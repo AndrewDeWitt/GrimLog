@@ -157,3 +157,20 @@ Key variables (see `env.example` for full list):
 - `DIRECT_URL` - Direct connection for migrations
 - `NEXT_PUBLIC_SUPABASE_URL` / `NEXT_PUBLIC_SUPABASE_ANON_KEY` - Auth
 - `LANGFUSE_*` - LLM observability (optional)
+
+## Security Practices
+
+**NEVER document actual sensitive values in code, comments, or documentation files.** This includes:
+- API keys, tokens, or secrets (even expired/rotated ones)
+- Database connection strings with credentials
+- Passwords or authentication tokens
+- Private URLs with embedded credentials
+- JWT secrets or encryption keys
+- Any string that resembles a real credential pattern
+
+**Instead, always use:**
+- Placeholder text: `your-api-key-here`, `<API_KEY>`, `sk-...`
+- Reference to env vars: "Set `OPENAI_API_KEY` in your `.env` file"
+- Generic examples: `https://example.supabase.co`
+
+**Why:** Security scanners (gitleaks, etc.) flag credential patterns. Even "example" credentials in docs can trigger false positives and create noise, or worse, accidentally expose real values if copy-pasted incorrectly.
