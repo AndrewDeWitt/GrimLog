@@ -1,0 +1,152 @@
+{
+  "name": "Lord Marshal Dreir",
+  "faction": "Astra Militarum",
+  "subfaction": "",
+  "role": "Character",
+  "keywords": [
+    "MOUNTED",
+    "CHARACTER",
+    "EPIC HERO",
+    "GRENADES",
+    "IMPERIUM",
+    "OFFICER",
+    "LORD MARSHAL DREIR"
+  ],
+  "stats": {
+    "movement": "10\"",
+    "toughness": 4,
+    "save": "4+",
+    "invulnerableSave": "4+",
+    "wounds": 6,
+    "leadership": 7,
+    "objectiveControl": 2
+  },
+  "composition": "1 Lord Marshal Dreir – EPIC HERO",
+  "compositionData": [
+    {
+      "name": "Lord Marshal Dreir",
+      "role": "leader",
+      "count": 1,
+      "woundsPerModel": 6
+    }
+  ],
+  "unitSize": "1",
+  "leaderRules": "This model can be attached to the following unit: Death Riders",
+  "leaderAbilities": "This OFFICER can issue up to 3 Orders to REGIMENT units.",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Laspistol",
+      "range": "12\"",
+      "type": "Pistol",
+      "attacks": "1",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "3",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "PISTOL"
+      ]
+    },
+    {
+      "name": "Sabre of Sacrifice",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "6",
+      "ballisticSkill": "",
+      "weaponSkill": "2+",
+      "strength": "6",
+      "armorPenetration": "-2",
+      "damage": "1",
+      "abilities": [
+        "ANTI-INFANTRY 4+"
+      ]
+    },
+    {
+      "name": "Savage claws",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "2",
+      "ballisticSkill": "",
+      "weaponSkill": "4+",
+      "strength": "4",
+      "armorPenetration": "-1",
+      "damage": "1",
+      "abilities": [
+        "EXTRA ATTACKS"
+      ]
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Leader",
+      "type": "core",
+      "description": "This model can be attached to a unit to lead it.",
+      "triggerPhase": [
+        "Keyword"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Feel No Pain 6+",
+      "type": "core",
+      "description": "Each time this model would lose a wound, roll one D6: on a 6, that wound is not lost.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": true,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Voice of Command",
+      "type": "faction",
+      "description": "This model can issue Orders to friendly units.",
+      "triggerPhase": [
+        "Command"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Tough to Kill",
+      "type": "unit",
+      "description": "The first time this model is destroyed, roll one D6 at the end of the phase. On a 2+, set this model back up on the battlefield as close as possible to where it was destroyed and not within Engagement Range of any enemy units, with D3 wounds remaining.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "End of Phase",
+      "isReactive": true,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Leading the Charge",
+      "type": "unit",
+      "description": "Each time this model’s unit makes a Charge move, until the end of the turn, melee weapons equipped by models in that unit have the [DEVASTATING WOUNDS] ability.",
+      "triggerPhase": [
+        "Charge",
+        "Fight"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [],
+  "pointsCost": 100,
+  "pointsTiers": [
+    {
+      "models": 1,
+      "points": 100
+    }
+  ]
+}

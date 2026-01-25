@@ -1,0 +1,138 @@
+{
+  "name": "Haruspex",
+  "faction": "Tyranids",
+  "subfaction": "",
+  "role": "Other",
+  "keywords": [
+    "MONSTER",
+    "GREAT DEVOURER",
+    "HARVESTER",
+    "HARUSPEX",
+    "TYRANIDS"
+  ],
+  "stats": {
+    "movement": "8\"",
+    "toughness": 11,
+    "save": "3+",
+    "invulnerableSave": "",
+    "wounds": 14,
+    "leadership": 8,
+    "objectiveControl": 4
+  },
+  "composition": "1 Haruspex",
+  "compositionData": [
+    {
+      "name": "Haruspex",
+      "role": "regular",
+      "count": 1,
+      "woundsPerModel": 14
+    }
+  ],
+  "unitSize": "1",
+  "leaderRules": "",
+  "leaderAbilities": "",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Grasping tongue",
+      "range": "12\"",
+      "type": "Assault 1",
+      "attacks": "1",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "6",
+      "armorPenetration": "-2",
+      "damage": "D6+1",
+      "abilities": [
+        "PRECISION"
+      ]
+    },
+    {
+      "name": "Ravenous maw",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "1",
+      "ballisticSkill": "",
+      "weaponSkill": "3+",
+      "strength": "7",
+      "armorPenetration": "-1",
+      "damage": "2",
+      "abilities": []
+    },
+    {
+      "name": "Shovelling claws",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "4",
+      "ballisticSkill": "",
+      "weaponSkill": "3+",
+      "strength": "14",
+      "armorPenetration": "-2",
+      "damage": "D6+1",
+      "abilities": [
+        "EXTRA ATTACKS"
+      ]
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Deadly Demise D3",
+      "type": "core",
+      "description": "Deadly Demise D3",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": true,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Synapse",
+      "type": "faction",
+      "description": "Synapse",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [
+        "TYRANIDS"
+      ],
+      "effects": null
+    },
+    {
+      "name": "Grisly Spectacle",
+      "type": "unit",
+      "description": "Each time this model is selected to fight, after resolving its attacks, if one or more enemy units were destroyed by those attacks, each enemy unit within 6\" of this model must take a Battle-shock test.",
+      "triggerPhase": [
+        "Fight"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Damaged: 1-5 Wounds Remaining",
+      "type": "unit",
+      "description": "While this model has 1-5 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.",
+      "triggerPhase": [
+        "Shooting",
+        "Fight"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [],
+  "pointsCost": 125,
+  "pointsTiers": [
+    {
+      "models": 1,
+      "points": 125
+    }
+  ]
+}

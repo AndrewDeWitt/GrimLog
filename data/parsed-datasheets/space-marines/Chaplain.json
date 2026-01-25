@@ -1,0 +1,125 @@
+{
+  "name": "Chaplain",
+  "faction": "Space Marines",
+  "subfaction": "Space Wolves",
+  "role": "Character",
+  "keywords": [
+    "INFANTRY",
+    "CHARACTER",
+    "GRENADES",
+    "IMPERIUM",
+    "TACTICUS",
+    "CHAPLAIN",
+    "ADEPTUS ASTARTES"
+  ],
+  "stats": {
+    "movement": "6\"",
+    "toughness": 4,
+    "save": "3+",
+    "invulnerableSave": "4+",
+    "wounds": 4,
+    "leadership": 5,
+    "objectiveControl": 1
+  },
+  "composition": "1 Chaplain",
+  "compositionData": [
+    {
+      "name": "Chaplain",
+      "role": "leader",
+      "count": 1,
+      "woundsPerModel": 4
+    }
+  ],
+  "unitSize": "1",
+  "leaderRules": "This model can be attached to the following units: Assault Intercessor Squad, Bladeguard Veteran Squad, Hellblaster Squad, Infernus Squad, Intercessor Squad, Sternguard Veteran Squad, Tactical Squad, Crusader Squad, Sword Brethren Squad, Death Company Marines, Death Company Marines with Bolt Rifles, Inner Circle Companions, Deathwatch Veterans, Decimus Kill Team, Fortis Kill Team, Assault Squad, Crusader Squad (Legendary), Death Company Marines with Boltguns, Vanguard Veteran Squad, Wolf Guard.",
+  "leaderAbilities": "Litany of Hate: While this model is leading a unit, each time a model in that unit makes a melee attack, add 1 to the Wound roll.",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Absolvor bolt pistol",
+      "range": "18\"",
+      "type": "Pistol",
+      "attacks": "1",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "5",
+      "armorPenetration": "-1",
+      "damage": "2",
+      "abilities": [
+        "PISTOL"
+      ]
+    },
+    {
+      "name": "Crozius arcanum",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "5",
+      "ballisticSkill": "",
+      "weaponSkill": "2+",
+      "strength": "6",
+      "armorPenetration": "-1",
+      "damage": "2",
+      "abilities": []
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Leader",
+      "type": "core",
+      "description": "This model can be attached to a unit to lead it.",
+      "triggerPhase": [
+        "Keyword"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Oath of Moment",
+      "type": "faction",
+      "description": "If your Army Faction is Adeptus Astartes, at the start of your Command phase, you can select one unit from your opponent's army. Until the start of your next Command phase, each time a model from your army with this ability makes an attack that targets that unit, you can re-roll the Hit roll.",
+      "triggerPhase": [
+        "Command"
+      ],
+      "triggerSubphase": "Start of Phase",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Litany of Hate",
+      "type": "unit",
+      "description": "While this model is leading a unit, each time a model in that unit makes a melee attack, add 1 to the Wound roll.",
+      "triggerPhase": [
+        "Fight"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Spiritual Leader",
+      "type": "unit",
+      "description": "Once per battle, at the start of any phase, you can select one friendly ADEPTUS ASTARTES unit that is Battle-shocked and within 12\" of this model. That unit is no longer Battle-shocked.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "Start of Phase",
+      "isReactive": true,
+      "requiredKeywords": [
+        "ADEPTUS ASTARTES"
+      ],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [],
+  "pointsCost": 60,
+  "pointsTiers": [
+    {
+      "models": 1,
+      "points": 60
+    }
+  ]
+}

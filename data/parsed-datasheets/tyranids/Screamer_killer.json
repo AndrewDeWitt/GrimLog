@@ -1,0 +1,109 @@
+{
+  "name": "Screamer-killer",
+  "faction": "Tyranids",
+  "subfaction": "",
+  "role": "Monster",
+  "keywords": [
+    "MONSTER",
+    "GREAT DEVOURER",
+    "SCREAMER-KILLER",
+    "TYRANIDS"
+  ],
+  "stats": {
+    "movement": "8\"",
+    "toughness": 9,
+    "save": "2+",
+    "invulnerableSave": "",
+    "wounds": 10,
+    "leadership": 8,
+    "objectiveControl": 3
+  },
+  "composition": "1 Screamer-Killer",
+  "compositionData": [
+    {
+      "name": "Screamer-Killer",
+      "role": "regular",
+      "count": 1,
+      "woundsPerModel": 10
+    }
+  ],
+  "unitSize": "1",
+  "leaderRules": "",
+  "leaderAbilities": "",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Bio-plasmic scream",
+      "range": "18\"",
+      "type": "ASSAULT, BLAST",
+      "attacks": "D6+3",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "8",
+      "armorPenetration": "-2",
+      "damage": "1",
+      "abilities": [
+        "ASSAULT",
+        "BLAST"
+      ]
+    },
+    {
+      "name": "Screamer-killer talons",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "10",
+      "ballisticSkill": "",
+      "weaponSkill": "3+",
+      "strength": "10",
+      "armorPenetration": "-2",
+      "damage": "3",
+      "abilities": []
+    }
+  ],
+  "abilities": [
+    {
+      "name": "DEADLY DEMISE",
+      "type": "core",
+      "description": "Deadly Demise 1",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": true,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "SYNAPSE",
+      "type": "faction",
+      "description": "Synapse",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "DEATH SCREAM",
+      "type": "unit",
+      "description": "In your Shooting phase, after this model has shot, select one unit hit by one or more of those attacks. That unit must take a Battle-shock test, subtracting 1 from that test.",
+      "triggerPhase": [
+        "Shooting"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [],
+  "pointsCost": 135,
+  "pointsTiers": [
+    {
+      "models": 1,
+      "points": 135
+    }
+  ]
+}

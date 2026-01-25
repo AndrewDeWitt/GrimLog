@@ -1,0 +1,270 @@
+{
+  "name": "Impulsor",
+  "faction": "Space Marines",
+  "subfaction": "space-wolves",
+  "role": "Dedicated Transport",
+  "keywords": [
+    "VEHICLE",
+    "TRANSPORT",
+    "DEDICATED TRANSPORT",
+    "IMPERIUM",
+    "IMPULSOR",
+    "ADEPTUS ASTARTES"
+  ],
+  "stats": {
+    "movement": "12\"",
+    "toughness": 9,
+    "save": "3+",
+    "invulnerableSave": "",
+    "wounds": 11,
+    "leadership": 6,
+    "objectiveControl": 2
+  },
+  "composition": "1 Impulsor",
+  "compositionData": [
+    {
+      "name": "Impulsor",
+      "role": "regular",
+      "count": 1,
+      "woundsPerModel": 11
+    }
+  ],
+  "unitSize": "1",
+  "leaderRules": "",
+  "leaderAbilities": "",
+  "transportCapacity": "Transport capacity 7 TACTICUS or PHOBOS INFANTRY models. Cannot transport JUMP PACK models.",
+  "weapons": [
+    {
+      "name": "Bellicatus missile array – frag",
+      "range": "48\"",
+      "type": "Heavy D6",
+      "attacks": "D6",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "BLAST"
+      ]
+    },
+    {
+      "name": "Bellicatus missile array – Icarus",
+      "range": "48\"",
+      "type": "Heavy D3",
+      "attacks": "D3",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "8",
+      "armorPenetration": "-1",
+      "damage": "2",
+      "abilities": [
+        "ANTI-FLY 2+"
+      ]
+    },
+    {
+      "name": "Bellicatus missile array – krak",
+      "range": "48\"",
+      "type": "Heavy 1",
+      "attacks": "1",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "8",
+      "armorPenetration": "-2",
+      "damage": "D6",
+      "abilities": []
+    },
+    {
+      "name": "Fragstorm grenade launcher",
+      "range": "18\"",
+      "type": "Blast D6",
+      "attacks": "D6",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "BLAST"
+      ]
+    },
+    {
+      "name": "Ironhail heavy stubber",
+      "range": "36\"",
+      "type": "Rapid fire 3",
+      "attacks": "3",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "RAPID FIRE 3"
+      ]
+    },
+    {
+      "name": "Ironhail skytalon array",
+      "range": "36\"",
+      "type": "8",
+      "attacks": "8",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "ANTI-FLY 4+",
+        "SUSTAINED HITS 1"
+      ]
+    },
+    {
+      "name": "Storm bolter",
+      "range": "24\"",
+      "type": "Rapid fire 2",
+      "attacks": "2",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "RAPID FIRE 2"
+      ]
+    },
+    {
+      "name": "Armoured hull",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "3",
+      "ballisticSkill": "",
+      "weaponSkill": "4+",
+      "strength": "6",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": []
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Deadly Demise D3",
+      "type": "core",
+      "description": "DEADLY DEMISE D3.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": true,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Firing Deck 6",
+      "type": "core",
+      "description": "FIRING DECK 6.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Oath of Moment",
+      "type": "faction",
+      "description": "OATH OF MOMENT (ADEPTUS ASTARTES faction ability).",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Assault Vehicle",
+      "type": "unit",
+      "description": "Units can disembark from this TRANSPORT after it has Advanced. Units that do so count as having made a Normal move, and cannot declare a charge that turn.",
+      "triggerPhase": [
+        "Movement"
+      ],
+      "triggerSubphase": "End of Phase",
+      "isReactive": false,
+      "requiredKeywords": [
+        "TRANSPORT"
+      ],
+      "effects": null
+    },
+    {
+      "name": "Orbital Comms Array (Aura)",
+      "type": "wargear",
+      "description": "While a friendly ADEPTUS ASTARTES unit is within 6\" of the bearer, each time you target that unit with a Stratagem, roll one D6: on a 5+, you gain 1CP.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [
+        "ADEPTUS ASTARTES"
+      ],
+      "effects": {
+        "wounds": null,
+        "toughness": null,
+        "save": null,
+        "invulnerableSave": null,
+        "movement": null
+      }
+    },
+    {
+      "name": "Shield Dome",
+      "type": "wargear",
+      "description": "The bearer has a 5+ invulnerable save.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": {
+        "wounds": null,
+        "toughness": null,
+        "save": null,
+        "invulnerableSave": "5+",
+        "movement": null
+      }
+    }
+  ],
+  "wargearOptions": [
+    {
+      "description": "Equipped with 1 ironhail heavy stubber.",
+      "pointsCost": 0
+    },
+    {
+      "description": "Replace the 2 storm bolters with 2 fragstorm grenade launchers.",
+      "pointsCost": 0
+    },
+    {
+      "description": "Equipped with 1 bellicatus missile array (option).",
+      "pointsCost": 0
+    },
+    {
+      "description": "Equipped with 1 ironhail skytalon array (option).",
+      "pointsCost": 0
+    },
+    {
+      "description": "Equipped with 1 orbital comms array (option).",
+      "pointsCost": 0
+    },
+    {
+      "description": "Equipped with 1 shield dome (option).",
+      "pointsCost": 0
+    }
+  ],
+  "pointsCost": 80,
+  "pointsTiers": [
+    {
+      "models": 1,
+      "points": 80
+    }
+  ]
+}

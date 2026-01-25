@@ -1,0 +1,124 @@
+{
+  "name": "Ripper Swarms",
+  "faction": "Tyranids",
+  "subfaction": "",
+  "role": "",
+  "keywords": [
+    "SWARM",
+    "GREAT DEVOURER",
+    "HARVESTER",
+    "RIPPER SWARMS",
+    "TYRANIDS"
+  ],
+  "stats": {
+    "movement": "6\"",
+    "toughness": 2,
+    "save": "6+",
+    "invulnerableSave": "",
+    "wounds": 4,
+    "leadership": 8,
+    "objectiveControl": 0
+  },
+  "composition": "1-3 Ripper Swarms",
+  "compositionData": [
+    {
+      "name": "Ripper Swarm",
+      "role": "regular",
+      "count": 1,
+      "woundsPerModel": 4
+    }
+  ],
+  "unitSize": "1-3",
+  "leaderRules": "",
+  "leaderAbilities": "",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Spinemaws",
+      "range": "6\"",
+      "type": "Pistol",
+      "attacks": "4",
+      "ballisticSkill": "5+",
+      "weaponSkill": "",
+      "strength": "3",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": []
+    },
+    {
+      "name": "Chitinous claws and teeth",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "6",
+      "ballisticSkill": "",
+      "weaponSkill": "5+",
+      "strength": "2",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "SUSTAINED HITS 1"
+      ]
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Deep Strike",
+      "type": "core",
+      "description": "Deep Strike",
+      "triggerPhase": [
+        "Deployment"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Synapse",
+      "type": "faction",
+      "description": "Synapse",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [
+        "TYRANIDS"
+      ],
+      "effects": null
+    },
+    {
+      "name": "Chitinous Horrors (Aura)",
+      "type": "unit",
+      "description": "While an enemy unit is within Engagement Range of this unit, halve the Objective Control characteristic of models in that enemy unit.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [
+    {
+      "description": "All models in this unit can each be equipped with 1 spinemaws.",
+      "pointsCost": 0
+    }
+  ],
+  "pointsCost": 0,
+  "pointsTiers": [
+    {
+      "models": 1,
+      "points": 25
+    },
+    {
+      "models": 2,
+      "points": 40
+    },
+    {
+      "models": 3,
+      "points": 50
+    }
+  ]
+}

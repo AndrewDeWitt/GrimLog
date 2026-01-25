@@ -1,0 +1,107 @@
+{
+  "name": "Tyranid Warriors With Melee Bio-weapons",
+  "faction": "tyranids",
+  "subfaction": "",
+  "role": "Elites",
+  "keywords": [
+    "INFANTRY",
+    "GREAT DEVOURER",
+    "SYNAPSE",
+    "TYRANID WARRIORS WITH MELEE BIO-WEAPONS",
+    "TYRANIDS"
+  ],
+  "stats": {
+    "movement": "6\"",
+    "toughness": 5,
+    "save": "4+",
+    "invulnerableSave": "",
+    "wounds": 3,
+    "leadership": 7,
+    "objectiveControl": 2
+  },
+  "composition": "1 Tyranid Prime, 2-5 Tyranid Warriors. Every model is equipped with: Tyranid Warrior claws and talons.",
+  "compositionData": [
+    {
+      "name": "Tyranid Prime",
+      "role": "leader",
+      "count": 1,
+      "woundsPerModel": 3
+    },
+    {
+      "name": "Tyranid Warrior",
+      "role": "regular",
+      "count": 2,
+      "woundsPerModel": 3
+    }
+  ],
+  "unitSize": "3-6",
+  "leaderRules": "Can be led by Winged Tyranid Prime",
+  "leaderAbilities": "",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Tyranid Warrior claws and talons [twin-linked]",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "3",
+      "ballisticSkill": "",
+      "weaponSkill": "3+",
+      "strength": "5",
+      "armorPenetration": "-2",
+      "damage": "1",
+      "abilities": [
+        "TWIN-LINKED"
+      ]
+    }
+  ],
+  "abilities": [
+    {
+      "name": "SHADOW IN THE WARP",
+      "type": "faction",
+      "description": "",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "SYNAPSE",
+      "type": "faction",
+      "description": "",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "ADAPTIVE INSTINCTS",
+      "type": "unit",
+      "description": "At the start of the Fight phase, select one of the following:\n\nAggression Imperative: Until the end of the phase, each time a model in this unit makes an attack, re-roll a Hit roll of 1.\n\nBioregeneration: Until the end of the phase, each time a saving throw is made for a model in this unit, re-roll a saving throw of 1.",
+      "triggerPhase": [
+        "Fight"
+      ],
+      "triggerSubphase": "Start of Phase",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [],
+  "pointsCost": 75,
+  "pointsTiers": [
+    {
+      "models": 3,
+      "points": 75
+    },
+    {
+      "models": 6,
+      "points": 150
+    }
+  ]
+}

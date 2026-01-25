@@ -1,0 +1,144 @@
+{
+  "name": "Primaris Psyker",
+  "faction": "Astra Militarum",
+  "subfaction": "",
+  "role": "Character",
+  "keywords": [
+    "INFANTRY",
+    "CHARACTER",
+    "PSYKER",
+    "IMPERIUM",
+    "PRIMARIS PSYKER"
+  ],
+  "stats": {
+    "movement": "6\"",
+    "toughness": 3,
+    "save": "5+",
+    "invulnerableSave": "",
+    "wounds": 3,
+    "leadership": 7,
+    "objectiveControl": 1
+  },
+  "composition": "1 Primaris Psyker",
+  "compositionData": [
+    {
+      "name": "Primaris Psyker",
+      "role": "leader",
+      "count": 1,
+      "woundsPerModel": 3
+    }
+  ],
+  "unitSize": "1",
+  "leaderRules": "This model can be attached to the following units: Cadian Shock Troops, Catachan Jungle Fighters, Kasrkin, Krieg Combat Engineers, Tempestus Scions, Death Korps Of Krieg",
+  "leaderAbilities": "",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Laspistol",
+      "range": "12\"",
+      "type": "Pistol",
+      "attacks": "1",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "3",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "PISTOL"
+      ]
+    },
+    {
+      "name": "Psychic Maelstrom – witchfire",
+      "range": "18\"",
+      "type": "Psychic",
+      "attacks": "D6",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "5",
+      "armorPenetration": "-2",
+      "damage": "1",
+      "abilities": [
+        "BLAST",
+        "DEVASTATING WOUNDS",
+        "PSYCHIC"
+      ]
+    },
+    {
+      "name": "Psychic Maelstrom – focused witchfire",
+      "range": "18\"",
+      "type": "Psychic",
+      "attacks": "D6+1",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "6",
+      "armorPenetration": "-2",
+      "damage": "2",
+      "abilities": [
+        "BLAST",
+        "DEVASTATING WOUNDS",
+        "HAZARDOUS",
+        "PSYCHIC"
+      ]
+    },
+    {
+      "name": "Force weapon",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "3",
+      "ballisticSkill": "",
+      "weaponSkill": "4+",
+      "strength": "6",
+      "armorPenetration": "-1",
+      "damage": "D3",
+      "abilities": [
+        "PSYCHIC"
+      ]
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Leader",
+      "type": "core",
+      "description": "This model can be attached to a unit.",
+      "triggerPhase": [
+        "Keyword"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Malign Wardings (Psychic)",
+      "type": "unit",
+      "description": "While this model is leading a unit, models in that unit have the Feel No Pain 4+ ability against Psychic Attacks.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": true,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Psychic Barrier (Psychic)",
+      "type": "unit",
+      "description": "At the start of your opponent’s Shooting phase, you can roll one D6: on a 1, this PSYKER’s unit suffers D3 mortal wounds; on a 2+, until the end of the phase, models in this PSYKER’s unit have a 4+ invulnerable save.",
+      "triggerPhase": [
+        "Shooting"
+      ],
+      "triggerSubphase": "Start of Phase",
+      "isReactive": true,
+      "requiredKeywords": [],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [],
+  "pointsCost": 60,
+  "pointsTiers": [
+    {
+      "models": 1,
+      "points": 60
+    }
+  ]
+}

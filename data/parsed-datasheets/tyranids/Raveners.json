@@ -1,0 +1,100 @@
+{
+  "name": "Raveners",
+  "faction": "Tyranids",
+  "subfaction": "",
+  "role": "Elites",
+  "keywords": [
+    "INFANTRY",
+    "GREAT DEVOURER",
+    "VANGUARD INVADER",
+    "BURROWERS",
+    "RAVENERS",
+    "TYRANIDS"
+  ],
+  "stats": {
+    "movement": "10\"",
+    "toughness": 5,
+    "save": "4+",
+    "invulnerableSave": "",
+    "wounds": 3,
+    "leadership": 8,
+    "objectiveControl": 1
+  },
+  "composition": "5 Raveners",
+  "compositionData": [
+    {
+      "name": "Ravener",
+      "role": "regular",
+      "count": 5,
+      "woundsPerModel": 3
+    }
+  ],
+  "unitSize": "5",
+  "leaderRules": "Can be led by Hyperadapted Raveners",
+  "leaderAbilities": "",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Ravener claws and talons [twin-linked]",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "3",
+      "ballisticSkill": "",
+      "weaponSkill": "3+",
+      "strength": "5",
+      "armorPenetration": "-2",
+      "damage": "2",
+      "abilities": [
+        "TWIN-LINKED"
+      ]
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Deep Strike",
+      "type": "core",
+      "description": "This unit can Deep Strike.",
+      "triggerPhase": [
+        "Deployment"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Synapse",
+      "type": "faction",
+      "description": "Synapse. (Faction ability: this unit is affected by the TYRANIDS synapse rules.)",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [
+        "TYRANIDS"
+      ],
+      "effects": null
+    },
+    {
+      "name": "Death From Below",
+      "type": "unit",
+      "description": "At the end of your opponent’s turn, if this unit is not within Engagement Range of one or more enemy units, you can remove it from the battlefield and place it into Strategic Reserves.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "End of Phase",
+      "isReactive": true,
+      "requiredKeywords": [],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [],
+  "pointsCost": 125,
+  "pointsTiers": [
+    {
+      "models": 5,
+      "points": 125
+    }
+  ]
+}

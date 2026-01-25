@@ -1,0 +1,20 @@
+{
+  "total": 95,
+  "success": 95,
+  "failed": 0,
+  "skipped": 0,
+  "errors": [],
+  "selectorFallbacks": 0,
+  "legendsDetected": 95,
+  "forgeWorldDetected": 95,
+  "lowConfidenceDetections": 0,
+  "qualityScores": {
+    "average": 55,
+    "min": 55,
+    "max": 55
+  },
+  "faction": "space-marines",
+  "subfaction": "space-wolves",
+  "selectorUsed": ".NavColumns3",
+  "completedAt": "2026-01-10T05:23:31.059Z"
+}

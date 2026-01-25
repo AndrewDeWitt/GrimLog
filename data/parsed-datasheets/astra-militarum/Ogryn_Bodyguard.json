@@ -1,0 +1,204 @@
+{
+  "name": "Ogryn Bodyguard",
+  "faction": "Astra Militarum",
+  "subfaction": "",
+  "role": "Character",
+  "keywords": [
+    "INFANTRY",
+    "CHARACTER",
+    "GRENADES",
+    "IMPERIUM",
+    "LOYAL PROTECTOR",
+    "OGRYN",
+    "BODYGUARD"
+  ],
+  "stats": {
+    "movement": "6\"",
+    "toughness": 6,
+    "save": "5+",
+    "invulnerableSave": "",
+    "wounds": 6,
+    "leadership": 7,
+    "objectiveControl": 1
+  },
+  "composition": "1 Ogryn Bodyguard",
+  "compositionData": [
+    {
+      "name": "Ogryn Bodyguard",
+      "role": "leader",
+      "count": 1,
+      "woundsPerModel": 6
+    }
+  ],
+  "unitSize": "1",
+  "leaderRules": "At the start of the Declare Battle Formations step, this model must join one COMMAND SQUAD unit from your army (a COMMAND SQUAD cannot have more than one LOYAL PROTECTOR model joined to it). This model then counts as part of that COMMAND SQUAD for the rest of the battle, and its Starting Strength is increased accordingly. If it is not possible to join this model to a COMMAND SQUAD, it does not take part in the battle and counts as having been destroyed.",
+  "leaderAbilities": "",
+  "transportCapacity": "While this model is joined to a unit, it can embark within any TRANSPORT that unit can embark within, and takes up the space of 3 models.",
+  "weapons": [
+    {
+      "name": "Grenadier gauntlet blast",
+      "range": "18\"",
+      "type": "Ranged",
+      "attacks": "D6",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "BLAST"
+      ]
+    },
+    {
+      "name": "Ripper gun rapid fire 3",
+      "range": "18\"",
+      "type": "Ranged",
+      "attacks": "3",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "5",
+      "armorPenetration": "-1",
+      "damage": "2",
+      "abilities": [
+        "RAPID FIRE 3"
+      ]
+    },
+    {
+      "name": "Bullgryn maul",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "5",
+      "ballisticSkill": "",
+      "weaponSkill": "3+",
+      "strength": "7",
+      "armorPenetration": "-1",
+      "damage": "2",
+      "abilities": []
+    },
+    {
+      "name": "Close combat weapon",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "4",
+      "ballisticSkill": "",
+      "weaponSkill": "3+",
+      "strength": "6",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": []
+    },
+    {
+      "name": "Huge knife",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "6",
+      "ballisticSkill": "",
+      "weaponSkill": "3+",
+      "strength": "8",
+      "armorPenetration": "-1",
+      "damage": "2",
+      "abilities": []
+    },
+    {
+      "name": "Ripper gun",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "5",
+      "ballisticSkill": "",
+      "weaponSkill": "3+",
+      "strength": "6",
+      "armorPenetration": "-1",
+      "damage": "1",
+      "abilities": []
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Feel No Pain 6+",
+      "type": "core",
+      "description": "The model has the Feel No Pain 6+ ability.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": true,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Ogryn Bodyguard",
+      "type": "unit",
+      "description": "While one or more OFFICER models are in the same unit as this model, those OFFICER models have the Feel No Pain 4+ ability.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": true,
+      "requiredKeywords": [
+        "OFFICER"
+      ],
+      "effects": null
+    },
+    {
+      "name": "Brute Shield",
+      "type": "wargear",
+      "description": "The bearer has a 4+ invulnerable save.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": true,
+      "requiredKeywords": [],
+      "effects": {
+        "wounds": null,
+        "toughness": null,
+        "save": null,
+        "invulnerableSave": "4+",
+        "movement": null
+      }
+    },
+    {
+      "name": "Slabshield",
+      "type": "wargear",
+      "description": "The bearer has a Wounds characteristic of 7.",
+      "triggerPhase": [
+        "General"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": {
+        "wounds": 7,
+        "toughness": null,
+        "save": null,
+        "invulnerableSave": null,
+        "movement": null
+      }
+    }
+  ],
+  "wargearOptions": [
+    {
+      "description": "This model’s ripper gun can be replaced with 1 grenadier gauntlet",
+      "pointsCost": 0
+    },
+    {
+      "description": "This model’s ripper gun can be replaced with 1 Bullgryn maul",
+      "pointsCost": 0
+    },
+    {
+      "description": "This model’s huge knife can be replaced with 1 brute shield",
+      "pointsCost": 0
+    },
+    {
+      "description": "This model’s huge knife can be replaced with 1 slabshield",
+      "pointsCost": 0
+    }
+  ],
+  "pointsCost": 40,
+  "pointsTiers": [
+    {
+      "models": 1,
+      "points": 40
+    }
+  ]
+}

@@ -1,0 +1,126 @@
+---
+description: Mandatory documentation standards for TacLog. Always follow these rules when creating or updating documentation.
+tags: [documentation, standards, mandatory]
+type: always
+globs: ["**/*.md", "docs/**/*"]
+---
+
+# TacLog Documentation Standards
+
+## Documentation Types (4 types only)
+
+1. **User Guides** (`docs/guides/`) - HOW TO use features
+   - Step-by-step instructions, configuration, examples, troubleshooting
+
+2. **API Docs** (`docs/api/`) - Technical reference
+   - Request/response formats, parameters, examples, error codes
+
+3. **Features** (`docs/features/`) - WHAT the feature is
+   - Overview, architecture, key components, links to guides
+
+4. **Troubleshooting** (`docs/troubleshooting/`) - FIX problems
+   - Problem descriptions, solutions, common mistakes, debug steps
+
+## When to Document
+
+**✅ DO document:**
+- New features → `docs/features/FEATURE_NAME.md`
+- New API endpoints → `docs/api/ENDPOINT_NAME.md`
+- Complex systems → `docs/guides/SYSTEM_NAME_GUIDE.md`
+- Common problems → `docs/troubleshooting/PROBLEM_NAME.md`
+
+**❌ DON'T document:**
+- Session notes (use Git commits)
+- WIP features (wait until complete)
+- Implementation details (use code comments)
+- Personal notes (not in repo)
+
+## Post-Feature Documentation Checklist
+
+**After completing ANY feature, YOU MUST:**
+
+1. Update `CHANGELOG.md` with version and changes
+2. Update relevant guide in `docs/guides/` (if user-facing)
+3. Create feature doc in `docs/features/` (if major feature)
+4. Update API docs in `docs/api/` (if endpoints changed)
+5. Update `README.md` (if user-facing changes, keep < 300 lines)
+6. Update `docs/README.md` index with links to new docs
+
+**DO NOT:**
+- ❌ Create `FEATURE_COMPLETE.md` files
+- ❌ Keep session summaries in docs/
+- ❌ Duplicate information across files
+- ❌ Leave outdated docs in place
+
+## Changelog Management (Rolling Window)
+
+The changelog uses a **rolling window** system to stay manageable:
+
+- **`CHANGELOG.md`** - Last 30 versions (recent changes)
+- **`CHANGELOG_ARCHIVE.md`** - All older entries (full history)
+
+**When adding entries:**
+1. Add new entries to the TOP of `CHANGELOG.md`
+2. When `CHANGELOG.md` exceeds 30 versions, move oldest entries to `CHANGELOG_ARCHIVE.md`
+
+**Archive maintenance:**
+```bash
+# Count versions in CHANGELOG.md
+grep -c "^## \[" CHANGELOG.md
+
+# If > 30, move oldest entries to archive
+# Cut at version 31 and append to CHANGELOG_ARCHIVE.md
+```
+
+**Why rolling window:**
+- Keeps main changelog readable and quick to load
+- Preserves full history for AI context in archive
+- Both files in root for easy access
+
+## Document Structure (MANDATORY)
+
+```markdown
+# [Clear Title]
+
+**Last Updated:** YYYY-MM-DD
+**Status:** Complete|Draft|Deprecated
+
+## Overview
+[1-2 paragraph description]
+
+## Table of Contents
+- [Sections...]
+
+## [Content sections...]
+
+## Related Documentation
+- [Links to related docs with descriptions]
+```
+
+## File Naming
+
+- Use `SCREAMING_SNAKE_CASE`
+- Be descriptive: `AUDIO_VAD_GUIDE.md` not `AUDIO.md`
+- No dates in filenames
+- No "COMPLETE" or "SUMMARY" in permanent docs
+
+**Examples:**
+- ✅ `docs/guides/AUDIO_VAD_GUIDE.md`
+- ✅ `docs/api/TRANSCRIBE_ENDPOINT.md`
+- ✅ `docs/features/AI_TOOL_CALLING.md`
+- ❌ `docs/AUDIO.md` (too vague)
+- ❌ `FEATURE_COMPLETE.md` (temporary)
+- ❌ `VALIDATION_2024.md` (no dates)
+
+## Documentation Enforcement
+
+When user says "I added feature X":
+1. Ask: "Should I update the documentation for this feature?"
+2. If yes → Follow post-feature checklist
+3. If no → Remind them docs should be updated
+
+When you complete a feature:
+1. ALWAYS update CHANGELOG.md
+2. ALWAYS update relevant documentation
+3. ALWAYS update docs/README.md index
+4. Do NOT create temporary completion notes

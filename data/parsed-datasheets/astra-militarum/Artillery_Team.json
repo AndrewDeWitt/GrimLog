@@ -1,0 +1,169 @@
+{
+  "name": "Artillery Team",
+  "faction": "Astra Militarum",
+  "subfaction": "",
+  "role": "Other",
+  "keywords": [
+    "INFANTRY",
+    "ARTILLERY",
+    "GRENADES",
+    "IMPERIUM",
+    "REGIMENT",
+    "ARTILLERY TEAM"
+  ],
+  "stats": {
+    "movement": "3\"",
+    "toughness": 7,
+    "save": "3+",
+    "invulnerableSave": "",
+    "wounds": 10,
+    "leadership": 7,
+    "objectiveControl": 3
+  },
+  "composition": "1 Artillery Team",
+  "compositionData": [
+    {
+      "name": "Artillery Team",
+      "role": "regular",
+      "count": 1,
+      "woundsPerModel": 10
+    }
+  ],
+  "unitSize": "1",
+  "leaderRules": "",
+  "leaderAbilities": "",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Heavy mortar",
+      "range": "48\"",
+      "type": "Heavy, Indirect Fire, Blast",
+      "attacks": "D6+3",
+      "ballisticSkill": "5+",
+      "weaponSkill": "",
+      "strength": "8",
+      "armorPenetration": "-1",
+      "damage": "2",
+      "abilities": [
+        "BLAST",
+        "HEAVY",
+        "INDIRECT FIRE"
+      ]
+    },
+    {
+      "name": "Heavy quad launcher",
+      "range": "48\"",
+      "type": "Heavy, Indirect Fire, Blast, Twin-linked",
+      "attacks": "2D6",
+      "ballisticSkill": "5+",
+      "weaponSkill": "",
+      "strength": "5",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "BLAST",
+        "HEAVY",
+        "INDIRECT FIRE",
+        "TWIN-LINKED"
+      ]
+    },
+    {
+      "name": "Lasgun",
+      "range": "24\"",
+      "type": "Rapid Fire 1",
+      "attacks": "1",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "3",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "RAPID FIRE 1"
+      ]
+    },
+    {
+      "name": "Multiple rocket launcher",
+      "range": "48\"",
+      "type": "Anti-infantry 3+, Blast, Heavy, Indirect Fire",
+      "attacks": "D6+3",
+      "ballisticSkill": "5+",
+      "weaponSkill": "",
+      "strength": "2",
+      "armorPenetration": "-1",
+      "damage": "1",
+      "abilities": [
+        "ANTI-INFANTRY 3+",
+        "BLAST",
+        "HEAVY",
+        "INDIRECT FIRE"
+      ]
+    },
+    {
+      "name": "Siege cannon",
+      "range": "48\"",
+      "type": "Heavy, Indirect Fire, Blast",
+      "attacks": "D6",
+      "ballisticSkill": "5+",
+      "weaponSkill": "",
+      "strength": "12",
+      "armorPenetration": "-2",
+      "damage": "3",
+      "abilities": [
+        "BLAST",
+        "HEAVY",
+        "INDIRECT FIRE"
+      ]
+    },
+    {
+      "name": "Crew close combat weapons",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "3",
+      "ballisticSkill": "",
+      "weaponSkill": "4+",
+      "strength": "3",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": []
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Remorseless Barrage",
+      "type": "unit",
+      "description": "In your Shooting phase, after this model has shot, if one or more of those attacks made with an Indirect Fire weapon scored a hit against an enemy unit, that unit must take a Battle-shock test (if an INFANTRY unit is hit by one or more attacks made by a multiple rocket launcher, they must subtract 1 from their Battle-shock test when doing so).",
+      "triggerPhase": [
+        "Shooting"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Born Soldiers",
+      "type": "faction",
+      "description": "Each time an Astra Militarum unit from your army is selected to shoot, if that unit Remained Stationary this turn, until the end of the phase, ranged weapons equipped by models in that unit have the [LETHAL HITS] ability.",
+      "triggerPhase": [
+        "Shooting"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [
+    {
+      "description": "This model’s heavy mortar can be replaced with one of the following: 1 siege cannon, 1 heavy quad launcher, 1 multiple rocket launcher",
+      "pointsCost": 0
+    }
+  ],
+  "pointsCost": 95,
+  "pointsTiers": [
+    {
+      "models": 1,
+      "points": 95
+    }
+  ]
+}

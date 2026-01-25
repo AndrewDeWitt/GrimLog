@@ -1,0 +1,131 @@
+{
+  "name": "Drop Pod",
+  "faction": "Adeptus Astartes",
+  "subfaction": "Space Wolves",
+  "role": "Dedicated Transports",
+  "keywords": [
+    "VEHICLE",
+    "TRANSPORT",
+    "DEDICATED TRANSPORT",
+    "IMPERIUM",
+    "DROP POD",
+    "ADEPTUS ASTARTES"
+  ],
+  "stats": {
+    "movement": "-",
+    "toughness": 7,
+    "save": "3+prime",
+    "invulnerableSave": "",
+    "wounds": 8,
+    "leadership": 6,
+    "objectiveControl": 0
+  },
+  "composition": "1 Drop Pod",
+  "compositionData": [
+    {
+      "name": "Drop Pod",
+      "role": "regular",
+      "count": 1,
+      "woundsPerModel": 8
+    }
+  ],
+  "unitSize": "1",
+  "leaderRules": "",
+  "leaderAbilities": "",
+  "transportCapacity": "12 ADEPTUS ASTARTES INFANTRY models. It cannot transport CENTURION, GRAVIS, JUMP PACK, WULFEN or TERMINATOR models.",
+  "weapons": [],
+  "abilities": [
+    {
+      "name": "Deadly Demise 1",
+      "type": "core",
+      "description": "When this model is destroyed, roll one D6. On a 6, each unit within 6\" suffers 1 mortal wound.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": true,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Deep Strike",
+      "type": "core",
+      "description": "During the Declare Formations step, if every model in a unit has this ability, you can set it up in Reinforcements instead of setting it up as described in the Deploy Battleline Units step. If you do, in the Reinforcements step of one of your Movement phases you can set up this unit anywhere on the battlefield that is more than 9\" away from all enemy models.",
+      "triggerPhase": [
+        "Deployment"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Oath of Moment",
+      "type": "faction",
+      "description": "If your Army Faction is Adeptus Astartes, at the start of your Command phase, you can select one unit from your opponent’s army. Until the start of your next Command phase, each time a model from your army with this ability makes an attack that targets that enemy unit, you can re-roll the Hit roll.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Drop Pod Assault",
+      "type": "unit",
+      "description": "This model must start the battle in Reserves and can be set up in the Reinforcements step of your first, second or third Movement phase, regardless of any mission rules. Any units embarked within this model must immediately disembark after it has been set up on the battlefield, and they must be set up more than 9\" away from all enemy models.",
+      "triggerPhase": [
+        "Movement"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Combat Disembarkation",
+      "type": "unit",
+      "description": "Each time a unit disembarks from this model after it has been set up on the battlefield, that unit is still eligible to declare a charge this turn.",
+      "triggerPhase": [
+        "Charge"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Deployment Complete",
+      "type": "unit",
+      "description": "Once this unit is set up on the battlefield and all units within it have disembarked, until the end of the battle, units cannot embark within this TRANSPORT.",
+      "triggerPhase": [
+        "Movement"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Designer’s Note: Hull",
+      "type": "unit",
+      "description": "The highlighted portions of this model are the only parts that are considered to make up its hull. Models can be set up or end a move on any part of this model that is not highlighted in red. If any models are on non-highlighted sections of this model when it is destroyed, place those models as close to their original position as possible, on the battlefield, after removing this model.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [],
+  "pointsCost": 70,
+  "pointsTiers": [
+    {
+      "models": 1,
+      "points": 70
+    }
+  ]
+}

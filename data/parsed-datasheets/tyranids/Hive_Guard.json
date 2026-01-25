@@ -1,0 +1,122 @@
+{
+  "name": "Hive Guard",
+  "faction": "Tyranids",
+  "subfaction": "",
+  "role": "Elites",
+  "keywords": [
+    "INFANTRY",
+    "GREAT DEVOURER",
+    "HIVE GUARD",
+    "TYRANIDS"
+  ],
+  "stats": {
+    "movement": "6\"",
+    "toughness": 7,
+    "save": "3+",
+    "invulnerableSave": "",
+    "wounds": 4,
+    "leadership": 8,
+    "objectiveControl": 1
+  },
+  "composition": "3-6 Hive Guard",
+  "compositionData": [
+    {
+      "name": "Hive Guard",
+      "role": "regular",
+      "count": 3,
+      "woundsPerModel": 4
+    }
+  ],
+  "unitSize": "3-6",
+  "leaderRules": "",
+  "leaderAbilities": "",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Impaler cannon",
+      "range": "36\"",
+      "type": "Heavy",
+      "attacks": "4",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "5",
+      "armorPenetration": "-1",
+      "damage": "1",
+      "abilities": [
+        "HEAVY",
+        "INDIRECT FIRE"
+      ]
+    },
+    {
+      "name": "Shockcannon",
+      "range": "24\"",
+      "type": "",
+      "attacks": "2",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "7",
+      "armorPenetration": "-1",
+      "damage": "3",
+      "abilities": [
+        "ANTI-VEHICLE 2+"
+      ]
+    },
+    {
+      "name": "Chitinous claws and teeth",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "3",
+      "ballisticSkill": "",
+      "weaponSkill": "4+",
+      "strength": "5",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": []
+    }
+  ],
+  "abilities": [
+    {
+      "name": "SYNAPSE",
+      "type": "faction",
+      "description": "Synapse",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [
+        "TYRANIDS"
+      ],
+      "effects": null
+    },
+    {
+      "name": "DEFENSIVE STANCE",
+      "type": "unit",
+      "description": "Each time you target this unit with the Fire Overwatch Stratagem, while resolving that Stratagem, hits are scored on unmodified Hit rolls of 5+, or unmodified Hit rolls of 4+ instead if this unit is within range of an objective marker.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": true,
+      "requiredKeywords": [],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [
+    {
+      "description": "Any number of models can each have their shockcannon replaced with 1 impaler cannon.",
+      "pointsCost": 0
+    }
+  ],
+  "pointsCost": 90,
+  "pointsTiers": [
+    {
+      "models": 3,
+      "points": 90
+    },
+    {
+      "models": 6,
+      "points": 180
+    }
+  ]
+}

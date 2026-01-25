@@ -1,0 +1,206 @@
+{
+  "name": "Reiver Squad",
+  "faction": "Space Marines",
+  "subfaction": "Space Wolves",
+  "role": "Elites",
+  "keywords": [
+    "INFANTRY",
+    "GRENADES",
+    "SMOKE",
+    "IMPERIUM",
+    "PHOBOS",
+    "REIVER SQUAD",
+    "ADEPTUS ASTARTES"
+  ],
+  "stats": {
+    "movement": "6\"",
+    "toughness": 4,
+    "save": "3+",
+    "invulnerableSave": "",
+    "wounds": 2,
+    "leadership": 6,
+    "objectiveControl": 1
+  },
+  "composition": "1 Reiver Sergeant, 4-9 Reivers",
+  "compositionData": [
+    {
+      "name": "Reiver Sergeant",
+      "role": "leader",
+      "count": 1,
+      "woundsPerModel": 2
+    },
+    {
+      "name": "Reiver",
+      "role": "regular",
+      "count": 4,
+      "woundsPerModel": 2
+    }
+  ],
+  "unitSize": "5-10",
+  "leaderRules": "Can be led by: Captain In Phobos Armour; Librarian In Phobos Armour; Lieutenant In Phobos Armour; Lieutenant In Reiver Armour",
+  "leaderAbilities": "",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Bolt carbine",
+      "range": "24\"",
+      "type": "Rapid 2",
+      "attacks": "2",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "PRECISION"
+      ]
+    },
+    {
+      "name": "Special issue bolt pistol",
+      "range": "12\"",
+      "type": "Pistol 1",
+      "attacks": "1",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "-1",
+      "damage": "1",
+      "abilities": [
+        "PISTOL",
+        "PRECISION"
+      ]
+    },
+    {
+      "name": "Close combat weapon",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "3",
+      "ballisticSkill": "",
+      "weaponSkill": "3+",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": []
+    },
+    {
+      "name": "Combat knife",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "4",
+      "ballisticSkill": "",
+      "weaponSkill": "3+",
+      "strength": "4",
+      "armorPenetration": "-1",
+      "damage": "1",
+      "abilities": [
+        "PRECISION"
+      ]
+    }
+  ],
+  "abilities": [
+    {
+      "name": "SCOUTS 6\\\"",
+      "type": "core",
+      "description": "Scouts 6\".",
+      "triggerPhase": [
+        "Deployment"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "OATH OF MOMENT",
+      "type": "faction",
+      "description": "Oath of Moment.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "FEARSOME ASSAULT",
+      "type": "unit",
+      "description": "At the start of the Fight phase, each enemy unit within Engagement Range of one or more units with this ability must take a Battle-shock test, subtracting 1 from that test.",
+      "triggerPhase": [
+        "Fight"
+      ],
+      "triggerSubphase": "Start of Phase",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "TERROR TROOPS (AURA)",
+      "type": "unit",
+      "description": "While an enemy unit (excluding MONSTERS and VEHICLES) is within 3\" of one or more units with this ability, subtract 1 from the Objective Control characteristic of models in that enemy unit.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [
+        "INFANTRY"
+      ],
+      "effects": null
+    },
+    {
+      "name": "GRAPNEL LAUNCHER",
+      "type": "wargear",
+      "description": "Each time the bearer’s unit makes a Normal, Advance, Fall Back or Charge move, ignore any vertical distance when determining the total distance the bearer can be moved during that move.",
+      "triggerPhase": [
+        "Movement",
+        "Charge"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "REIVER GRAV-CHUTE",
+      "type": "wargear",
+      "description": "The bearer has the Deep Strike ability.",
+      "triggerPhase": [
+        "Deployment"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [
+    {
+      "description": "All models in this unit can each have their combat knife replaced with 1 bolt carbine and 1 close combat weapon.",
+      "pointsCost": 0
+    },
+    {
+      "description": "If the Reiver Sergeant is equipped with 1 bolt carbine, it can be equipped with 1 combat knife.",
+      "pointsCost": 0
+    },
+    {
+      "description": "All models in this unit can each be equipped with 1 Reiver grav-chute.",
+      "pointsCost": 0
+    },
+    {
+      "description": "All models in this unit can each be equipped with 1 grapnel launcher.",
+      "pointsCost": 0
+    }
+  ],
+  "pointsCost": 80,
+  "pointsTiers": [
+    {
+      "models": 5,
+      "points": 80
+    },
+    {
+      "models": 10,
+      "points": 160
+    }
+  ]
+}

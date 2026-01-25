@@ -1,0 +1,178 @@
+{
+  "name": "Doomhammer",
+  "faction": "Astra Militarum",
+  "subfaction": "",
+  "role": "Other",
+  "keywords": [
+    "VEHICLE",
+    "TITANIC",
+    "SMOKE",
+    "IMPERIUM",
+    "TRANSPORT",
+    "DOOMHAMMER"
+  ],
+  "stats": {
+    "movement": "12\"",
+    "toughness": 13,
+    "save": "2+",
+    "invulnerableSave": "",
+    "wounds": 24,
+    "leadership": 7,
+    "objectiveControl": 8
+  },
+  "composition": "1 Doomhammer",
+  "compositionData": [
+    {
+      "name": "Doomhammer",
+      "role": "regular",
+      "count": 1,
+      "woundsPerModel": 24
+    }
+  ],
+  "unitSize": "1",
+  "leaderRules": "",
+  "leaderAbilities": "",
+  "transportCapacity": "This model has a transport capacity of 26 ASTRA MILITARUM INFANTRY models. Each OGRYN model takes up the space of 3 models. It cannot transport ARTILLERY models.",
+  "weapons": [
+    {
+      "name": "Lascannon",
+      "range": "48\"",
+      "type": "Ranged",
+      "attacks": "1",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "12",
+      "armorPenetration": "-3",
+      "damage": "D6+1",
+      "abilities": []
+    },
+    {
+      "name": "Magma cannon",
+      "range": "24\"",
+      "type": "Ranged",
+      "attacks": "D6+3",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "12",
+      "armorPenetration": "-4",
+      "damage": "D6",
+      "abilities": [
+        "BLAST",
+        "MELTA 6"
+      ]
+    },
+    {
+      "name": "Twin heavy bolter",
+      "range": "36\"",
+      "type": "Ranged",
+      "attacks": "3",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "5",
+      "armorPenetration": "-1",
+      "damage": "2",
+      "abilities": [
+        "SUSTAINED HITS 1",
+        "TWIN-LINKED"
+      ]
+    },
+    {
+      "name": "Twin heavy flamer",
+      "range": "12\"",
+      "type": "Ranged",
+      "attacks": "D6",
+      "ballisticSkill": "N/A",
+      "weaponSkill": "",
+      "strength": "5",
+      "armorPenetration": "-1",
+      "damage": "1",
+      "abilities": [
+        "IGNORES COVER",
+        "TORRENT",
+        "TWIN-LINKED"
+      ]
+    },
+    {
+      "name": "Armoured tracks",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "6",
+      "ballisticSkill": "",
+      "weaponSkill": "4+",
+      "strength": "8",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": []
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Deadly Demise D6+2",
+      "type": "core",
+      "description": "When this model is destroyed, roll one D6. On a 6, each unit within 6\" suffers D6+2 mortal wounds.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": true,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Firing Deck 6",
+      "type": "core",
+      "description": "In your Shooting phase, you can select up to 6 models embarked within this Transport. Until the end of the phase, this Transport is treated as being equipped with all of the ranged weapons those models are equipped with.",
+      "triggerPhase": [
+        "Shooting"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Close-range Titan Killer",
+      "type": "unit",
+      "description": "Each time this model’s magma cannon targets a MONSTER or VEHICLE unit, that target is always considered to be within half range of that weapon.",
+      "triggerPhase": [
+        "Shooting"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": [
+        "MONSTER",
+        "VEHICLE"
+      ],
+      "effects": null
+    },
+    {
+      "name": "Damaged: 1-8 Wounds Remaining",
+      "type": "unit",
+      "description": "While this model has 1-8 wounds remaining, subtract 4 from its Objective Control characteristic and each time this model makes an attack, subtract 1 from the Hit roll.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": true,
+      "requiredKeywords": [],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [
+    {
+      "description": "This model’s 2 twin heavy flamers can be replaced with 2 twin heavy bolters.",
+      "pointsCost": 0
+    },
+    {
+      "description": "This model can be equipped with one of the following: 2 lascannons and 2 twin heavy bolters; 2 lascannons and 2 twin heavy flamers",
+      "pointsCost": 0
+    }
+  ],
+  "pointsCost": 415,
+  "pointsTiers": [
+    {
+      "models": 1,
+      "points": 415
+    }
+  ]
+}

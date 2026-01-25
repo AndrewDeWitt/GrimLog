@@ -1,0 +1,153 @@
+{
+  "name": "Zoanthropes",
+  "faction": "Tyranids",
+  "subfaction": "",
+  "role": "Elites",
+  "keywords": [
+    "INFANTRY",
+    "PSYKER",
+    "FLY",
+    "GREAT DEVOURER",
+    "SYNAPSE",
+    "ZOANTHROPES",
+    "TYRANIDS"
+  ],
+  "stats": {
+    "movement": "5\"",
+    "toughness": 5,
+    "save": "5+",
+    "invulnerableSave": "4+",
+    "wounds": 3,
+    "leadership": 7,
+    "objectiveControl": 1
+  },
+  "composition": "1 Neurothrope, 2-5 Zoanthropes. Every model is equipped with: Warp Blast; chitinous claws and teeth.",
+  "compositionData": [
+    {
+      "name": "Neurothrope",
+      "role": "leader",
+      "count": 1,
+      "woundsPerModel": 3
+    },
+    {
+      "name": "Zoanthrope",
+      "role": "regular",
+      "count": 2,
+      "woundsPerModel": 3
+    }
+  ],
+  "unitSize": "3",
+  "leaderRules": "This unit can be led by the following unit: Neurotyrant",
+  "leaderAbilities": "",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Warp Blast - witchfire",
+      "range": "24\"",
+      "type": "D3",
+      "attacks": "D3",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "7",
+      "armorPenetration": "-2",
+      "damage": "D3",
+      "abilities": [
+        "BLAST",
+        "PSYCHIC"
+      ]
+    },
+    {
+      "name": "Warp Blast - focused witchfire",
+      "range": "24\"",
+      "type": "1",
+      "attacks": "1",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "12",
+      "armorPenetration": "-3",
+      "damage": "D6+1",
+      "abilities": [
+        "LETHAL HITS",
+        "PSYCHIC"
+      ]
+    },
+    {
+      "name": "Chitinous claws and teeth",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "2",
+      "ballisticSkill": "",
+      "weaponSkill": "5+",
+      "strength": "3",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": []
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Shadow in the Warp",
+      "type": "faction",
+      "description": "Shadow in the Warp",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Synapse",
+      "type": "faction",
+      "description": "Synapse",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [
+        "TYRANIDS"
+      ],
+      "effects": null
+    },
+    {
+      "name": "Spirit Leech (Aura, Psychic)",
+      "type": "unit",
+      "description": "While an enemy unit is within 6\" of this unit, if this unit contains a Neurothrope, each time that enemy unit fails a Battle-shock test, it suffers D3 mortal wounds and one model in this unit regains up to D3 lost wounds.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": true,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Warp Field (Aura, Psychic)",
+      "type": "unit",
+      "description": "While a friendly TYRANIDS unit is within 6\" of this unit, models in that unit have a 6+ invulnerable save.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [
+        "TYRANIDS"
+      ],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [],
+  "pointsCost": 100,
+  "pointsTiers": [
+    {
+      "models": 3,
+      "points": 100
+    },
+    {
+      "models": 6,
+      "points": 200
+    }
+  ]
+}

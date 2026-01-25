@@ -1,0 +1,191 @@
+{
+  "name": "Grey Hunters",
+  "faction": "Space Marines",
+  "subfaction": "Space Wolves",
+  "role": "Battleline",
+  "keywords": [
+    "INFANTRY",
+    "BATTLELINE",
+    "GRENADES",
+    "IMPERIUM",
+    "TACTICUS",
+    "GREY HUNTERS",
+    "ADEPTUS ASTARTES",
+    "SPACE WOLVES"
+  ],
+  "stats": {
+    "movement": "7\"",
+    "toughness": 4,
+    "save": "3+",
+    "invulnerableSave": "",
+    "wounds": 2,
+    "leadership": 6,
+    "objectiveControl": 3
+  },
+  "composition": "1 Grey Hunter Pack Leader, 9 Grey Hunters",
+  "compositionData": [
+    {
+      "name": "Grey Hunter Pack Leader",
+      "role": "leader",
+      "count": 1,
+      "woundsPerModel": 2
+    },
+    {
+      "name": "Grey Hunter",
+      "role": "regular",
+      "count": 9,
+      "woundsPerModel": 2
+    }
+  ],
+  "unitSize": "10 models",
+  "leaderRules": "Inquisitor, Inquisitor Coteaz, Inquisitor Draxus, Inquisitor Greyfax, Iron Priest, Njal Stormcaller, Ulrik The Slayer, Wolf Guard Battle Leader, Wolf Priest, Inquisitor Eisenhorn, Inquisitor In Terminator Armour, Krom Dragongaze, Wolf Guard Pack Leader, Wolf Guard Pack Leader In Terminator Armour",
+  "leaderAbilities": "",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Bolt carbine",
+      "range": "24\"",
+      "type": "RAPID FIRE 1",
+      "attacks": "2",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "RAPID FIRE 1"
+      ]
+    },
+    {
+      "name": "Bolt pistol",
+      "range": "12\"",
+      "type": "PISTOL",
+      "attacks": "1",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "PISTOL"
+      ]
+    },
+    {
+      "name": "Plasma pistol — standard",
+      "range": "12\"",
+      "type": "PISTOL",
+      "attacks": "1",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "7",
+      "armorPenetration": "-2",
+      "damage": "1",
+      "abilities": [
+        "PISTOL"
+      ]
+    },
+    {
+      "name": "Plasma pistol — supercharge",
+      "range": "12\"",
+      "type": "HAZARDOUS, PISTOL",
+      "attacks": "1",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "8",
+      "armorPenetration": "-3",
+      "damage": "2",
+      "abilities": [
+        "HAZARDOUS",
+        "PISTOL"
+      ]
+    },
+    {
+      "name": "Astartes chainsword",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "4",
+      "ballisticSkill": "",
+      "weaponSkill": "3+",
+      "strength": "4",
+      "armorPenetration": "-1",
+      "damage": "1",
+      "abilities": []
+    },
+    {
+      "name": "Power fist",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "3",
+      "ballisticSkill": "",
+      "weaponSkill": "3+",
+      "strength": "8",
+      "armorPenetration": "-2",
+      "damage": "2",
+      "abilities": []
+    },
+    {
+      "name": "Power weapon",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "4",
+      "ballisticSkill": "",
+      "weaponSkill": "3+",
+      "strength": "5",
+      "armorPenetration": "-2",
+      "damage": "1",
+      "abilities": []
+    }
+  ],
+  "abilities": [
+    {
+      "name": "OATH OF MOMENT",
+      "type": "faction",
+      "description": "",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "CUNNING HUNTERS",
+      "type": "unit",
+      "description": "Each time a model in this unit makes an attack, re-roll a Wound roll of 1. If the target is within range of an objective marker, you can re-roll the Wound roll instead.",
+      "triggerPhase": [
+        "Shooting",
+        "Fight"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [
+    {
+      "description": "The Grey Hunter Pack Leader’s bolt carbine can be replaced with 1 plasma pistol.",
+      "pointsCost": 0
+    },
+    {
+      "description": "The Grey Hunter Pack Leader’s Astartes chainsword can be replaced with 1 power fist.",
+      "pointsCost": 0
+    },
+    {
+      "description": "The Grey Hunter Pack Leader’s Astartes chainsword can be replaced with 1 power weapon.",
+      "pointsCost": 0
+    },
+    {
+      "description": "Calibanite Armaments (Enhancement)",
+      "pointsCost": 15
+    }
+  ],
+  "pointsCost": 180,
+  "pointsTiers": [
+    {
+      "models": 10,
+      "points": 180
+    }
+  ]
+}

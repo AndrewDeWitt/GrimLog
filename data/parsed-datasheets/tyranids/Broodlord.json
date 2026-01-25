@@ -1,0 +1,141 @@
+{
+  "name": "Broodlord",
+  "faction": "Tyranids",
+  "subfaction": "",
+  "role": "Character",
+  "keywords": [
+    "INFANTRY",
+    "CHARACTER",
+    "PSYKER",
+    "GREAT DEVOURER",
+    "SYNAPSE",
+    "VANGUARD INVADER",
+    "BROODLORD",
+    "TYRANIDS"
+  ],
+  "stats": {
+    "movement": "8\"",
+    "toughness": 5,
+    "save": "4+",
+    "invulnerableSave": "4+",
+    "wounds": 6,
+    "leadership": 7,
+    "objectiveControl": 1
+  },
+  "composition": "1 Broodlord",
+  "compositionData": [
+    {
+      "name": "Broodlord",
+      "role": "leader",
+      "count": 1,
+      "woundsPerModel": 6
+    }
+  ],
+  "unitSize": "1",
+  "leaderRules": "Can be attached to Genestealers",
+  "leaderAbilities": "Vicious Insight: While this model is leading a unit, weapons equipped by models in that unit have the [DEVASTATING WOUNDS] ability.",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Broodlord claws and talons",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "5",
+      "ballisticSkill": "",
+      "weaponSkill": "2+",
+      "strength": "6",
+      "armorPenetration": "-2",
+      "damage": "2",
+      "abilities": [
+        "DEVASTATING WOUNDS",
+        "TWIN-LINKED"
+      ]
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Leader",
+      "type": "core",
+      "description": "Leader",
+      "triggerPhase": [
+        "Keyword"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Scouts 8\"",
+      "type": "core",
+      "description": "Scouts 8\"",
+      "triggerPhase": [
+        "Deployment"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Synapse",
+      "type": "faction",
+      "description": "Synapse",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [
+        "TYRANIDS"
+      ],
+      "effects": null
+    },
+    {
+      "name": "Shadow in the Warp",
+      "type": "faction",
+      "description": "Shadow in the Warp",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [
+        "TYRANIDS"
+      ],
+      "effects": null
+    },
+    {
+      "name": "Vicious Insight",
+      "type": "leader",
+      "description": "While this model is leading a unit, weapons equipped by models in that unit have the [DEVASTATING WOUNDS] ability.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Hypnotic Gaze (Psychic)",
+      "type": "unit",
+      "description": "At the start of the Fight phase, select one enemy unit within Engagement Range of this model. Until the end of the phase, each time a model in that unit makes an attack, subtract 1 from the Hit roll.",
+      "triggerPhase": [
+        "Fight"
+      ],
+      "triggerSubphase": "Start of Phase",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [],
+  "pointsCost": 80,
+  "pointsTiers": [
+    {
+      "models": 1,
+      "points": 80
+    }
+  ]
+}

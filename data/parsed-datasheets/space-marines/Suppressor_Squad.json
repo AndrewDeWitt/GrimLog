@@ -1,0 +1,132 @@
+{
+  "name": "Suppressor Squad",
+  "faction": "Space Marines",
+  "subfaction": "Space Wolves",
+  "role": "Other",
+  "keywords": [
+    "INFANTRY",
+    "GRENADES",
+    "SMOKE",
+    "JUMP PACK",
+    "FLY",
+    "IMPERIUM",
+    "SUPPRESSOR SQUAD",
+    "ADEPTUS ASTARTES"
+  ],
+  "stats": {
+    "movement": "12\"",
+    "toughness": 4,
+    "save": "3+",
+    "invulnerableSave": "",
+    "wounds": 2,
+    "leadership": 6,
+    "objectiveControl": 1
+  },
+  "composition": "1 Suppressor Sergeant, 2 Suppressors",
+  "compositionData": [
+    {
+      "name": "Suppressor Sergeant",
+      "role": "leader",
+      "count": 1,
+      "woundsPerModel": 2
+    },
+    {
+      "name": "Suppressor",
+      "role": "regular",
+      "count": 2,
+      "woundsPerModel": 2
+    }
+  ],
+  "unitSize": "3",
+  "leaderRules": "",
+  "leaderAbilities": "",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Accelerator autocannon",
+      "range": "48\"",
+      "type": "Heavy 3",
+      "attacks": "3",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "8",
+      "armorPenetration": "-1",
+      "damage": "2",
+      "abilities": [
+        "HEAVY"
+      ]
+    },
+    {
+      "name": "Bolt pistol",
+      "range": "12\"",
+      "type": "Pistol 1",
+      "attacks": "1",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "PISTOL"
+      ]
+    },
+    {
+      "name": "Close combat weapon",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "3",
+      "ballisticSkill": "",
+      "weaponSkill": "3+",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": []
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Deep Strike",
+      "type": "core",
+      "description": "Deep Strike",
+      "triggerPhase": [
+        "Deployment"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Oath of Moment",
+      "type": "faction",
+      "description": "Oath of Moment",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Suppression Fire",
+      "type": "unit",
+      "description": "In your Shooting phase, after this unit has shot, select one enemy unit hit by one or more of those attacks made with an accelerator autocannon. Until the start of your next turn, while this unit is on the battlefield, that enemy unit is suppressed. While a unit is suppressed, each time a model in that unit makes an attack, subtract 1 from the Hit roll.",
+      "triggerPhase": [
+        "Shooting"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [],
+  "pointsCost": 75,
+  "pointsTiers": [
+    {
+      "models": 3,
+      "points": 75
+    }
+  ]
+}

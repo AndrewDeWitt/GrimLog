@@ -1,0 +1,204 @@
+{
+  "name": "Assault Intercessors With Jump Packs",
+  "faction": "Adeptus Astartes",
+  "subfaction": "Space Wolves",
+  "role": "Other",
+  "keywords": [
+    "INFANTRY",
+    "GRENADES",
+    "JUMP PACK",
+    "FLY",
+    "IMPERIUM",
+    "TACTICUS",
+    "ASSAULT INTERCESSORS WITH JUMP PACKS",
+    "ADEPTUS ASTARTES"
+  ],
+  "stats": {
+    "movement": "12\"",
+    "toughness": 4,
+    "save": "3+",
+    "invulnerableSave": "",
+    "wounds": 2,
+    "leadership": 6,
+    "objectiveControl": 1
+  },
+  "composition": "1 Assault Intercessor Sergeant with Jump Pack, 4-9 Assault Intercessors with Jump Packs",
+  "compositionData": [
+    {
+      "name": "Assault Intercessor Sergeant with Jump Pack",
+      "role": "leader",
+      "count": 1,
+      "woundsPerModel": 2
+    },
+    {
+      "name": "Assault Intercessor with Jump Pack",
+      "role": "regular",
+      "count": 4,
+      "woundsPerModel": 2
+    }
+  ],
+  "unitSize": "5-10",
+  "leaderRules": "This unit can be led by the following units: Captain With Jump Pack, Chaplain With Jump Pack, Kayvaan Shrike, Commander Dante, Sanguinary Priest With Jump Pack",
+  "leaderAbilities": "",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Hand flamer",
+      "range": "12\"",
+      "type": "Pistol",
+      "attacks": "D6",
+      "ballisticSkill": "N/A",
+      "weaponSkill": "",
+      "strength": "3",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "IGNORES COVER",
+        "PISTOL",
+        "TORRENT"
+      ]
+    },
+    {
+      "name": "Heavy bolt pistol",
+      "range": "18\"",
+      "type": "Pistol",
+      "attacks": "1",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "-1",
+      "damage": "1",
+      "abilities": [
+        "PISTOL"
+      ]
+    },
+    {
+      "name": "Plasma pistol - standard",
+      "range": "12\"",
+      "type": "Pistol",
+      "attacks": "1",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "7",
+      "armorPenetration": "-2",
+      "damage": "1",
+      "abilities": [
+        "PISTOL"
+      ]
+    },
+    {
+      "name": "Plasma pistol - supercharge",
+      "range": "12\"",
+      "type": "Pistol",
+      "attacks": "1",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "8",
+      "armorPenetration": "-3",
+      "damage": "2",
+      "abilities": [
+        "HAZARDOUS",
+        "PISTOL"
+      ]
+    },
+    {
+      "name": "Astartes chainsword",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "4",
+      "ballisticSkill": "",
+      "weaponSkill": "3+",
+      "strength": "4",
+      "armorPenetration": "-1",
+      "damage": "1",
+      "abilities": []
+    },
+    {
+      "name": "Power weapon",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "4",
+      "ballisticSkill": "",
+      "weaponSkill": "3+",
+      "strength": "5",
+      "armorPenetration": "-2",
+      "damage": "1",
+      "abilities": []
+    },
+    {
+      "name": "Power fist",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "3",
+      "ballisticSkill": "",
+      "weaponSkill": "3+",
+      "strength": "8",
+      "armorPenetration": "-2",
+      "damage": "2",
+      "abilities": []
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Deep Strike",
+      "type": "core",
+      "description": "During the Declare Battle Formations step, if every model in a unit has this ability, you can set it up in Reinforcements instead of setting it up on the battlefield. If you do, in the Reinforcements step of one of your Movement phases you can set up this unit anywhere on the battlefield that is more than 9\" away from all enemy models.",
+      "triggerPhase": [
+        "Deployment"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Oath of Moment",
+      "type": "faction",
+      "description": "If your Army Faction is Adeptus Astartes, at the start of your Command phase, select one unit from your opponent's army. Until the start of your next Command phase, each time a model from your army with this ability makes an attack that targets that enemy unit, you can re-roll the Hit roll.",
+      "triggerPhase": [
+        "Command"
+      ],
+      "triggerSubphase": "Start of Phase",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Hammer of Wrath",
+      "type": "unit",
+      "description": "Each time this unit ends a Charge move, select one enemy unit within Engagement Range of it, then roll one D6 for each model in this unit that is within Engagement Range of that enemy unit: for each 4+, that enemy unit suffers 1 mortal wound.",
+      "triggerPhase": [
+        "Charge"
+      ],
+      "triggerSubphase": "End of Phase",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [
+    {
+      "description": "For every 5 models in this unit, 1 Assault Intercessor with Jump Pack’s heavy bolt pistol can be replaced with 1 plasma pistol.",
+      "pointsCost": 0
+    },
+    {
+      "description": "The Assault Intercessor Sergeant with Jump Pack’s Astartes chainsword can be replaced with one of the following: 1 power weapon, 1 power fist.",
+      "pointsCost": 0
+    },
+    {
+      "description": "The Assault Intercessor Sergeant with Jump Pack’s heavy bolt pistol can be replaced with one of the following: 1 hand flamer, 1 plasma pistol.",
+      "pointsCost": 0
+    }
+  ],
+  "pointsCost": 90,
+  "pointsTiers": [
+    {
+      "models": 5,
+      "points": 90
+    },
+    {
+      "models": 10,
+      "points": 170
+    }
+  ]
+}

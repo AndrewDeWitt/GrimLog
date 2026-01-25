@@ -1,0 +1,167 @@
+{
+  "name": "Krieg Heavy Weapons Squad",
+  "faction": "Astra Militarum",
+  "subfaction": "",
+  "role": "Other",
+  "keywords": [
+    "INFANTRY",
+    "GRENADES",
+    "IMPERIUM",
+    "REGIMENT",
+    "KRIEG HEAVY WEAPONS SQUAD"
+  ],
+  "stats": {
+    "movement": "4\"",
+    "toughness": 3,
+    "save": "4+",
+    "invulnerableSave": "",
+    "wounds": 2,
+    "leadership": 7,
+    "objectiveControl": 1
+  },
+  "composition": "3 Heavy Weapons Gunners, 1 Fire Coordinator",
+  "compositionData": [
+    {
+      "name": "Fire Coordinator",
+      "role": "leader",
+      "count": 1,
+      "woundsPerModel": 1
+    },
+    {
+      "name": "Heavy Weapons Gunner",
+      "role": "regular",
+      "count": 3,
+      "woundsPerModel": 2
+    }
+  ],
+  "unitSize": "4",
+  "leaderRules": "",
+  "leaderAbilities": "",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Krieg heavy flamer",
+      "range": "18\"",
+      "type": "Torrent",
+      "attacks": "D6",
+      "ballisticSkill": "N/A",
+      "weaponSkill": "",
+      "strength": "5",
+      "armorPenetration": "-1",
+      "damage": "2",
+      "abilities": [
+        "IGNORES COVER",
+        "TORRENT"
+      ]
+    },
+    {
+      "name": "Lascannon",
+      "range": "48\"",
+      "type": "Heavy",
+      "attacks": "1",
+      "ballisticSkill": "5+",
+      "weaponSkill": "",
+      "strength": "12",
+      "armorPenetration": "-3",
+      "damage": "D6+1",
+      "abilities": [
+        "HEAVY"
+      ]
+    },
+    {
+      "name": "Laspistol",
+      "range": "12\"",
+      "type": "Pistol",
+      "attacks": "1",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "3",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "PISTOL"
+      ]
+    },
+    {
+      "name": "Twin Krieg heavy stubber",
+      "range": "48\"",
+      "type": "Heavy, Rapid Fire 3, Twin-linked",
+      "attacks": "3",
+      "ballisticSkill": "5+",
+      "weaponSkill": "",
+      "strength": "6",
+      "armorPenetration": "-1",
+      "damage": "1",
+      "abilities": [
+        "HEAVY",
+        "RAPID FIRE 3",
+        "TWIN-LINKED"
+      ]
+    },
+    {
+      "name": "Close combat weapon",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "1",
+      "ballisticSkill": "",
+      "weaponSkill": "4+",
+      "strength": "3",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": []
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Born Soldiers",
+      "type": "faction",
+      "description": "Each time a model in this unit makes a ranged attack, if this unit Remained Stationary this turn, that attack has the [LETHAL HITS] ability.",
+      "triggerPhase": [
+        "Shooting"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Final Duty",
+      "type": "unit",
+      "description": "While the Fire Coordinator model is on the battlefield, each time a Heavy Weapons Gunner model is destroyed, roll one D6: on a 3+, do not remove it from play. The destroyed model can shoot after the attacking model’s unit has finished making its attacks, and is then removed from play.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": true,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Embarking",
+      "type": "unit",
+      "description": "While embarked within a TRANSPORT, each Heavy Weapons Gunner model takes up the space of 2 models, and each weapon equipped by these models is considered to be 2 models’ weapons for the purposes of the Firing Deck ability.",
+      "triggerPhase": [
+        "General"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [
+        "TRANSPORT"
+      ],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [
+    {
+      "description": "Any number of Heavy Weapons Gunners can each have their lascannon replaced with one of the following: 1 Krieg heavy flamer, 1 twin Krieg heavy stubber",
+      "pointsCost": 0
+    }
+  ],
+  "pointsCost": 75,
+  "pointsTiers": [
+    {
+      "models": 4,
+      "points": 75
+    }
+  ]
+}

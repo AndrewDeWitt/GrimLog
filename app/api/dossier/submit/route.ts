@@ -1,0 +1,240 @@
+/**
+ * Dossier Submit API Endpoint
+ *
+ * POST /api/dossier/submit
+ *
+ * Quick submission endpoint for async dossier generation.
+ * Creates a pending record and triggers background processing.
+ * Returns immediately with the dossier ID for polling.
+ *
+ * Uses direct function calls for background processing (no HTTP).
+ */
+
+import { NextRequest, NextResponse } from 'next/server';
+import { after } from 'next/server';
+import { prisma } from '@/lib/prisma';
+import { requireAuth } from '@/lib/auth/apiAuth';
+import { checkRateLimit, getRateLimitIdentifier, getClientIp, RATE_LIMITS } from '@/lib/rateLimit';
+import { checkCreditsAvailable } from '@/lib/dossierCredits';
+import { analyzeDossier } from '@/lib/dossierAnalysis';
+import { parseArmyListFromText } from '@/lib/armyListParser';
+import { generateDossier } from '@/lib/dossierGenerator';
+import { langfuse } from '@/lib/langfuse';
+
+// Route segment config
+export const dynamic = 'force-dynamic';
+
+interface SubmitRequest {
+  text: string;
+  factionId: string;
+}
+
+export async function POST(request: NextRequest) {
+  try {
+    // 1. Require authentication
+    const user = await requireAuth();
+
+    // 2. Rate limiting
+    const ipAddress = getClientIp(request);
+    const identifier = getRateLimitIdentifier(user.id, ipAddress);
+    const rateLimit = checkRateLimit(identifier, RATE_LIMITS.dossierAnalyze);
+
+    if (!rateLimit.allowed) {
+      return NextResponse.json(
+        {
+          error: 'Rate limit exceeded',
+          message: `Too many requests. Please wait ${Math.ceil((rateLimit.resetTime - Date.now()) / 1000)} seconds.`,
+          retryAfter: Math.ceil((rateLimit.resetTime - Date.now()) / 1000)
+        },
+        {
+          status: 429,
+          headers: {
+            'X-RateLimit-Limit': RATE_LIMITS.dossierAnalyze.maxRequests.toString(),
+            'X-RateLimit-Remaining': rateLimit.remaining.toString(),
+            'X-RateLimit-Reset': new Date(rateLimit.resetTime).toISOString(),
+            'Retry-After': Math.ceil((rateLimit.resetTime - Date.now()) / 1000).toString(),
+          }
+        }
+      );
+    }
+
+    // 3. Check credits (without deducting - will deduct when processing starts)
+    const creditCheck = await checkCreditsAvailable(user.id);
+    if (!creditCheck.allowed) {
+      return NextResponse.json(
+        {
+          error: 'No credits remaining',
+          remainingCredits: 0,
+          message: 'You have used all your free dossier generations. Contact an administrator for more credits.'
+        },
+        { status: 402 }
+      );
+    }
+
+    // 4. Parse and validate request body
+    const body: SubmitRequest = await request.json();
+    const { text, factionId } = body;
+
+    if (!factionId?.trim()) {
+      return NextResponse.json(
+        { error: 'Please select a faction' },
+        { status: 400 }
+      );
+    }
+
+    if (!text?.trim()) {
+      return NextResponse.json(
+        { error: 'Please provide an army list text' },
+        { status: 400 }
+      );
+    }
+
+    // Basic validation - text should have some content
+    if (text.trim().length < 20) {
+      return NextResponse.json(
+        { error: 'Army list text is too short. Please paste a complete army list.' },
+        { status: 400 }
+      );
+    }
+
+    // 5. Create pending dossier record
+    const dossier = await prisma.dossierGeneration.create({
+      data: {
+        userId: user.id,
+        status: 'pending',
+        inputText: text.trim(),
+      },
+    });
+
+    console.log(`📋 Dossier submitted: id=${dossier.id}, userId=${user.id}`);
+
+    // 6. Trigger background processing using Next.js after() API
+    // Uses direct function calls - no HTTP requests needed
+    after(async () => {
+      // Create a single Langfuse trace for the entire dossier generation process
+      const trace = langfuse.trace({
+        name: "dossier-strategic-analysis-background",
+        metadata: {
+          dossierId: dossier.id,
+          userId: user.id,
+          textLength: text.length,
+        },
+        tags: ['dossier-analysis', 'background-processing']
+      });
+
+      try {
+        console.log(`🔄 Starting background processing for dossier: ${dossier.id}`);
+
+        // Update status to processing
+        await prisma.dossierGeneration.update({
+          where: { id: dossier.id },
+          data: { status: 'processing' },
+        });
+
+        // Step 1: Parse the army list (direct function call)
+        const parseSpan = trace.span({
+          name: "parse-army-list",
+          metadata: { textLength: text.length }
+        });
+        console.log(`📝 Parsing army list for dossier: ${dossier.id}`);
+        const parseResult = await parseArmyListFromText({
+          text: text.trim(),
+          factionId, // Filter datasheets by selected faction
+          trace, // Pass trace for LLM cost tracking
+        });
+
+        if (!parseResult.success || !parseResult.parsedArmy) {
+          parseSpan.end({ level: "ERROR", statusMessage: parseResult.error });
+          throw new Error(parseResult.error || 'Failed to parse army list');
+        }
+
+        const parsedArmy = parseResult.parsedArmy;
+        parseSpan.end({
+          metadata: {
+            unitCount: parsedArmy.units?.length || 0,
+            faction: parsedArmy.detectedFaction,
+            detachment: parsedArmy.detectedDetachment,
+          }
+        });
+        console.log(`✅ Army parsed: ${parsedArmy.units?.length || 0} units`);
+
+        // Step 2: Run local analysis
+        const localAnalysisSpan = trace.span({
+          name: "run-local-analysis",
+        });
+        console.log(`📊 Running local analysis for dossier: ${dossier.id}`);
+        const localAnalysis = analyzeDossier(parsedArmy);
+        localAnalysisSpan.end({
+          metadata: {
+            totalPoints: localAnalysis.totalPoints,
+            unitCount: localAnalysis.unitCount,
+            modelCount: localAnalysis.modelCount,
+          }
+        });
+        console.log(`✅ Local analysis complete: ${localAnalysis.totalPoints} points`);
+
+        // Step 3: Generate dossier with AI (direct function call)
+        console.log(`🤖 Starting AI analysis for dossier: ${dossier.id}`);
+        const generateResult = await generateDossier({
+          parsedArmy,
+          localAnalysis,
+          userId: user.id,
+          dossierId: dossier.id,
+          trace, // Pass trace for LLM cost tracking
+        });
+
+        if (generateResult.success) {
+          console.log(`✅ Background processing completed for dossier: ${dossier.id}`);
+          trace.update({ tags: ['success'] });
+        } else {
+          console.error(`❌ AI analysis failed for dossier ${dossier.id}:`, generateResult.error);
+          trace.update({ metadata: { error: generateResult.error, status: 'error' } });
+          // generateDossier already marks the dossier as failed in the database
+        }
+
+      } catch (error) {
+        console.error(`❌ Background processing error for dossier ${dossier.id}:`, error);
+
+        trace.update({
+          metadata: { error: error instanceof Error ? error.message : 'Unknown error', status: 'error' }
+        });
+
+        // Update status to failed
+        await prisma.dossierGeneration.update({
+          where: { id: dossier.id },
+          data: {
+            status: 'failed',
+            completedAt: new Date(),
+            errorMessage: error instanceof Error ? error.message : 'Unknown error',
+          },
+        });
+      } finally {
+        // Always flush the trace at the end
+        await langfuse.flushAsync().catch(() => {});
+      }
+    });
+
+    // 7. Return immediately with dossier ID
+    return NextResponse.json({
+      success: true,
+      dossierId: dossier.id,
+      status: 'pending',
+      message: 'Dossier generation started. You will be notified when complete.',
+    });
+
+  } catch (error) {
+    console.error('Dossier submit error:', error);
+
+    if (error instanceof Error && error.message === 'Authentication required') {
+      return NextResponse.json(
+        { error: 'Authentication required' },
+        { status: 401 }
+      );
+    }
+
+    return NextResponse.json(
+      { error: 'Failed to submit dossier for generation' },
+      { status: 500 }
+    );
+  }
+}

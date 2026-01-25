@@ -1,0 +1,27 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__supabase__execute_sql",
+      "Bash(npx eslint:*)",
+      "Bash(npx tsc:*)",
+      "Bash(npm run lint:*)",
+      "Bash(npm run build:*)",
+      "Bash(ls:*)",
+      "Bash(echo:*)",
+      "Bash(npx next lint:*)",
+      "Bash(pushd:*)",
+      "Bash(popd)",
+      "Bash(git check-ignore:*)",
+      "mcp__supabase__list_projects",
+      "mcp__supabase__get_advisors",
+      "WebFetch(domain:ai.google.dev)",
+      "WebFetch(domain:langfuse.com)",
+      "Bash(dir:*)",
+      "Bash(git add:*)"
+    ]
+  },
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [
+    "supabase"
+  ]
+}

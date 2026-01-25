@@ -1,0 +1,164 @@
+{
+  "name": "Captain In Phobos Armour",
+  "faction": "Space Marines",
+  "subfaction": "Space Wolves",
+  "role": "Character",
+  "keywords": [
+    "INFANTRY",
+    "CHARACTER",
+    "GRENADES",
+    "IMPERIUM",
+    "PHOBOS",
+    "CAPTAIN",
+    "ADEPTUS ASTARTES"
+  ],
+  "stats": {
+    "movement": "6\"",
+    "toughness": 4,
+    "save": "3+",
+    "invulnerableSave": "4+",
+    "wounds": 5,
+    "leadership": 6,
+    "objectiveControl": 1
+  },
+  "composition": "1 Captain in Phobos Armour",
+  "compositionData": [
+    {
+      "name": "Captain in Phobos Armour",
+      "role": "leader",
+      "count": 1,
+      "woundsPerModel": 5
+    }
+  ],
+  "unitSize": "1",
+  "leaderRules": "This model can be attached to the following units: Eliminator Squad, Incursor Squad, Infiltrator Squad, Reiver Squad, Scout Squad, Spectrus Kill Team, Hounds Of Morkai, Wolf Scouts",
+  "leaderAbilities": "",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Bolt pistol",
+      "range": "12\"",
+      "type": "Pistol",
+      "attacks": "1",
+      "ballisticSkill": "2+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "PISTOL"
+      ]
+    },
+    {
+      "name": "Instigator bolt carbine",
+      "range": "24\"",
+      "type": "Precision",
+      "attacks": "1",
+      "ballisticSkill": "2+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "-2",
+      "damage": "2",
+      "abilities": [
+        "PRECISION"
+      ]
+    },
+    {
+      "name": "Combat knife",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "6",
+      "ballisticSkill": "",
+      "weaponSkill": "2+",
+      "strength": "4",
+      "armorPenetration": "-1",
+      "damage": "1",
+      "abilities": []
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Infiltrators",
+      "type": "core",
+      "description": "During deployment, if every model in this unit has this ability, you can set up this unit anywhere on the battlefield that is more than 9\" horizontally away from the enemy deployment zone and any enemy models.",
+      "triggerPhase": [
+        "Deployment"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Leader",
+      "type": "core",
+      "description": "This model can be attached to a unit to lead it.",
+      "triggerPhase": [
+        "Keyword"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Stealth",
+      "type": "core",
+      "description": "If every model in a unit has this ability, then each time a ranged attack is made against it, subtract 1 from the Hit roll.",
+      "triggerPhase": [
+        "Keyword"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Oath of Moment",
+      "type": "faction",
+      "description": "If your Army Faction is Adeptus Astartes, at the start of your Command phase, you can select one unit from your opponent’s army. Until the start of your next Command phase, each time a model from your army with this ability makes an attack that targets that enemy unit, you can re-roll the Hit roll.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Rites of Battle",
+      "type": "unit",
+      "description": "Once per battle round, one unit from your army with this ability can use it when its unit is targeted with a Stratagem. If it does, reduce the CP cost of that use of that Stratagem by 1CP.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": true,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Master of Deceit",
+      "type": "unit",
+      "description": "After both players have deployed their armies, if your army includes one or more models with this ability, you can select up to three friendly ADEPTUS ASTARTES INFANTRY units and redeploy all of those units. When doing so, any of those units can be placed into Strategic Reserves, regardless of how many units are already in Strategic Reserves.",
+      "triggerPhase": [
+        "Deployment"
+      ],
+      "triggerSubphase": "End of Phase",
+      "isReactive": false,
+      "requiredKeywords": [
+        "ADEPTUS ASTARTES",
+        "INFANTRY"
+      ],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [],
+  "pointsCost": 70,
+  "pointsTiers": [
+    {
+      "models": 1,
+      "points": 70
+    }
+  ]
+}

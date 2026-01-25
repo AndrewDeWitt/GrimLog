@@ -1,0 +1,138 @@
+{
+  "name": "Firestrike Servo-turrets",
+  "faction": "Space Marines",
+  "subfaction": "Space Wolves",
+  "role": "Other",
+  "keywords": [
+    "ARTILLERY",
+    "VEHICLE",
+    "IMPERIUM",
+    "FIRESTRIKE SERVO-TURRETS",
+    "ADEPTUS ASTARTES"
+  ],
+  "stats": {
+    "movement": "3\"",
+    "toughness": 6,
+    "save": "2+",
+    "invulnerableSave": "",
+    "wounds": 6,
+    "leadership": 6,
+    "objectiveControl": 2
+  },
+  "composition": "1-2 Firestrike Servo-turrets",
+  "compositionData": [
+    {
+      "name": "Firestrike Servo-turret",
+      "role": "regular",
+      "count": 1,
+      "woundsPerModel": 6
+    }
+  ],
+  "unitSize": "1-2",
+  "leaderRules": "",
+  "leaderAbilities": "",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Twin Firestrike autocannon [twin-linked]",
+      "range": "48\"",
+      "type": "Heavy 3",
+      "attacks": "3",
+      "ballisticSkill": "2+",
+      "weaponSkill": "",
+      "strength": "9",
+      "armorPenetration": "-1",
+      "damage": "3",
+      "abilities": [
+        "TWIN-LINKED"
+      ]
+    },
+    {
+      "name": "Twin Firestrike las-talon [twin-linked]",
+      "range": "36\"",
+      "type": "Heavy 2",
+      "attacks": "2",
+      "ballisticSkill": "2+",
+      "weaponSkill": "",
+      "strength": "10",
+      "armorPenetration": "-3",
+      "damage": "D6+1",
+      "abilities": [
+        "TWIN-LINKED"
+      ]
+    },
+    {
+      "name": "Close combat weapon",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "3",
+      "ballisticSkill": "",
+      "weaponSkill": "3+",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": []
+    }
+  ],
+  "abilities": [
+    {
+      "name": "OATH OF MOMENT",
+      "type": "faction",
+      "description": "Oath of Moment",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "SENTINEL PROTOCOLS",
+      "type": "unit",
+      "description": "Each time you select this unit for the Fire Overwatch Stratagem, hits are scored on unmodified Hit rolls of 4+ when resolving that Stratagem.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": true,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "REPLACE TWIN FIRESTRIKE LAS-TALON WITH TWIN FIRESTRIKE AUTOCANNON",
+      "type": "wargear",
+      "description": "Any number of models can each have their twin Firestrike las-talon replaced with 1 twin Firestrike autocannon.",
+      "triggerPhase": [
+        "General"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": {
+        "wounds": null,
+        "toughness": null,
+        "save": null,
+        "invulnerableSave": null,
+        "movement": null
+      }
+    }
+  ],
+  "wargearOptions": [
+    {
+      "description": "Any number of models can each have their twin Firestrike las-talon replaced with 1 twin Firestrike autocannon.",
+      "pointsCost": 0
+    }
+  ],
+  "pointsCost": 75,
+  "pointsTiers": [
+    {
+      "models": 1,
+      "points": 75
+    },
+    {
+      "models": 2,
+      "points": 150
+    }
+  ]
+}

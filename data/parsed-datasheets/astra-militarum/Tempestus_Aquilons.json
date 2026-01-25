@@ -1,0 +1,332 @@
+{
+  "name": "Tempestus Aquilons",
+  "faction": "Astra Militarum",
+  "subfaction": "",
+  "role": "Other",
+  "keywords": [
+    "INFANTRY",
+    "GRENADES",
+    "SMOKE",
+    "IMPERIUM",
+    "REGIMENT",
+    "MILITARUM TEMPESTUS",
+    "TEMPESTUS AQUILONS"
+  ],
+  "stats": {
+    "movement": "6\"",
+    "toughness": 3,
+    "save": "4+",
+    "invulnerableSave": "",
+    "wounds": 1,
+    "leadership": 7,
+    "objectiveControl": 1
+  },
+  "composition": "1 Tempestor Aquilon, 9 Tempestus Aquilons",
+  "compositionData": [
+    {
+      "name": "Tempestor Aquilon",
+      "role": "leader",
+      "count": 1,
+      "woundsPerModel": 1
+    },
+    {
+      "name": "Tempestus Aquilon",
+      "role": "regular",
+      "count": 9,
+      "woundsPerModel": 1
+    }
+  ],
+  "unitSize": "10",
+  "leaderRules": "",
+  "leaderAbilities": "",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Bolt pistol",
+      "range": "12\"",
+      "type": "Pistol",
+      "attacks": "1",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "PISTOL"
+      ]
+    },
+    {
+      "name": "Hot-shot lascarbine",
+      "range": "18\"",
+      "type": "Assault",
+      "attacks": "2",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "3",
+      "armorPenetration": "-1",
+      "damage": "1",
+      "abilities": [
+        "ASSAULT"
+      ]
+    },
+    {
+      "name": "Hot-shot laspistol",
+      "range": "12\"",
+      "type": "Pistol",
+      "attacks": "1",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "3",
+      "armorPenetration": "-1",
+      "damage": "1",
+      "abilities": [
+        "PISTOL"
+      ]
+    },
+    {
+      "name": "Hot-shot long-las",
+      "range": "36\"",
+      "type": "Heavy",
+      "attacks": "1",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "-2",
+      "damage": "3",
+      "abilities": [
+        "HEAVY",
+        "PRECISION"
+      ]
+    },
+    {
+      "name": "Sentry flamer",
+      "range": "12\"",
+      "type": "Torrent",
+      "attacks": "D6+3",
+      "ballisticSkill": "N/A",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "IGNORES COVER",
+        "TORRENT"
+      ]
+    },
+    {
+      "name": "Sentry grenade launcher – frag",
+      "range": "24\"",
+      "type": "Blast",
+      "attacks": "D3+3",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "BLAST"
+      ]
+    },
+    {
+      "name": "Sentry grenade launcher – krak",
+      "range": "24\"",
+      "type": "Ranged",
+      "attacks": "2",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "9",
+      "armorPenetration": "-2",
+      "damage": "D3",
+      "abilities": []
+    },
+    {
+      "name": "Sentry hot-shot volley gun",
+      "range": "30\"",
+      "type": "Rapid Fire 4",
+      "attacks": "4",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "-1",
+      "damage": "1",
+      "abilities": [
+        "RAPID FIRE 4"
+      ]
+    },
+    {
+      "name": "Melta carbine",
+      "range": "10\"",
+      "type": "Assault",
+      "attacks": "1",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "9",
+      "armorPenetration": "-4",
+      "damage": "D6",
+      "abilities": [
+        "ASSAULT",
+        "MELTA 2"
+      ]
+    },
+    {
+      "name": "Plasma carbine – standard",
+      "range": "18\"",
+      "type": "Assault",
+      "attacks": "2",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "7",
+      "armorPenetration": "-2",
+      "damage": "1",
+      "abilities": [
+        "ASSAULT"
+      ]
+    },
+    {
+      "name": "Plasma carbine – supercharge",
+      "range": "18\"",
+      "type": "Assault",
+      "attacks": "2",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "8",
+      "armorPenetration": "-3",
+      "damage": "2",
+      "abilities": [
+        "ASSAULT",
+        "HAZARDOUS"
+      ]
+    },
+    {
+      "name": "Chainsword",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "4",
+      "ballisticSkill": "",
+      "weaponSkill": "4+",
+      "strength": "3",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": []
+    },
+    {
+      "name": "Close combat weapon",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "2",
+      "ballisticSkill": "",
+      "weaponSkill": "4+",
+      "strength": "3",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": []
+    },
+    {
+      "name": "Power weapon",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "3",
+      "ballisticSkill": "",
+      "weaponSkill": "4+",
+      "strength": "4",
+      "armorPenetration": "-2",
+      "damage": "1",
+      "abilities": []
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Deep Strike",
+      "type": "core",
+      "description": "During the Declare Battle Formations step, if every model in this unit has this ability, you can set it up in Reinforcements instead of setting it up on the battlefield. If you do, in the Reinforcements step of one of your Movement phases you can set up this unit anywhere on the battlefield that is more than 9\" horizontally away from all enemy units.",
+      "triggerPhase": [
+        "Deployment"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Precision Drop",
+      "type": "unit",
+      "description": "In your Movement phase, when this unit is set up on the battlefield using the Deep Strike ability, it can perform a precision drop. If it does, this unit can be set up anywhere on the battlefield that is more than 6\" horizontally away from all enemy units, but until the end of the turn, it is not eligible to declare a charge.",
+      "triggerPhase": [
+        "Movement"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Servo-sentry",
+      "type": "unit",
+      "description": "When this unit is set up on the battlefield using the Deep Strike ability, the Tempestor Aquilon can shoot with its sentry weapon (its sentry flamer, sentry grenade launcher or sentry hot-shot volley gun).",
+      "triggerPhase": [
+        "Movement"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [
+    {
+      "description": "The Tempestor Aquilon’s sentry flamer can be replaced with 1 sentry hot-shot volley gun.",
+      "pointsCost": 0
+    },
+    {
+      "description": "The Tempestor Aquilon’s sentry flamer can be replaced with 1 sentry grenade launcher.",
+      "pointsCost": 0
+    },
+    {
+      "description": "The Tempestor Aquilon’s hot-shot lascarbine can be replaced with 1 chainsword.",
+      "pointsCost": 0
+    },
+    {
+      "description": "The Tempestor Aquilon’s hot-shot lascarbine can be replaced with 1 power weapon.",
+      "pointsCost": 0
+    },
+    {
+      "description": "The Tempestor Aquilon’s hot-shot lascarbine can be replaced with 1 hot-shot laspistol.",
+      "pointsCost": 0
+    },
+    {
+      "description": "The Tempestor Aquilon can be equipped with 1 bolt pistol.",
+      "pointsCost": 0
+    },
+    {
+      "description": "The Tempestor Aquilon can be equipped with 1 hot-shot laspistol.",
+      "pointsCost": 0
+    },
+    {
+      "description": "One Tempestus Aquilon’s hot‑shot lascarbine can be replaced with 1 melta carbine.",
+      "pointsCost": 0
+    },
+    {
+      "description": "One Tempestus Aquilon’s hot‑shot lascarbine can be replaced with 1 plasma carbine.",
+      "pointsCost": 0
+    },
+    {
+      "description": "One Tempestus Aquilon’s hot-shot lascarbine can be replaced with 2 hot-shot laspistols.",
+      "pointsCost": 0
+    },
+    {
+      "description": "One Tempestus Aquilon’s hot-shot lascarbine can be replaced with 1 hot-shot long-las.",
+      "pointsCost": 0
+    },
+    {
+      "description": "Up to two Tempestus Aquilons can each have their hot-shot lascarbine replaced with 1 hot-shot laspistol.",
+      "pointsCost": 0
+    }
+  ],
+  "pointsCost": 100,
+  "pointsTiers": [
+    {
+      "models": 10,
+      "points": 100
+    }
+  ]
+}

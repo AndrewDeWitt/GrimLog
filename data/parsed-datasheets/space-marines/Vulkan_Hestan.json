@@ -1,0 +1,141 @@
+{
+  "name": "Vulkan He'stan",
+  "faction": "Space Marines",
+  "subfaction": null,
+  "role": "Character",
+  "keywords": [
+    "INFANTRY",
+    "CHARACTER",
+    "EPIC HERO",
+    "IMPERIUM",
+    "GRENADES",
+    "TACTICUS",
+    "CAPTAIN",
+    "VULKAN HE'STAN",
+    "ADEPTUS ASTARTES",
+    "SALAMANDERS"
+  ],
+  "stats": {
+    "movement": "6\"",
+    "toughness": 4,
+    "save": "2+",
+    "invulnerableSave": "4+",
+    "wounds": 5,
+    "leadership": 6,
+    "objectiveControl": 1
+  },
+  "composition": "1 Vulkan He'stan – EPIC HERO",
+  "compositionData": [
+    {
+      "name": "Vulkan He'stan",
+      "role": "leader",
+      "count": 1,
+      "woundsPerModel": 5
+    }
+  ],
+  "unitSize": "1",
+  "leaderRules": "This model can be attached to the following units: Assault Intercessor Squad, Bladeguard Veteran Squad, Company Heroes, Infernus Squad, Intercessor Squad, Sternguard Veteran Squad.",
+  "leaderAbilities": "Forgefather: While this model is leading a unit, each time a model in that unit makes an attack, add 1 to the Hit roll if the target of that attack is within range of an objective marker.",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Gauntlet of the Forge",
+      "range": "12\"",
+      "type": "Pistol",
+      "attacks": "D6",
+      "ballisticSkill": "",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "-1",
+      "damage": "1",
+      "abilities": [
+        "IGNORES COVER",
+        "PISTOL",
+        "TORRENT"
+      ]
+    },
+    {
+      "name": "Spear of Vulkan – strike",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "5",
+      "ballisticSkill": "",
+      "weaponSkill": "2+",
+      "strength": "6",
+      "armorPenetration": "-2",
+      "damage": "2",
+      "abilities": []
+    },
+    {
+      "name": "Spear of Vulkan – sweep",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "10",
+      "ballisticSkill": "",
+      "weaponSkill": "2+",
+      "strength": "5",
+      "armorPenetration": "-1",
+      "damage": "1",
+      "abilities": []
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Leader",
+      "type": "core",
+      "description": "This model is a Leader.",
+      "triggerPhase": [
+        "Keyword"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Oath of Moment",
+      "type": "faction",
+      "description": "Oath of Moment",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Forgefather",
+      "type": "leader",
+      "description": "While this model is leading a unit, each time a model in that unit makes an attack, add 1 to the Hit roll if the target of that attack is within range of an objective marker.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Seeker of Lost Relics",
+      "type": "unit",
+      "description": "At the start of the battle, select one enemy unit. Each time this model makes an attack that targets that unit, add 1 to the Wound roll.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [],
+  "pointsCost": 85,
+  "pointsTiers": [
+    {
+      "models": 1,
+      "points": 85
+    }
+  ]
+}
+

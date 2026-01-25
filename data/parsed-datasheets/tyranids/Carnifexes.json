@@ -1,0 +1,235 @@
+{
+  "name": "Carnifexes",
+  "faction": "Tyranids",
+  "subfaction": "",
+  "role": "Other",
+  "keywords": [
+    "MONSTER",
+    "GREAT DEVOURER",
+    "CARNIFEXES"
+  ],
+  "stats": {
+    "movement": "8\"",
+    "toughness": 9,
+    "save": "2+",
+    "invulnerableSave": "",
+    "wounds": 8,
+    "leadership": 8,
+    "objectiveControl": 3
+  },
+  "composition": "1-2 Carnifexes",
+  "compositionData": [
+    {
+      "name": "Carnifex",
+      "role": "regular",
+      "count": 1,
+      "woundsPerModel": 8
+    }
+  ],
+  "unitSize": "1-2",
+  "leaderRules": "This unit can be led by the following unit: Old One Eye",
+  "leaderAbilities": "",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Bio-plasma",
+      "range": "12\"",
+      "type": "Assault D3",
+      "attacks": "D3",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "7",
+      "armorPenetration": "-2",
+      "damage": "1",
+      "abilities": [
+        "ASSAULT",
+        "BLAST"
+      ]
+    },
+    {
+      "name": "Deathspitters with slimer maggots",
+      "range": "24\"",
+      "type": "Assault 6",
+      "attacks": "6",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "7",
+      "armorPenetration": "-2",
+      "damage": "1",
+      "abilities": []
+    },
+    {
+      "name": "Devourers with brainleech worms",
+      "range": "18\"",
+      "type": "12",
+      "attacks": "12",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "6",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": []
+    },
+    {
+      "name": "Heavy venom cannon",
+      "range": "36\"",
+      "type": "Blast D3",
+      "attacks": "D3",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "9",
+      "armorPenetration": "-2",
+      "damage": "3",
+      "abilities": [
+        "BLAST"
+      ]
+    },
+    {
+      "name": "Spine banks",
+      "range": "6\"",
+      "type": "Assault 5",
+      "attacks": "5",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "5",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "ASSAULT"
+      ]
+    },
+    {
+      "name": "Stranglethorn cannon",
+      "range": "36\"",
+      "type": "Blast D6",
+      "attacks": "D6",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "14",
+      "armorPenetration": "-2",
+      "damage": "2",
+      "abilities": [
+        "BLAST"
+      ]
+    },
+    {
+      "name": "Carnifex crushing claws",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "4",
+      "ballisticSkill": "",
+      "weaponSkill": "4+",
+      "strength": "12",
+      "armorPenetration": "-3",
+      "damage": "D6+1",
+      "abilities": []
+    },
+    {
+      "name": "Carnifex extra scything talons",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "2",
+      "ballisticSkill": "",
+      "weaponSkill": "4+",
+      "strength": "9",
+      "armorPenetration": "-2",
+      "damage": "3",
+      "abilities": [
+        "EXTRA ATTACKS"
+      ]
+    },
+    {
+      "name": "Carnifex scything talons",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "6",
+      "ballisticSkill": "",
+      "weaponSkill": "4+",
+      "strength": "9",
+      "armorPenetration": "-2",
+      "damage": "3",
+      "abilities": []
+    },
+    {
+      "name": "Chitinous claws and teeth",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "4",
+      "ballisticSkill": "",
+      "weaponSkill": "4+",
+      "strength": "6",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": []
+    }
+  ],
+  "abilities": [
+    {
+      "name": "DEADLY DEMISE 1",
+      "type": "core",
+      "description": "Deadly Demise 1",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": true,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "SYNAPSE",
+      "type": "faction",
+      "description": "",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [
+        "TYRANIDS"
+      ],
+      "effects": null
+    },
+    {
+      "name": "BLISTERING ASSAULT",
+      "type": "unit",
+      "description": "Each time an enemy unit is selected to shoot, after that unit has shot, if any models from this unit lost one or more wounds as a result of those attacks, this unit can make a Blistering Assault move. If it does, roll one D6, adding 2 to the result: each model in this unit can be moved a distance in inches up to the result, but this unit must finish that move as close as possible to the closest enemy unit. When doing so, those models can be moved within Engagement Range of that enemy unit. Each unit can only make one Blistering Assault move per phase.",
+      "triggerPhase": [
+        "Shooting"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": true,
+      "requiredKeywords": [],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [
+    {
+      "description": "Any number of models can each have their Carnifex extra scything talons replaced with one of the following: 1 deathspitters with slimer maggots; 1 devourers with brainleech worms; 1 heavy venom cannon; 1 stranglethorn cannon; 1 Carnifex crushing claws.",
+      "pointsCost": 0
+    },
+    {
+      "description": "Any number of models can each have their Carnifex scything talons replaced with one of the following: 1 deathspitters with slimer maggots; 1 devourers with brainleech worms; 1 Carnifex crushing claws.",
+      "pointsCost": 0
+    },
+    {
+      "description": "Any number of models can each be equipped with 1 bio-plasma.",
+      "pointsCost": 0
+    },
+    {
+      "description": "Any number of models can each be equipped with 1 spine banks.",
+      "pointsCost": 0
+    }
+  ],
+  "pointsCost": 115,
+  "pointsTiers": [
+    {
+      "models": 1,
+      "points": 115
+    },
+    {
+      "models": 2,
+      "points": 230
+    }
+  ]
+}

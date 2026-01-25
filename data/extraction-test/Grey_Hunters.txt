@@ -1,0 +1,110 @@
+=== DATASHEET ===
+Grey Hunters(⌀32mm)
+
+
+
+
+M
+7"
+
+
+
+T
+4
+
+
+
+Sv
+3+
+
+
+
+W
+2
+
+
+
+
+Ld
+6+
+
+
+
+OC
+3
+
+
+
+
+
+
+
+
+
+
+	
+		RANGED WEAPONSRANGEABSSAPDBolt carbine [rapid fire 1]Bolt carbine [rapid fire 1]24"23+401Bolt pistol [pistol]Bolt pistol [pistol]12"13+401Plasma pistol – standard [pistol]Plasma pistol – standard [pistol]12"13+7-21Plasma pistol – supercharge [hazardous, pistol]Plasma pistol – supercharge [hazardous, pistol]12"13+8-32MELEE WEAPONSRANGEAWSSAPDAstartes chainswordAstartes chainswordMelee43+4-11Power fistPower fistMelee33+8-22Power weaponPower weaponMelee43+5-21WARGEAR OPTIONS
+The Grey Hunter Pack Leader’s bolt carbine can be replaced with 1 plasma pistol.The Grey Hunter Pack Leader’s Astartes chainsword can be replaced with one of the following1 power fist1 power weapon
+	
+	
+		ABILITIESFACTION: Oath of MomentCunning Hunters: Each time a model in this unit makes an attack, re-roll a Wound roll of 1. If the target is within range of an objective marker, you can re-roll the Wound roll instead.UNIT COMPOSITION
+1 Grey Hunter Pack Leader9 Grey HuntersEvery model is equipped with: bolt carbine; bolt pistol; Astartes chainsword.10 models180
+	
+
+
+	
+		KEYWORDS: INFANTRY, BATTLELINE, GRENADES, IMPERIUM, TACTICUS, GREY HUNTERS
+	
+	FACTION KEYWORDS:ADEPTUS ASTARTES, SPACE WOLVES
+
+
+	
+		STRATAGEMS
+
+ARMOUR OF CONTEMPT1CP1st Company Task Force – Battle TacticINSTANT OF GRACE1CPAngelic Inheritors – Epic Deed
+ARMOUR OF CONTEMPT1CPAngelic Inheritors – Battle TacticSTRIKE NOW FOR GLORY1CPAngelic Inheritors – Strategic PloyFOCUSED FURY1CPAngelic Inheritors – Battle TacticNOT ONE BACKWARDS STEP1CPAnvil Siege Force – Strategic Ploy
+ARMOUR OF CONTEMPT1CPAnvil Siege Force – Battle TacticBATTLE DRILL RECALL1CPAnvil Siege Force – Battle TacticNO THREAT TOO GREAT2CPAnvil Siege Force – Battle TacticHAIL OF VENGEANCE2CPAnvil Siege Force – Strategic PloyRIGID DISCIPLINE1CPAnvil Siege Force – Strategic PloyADAPTIVE TACTICS1CPBlack Spear Task Force – Strategic Ploy
+ARMOUR OF CONTEMPT1CPBlack Spear Task Force – Battle TacticSITE-TO-SITE TELEPORTATION1CPBlack Spear Task Force – Strategic PloyCOMMAND RE-ROLL1CPBoarding Actions – Epic DeedBAINSANE BRAVERY1CPBoarding Actions – Epic DeedBAEXPLOSIVE CLEARANCE1CPBoarding Actions – Battle TacticBACOUNTER-OFFENSIVE2CPBoarding Actions – Strategic PloyBA
+IN THE EMPEROR’S NAME1CPBoarding Strike – Battle TacticVOX-AMPLIFIED ROAR1CPBoarding Strike – Strategic PloyCERAMITE BULWARK1CPBoarding Strike – Battle TacticDUTY AND DEFIANCE1CPBoarding Strike – Strategic PloyRUNES OF CLAIMING1CPChampions of Fenris – Strategic Ploy
+ARMOUR OF CONTEMPT1CPChampions of Fenris – Strategic Ploy
+PREYTAKER’S EYE1CPChampions of Fenris – Strategic PloySTALKING WOLVES1CPChampions of Fenris – Strategic PloyDREAD CRUSADERS1CPCompanions of Vehemence – Strategic PloyDEVOUT PUSH1CPCompanions of Vehemence – Battle TacticFOR THE EMPEROR'S HONOUR!1CPCompanions of Vehemence – Battle TacticHEARTS HARDENED TO DUTY1CPCompanions of Vehemence – Strategic Ploy
+ARMOUR OF CONTEMPT1CPCompany Of Hunters – Battle TacticCOMMAND RE-ROLL1CPCore – Battle TacticCINSANE BRAVERY1CPCore – Epic DeedC
+FIRE OVERWATCH1CPCore – Strategic PloyCRAPID INGRESS1CPCore – Strategic PloyCGRENADE1CPCore – WargearCGO TO GROUND1CPCore – Battle TacticCHEROIC INTERVENTION1CPCore – Strategic PloyCCOUNTER-OFFENSIVE2CPCore – Strategic PloyC
+ARMOUR OF CONTEMPT1CPEmperor's Shield – Battle Tactic
+ARMOUR OF CONTEMPT1CPFirestorm Assault Force – Battle Tactic
+CRUCIBLE OF BATTLE1CPFirestorm Assault Force – Battle TacticIMMOLATION PROTOCOLS2CPFirestorm Assault Force – Battle TacticONSLAUGHT OF FIRE1CPFirestorm Assault Force – Battle TacticRAPID EMBARKATION1CPFirestorm Assault Force – Strategic PloyWRATHFUL INFERNO1CPForgefather’s Seekers – Strategic Ploy
+ARMOUR OF CONTEMPT1CPForgefather’s Seekers – Battle Tactic
+CRUCIBLE OF BATTLE1CPForgefather’s Seekers – Battle TacticIMMOLATION PROTOCOLS2CPForgefather’s Seekers – Battle TacticBLAZING EARTH1CPForgefather’s Seekers – Strategic PloyADAPTIVE STRATEGY1CPGladius Task Force – Strategic PloySQUAD TACTICS1CPGladius Task Force – Strategic Ploy
+ARMOUR OF CONTEMPT1CPGladius Task Force – Battle TacticSTORM OF FIRE1CPGladius Task Force – Battle TacticHONOUR THE CHAPTER1CPGladius Task Force – Battle TacticONLY IN DEATH DOES DUTY END2CPGladius Task Force – Epic DeedFOCUSED HATRED1CPGodhammer Assault Force – Strategic PloyA CEASELESS CAUSE1CPGodhammer Assault Force – Strategic PloyCONDEMNATORY INFO-SCREED1CPGodhammer Assault Force – Battle Tactic
+ARMOUR OF CONTEMPT1CPInner Circle Task Force – Battle TacticUNBOWED CONVICTION1CPIronstorm Spearhead – Battle Tactic
+ARMOUR OF CONTEMPT1CPIronstorm Spearhead – Battle Tactic
+MERCY IS WEAKNESS2CPIronstorm Spearhead – Battle TacticANGELIC GRACE1CPLiberator Assault Group – Strategic PloyAGGRESSIVE ONSLAUGHT1CPLiberator Assault Group – Strategic PloyRELENTLESS ASSAULT1CPLiberator Assault Group – Strategic Ploy
+ARMOUR OF CONTEMPT1CPLiberator Assault Group – Battle TacticSAVAGE ECHOES1CPLiberator Assault Group – Battle TacticRED RAMPAGE1CPLiberator Assault Group – Battle Tactic
+ARMOUR OF CONTEMPT1CPLibrarius Conclave – Strategic PloyFIERY SHIELD1CPLibrarius Conclave – Strategic PloyIRON ARM1CPLibrarius Conclave – Strategic Ploy
+OVERPOWERING EXACTION1CPLion’s Blade Task Force – Strategic Ploy
+ARMOUR OF CONTEMPT1CPLion’s Blade Task Force – Battle TacticSTRENGTH IN UNITY1CPLion’s Blade Task Force – Battle TacticTHUNDEROUS PURSUIT1CPSaga of the Beastslayer – Strategic PloyPINNING FIRE1CPSaga of the Beastslayer – Strategic PloyUNBRIDLED FEROCITY1CPSaga of the Beastslayer – Battle TacticCOORDINATED STRIKE1CPSaga of the Beastslayer – Strategic Ploy
+BOUNDING ADVANCE1CPSaga of the Hunter – Strategic PloyCHOSEN PREY1CPSaga of the Hunter – Strategic PloyMARKED FOR DESTRUCTION1CPSaga of the Hunter – Battle TacticHUNTERS’ TRAIL1CPSaga of the Hunter – Strategic PloyOVERWHELMING ONSLAUGHT1CPSaga of the Hunter – Battle TacticTERRITORIAL ADVANTAGE1CPSaga of the Hunter – Strategic PloyFEINT AND THRUST1CPShadowmark Talon – Strategic PloyRAPTORIAL VIGILANCE1CPShadowmark Talon – Battle Tactic
+ARMOUR OF CONTEMPT1CPShadowmark Talon – Battle TacticSTUNNING FUSILLADE1CPShadowmark Talon – Battle TacticLAY LOW THE TYRANTS1CPShadowmark Talon – Battle TacticINTO DARKNESS1CPShadowmark Talon – Strategic PloyWIND-SWIFT EVASION1CPStormlance Task Force – Strategic Ploy
+ARMOUR OF CONTEMPT1CPStormlance Task Force – Battle TacticBLITZING FUSILLADE1CPStormlance Task Force – Battle TacticUNBRIDLED ARDOUR1CPThe Angelic Host – Epic Deed
+ARMOUR OF CONTEMPT1CPThe Angelic Host – Battle Tactic
+ARMOUR OF CONTEMPT1CPThe Lost Brethren – Battle TacticINTRACTABLE1CPUnforgiven Task Force – Strategic Ploy
+ARMOUR OF CONTEMPT1CPUnforgiven Task Force – Battle Tactic
+UNFORGIVEN FURY1CPUnforgiven Task Force – Battle TacticFIRE DISCIPLINE1CPUnforgiven Task Force – Battle TacticGRIM RETRIBUTION1CPUnforgiven Task Force – Strategic PloyUNBREAKABLE LINES2CPUnforgiven Task Force – Battle TacticA DEADLY PRIZE1CPVanguard Spearhead – Wargear
+ARMOUR OF CONTEMPT1CPVanguard Spearhead – Battle TacticSTRIKE FROM THE SHADOWS1CPVanguard Spearhead – Battle TacticCALCULATED FEINT1CPVanguard Spearhead – Strategic PloySURGICAL STRIKES2CPVanguard Spearhead – Battle TacticGUERRILLA TACTICS1CPVanguard Spearhead – Strategic Ploy
+RECLAIM OUR HONOUR!1CPVindication Task Force – Strategic Ploy
+SPOOR OF THE UNHOLY1CPVindication Task Force – Battle TacticPERFERVID INTERVENTION2CPVindication Task Force – Strategic PloyLITANIES OF PURGATION1CPVindication Task Force – Battle TacticLION’S WILL1CPWrath of the Rock – Strategic PloyTACTICAL MASTERY1CPWrath of the Rock – Battle Tactic
+ARMOUR OF CONTEMPT1CPWrath of the Rock – Battle TacticRELICS OF THE DARK AGE1CPWrath of the Rock – Strategic PloyLEONINE AGGRESSION1CPWrath of the Rock – Strategic PloyFUELLED BY FAITH1CPWrathful Procession – Battle TacticVOICE OF DEVOTION1CPWrathful Procession – Strategic Ploy
+ARMOUR OF CONTEMPT1CPWrathful Procession – Battle TacticBRUTE FERVOUR1CPWrathful Procession – Battle TacticCASTIGATE THE DEMAGOGUES1CPWrathful Procession – Battle TacticRELENTLESS MOMENTUM1CPWrathful Procession – Strategic Ploy
+	
+	
+		LED BY
+
+This unit can be led by the following units:
+InquisitorInquisitor CoteazInquisitor DraxusInquisitor GreyfaxIron PriestNjal StormcallerUlrik The SlayerWolf Guard Battle LeaderWolf PriestInquisitor EisenhornInquisitor In Terminator ArmourDETACHMENT ABILITY
+Combat DoctrinesRed ThirstShield of the ImperiumArmoured WrathClose-range EradicationLightning AssaultShadow MastersExtremis-level ThreatMission TacticsIn The Lion’s ClawsLegacy of the AngelZealous LitaniesThe Great Wolf WatchesDutiful TenacityPack’s QuarryHeroes AllLegendary SlayersVulkan’s QuestRighteous FervourShock and AweWrath of DornMasters of ShadowGrim ResolveMasters Of ManoeuvreDrive Home the BladeENHANCEMENTS
+Calibanite Armaments15
+	
+
+
+=== KEYWORDS ===
+Space Marines, rapid, fire, 1, pistol, hazardous, Oath, of, Moment, Wound, roll, objective, marker, INFANTRY, BATTLELINE, GRENADES, IMPERIUM, TACTICUS, GREY, HUNTERS, ADEPTUS, ASTARTES, SPACE, WOLVES, ARMOUR, OF, CONTEMPT, INSTANT, GRACE, STRIKE, NOW, FOR, GLORY, FOCUSED, FURY, NOT, ONE, BACKWARDS, STEP, BATTLE, DRILL, RECALL, NO, THREAT, TOO, GREAT, HAIL, VENGEANCE, RIGID, DISCIPLINE, ADAPTIVE, TACTICS, SITE-TO-SITE, TELEPORTATION, COMMAND, RE-ROLL, INSANE, BRAVERY, EXPLOSIVE, CLEARANCE, COUNTER-OFFENSIVE, IN, THE, EMPEROR’S, NAME, VOX-AMPLIFIED, ROAR, CERAMITE, BULWARK, DUTY, AND, DEFIANCE, RUNES, CLAIMING, PREYTAKER’S, EYE, STALKING, DREAD, CRUSADERS, DEVOUT, PUSH, EMPEROR'S, HONOUR!, HEARTS, HARDENED, TO, FIRE, OVERWATCH, RAPID, INGRESS, GRENADE, GO, GROUND, HEROIC, INTERVENTION, CRUCIBLE, IMMOLATION, PROTOCOLS, ONSLAUGHT, EMBARKATION, WRATHFUL, INFERNO, BLAZING, EARTH, STRATEGY, SQUAD, STORM, HONOUR, CHAPTER, ONLY, DEATH, DOES, END, HATRED, A, CEASELESS, CAUSE, CONDEMNATORY, INFO-SCREED, UNBOWED, CONVICTION, MERCY, IS, WEAKNESS, ANGELIC, AGGRESSIVE, RELENTLESS, ASSAULT, SAVAGE, ECHOES, RED, RAMPAGE, FIERY, SHIELD, IRON, ARM, OVERPOWERING, EXACTION, STRENGTH, UNITY, THUNDEROUS, PURSUIT, PINNING, UNBRIDLED, FEROCITY, COORDINATED, BOUNDING, ADVANCE, CHOSEN, PREY, MARKED, DESTRUCTION, HUNTERS’, TRAIL, OVERWHELMING, TERRITORIAL, ADVANTAGE, FEINT, THRUST, RAPTORIAL, VIGILANCE, STUNNING, FUSILLADE, LAY, LOW, TYRANTS, INTO, DARKNESS, WIND-SWIFT, EVASION, BLITZING, ARDOUR, INTRACTABLE, UNFORGIVEN, GRIM, RETRIBUTION, UNBREAKABLE, LINES, DEADLY, PRIZE, FROM, SHADOWS, CALCULATED, SURGICAL, STRIKES, GUERRILLA, RECLAIM, OUR, SPOOR, UNHOLY, PERFERVID, LITANIES, PURGATION, LION’S, WILL, TACTICAL, MASTERY, RELICS, DARK, AGE, LEONINE, AGGRESSION, FUELLED, BY, FAITH, VOICE, DEVOTION, BRUTE, FERVOUR, CASTIGATE, DEMAGOGUES, MOMENTUM, Combat, Doctrines, Red, Thirst, Shield, the, Imperium, Armoured, Wrath, Close-range, Eradication, Lightning, Assault, Shadow, Masters, Extremis-level, Threat, Mission, Tactics, In, The, Lion’s, Claws, Legacy, Angel, Zealous, Litanies, Great, Wolf, Watches, Dutiful, Tenacity, Pack’s, Quarry, Heroes, All, Legendary, Slayers, Vulkan’s, Quest, Righteous, Fervour, Shock, and, Awe, Dorn, Grim, Resolve, Of, Manoeuvre, Drive, Home, Blade, Calibanite, Armaments

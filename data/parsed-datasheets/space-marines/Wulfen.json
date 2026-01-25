@@ -1,0 +1,139 @@
+{
+  "name": "Wulfen",
+  "faction": "Space Marines",
+  "subfaction": "Space Wolves",
+  "role": "Elites",
+  "keywords": [
+    "INFANTRY",
+    "IMPERIUM",
+    "WULFEN",
+    "ADEPTUS ASTARTES",
+    "SPACE WOLVES"
+  ],
+  "stats": {
+    "movement": "9\"",
+    "toughness": 6,
+    "save": "4+",
+    "invulnerableSave": "",
+    "wounds": 2,
+    "leadership": 7,
+    "objectiveControl": 0
+  },
+  "composition": "5-10 Wulfen",
+  "compositionData": [
+    {
+      "name": "Wulfen",
+      "role": "regular",
+      "count": 5,
+      "woundsPerModel": 2
+    }
+  ],
+  "unitSize": "5-10",
+  "leaderRules": "",
+  "leaderAbilities": "",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Stormfrag auto-launcher",
+      "range": "12\"",
+      "type": "Assault D3, Blast",
+      "attacks": "D3",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "ASSAULT",
+        "BLAST"
+      ]
+    },
+    {
+      "name": "Wulfen weapons",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "3",
+      "ballisticSkill": "",
+      "weaponSkill": "3+",
+      "strength": "5",
+      "armorPenetration": "-2",
+      "damage": "2",
+      "abilities": [
+        "SUSTAINED HITS 1"
+      ]
+    }
+  ],
+  "abilities": [
+    {
+      "name": "CURSE OF THE WULFEN",
+      "type": "faction",
+      "description": "",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "OATH OF MOMENT",
+      "type": "faction",
+      "description": "",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "SAVAGE FRENZY",
+      "type": "unit",
+      "description": "Each time an enemy unit (excluding MONSTERS and VEHICLES) within Engagement Range of this unit Falls Back, all models in that enemy unit must take a Desperate Escape test. When doing so, if that enemy unit is Battle-shocked, subtract 1 from each of those tests.",
+      "triggerPhase": [
+        "Movement"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": true,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "DEATH TOTEM",
+      "type": "wargear",
+      "description": "Each time the bearer makes a melee attack, re-roll a Hit roll of 1.",
+      "triggerPhase": [
+        "Fight"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": {
+        "wounds": null,
+        "toughness": null,
+        "save": null,
+        "invulnerableSave": null,
+        "movement": null
+      }
+    }
+  ],
+  "wargearOptions": [
+    {
+      "description": "Any number of models can each have their death totem replaced with 1 stormfrag auto-launcher.",
+      "pointsCost": 0
+    }
+  ],
+  "pointsCost": 85,
+  "pointsTiers": [
+    {
+      "models": 5,
+      "points": 85
+    },
+    {
+      "models": 10,
+      "points": 170
+    }
+  ]
+}

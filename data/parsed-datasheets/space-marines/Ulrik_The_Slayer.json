@@ -1,0 +1,154 @@
+{
+  "name": "Ulrik The Slayer",
+  "faction": "Space Marines",
+  "subfaction": "Space Wolves",
+  "role": "Character",
+  "keywords": [
+    "INFANTRY",
+    "CHARACTER",
+    "EPIC HERO",
+    "GRENADES",
+    "IMPERIUM",
+    "WOLF PRIEST",
+    "ULRIK THE SLAYER",
+    "LEADER"
+  ],
+  "stats": {
+    "movement": "7\"",
+    "toughness": 4,
+    "save": "3+",
+    "invulnerableSave": "4+",
+    "wounds": 4,
+    "leadership": 5,
+    "objectiveControl": 1
+  },
+  "composition": "1 Ulrik the Slayer – EPIC HERO",
+  "compositionData": [
+    {
+      "name": "Ulrik The Slayer",
+      "role": "leader",
+      "count": 1,
+      "woundsPerModel": 4
+    }
+  ],
+  "unitSize": "1",
+  "leaderRules": "This model can be attached to the following units: Blood Claws; Grey Hunters; Wolf Guard Headtakers",
+  "leaderAbilities": "While this model is leading a unit, each time a model in that unit makes a melee attack, add 1 to the Hit roll. If that attack targets a unit that has this model’s Slayer’s Oath keyword (see above), add 1 to the Wound roll as well.",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Plasma pistol – standard [pistol]",
+      "range": "12\"",
+      "type": "Pistol",
+      "attacks": "1",
+      "ballisticSkill": "2+",
+      "weaponSkill": "",
+      "strength": "7",
+      "armorPenetration": "-2",
+      "damage": "1",
+      "abilities": [
+        "PISTOL"
+      ]
+    },
+    {
+      "name": "Plasma pistol – supercharge [hazardous, pistol]",
+      "range": "12\"",
+      "type": "Pistol",
+      "attacks": "1",
+      "ballisticSkill": "2+",
+      "weaponSkill": "",
+      "strength": "8",
+      "armorPenetration": "-3",
+      "damage": "2",
+      "abilities": [
+        "HAZARDOUS",
+        "PISTOL"
+      ]
+    },
+    {
+      "name": "Artificer crozius arcanum [ANTI-MONSTER 4+, ANTI-VEHICLE 4+]",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "5",
+      "ballisticSkill": "",
+      "weaponSkill": "2+",
+      "strength": "6",
+      "armorPenetration": "-2",
+      "damage": "2",
+      "abilities": [
+        "ANTI-MONSTER 4+",
+        "ANTI-VEHICLE 4+"
+      ]
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Feel No Pain 6+",
+      "type": "core",
+      "description": "Feel No Pain 6+",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": true,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Leader",
+      "type": "core",
+      "description": "Leader",
+      "triggerPhase": [
+        "Keyword"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Oath of Moment",
+      "type": "faction",
+      "description": "Oath of Moment",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Slayer’s Oath",
+      "type": "unit",
+      "description": "Slayer’s Oath: At the start of the battle, select one of the following keywords to be this model’s Slayer’s Oath: CHARACTER; MONSTER; VEHICLE. The first time this model’s unit destroys a unit with this model’s Slayer’s Oath keyword, if your Detachment rule has a Saga, until the end of the battle, this model’s unit receives the benefits of that Detachment rule as if that Saga had been completed.",
+      "triggerPhase": [
+        "Deployment"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Oathbound",
+      "type": "unit",
+      "description": "Oathbound: While this model is leading a unit, each time a model in that unit makes a melee attack, add 1 to the Hit roll. If that attack targets a unit that has this model’s Slayer’s Oath keyword (see above), add 1 to the Wound roll as well.",
+      "triggerPhase": [
+        "Fight"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [],
+  "pointsCost": 70,
+  "pointsTiers": [
+    {
+      "models": 1,
+      "points": 70
+    }
+  ]
+}

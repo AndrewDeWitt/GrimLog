@@ -1,0 +1,89 @@
+{
+  "name": "Hormagaunts",
+  "faction": "Tyranids",
+  "subfaction": "",
+  "role": "Battleline",
+  "keywords": [
+    "INFANTRY",
+    "BATTLELINE",
+    "GREAT DEVOURER",
+    "ENDLESS MULTITUDE",
+    "HORMAGAUNTS",
+    "TYRANIDS"
+  ],
+  "stats": {
+    "movement": "10\"",
+    "toughness": 3,
+    "save": "5+",
+    "invulnerableSave": "",
+    "wounds": 1,
+    "leadership": 8,
+    "objectiveControl": 2
+  },
+  "composition": "10-20 Hormagaunts",
+  "compositionData": [
+    {
+      "name": "Hormagaunt",
+      "role": "regular",
+      "count": 10,
+      "woundsPerModel": 1
+    }
+  ],
+  "unitSize": "10-20",
+  "leaderRules": "",
+  "leaderAbilities": "",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Hormagaunt talons",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "3",
+      "ballisticSkill": "",
+      "weaponSkill": "4+",
+      "strength": "3",
+      "armorPenetration": "-1",
+      "damage": "1",
+      "abilities": []
+    }
+  ],
+  "abilities": [
+    {
+      "name": "SYNAPSE",
+      "type": "faction",
+      "description": "This unit is a Synapse unit.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "BOUNDING LEAP",
+      "type": "unit",
+      "description": "This unit is eligible to declare a charge in a turn in which it Advanced.",
+      "triggerPhase": [
+        "Movement",
+        "Charge"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [],
+  "pointsCost": 65,
+  "pointsTiers": [
+    {
+      "models": 10,
+      "points": 65
+    },
+    {
+      "models": 20,
+      "points": 130
+    }
+  ]
+}

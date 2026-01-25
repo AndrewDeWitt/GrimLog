@@ -1,0 +1,123 @@
+{
+  "name": "Tyrannocyte",
+  "faction": "tyranids",
+  "subfaction": "",
+  "role": "Dedicated Transport",
+  "keywords": [
+    "MONSTER",
+    "FLY",
+    "TRANSPORT",
+    "DEDICATED TRANSPORT",
+    "GREAT DEVOURER",
+    "VANGUARD INVADER",
+    "TYRANNOCYTE"
+  ],
+  "stats": {
+    "movement": "8\"",
+    "toughness": 9,
+    "save": "3+",
+    "invulnerableSave": "",
+    "wounds": 10,
+    "leadership": 8,
+    "objectiveControl": 2
+  },
+  "composition": "1 Tyrannocyte",
+  "compositionData": [
+    {
+      "name": "Tyrannocyte",
+      "role": "regular",
+      "count": 1,
+      "woundsPerModel": 10
+    }
+  ],
+  "unitSize": "1",
+  "leaderRules": "",
+  "leaderAbilities": "",
+  "transportCapacity": "20 TYRANIDS INFANTRY models, or 1 TYRANIDS MONSTER model with a Wounds characteristic of 12 or less. Each INFANTRY model with a Wounds characteristic of more than 1 takes up the space of 3 models.",
+  "weapons": [
+    {
+      "name": "Tyrannocyte bio-weapons",
+      "range": "24\"",
+      "type": "Assault 5",
+      "attacks": "5",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "5",
+      "armorPenetration": "-1",
+      "damage": "2",
+      "abilities": []
+    },
+    {
+      "name": "Flensing whips",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "6",
+      "ballisticSkill": "",
+      "weaponSkill": "4+",
+      "strength": "7",
+      "armorPenetration": "-1",
+      "damage": "2",
+      "abilities": []
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Deadly Demise D3",
+      "type": "core",
+      "description": "When this model is destroyed, roll a D3. Each enemy unit within 3\" of this model when it was destroyed suffers that many mortal wounds.",
+      "triggerPhase": [
+        "General"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Deep Strike",
+      "type": "core",
+      "description": "This unit can be set up in Reserves and later set up on the battlefield during the Reinforcements step as described by the Deep Strike rule. (See the Core Rules for Deep Strike rules and restrictions.)",
+      "triggerPhase": [
+        "Deployment"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Synapse",
+      "type": "faction",
+      "description": "While a friendly TYRANIDS unit is within range of a friendly model with the SYNAPSE keyword, that unit is under the control of the synaptic network and is affected by the Synapse rules (it does not suffer from certain effects that would otherwise cause it to fall back or take uncontrolled actions).",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [
+        "TYRANIDS"
+      ],
+      "effects": null
+    },
+    {
+      "name": "Aerial Seeding",
+      "type": "unit",
+      "description": "This model must start the battle in Reserves, but neither it nor any units embarked within it are counted towards any limits placed on the maximum number of Reserves units you can start the battle with. This model can be set up in the Reinforcements step of your first, second or third Movement phase, regardless of any mission rules. Any units embarked within this model must immediately disembark after it has been set up on the battlefield, and they must be set up more than 9\" away from all enemy models. After this model has been set up on the battlefield, no units can embark within it.",
+      "triggerPhase": [
+        "Deployment"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [],
+  "pointsCost": 105,
+  "pointsTiers": [
+    {
+      "models": 1,
+      "points": 105
+    }
+  ]
+}

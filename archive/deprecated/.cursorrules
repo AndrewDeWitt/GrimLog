@@ -1,0 +1,264 @@
+# TacLog AI Assistant Rules
+
+You are an AI assistant working on TacLog, an AI-powered tactical logger for tabletop wargames.
+
+## Core Principles
+
+1. **Always execute, never block** - The user has final authority
+2. **Complete work fully** - No "TODO" or "you should" - do it yourself
+3. **Document after implementation** - Code first, then documentation
+4. **Follow established patterns** - Match existing code style and structure
+
+## Documentation Rules (MANDATORY)
+
+### Rule 1: Documentation Types (4 types only)
+
+1. **User Guides** (`docs/guides/`) - HOW TO use features
+   - Step-by-step instructions, configuration, examples, troubleshooting
+
+2. **API Docs** (`docs/api/`) - Technical reference
+   - Request/response formats, parameters, examples, error codes
+
+3. **Features** (`docs/features/`) - WHAT the feature is
+   - Overview, architecture, key components, links to guides
+
+4. **Troubleshooting** (`docs/troubleshooting/`) - FIX problems
+   - Problem descriptions, solutions, common mistakes, debug steps
+
+### Rule 2: When to Document
+
+**✅ DO document:**
+- New features → `docs/features/FEATURE_NAME.md`
+- New API endpoints → `docs/api/ENDPOINT_NAME.md`
+- Complex systems → `docs/guides/SYSTEM_NAME_GUIDE.md`
+- Common problems → `docs/troubleshooting/PROBLEM_NAME.md`
+
+**❌ DON'T document:**
+- Session notes (use Git commits)
+- WIP features (wait until complete)
+- Implementation details (use code comments)
+- Personal notes (not in repo)
+
+### Rule 3: Post-Feature Documentation Checklist
+
+**After completing ANY feature, YOU MUST:**
+
+1. Update `CHANGELOG.md` with version and changes
+2. Update relevant guide in `docs/guides/` (if user-facing)
+3. Create feature doc in `docs/features/` (if major feature)
+4. Update API docs in `docs/api/` (if endpoints changed)
+5. Update `README.md` (if user-facing changes, keep < 300 lines)
+6. Update `docs/README.md` index with links to new docs
+
+**DO NOT:**
+- ❌ Create `FEATURE_COMPLETE.md` files
+- ❌ Keep session summaries in docs/
+- ❌ Duplicate information across files
+- ❌ Leave outdated docs in place
+
+### Rule 4: Document Structure (MANDATORY FORMAT)
+
+```markdown
+# [Clear Title]
+
+**Last Updated:** YYYY-MM-DD
+**Status:** Complete|Draft|Deprecated
+
+## Overview
+[1-2 paragraph description]
+
+## Table of Contents
+- [Sections...]
+
+## [Content sections...]
+
+## Related Documentation
+- [Links to related docs with descriptions]
+```
+
+### Rule 5: File Naming
+
+- Use `SCREAMING_SNAKE_CASE`
+- Be descriptive: `AUDIO_VAD_GUIDE.md` not `AUDIO.md`
+- No dates in filenames
+- No "COMPLETE" or "SUMMARY" in permanent docs
+
+**Examples:**
+- ✅ `docs/guides/AUDIO_VAD_GUIDE.md`
+- ✅ `docs/api/TRANSCRIBE_ENDPOINT.md`
+- ✅ `docs/features/AI_TOOL_CALLING.md`
+- ❌ `docs/AUDIO.md` (too vague)
+- ❌ `FEATURE_COMPLETE.md` (temporary, don't create)
+- ❌ `VALIDATION_2024.md` (no dates)
+
+### Rule 6: Documentation Enforcement
+
+When user says "I added feature X":
+1. Ask: "Should I update the documentation for this feature?"
+2. If yes → Follow post-feature checklist above
+3. If no → Remind them docs should be updated
+
+When you complete a feature:
+1. ALWAYS update CHANGELOG.md
+2. ALWAYS update relevant documentation
+3. ALWAYS update docs/README.md index
+4. Do NOT create temporary completion notes
+
+## Code Standards
+
+### TypeScript
+- Strict mode enabled
+- Use proper types, no `any` without justification
+- Prefer interfaces over types for object shapes
+- Use `const` by default, `let` only when reassignment needed
+
+### React/Next.js
+- Use App Router (not Pages Router)
+- Server Components by default, Client Components when needed
+- Use `"use client"` directive only when necessary
+- Prefer composition over complex props drilling
+
+### API Routes
+- Validate inputs before processing
+- Return consistent response format: `{ success: boolean, data?: any, error?: string }`
+- Handle errors gracefully with try-catch
+- Log errors with context
+
+### Database (Prisma)
+- Use transactions for multi-step operations
+- Handle unique constraint violations
+- Always close connections (use Prisma client properly)
+- Index frequently queried fields
+
+### File Organization
+- Keep related code together
+- `lib/` for shared utilities and logic
+- `components/` for React components
+- `app/api/` for API routes
+- No circular dependencies
+
+## AI-Specific Features
+
+### OpenAI Integration
+- Use `lib/langfuse.ts` for observability
+- Wrap all OpenAI calls in Langfuse traces
+- Include context in traces (session ID, game state, etc.)
+- Handle rate limits with exponential backoff
+
+### Tool Calling
+- Tool definitions in `lib/aiTools.ts`
+- Tool handlers in `lib/toolHandlers.ts`
+- Always validate tool arguments
+- Return consistent `ToolExecutionResult` format
+- Include validation results when applicable
+
+### Context Management
+- Use `lib/validationHelpers.ts` for game context
+- Fetch last 10-15 transcripts for analysis
+- Include conversation history in AI prompts
+- Use smart triggers from `lib/analysisTriggers.ts`
+
+## Testing Strategy
+
+Before claiming a feature is complete:
+1. ✅ Linter passes (`npm run lint`)
+2. ✅ TypeScript compiles (`npx tsc --noEmit`)
+3. ✅ Manual testing in browser
+4. ✅ Check console for errors
+5. ✅ Verify Langfuse traces (if AI feature)
+6. ✅ Test edge cases (empty input, errors, etc.)
+
+## Common Patterns
+
+### Error Handling
+```typescript
+try {
+  // Operation
+  return { success: true, data: result };
+} catch (error) {
+  console.error('Context:', error);
+  return { success: false, error: error.message };
+}
+```
+
+### Validation Pattern
+```typescript
+// Validate early, fail fast
+if (!input) {
+  return { success: false, error: 'Missing required input' };
+}
+
+// Validate with helper
+const validation = validateSomething(input);
+if (!validation.isValid) {
+  return { success: false, error: validation.reason };
+}
+```
+
+### API Response Pattern
+```typescript
+return NextResponse.json({
+  success: true,
+  data: { /* result */ },
+  // Optional:
+  validation: { /* validation info */ }
+}, { status: 200 });
+```
+
+## Important Context
+
+### Project Architecture
+- **Dual-endpoint design**: `/api/transcribe` (frequent) vs `/api/analyze` (smart)
+- **Context-aware triggers**: 5 triggers determine when to analyze (priority keywords, completion phrases, long silence, min transcripts, max time)
+- **Multi-layer validation**: Client audio analysis → Server file check → Transcription validation
+- **Always execute philosophy**: Validation is advisory, never blocking
+
+### Key Files
+- `app/page.tsx` - Main game interface with VAD
+- `app/api/analyze/route.ts` - AI analysis with tool calling
+- `app/api/transcribe/route.ts` - Fast transcription only
+- `lib/aiTools.ts` - 11 AI tool definitions
+- `lib/toolHandlers.ts` - Tool execution logic
+- `lib/audioCapture.ts` - VAD and recording
+- `lib/validationHelpers.ts` - Game state validation
+
+### Database Schema
+See `prisma/schema.prisma` for full schema. Key models:
+- `GameSession` - Game sessions
+- `TranscriptHistory` - All transcriptions
+- `TimelineEvent` - Game events
+- `Army` - Player armies
+- `Stratagem` - Stratagems
+
+## When User Asks for Help
+
+1. **Search existing docs first** - Check `docs/` folder
+2. **Reference by type** - Link to appropriate guide/API doc/feature doc
+3. **Provide examples** - Show code from the project
+4. **Explain context** - Why it's designed this way
+
+## When Uncertain
+
+- ASK before making breaking changes
+- CONFIRM before deleting files
+- VERIFY before archiving documentation
+- EXPLAIN trade-offs when suggesting alternatives
+
+## What Makes You Successful
+
+✅ Following documentation standards religiously
+✅ Completing features end-to-end (code + docs)
+✅ Maintaining consistency with existing patterns
+✅ Providing clear explanations and examples
+✅ Thinking about edge cases and error handling
+✅ Updating CHANGELOG and docs/README.md
+
+❌ Leaving "TODO" comments for users
+❌ Creating temporary documentation files
+❌ Duplicating code or documentation
+❌ Breaking changes without discussion
+❌ Incomplete implementations
+
+---
+
+**Remember: You're not just writing code, you're maintaining a well-documented, production-ready system. Act accordingly.**

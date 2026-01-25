@@ -1,0 +1,347 @@
+{
+  "name": "Tempestus Scions",
+  "faction": "Astra Militarum",
+  "subfaction": "",
+  "role": "Other",
+  "keywords": [
+    "INFANTRY",
+    "GRENADES",
+    "IMPERIUM",
+    "REGIMENT",
+    "MILITARUM TEMPESTUS",
+    "TEMPESTUS SCIONS"
+  ],
+  "stats": {
+    "movement": "6\"",
+    "toughness": 3,
+    "save": "4+",
+    "invulnerableSave": "",
+    "wounds": 1,
+    "leadership": 7,
+    "objectiveControl": 1
+  },
+  "composition": "1 Tempestor, 4-9 Tempestus Scions",
+  "compositionData": [
+    {
+      "name": "Tempestor",
+      "role": "leader",
+      "count": 1,
+      "woundsPerModel": 1
+    },
+    {
+      "name": "Tempestus Scion",
+      "role": "regular",
+      "count": 4,
+      "woundsPerModel": 1
+    }
+  ],
+  "unitSize": "5-10",
+  "leaderRules": "This unit can have up to two Leader units attached to it, provided no more than one of those units is a COMMAND SQUAD unit. If it does, and this Bodyguard unit is destroyed, the Leader units attached to it become separate units, with their original Starting Strengths.",
+  "leaderAbilities": "",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Bolt pistol",
+      "range": "12\"",
+      "type": "Pistol",
+      "attacks": "1",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "PISTOL"
+      ]
+    },
+    {
+      "name": "Flamer",
+      "range": "12\"",
+      "type": "Torrent",
+      "attacks": "D6",
+      "ballisticSkill": "N/A",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "IGNORES COVER",
+        "TORRENT"
+      ]
+    },
+    {
+      "name": "Grenade launcher – frag",
+      "range": "24\"",
+      "type": "Blast",
+      "attacks": "D3",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "3",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "BLAST"
+      ]
+    },
+    {
+      "name": "Grenade launcher – krak",
+      "range": "24\"",
+      "type": "Ranged",
+      "attacks": "1",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "9",
+      "armorPenetration": "-2",
+      "damage": "D3",
+      "abilities": []
+    },
+    {
+      "name": "Hot-shot lasgun",
+      "range": "24\"",
+      "type": "Rapid Fire 1",
+      "attacks": "1",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "3",
+      "armorPenetration": "-1",
+      "damage": "1",
+      "abilities": [
+        "RAPID FIRE 1"
+      ]
+    },
+    {
+      "name": "Hot-shot laspistol",
+      "range": "12\"",
+      "type": "Pistol",
+      "attacks": "1",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "3",
+      "armorPenetration": "-1",
+      "damage": "1",
+      "abilities": [
+        "PISTOL"
+      ]
+    },
+    {
+      "name": "Hot-shot volley gun",
+      "range": "30\"",
+      "type": "Rapid Fire 2",
+      "attacks": "2",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "-1",
+      "damage": "1",
+      "abilities": [
+        "RAPID FIRE 2"
+      ]
+    },
+    {
+      "name": "Meltagun",
+      "range": "12\"",
+      "type": "Melta 2",
+      "attacks": "1",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "9",
+      "armorPenetration": "-4",
+      "damage": "D6",
+      "abilities": [
+        "MELTA 2"
+      ]
+    },
+    {
+      "name": "Plasma gun – standard",
+      "range": "24\"",
+      "type": "Rapid Fire 1",
+      "attacks": "1",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "7",
+      "armorPenetration": "-2",
+      "damage": "1",
+      "abilities": [
+        "RAPID FIRE 1"
+      ]
+    },
+    {
+      "name": "Plasma gun – supercharge",
+      "range": "24\"",
+      "type": "Hazardous, Rapid Fire 1",
+      "attacks": "1",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "8",
+      "armorPenetration": "-3",
+      "damage": "2",
+      "abilities": [
+        "HAZARDOUS",
+        "RAPID FIRE 1"
+      ]
+    },
+    {
+      "name": "Plasma pistol – standard",
+      "range": "12\"",
+      "type": "Pistol",
+      "attacks": "1",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "7",
+      "armorPenetration": "-2",
+      "damage": "1",
+      "abilities": [
+        "PISTOL"
+      ]
+    },
+    {
+      "name": "Plasma pistol – supercharge",
+      "range": "12\"",
+      "type": "Hazardous, Pistol",
+      "attacks": "1",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "8",
+      "armorPenetration": "-3",
+      "damage": "2",
+      "abilities": [
+        "HAZARDOUS",
+        "PISTOL"
+      ]
+    },
+    {
+      "name": "Chainsword",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "4",
+      "ballisticSkill": "",
+      "weaponSkill": "4+",
+      "strength": "3",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": []
+    },
+    {
+      "name": "Close combat weapon",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "2",
+      "ballisticSkill": "",
+      "weaponSkill": "4+",
+      "strength": "3",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": []
+    },
+    {
+      "name": "Power fist",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "3",
+      "ballisticSkill": "",
+      "weaponSkill": "4+",
+      "strength": "6",
+      "armorPenetration": "-2",
+      "damage": "2",
+      "abilities": []
+    },
+    {
+      "name": "Power weapon",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "3",
+      "ballisticSkill": "",
+      "weaponSkill": "4+",
+      "strength": "4",
+      "armorPenetration": "-2",
+      "damage": "1",
+      "abilities": []
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Deep Strike",
+      "type": "core",
+      "description": "During the Declare Battle Formations step, if every model in this unit has this ability, you can set it up in Reinforcements instead of setting it up on the battlefield. If you do, in the Reinforcements step of one of your Movement phases you can set up this unit anywhere on the battlefield that is more than 9\" away from all enemy models.",
+      "triggerPhase": [
+        "Deployment"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Voice of Command",
+      "type": "faction",
+      "description": "If this unit has the OFFICER keyword, it can issue Orders.",
+      "triggerPhase": [
+        "Command"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Storm Troopers",
+      "type": "unit",
+      "description": "Each time a model in this unit makes an attack, re-roll a Wound roll of 1. If the target of that attack is an enemy unit within range of an objective marker, you can re-roll the Wound roll instead.",
+      "triggerPhase": [
+        "Shooting",
+        "Fight"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Vox-caster",
+      "type": "wargear",
+      "description": "Each time you target the bearer’s unit with a Stratagem, roll one D6, adding 1 to the result if there are one or more friendly OFFICER models within 6\": on a 5+, you gain 1CP.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": true,
+      "requiredKeywords": [],
+      "effects": {
+        "wounds": null,
+        "toughness": null,
+        "save": null,
+        "invulnerableSave": null,
+        "movement": null
+      }
+    }
+  ],
+  "wargearOptions": [
+    {
+      "description": "For every 5 models in this unit, up to two Tempestus Scions can each have their hot-shot lasgun replaced with one of the following: 1 flamer, 1 grenade launcher, 1 hot-shot volley gun, 1 meltagun, 1 plasma gun.",
+      "pointsCost": 0
+    },
+    {
+      "description": "1 Tempestus Scion’s hot-shot lasgun can be replaced with 1 hot-shot laspistol and 1 vox-caster.",
+      "pointsCost": 0
+    },
+    {
+      "description": "The Tempestor’s chainsword can be replaced with 1 power fist or 1 power weapon.",
+      "pointsCost": 0
+    },
+    {
+      "description": "The Tempestor’s hot-shot laspistol can be replaced with 1 bolt pistol or 1 plasma pistol.",
+      "pointsCost": 0
+    }
+  ],
+  "pointsCost": 70,
+  "pointsTiers": [
+    {
+      "models": 5,
+      "points": 70
+    },
+    {
+      "models": 10,
+      "points": 140
+    }
+  ]
+}

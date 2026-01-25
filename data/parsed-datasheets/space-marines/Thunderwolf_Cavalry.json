@@ -1,0 +1,194 @@
+{
+  "name": "Thunderwolf Cavalry",
+  "faction": "Space Marines",
+  "subfaction": "Space Wolves",
+  "role": "Other",
+  "keywords": [
+    "MOUNTED",
+    "GRENADES",
+    "IMPERIUM",
+    "THUNDERWOLF CAVALRY"
+  ],
+  "stats": {
+    "movement": "12\"",
+    "toughness": 6,
+    "save": "3+",
+    "invulnerableSave": "",
+    "wounds": 4,
+    "leadership": 6,
+    "objectiveControl": 2
+  },
+  "composition": "1 Thunderwolf Cavalry Pack Leader, 2-5 Thunderwolf Cavalry",
+  "compositionData": [
+    {
+      "name": "Thunderwolf Cavalry Pack Leader",
+      "role": "leader",
+      "count": 1,
+      "woundsPerModel": 4
+    },
+    {
+      "name": "Thunderwolf Cavalry",
+      "role": "regular",
+      "count": 2,
+      "woundsPerModel": 4
+    }
+  ],
+  "unitSize": "3",
+  "leaderRules": "Can be led by: Canis Wolfborn; Harald Deathwolf; Iron Priest On Thunderwolf; Wolf Guard Battle Leader On Thunderwolf; Wolf Lord on Thunderwolf; Logan Grimnar On Stormrider",
+  "leaderAbilities": "",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Bolt pistol",
+      "range": "12\"",
+      "type": "Pistol",
+      "attacks": "1",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "PISTOL"
+      ]
+    },
+    {
+      "name": "Boltgun",
+      "range": "24\"",
+      "type": "RAPID FIRE 2",
+      "attacks": "2",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "RAPID FIRE 2"
+      ]
+    },
+    {
+      "name": "Plasma pistol (standard)",
+      "range": "12\"",
+      "type": "Pistol",
+      "attacks": "1",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "7",
+      "armorPenetration": "-2",
+      "damage": "1",
+      "abilities": [
+        "PISTOL"
+      ]
+    },
+    {
+      "name": "Plasma pistol (supercharge)",
+      "range": "12\"",
+      "type": "Pistol",
+      "attacks": "1",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "8",
+      "armorPenetration": "-3",
+      "damage": "2",
+      "abilities": [
+        "HAZARDOUS",
+        "PISTOL"
+      ]
+    },
+    {
+      "name": "Teeth and claws",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "3",
+      "ballisticSkill": "",
+      "weaponSkill": "4+",
+      "strength": "5",
+      "armorPenetration": "-1",
+      "damage": "1",
+      "abilities": [
+        "EXTRA ATTACKS"
+      ]
+    },
+    {
+      "name": "Wolf Guard weapon",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "4",
+      "ballisticSkill": "",
+      "weaponSkill": "3+",
+      "strength": "5",
+      "armorPenetration": "-2",
+      "damage": "2",
+      "abilities": []
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Oath of Moment",
+      "type": "faction",
+      "description": "Oath of Moment.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Thunderous Charge",
+      "type": "unit",
+      "description": "Each time a model in this unit makes a melee attack with its Wolf Guard weapon, if it made a Charge move this turn, add 1 to the Damage characteristic of that attack.",
+      "triggerPhase": [
+        "Fight"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Storm Shield",
+      "type": "wargear",
+      "description": "The bearer has a 4+ invulnerable save.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": {
+        "wounds": null,
+        "toughness": null,
+        "save": null,
+        "invulnerableSave": "4+",
+        "movement": null
+      }
+    }
+  ],
+  "wargearOptions": [
+    {
+      "description": "Replace bolt pistol with a boltgun (any number of models may take this).",
+      "pointsCost": 0
+    },
+    {
+      "description": "Replace bolt pistol with a storm shield (any number of models may take this).",
+      "pointsCost": 0
+    },
+    {
+      "description": "For every 3 models in this unit, one model’s bolt pistol can be replaced with a plasma pistol.",
+      "pointsCost": 0
+    }
+  ],
+  "pointsCost": 115,
+  "pointsTiers": [
+    {
+      "models": 3,
+      "points": 115
+    },
+    {
+      "models": 6,
+      "points": 230
+    }
+  ]
+}

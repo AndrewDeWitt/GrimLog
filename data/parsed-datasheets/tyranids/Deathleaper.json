@@ -1,0 +1,163 @@
+{
+  "name": "Deathleaper",
+  "faction": "Tyranids",
+  "subfaction": "",
+  "role": "Character",
+  "keywords": [
+    "INFANTRY",
+    "CHARACTER",
+    "EPIC HERO",
+    "GREAT DEVOURER",
+    "VANGUARD INVADER",
+    "DEATHLEAPER",
+    "TYRANIDS"
+  ],
+  "stats": {
+    "movement": "8\"",
+    "toughness": 6,
+    "save": "3+",
+    "invulnerableSave": "4+",
+    "wounds": 7,
+    "leadership": 7,
+    "objectiveControl": 1
+  },
+  "composition": "1 Deathleaper \t60mm base \tEPIC HERO",
+  "compositionData": [
+    {
+      "name": "Deathleaper",
+      "role": "leader",
+      "count": 1,
+      "woundsPerModel": 7
+    }
+  ],
+  "unitSize": "1",
+  "leaderRules": "This model cannot be your WARLORD.",
+  "leaderAbilities": "",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Lictor claws and talons",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "6",
+      "ballisticSkill": "",
+      "weaponSkill": "2+",
+      "strength": "7",
+      "armorPenetration": "-2",
+      "damage": "2",
+      "abilities": [
+        "PRECISION"
+      ]
+    }
+  ],
+  "abilities": [
+    {
+      "name": "FIGHTS FIRST",
+      "type": "core",
+      "description": "Fights First — This model fights at the start of the Fight phase; when it fights it resolves its attacks before models that do not have this ability.",
+      "triggerPhase": [
+        "Fight"
+      ],
+      "triggerSubphase": "Start of Phase",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "INFILTRATORS",
+      "type": "core",
+      "description": "Infiltrators — This unit has the Infiltrators core ability (a deployment ability from the core rules).",
+      "triggerPhase": [
+        "Deployment"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "LONE OPERATIVE",
+      "type": "core",
+      "description": "Lone Operative — This unit has the Lone Operative core ability (see core rules).",
+      "triggerPhase": [
+        "Keyword"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "STEALTH",
+      "type": "core",
+      "description": "Stealth — This unit has the Stealth core ability (see core rules).",
+      "triggerPhase": [
+        "Keyword"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "SYNAPSE",
+      "type": "faction",
+      "description": "Synapse — This model is a synapse creature. (Synapse is a Tyranids faction rule; synapse effects influence friendly TYRANIDS units.)",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [
+        "TYRANIDS"
+      ],
+      "effects": null
+    },
+    {
+      "name": "FEEDER TENDRILS",
+      "type": "unit",
+      "description": "Feeder Tendrils — Each time this model destroys an enemy CHARACTER model, you gain 1CP.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [
+        "CHARACTER"
+      ],
+      "effects": null
+    },
+    {
+      "name": "FEAR OF THE UNSEEN (AURA)",
+      "type": "unit",
+      "description": "Fear of the Unseen (Aura) — While an enemy unit is within 6\" of this model, worsen the Leadership characteristic of models in that unit by 1. In addition, in the Battle-shock step of your opponent’s Command phase, if such an enemy unit is below its Starting Strength, it must take a Battle-shock test.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "HUNTER ORGANISM",
+      "type": "unit",
+      "description": "Hunter Organism — This model cannot be your WARLORD.",
+      "triggerPhase": [
+        "General"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [],
+  "pointsCost": 80,
+  "pointsTiers": [
+    {
+      "models": 1,
+      "points": 80
+    }
+  ]
+}

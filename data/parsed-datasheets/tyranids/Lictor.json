@@ -1,0 +1,147 @@
+{
+  "name": "Lictor",
+  "faction": "Tyranids",
+  "subfaction": "",
+  "role": "Other",
+  "keywords": [
+    "INFANTRY",
+    "GREAT DEVOURER",
+    "VANGUARD INVADER",
+    "LICTOR",
+    "TYRANIDS"
+  ],
+  "stats": {
+    "movement": "8\"",
+    "toughness": 6,
+    "save": "4+",
+    "invulnerableSave": "",
+    "wounds": 6,
+    "leadership": 7,
+    "objectiveControl": 1
+  },
+  "composition": "1 Lictor",
+  "compositionData": [
+    {
+      "name": "Lictor",
+      "role": "regular",
+      "count": 1,
+      "woundsPerModel": 6
+    }
+  ],
+  "unitSize": "1",
+  "leaderRules": "",
+  "leaderAbilities": "",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Lictor claws and talons [PRECISION]",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "6",
+      "ballisticSkill": "",
+      "weaponSkill": "2+",
+      "strength": "7",
+      "armorPenetration": "-2",
+      "damage": "2",
+      "abilities": [
+        "PRECISION"
+      ]
+    }
+  ],
+  "abilities": [
+    {
+      "name": "FIGHTS FIRST",
+      "type": "core",
+      "description": "This unit fights at the start of the Fight phase, before units that do not have Fights First.",
+      "triggerPhase": [
+        "Fight"
+      ],
+      "triggerSubphase": "Start of Phase",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "INFILTRATORS",
+      "type": "core",
+      "description": "This unit has the Infiltrators ability.",
+      "triggerPhase": [
+        "Deployment"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "LONE OPERATIVE",
+      "type": "core",
+      "description": "This model is a lone operative (acts as a single-model unit).",
+      "triggerPhase": [
+        "Keyword"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "STEALTH",
+      "type": "core",
+      "description": "This unit has the Stealth ability.",
+      "triggerPhase": [
+        "Keyword"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "SYNAPSE",
+      "type": "faction",
+      "description": "Synapse (faction ability).",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "FEEDER TENDRILS",
+      "type": "unit",
+      "description": "Each time this model destroys an enemy CHARACTER model, you gain 1CP.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": [
+        "CHARACTER"
+      ],
+      "effects": null
+    },
+    {
+      "name": "PHEROMONE TRAIL",
+      "type": "unit",
+      "description": "Once per battle round, you can target one model with this ability with the Rapid Ingress Stratagem for 0CP.",
+      "triggerPhase": [
+        "Deployment"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [],
+  "pointsCost": 60,
+  "pointsTiers": [
+    {
+      "models": 1,
+      "points": 60
+    }
+  ]
+}

@@ -1,0 +1,100 @@
+{
+  "name": "Genestealers",
+  "faction": "Tyranids",
+  "subfaction": "",
+  "role": "Other",
+  "keywords": [
+    "INFANTRY",
+    "GREAT DEVOURER",
+    "VANGUARD INVADER",
+    "GENESTEALERS",
+    "TYRANIDS"
+  ],
+  "stats": {
+    "movement": "8\"",
+    "toughness": 4,
+    "save": "5+",
+    "invulnerableSave": "5+",
+    "wounds": 2,
+    "leadership": 7,
+    "objectiveControl": 1
+  },
+  "composition": "5-10 Genestealers",
+  "compositionData": [
+    {
+      "name": "Genestealer",
+      "role": "regular",
+      "count": 5,
+      "woundsPerModel": 2
+    }
+  ],
+  "unitSize": "5-10",
+  "leaderRules": "This unit can be led by the following unit: Broodlord",
+  "leaderAbilities": "",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Genestealer claws and talons",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "4",
+      "ballisticSkill": "",
+      "weaponSkill": "2+",
+      "strength": "4",
+      "armorPenetration": "-2",
+      "damage": "1",
+      "abilities": []
+    }
+  ],
+  "abilities": [
+    {
+      "name": "SCOUTS",
+      "type": "core",
+      "description": "Scouts 8\"",
+      "triggerPhase": [
+        "Deployment"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "SYNAPSE",
+      "type": "faction",
+      "description": "Synapse",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "VANGUARD PREDATOR",
+      "type": "unit",
+      "description": "Each time a model in this unit makes an attack, re-roll a Hit roll of 1. If the target is within range of one or more objective markers, re-roll a Wound roll of 1 as well.",
+      "triggerPhase": [
+        "Shooting",
+        "Fight"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [],
+  "pointsCost": 75,
+  "pointsTiers": [
+    {
+      "models": 5,
+      "points": 75
+    },
+    {
+      "models": 10,
+      "points": 140
+    }
+  ]
+}

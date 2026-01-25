@@ -1,0 +1,267 @@
+{
+  "name": "Scout Squad",
+  "faction": "space-marines",
+  "subfaction": "space-wolves",
+  "role": "Elites",
+  "keywords": [
+    "INFANTRY",
+    "GRENADES",
+    "SMOKE",
+    "IMPERIUM",
+    "SCOUT SQUAD"
+  ],
+  "stats": {
+    "movement": "6\"",
+    "toughness": 4,
+    "save": "4+",
+    "invulnerableSave": "",
+    "wounds": 2,
+    "leadership": 6,
+    "objectiveControl": 1
+  },
+  "composition": "1 Scout Sergeant, 4-9 Scouts",
+  "compositionData": [
+    {
+      "name": "Scout Sergeant",
+      "role": "leader",
+      "count": 1,
+      "woundsPerModel": 2
+    },
+    {
+      "name": "Scout",
+      "role": "regular",
+      "count": 4,
+      "woundsPerModel": 2
+    }
+  ],
+  "unitSize": "5-10",
+  "leaderRules": "",
+  "leaderAbilities": "",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Astartes shotgun",
+      "range": "18\"",
+      "type": "Assault 2",
+      "attacks": "2",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "ASSAULT 2"
+      ]
+    },
+    {
+      "name": "Bolt pistol",
+      "range": "12\"",
+      "type": "Pistol 1",
+      "attacks": "1",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "PISTOL 1"
+      ]
+    },
+    {
+      "name": "Boltgun",
+      "range": "24\"",
+      "type": "Rapid Fire 2",
+      "attacks": "2",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "RAPID FIRE 2"
+      ]
+    },
+    {
+      "name": "Heavy bolter",
+      "range": "36\"",
+      "type": "Heavy 3",
+      "attacks": "3",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "5",
+      "armorPenetration": "-1",
+      "damage": "2",
+      "abilities": [
+        "HEAVY 3",
+        "SUSTAINED HITS 1"
+      ]
+    },
+    {
+      "name": "Missile launcher – frag",
+      "range": "48\"",
+      "type": "Heavy D6",
+      "attacks": "D6",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "BLAST",
+        "HEAVY D6"
+      ]
+    },
+    {
+      "name": "Missile launcher – krak",
+      "range": "48\"",
+      "type": "Heavy 1",
+      "attacks": "1",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "9",
+      "armorPenetration": "-2",
+      "damage": "D6",
+      "abilities": [
+        "HEAVY 1"
+      ]
+    },
+    {
+      "name": "Scout sniper rifle",
+      "range": "36\"",
+      "type": "Heavy 1, Precision",
+      "attacks": "1",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "-2",
+      "damage": "2",
+      "abilities": [
+        "HEAVY 1",
+        "PRECISION"
+      ]
+    },
+    {
+      "name": "Astartes chainsword",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "4",
+      "ballisticSkill": "",
+      "weaponSkill": "3+",
+      "strength": "4",
+      "armorPenetration": "-1",
+      "damage": "1",
+      "abilities": []
+    },
+    {
+      "name": "Close combat weapon",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "2",
+      "ballisticSkill": "",
+      "weaponSkill": "3+",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": []
+    },
+    {
+      "name": "Combat knife",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "3",
+      "ballisticSkill": "",
+      "weaponSkill": "3+",
+      "strength": "4",
+      "armorPenetration": "-1",
+      "damage": "1",
+      "abilities": []
+    }
+  ],
+  "abilities": [
+    {
+      "name": "INFILTRATORS",
+      "type": "core",
+      "description": "Infiltrators",
+      "triggerPhase": [
+        "Deployment"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "SCOUTS 6\"",
+      "type": "core",
+      "description": "Scouts 6\"",
+      "triggerPhase": [
+        "Deployment"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "OATH OF MOMENT",
+      "type": "faction",
+      "description": "Oath of Moment",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "GUERRILLA TACTICS",
+      "type": "unit",
+      "description": "Guerrilla Tactics: At the end of your opponent’s turn, if this unit is more than 6\" away from all enemy models, you can remove this unit from the battlefield and place it into Strategic Reserves.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "End of Phase",
+      "isReactive": true,
+      "requiredKeywords": [],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [
+    {
+      "description": "The Scout Sergeant's boltgun can be replaced with 1 Astartes chainsword.",
+      "pointsCost": 0
+    },
+    {
+      "description": "Any number of models can each have their boltgun replaced with 1 Astartes shotgun.",
+      "pointsCost": 0
+    },
+    {
+      "description": "Any number of models can each have their boltgun replaced with 1 combat knife.",
+      "pointsCost": 0
+    },
+    {
+      "description": "For every 5 models in this unit, 1 Scout’s boltgun can be replaced with 1 Scout sniper rifle.",
+      "pointsCost": 0
+    },
+    {
+      "description": "For every 5 models in this unit, 1 Scout’s boltgun can be replaced with 1 heavy bolter.",
+      "pointsCost": 0
+    },
+    {
+      "description": "For every 5 models in this unit, 1 Scout’s boltgun can be replaced with 1 missile launcher.",
+      "pointsCost": 0
+    }
+  ],
+  "pointsCost": 70,
+  "pointsTiers": [
+    {
+      "models": 5,
+      "points": 70
+    },
+    {
+      "models": 10,
+      "points": 140
+    }
+  ]
+}

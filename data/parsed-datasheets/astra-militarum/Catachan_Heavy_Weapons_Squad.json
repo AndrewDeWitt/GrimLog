@@ -1,0 +1,219 @@
+{
+  "name": "Catachan Heavy Weapons Squad",
+  "faction": "Astra Militarum",
+  "subfaction": "Catachan",
+  "role": "Other",
+  "keywords": [
+    "INFANTRY",
+    "GRENADES",
+    "IMPERIUM",
+    "REGIMENT",
+    "CATACHAN HEAVY WEAPONS SQUAD"
+  ],
+  "stats": {
+    "movement": "6\"",
+    "toughness": 3,
+    "save": "5+",
+    "invulnerableSave": "",
+    "wounds": 2,
+    "leadership": 7,
+    "objectiveControl": 2
+  },
+  "composition": "3 Heavy Weapons Teams",
+  "compositionData": [
+    {
+      "name": "Heavy Weapons Team",
+      "role": "regular",
+      "count": 3,
+      "woundsPerModel": 2
+    }
+  ],
+  "unitSize": "3",
+  "leaderRules": "",
+  "leaderAbilities": "",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Autocannon",
+      "range": "48\"",
+      "type": "Heavy",
+      "attacks": "2",
+      "ballisticSkill": "5+",
+      "weaponSkill": "",
+      "strength": "9",
+      "armorPenetration": "-1",
+      "damage": "3",
+      "abilities": [
+        "HEAVY"
+      ]
+    },
+    {
+      "name": "Heavy bolter",
+      "range": "36\"",
+      "type": "Heavy, Sustained Hits 1",
+      "attacks": "3",
+      "ballisticSkill": "5+",
+      "weaponSkill": "",
+      "strength": "5",
+      "armorPenetration": "-1",
+      "damage": "2",
+      "abilities": [
+        "HEAVY",
+        "SUSTAINED HITS 1"
+      ]
+    },
+    {
+      "name": "Lasgun",
+      "range": "24\"",
+      "type": "Rapid Fire 1",
+      "attacks": "1",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "3",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "RAPID FIRE 1"
+      ]
+    },
+    {
+      "name": "Lascannon",
+      "range": "48\"",
+      "type": "Heavy",
+      "attacks": "1",
+      "ballisticSkill": "5+",
+      "weaponSkill": "",
+      "strength": "12",
+      "armorPenetration": "-3",
+      "damage": "D6+1",
+      "abilities": [
+        "HEAVY"
+      ]
+    },
+    {
+      "name": "Missile launcher – frag",
+      "range": "48\"",
+      "type": "Heavy, Blast",
+      "attacks": "D6",
+      "ballisticSkill": "5+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "HEAVY",
+        "BLAST"
+      ]
+    },
+    {
+      "name": "Missile launcher – krak",
+      "range": "48\"",
+      "type": "Heavy",
+      "attacks": "1",
+      "ballisticSkill": "5+",
+      "weaponSkill": "",
+      "strength": "9",
+      "armorPenetration": "-2",
+      "damage": "D6",
+      "abilities": [
+        "HEAVY"
+      ]
+    },
+    {
+      "name": "Mortar",
+      "range": "48\"",
+      "type": "Heavy, Blast, Indirect Fire",
+      "attacks": "D6",
+      "ballisticSkill": "5+",
+      "weaponSkill": "",
+      "strength": "5",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "HEAVY",
+        "BLAST",
+        "INDIRECT FIRE"
+      ]
+    },
+    {
+      "name": "Weapons team close combat weapons",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "2",
+      "ballisticSkill": "",
+      "weaponSkill": "4+",
+      "strength": "3",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": []
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Scouts 6\"",
+      "type": "core",
+      "description": "This unit can make a Normal move of up to 6\" at the start of the first battle round, provided no model in that unit ends that move within 9\" of any enemy units.",
+      "triggerPhase": [
+        "Deployment"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Bring it Down!",
+      "type": "unit",
+      "description": "Each time a model in this unit makes a ranged attack that targets a MONSTER or VEHICLE unit, re-roll a Hit roll of 1 and re-roll a Wound roll of 1.",
+      "triggerPhase": [
+        "Shooting"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": [
+        "MONSTER",
+        "VEHICLE"
+      ],
+      "effects": null
+    },
+    {
+      "name": "Embarking",
+      "type": "unit",
+      "description": "While embarked within a TRANSPORT, each model takes up the space of 2 models, and each weapon equipped by these models is considered to be 2 models’ weapons for the purposes of the Firing Deck ability.",
+      "triggerPhase": [
+        "General"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [
+        "TRANSPORT"
+      ],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [
+    {
+      "description": "Any number of models can each have their heavy bolter replaced with 1 autocannon",
+      "pointsCost": 0
+    },
+    {
+      "description": "Any number of models can each have their heavy bolter replaced with 1 lascannon",
+      "pointsCost": 0
+    },
+    {
+      "description": "Any number of models can each have their heavy bolter replaced with 1 missile launcher",
+      "pointsCost": 0
+    },
+    {
+      "description": "Any number of models can each have their heavy bolter replaced with 1 mortar",
+      "pointsCost": 0
+    }
+  ],
+  "pointsCost": 65,
+  "pointsTiers": [
+    {
+      "models": 3,
+      "points": 65
+    }
+  ]
+}

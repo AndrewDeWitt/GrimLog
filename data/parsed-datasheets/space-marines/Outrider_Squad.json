@@ -1,0 +1,185 @@
+{
+  "name": "Outrider Squad",
+  "faction": "Space Marines",
+  "subfaction": "space-wolves",
+  "role": "Other",
+  "keywords": [
+    "MOUNTED",
+    "GRENADES",
+    "IMPERIUM",
+    "OUTRIDER SQUAD",
+    "RAVENWING",
+    "ADEPTUS ASTARTES"
+  ],
+  "stats": {
+    "movement": "12\"",
+    "toughness": 5,
+    "save": "3+",
+    "invulnerableSave": "",
+    "wounds": 4,
+    "leadership": 6,
+    "objectiveControl": 2
+  },
+  "composition": "1 Outrider Sergeant, 2-5 Outriders, 0-1 Invader ATV",
+  "compositionData": [
+    {
+      "name": "Outrider Sergeant",
+      "role": "leader",
+      "count": 1,
+      "woundsPerModel": 4
+    },
+    {
+      "name": "Outrider",
+      "role": "regular",
+      "count": 2,
+      "woundsPerModel": 4
+    }
+  ],
+  "unitSize": "3",
+  "leaderRules": "This unit can be led by the following units: Chaplain On Bike, Ravenwing Command Squad, Sammael, Ancient on Bike, Apothecary on Bike, Captain on Bike, Company Champion On Bike, Librarian on Bike, Sanguinary Priest on Bike, Techmarine on Bike",
+  "leaderAbilities": "",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Bolt pistol",
+      "range": "12\"",
+      "type": "PISTOL",
+      "attacks": "1",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "PISTOL"
+      ]
+    },
+    {
+      "name": "Heavy bolt pistol",
+      "range": "18\"",
+      "type": "PISTOL",
+      "attacks": "1",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "-1",
+      "damage": "1",
+      "abilities": [
+        "PISTOL"
+      ]
+    },
+    {
+      "name": "Twin bolt rifle",
+      "range": "24\"",
+      "type": "TWIN-LINKED",
+      "attacks": "2",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "-1",
+      "damage": "1",
+      "abilities": [
+        "TWIN-LINKED"
+      ]
+    },
+    {
+      "name": "Multi-melta",
+      "range": "18\"",
+      "type": "MELTA 2",
+      "attacks": "2",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "9",
+      "armorPenetration": "-4",
+      "damage": "D6",
+      "abilities": [
+        "MELTA 2"
+      ]
+    },
+    {
+      "name": "Onslaught gatling cannon",
+      "range": "24\"",
+      "type": "HEAVY 8",
+      "attacks": "8",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "5",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "DEVASTATING WOUNDS"
+      ]
+    },
+    {
+      "name": "Astartes chainsword",
+      "range": "Melee",
+      "type": "MELEE",
+      "attacks": "4",
+      "ballisticSkill": "",
+      "weaponSkill": "3+",
+      "strength": "4",
+      "armorPenetration": "-1",
+      "damage": "1",
+      "abilities": []
+    },
+    {
+      "name": "Close combat weapon",
+      "range": "Melee",
+      "type": "MELEE",
+      "attacks": "5",
+      "ballisticSkill": "",
+      "weaponSkill": "3+",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": []
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Oath of Moment",
+      "type": "faction",
+      "description": "Oath of Moment",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Thunderous Impact",
+      "type": "unit",
+      "description": "Each time a model in this unit makes a melee attack, if this unit made a Charge move this turn, improve the Strength and Damage characteristics of that attack by 1.",
+      "triggerPhase": [
+        "Fight"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [
+    {
+      "description": "An Invader ATV’s onslaught gatling cannon can be replaced with 1 multi-melta.",
+      "pointsCost": 0
+    }
+  ],
+  "pointsCost": 80,
+  "pointsTiers": [
+    {
+      "models": 3,
+      "points": 80
+    },
+    {
+      "models": 6,
+      "points": 160
+    },
+    {
+      "addOn": "Invader ATV",
+      "addOnPoints": 60
+    }
+  ]
+}

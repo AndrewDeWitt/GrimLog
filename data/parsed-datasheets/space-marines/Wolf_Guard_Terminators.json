@@ -1,0 +1,208 @@
+{
+  "name": "Wolf Guard Terminators",
+  "faction": "Space Marines",
+  "subfaction": "Space Wolves",
+  "role": "Elites",
+  "keywords": [
+    "INFANTRY",
+    "IMPERIUM",
+    "TERMINATOR",
+    "WOLF GUARD",
+    "WOLF GUARD TERMINATORS"
+  ],
+  "stats": {
+    "movement": "6\"",
+    "toughness": 5,
+    "save": "2+",
+    "invulnerableSave": "4+",
+    "wounds": 3,
+    "leadership": 6,
+    "objectiveControl": 1
+  },
+  "composition": "1 Wolf Guard Terminator Pack Leader; 4-9 Wolf Guard Terminators",
+  "compositionData": [
+    {
+      "name": "Wolf Guard Terminator Pack Leader",
+      "role": "leader",
+      "count": 1,
+      "woundsPerModel": 3
+    },
+    {
+      "name": "Wolf Guard Terminator",
+      "role": "regular",
+      "count": 4,
+      "woundsPerModel": 3
+    }
+  ],
+  "unitSize": "5-10",
+  "leaderRules": "Can be led by: Arjac Rockfist; Logan Grimnar; Krom Dragongaze; Wolf Guard Battle Leader In Terminator Armour",
+  "leaderAbilities": "",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Assault cannon",
+      "range": "24\"",
+      "type": "Assault 6",
+      "attacks": "6",
+      "ballisticSkill": "2+",
+      "weaponSkill": "",
+      "strength": "6",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "DEVASTATING WOUNDS"
+      ]
+    },
+    {
+      "name": "Storm bolter",
+      "range": "24\"",
+      "type": "Rapid Fire 2",
+      "attacks": "2",
+      "ballisticSkill": "2+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "RAPID FIRE 2"
+      ]
+    },
+    {
+      "name": "Master-crafted power weapon",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "4",
+      "ballisticSkill": "",
+      "weaponSkill": "3+",
+      "strength": "5",
+      "armorPenetration": "-2",
+      "damage": "2",
+      "abilities": []
+    },
+    {
+      "name": "Power fist",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "3",
+      "ballisticSkill": "",
+      "weaponSkill": "3+",
+      "strength": "8",
+      "armorPenetration": "-2",
+      "damage": "2",
+      "abilities": []
+    },
+    {
+      "name": "Relic greataxe",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "3",
+      "ballisticSkill": "",
+      "weaponSkill": "3+",
+      "strength": "7",
+      "armorPenetration": "-2",
+      "damage": "3",
+      "abilities": [
+        "DEVASTATING WOUNDS"
+      ]
+    },
+    {
+      "name": "Twin lightning claws",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "6",
+      "ballisticSkill": "",
+      "weaponSkill": "3+",
+      "strength": "5",
+      "armorPenetration": "-2",
+      "damage": "1",
+      "abilities": [
+        "TWIN-LINKED"
+      ]
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Deep Strike",
+      "type": "core",
+      "description": "Deep Strike",
+      "triggerPhase": [
+        "Deployment"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Oath of Moment",
+      "type": "faction",
+      "description": "Oath of Moment",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Rugged Resilience",
+      "type": "unit",
+      "description": "Each time an attack targets this unit, if the Strength characteristic of that attack is greater than the Toughness characteristic of this unit, subtract 1 from the Wound roll.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": true,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Storm Shield",
+      "type": "wargear",
+      "description": "The bearer has a Wounds characteristic of 4.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": {
+        "wounds": 4,
+        "toughness": null,
+        "save": null,
+        "invulnerableSave": null,
+        "movement": null
+      }
+    }
+  ],
+  "wargearOptions": [
+    {
+      "description": "Any number of models can each have their storm bolter replaced with 1 storm shield.",
+      "pointsCost": 0
+    },
+    {
+      "description": "For every 5 models in this unit, 1 Wolf Guard Terminator can replace its storm bolter and master-crafted power weapon with 1 assault cannon and 1 powerfist.",
+      "pointsCost": 0
+    },
+    {
+      "description": "The Wolf Guard Terminator Pack Leader’s storm bolter and master-crafted power weapon can be replaced with 1 relic greataxe.",
+      "pointsCost": 0
+    },
+    {
+      "description": "The Wolf Guard Terminator Pack Leader’s storm bolter and master-crafted power weapon can be replaced with 1 twin lightning claws.",
+      "pointsCost": 0
+    }
+  ],
+  "pointsCost": 170,
+  "pointsTiers": [
+    {
+      "models": 5,
+      "points": 170
+    },
+    {
+      "models": 10,
+      "points": 340
+    }
+  ]
+}

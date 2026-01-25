@@ -1,0 +1,144 @@
+{
+  "name": "Wulfen with Storm Shields",
+  "faction": "Space Marines",
+  "subfaction": "Space Wolves",
+  "role": "Elites",
+  "keywords": [
+    "INFANTRY",
+    "IMPERIUM",
+    "WULFEN",
+    "WULFEN WITH STORM SHIELDS",
+    "ADEPTUS ASTARTES",
+    "SPACE WOLVES"
+  ],
+  "stats": {
+    "movement": "9\"",
+    "toughness": 6,
+    "save": "4+",
+    "invulnerableSave": "4+",
+    "wounds": 2,
+    "leadership": 7,
+    "objectiveControl": 0
+  },
+  "composition": "5-10 Wulfen",
+  "compositionData": [
+    {
+      "name": "Wulfen",
+      "role": "regular",
+      "count": 5,
+      "woundsPerModel": 2
+    }
+  ],
+  "unitSize": "5-10",
+  "leaderRules": "",
+  "leaderAbilities": "",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Stormfrag auto-launcher",
+      "range": "12\"",
+      "type": "Assault D3, Blast",
+      "attacks": "D3",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "ASSAULT",
+        "BLAST"
+      ]
+    },
+    {
+      "name": "Thunder hammer",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "2",
+      "ballisticSkill": "",
+      "weaponSkill": "3+",
+      "strength": "5",
+      "armorPenetration": "-2",
+      "damage": "3",
+      "abilities": [
+        "ANTI-MONSTER 3+",
+        "ANTI-VEHICLE 3+"
+      ]
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Curse of the Wulfen",
+      "type": "faction",
+      "description": "Curse of the Wulfen",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Oath of Moment",
+      "type": "faction",
+      "description": "Oath of Moment",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Hammer Blow",
+      "type": "unit",
+      "description": "In the Fight phase, after this unit has fought, select one enemy MONSTER or VEHICLE unit hit by one or more of those attacks. Until the end of the next turn, that enemy unit is suppressed. While a unit is suppressed, each time a model in that unit makes an attack, subtract 1 from the Hit roll.",
+      "triggerPhase": [
+        "Fight"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": [
+        "MONSTER",
+        "VEHICLE"
+      ],
+      "effects": null
+    },
+    {
+      "name": "Death Totem",
+      "type": "wargear",
+      "description": "Each time the bearer makes a melee attack, re-roll a Hit roll of 1.",
+      "triggerPhase": [
+        "Fight"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": {
+        "wounds": null,
+        "toughness": null,
+        "save": null,
+        "invulnerableSave": null,
+        "movement": null
+      }
+    }
+  ],
+  "wargearOptions": [
+    {
+      "description": "Any number of models can each have their death totem replaced with 1 stormfrag auto-launcher.",
+      "pointsCost": 0
+    }
+  ],
+  "pointsCost": 100,
+  "pointsTiers": [
+    {
+      "models": 5,
+      "points": 100
+    },
+    {
+      "models": 10,
+      "points": 200
+    }
+  ]
+}

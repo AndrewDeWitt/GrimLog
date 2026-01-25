@@ -1,0 +1,189 @@
+{
+  "name": "Attilan Rough Riders",
+  "faction": "Astra Militarum",
+  "subfaction": "",
+  "role": "Other",
+  "keywords": [
+    "MOUNTED",
+    "GRENADES",
+    "IMPERIUM",
+    "REGIMENT",
+    "ATTILAN ROUGH RIDERS"
+  ],
+  "stats": {
+    "movement": "12\"",
+    "toughness": 4,
+    "save": "4+",
+    "invulnerableSave": "",
+    "wounds": 2,
+    "leadership": 7,
+    "objectiveControl": 1
+  },
+  "composition": "1 Rough Rider Sergeant, 4-9 Rough Riders",
+  "compositionData": [
+    {
+      "name": "Rough Rider Sergeant",
+      "role": "leader",
+      "count": 1,
+      "woundsPerModel": 2
+    },
+    {
+      "name": "Rough Rider",
+      "role": "regular",
+      "count": 4,
+      "woundsPerModel": 2
+    }
+  ],
+  "unitSize": "5-10",
+  "leaderRules": "",
+  "leaderAbilities": "",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Lasgun",
+      "range": "24\"",
+      "type": "Rapid Fire 1",
+      "attacks": "1",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "3",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "RAPID FIRE 1"
+      ]
+    },
+    {
+      "name": "Laspistol",
+      "range": "12\"",
+      "type": "Pistol",
+      "attacks": "1",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "3",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "PISTOL"
+      ]
+    },
+    {
+      "name": "Goad lance",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "2",
+      "ballisticSkill": "",
+      "weaponSkill": "3+",
+      "strength": "6",
+      "armorPenetration": "-2",
+      "damage": "2",
+      "abilities": [
+        "LANCE"
+      ]
+    },
+    {
+      "name": "Hunting lance – frag tip",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "D6",
+      "ballisticSkill": "",
+      "weaponSkill": "3+",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "LANCE"
+      ]
+    },
+    {
+      "name": "Hunting lance – melta tip",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "1",
+      "ballisticSkill": "",
+      "weaponSkill": "3+",
+      "strength": "9",
+      "armorPenetration": "-4",
+      "damage": "D6",
+      "abilities": [
+        "LANCE"
+      ]
+    },
+    {
+      "name": "Power sabre",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "4",
+      "ballisticSkill": "",
+      "weaponSkill": "3+",
+      "strength": "4",
+      "armorPenetration": "-2",
+      "damage": "1",
+      "abilities": []
+    },
+    {
+      "name": "Steed’s hooves",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "2",
+      "ballisticSkill": "",
+      "weaponSkill": "4+",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "EXTRA ATTACKS"
+      ]
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Born Soldiers",
+      "type": "faction",
+      "description": "Each time an Astra Militarum unit from your army is selected to shoot, if that unit Remained Stationary this turn, until the end of the phase, ranged weapons equipped by models in that unit have the [LETHAL HITS] ability.",
+      "triggerPhase": [
+        "Shooting"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": [
+        "ASTRA MILITARUM"
+      ],
+      "effects": null
+    },
+    {
+      "name": "Horsemasters",
+      "type": "unit",
+      "description": "This unit is eligible to shoot and declare a charge in a turn in which it Fell Back.",
+      "triggerPhase": [
+        "Shooting",
+        "Charge"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [
+    {
+      "description": "For every 5 models in this unit, 1 model’s hunting lance can be replaced with 1 goad lance.",
+      "pointsCost": 0
+    },
+    {
+      "description": "The Rough Rider Sergeant can be equipped with 1 power sabre.",
+      "pointsCost": 0
+    }
+  ],
+  "pointsCost": 60,
+  "pointsTiers": [
+    {
+      "models": 5,
+      "points": 60
+    },
+    {
+      "models": 10,
+      "points": 120
+    }
+  ]
+}

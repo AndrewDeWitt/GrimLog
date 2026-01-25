@@ -1,0 +1,150 @@
+{
+  "name": "Lord Solar Leontus",
+  "faction": "Astra Militarum",
+  "subfaction": "",
+  "role": "Character",
+  "keywords": [
+    "MOUNTED",
+    "CHARACTER",
+    "EPIC HERO",
+    "IMPERIUM",
+    "OFFICER",
+    "LORD SOLAR LEONTUS"
+  ],
+  "stats": {
+    "movement": "12\"",
+    "toughness": 4,
+    "save": "3+",
+    "invulnerableSave": "4+",
+    "wounds": 8,
+    "leadership": 6,
+    "objectiveControl": 2
+  },
+  "composition": "1 Lord Solar Leontus – EPIC HERO",
+  "compositionData": [
+    {
+      "name": "Lord Solar Leontus",
+      "role": "leader",
+      "count": 1,
+      "woundsPerModel": 8
+    }
+  ],
+  "unitSize": "1",
+  "leaderRules": "This model can be attached to the following units: Attilan Rough Riders, Cadian Shock Troops, Catachan Jungle Fighters, Death Riders, Kasrkin, Krieg Combat Engineers, Death Korps Of Krieg",
+  "leaderAbilities": "This OFFICER can issue up to 3 Orders to: REGIMENT units, SQUADRON units, TITANIC units",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Sol’s Righteous Gaze pistol",
+      "range": "12\"",
+      "type": "Pistol",
+      "attacks": "2",
+      "ballisticSkill": "2+",
+      "weaponSkill": "",
+      "strength": "8",
+      "armorPenetration": "-2",
+      "damage": "2",
+      "abilities": [
+        "PISTOL"
+      ]
+    },
+    {
+      "name": "Conquest",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "6",
+      "ballisticSkill": "",
+      "weaponSkill": "2+",
+      "strength": "6",
+      "armorPenetration": "-2",
+      "damage": "2",
+      "abilities": []
+    },
+    {
+      "name": "Konstantin’s hooves",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "2",
+      "ballisticSkill": "",
+      "weaponSkill": "4+",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "EXTRA ATTACKS"
+      ]
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Leader",
+      "type": "core",
+      "description": "This model can be attached to a unit.",
+      "triggerPhase": [
+        "Keyword"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Voice of Command",
+      "type": "faction",
+      "description": "This model can issue Orders.",
+      "triggerPhase": [
+        "Command"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "The Lord Solar",
+      "type": "unit",
+      "description": "At the start of your Command phase, if this model is on the battlefield, you gain 1CP.",
+      "triggerPhase": [
+        "Command"
+      ],
+      "triggerSubphase": "Start of Phase",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "The Collegiate Astrolex",
+      "type": "unit",
+      "description": "After both players have deployed their armies, select up to three ASTRA MILITARUM units from your army and redeploy them. When doing so, you can set those units up in Strategic Reserves if you wish, regardless of how many units are already in Strategic Reserves.",
+      "triggerPhase": [
+        "Deployment"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [
+        "ASTRA MILITARUM"
+      ],
+      "effects": null
+    },
+    {
+      "name": "SUPREME COMMANDER",
+      "type": "unit",
+      "description": "If this model is in your army, it must be your WARLORD.",
+      "triggerPhase": [
+        "General"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [],
+  "pointsCost": 130,
+  "pointsTiers": [
+    {
+      "models": 1,
+      "points": 130
+    }
+  ]
+}

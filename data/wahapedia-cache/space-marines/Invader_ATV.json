@@ -1,0 +1,15 @@
+{
+  "name": "Invader ATV",
+  "url": "https://wahapedia.ru/wh40k10ed/factions/space-marines/Invader-ATV",
+  "category": "Other",
+  "faction": "space-marines",
+  "subfaction": "space-wolves",
+  "classification": {
+    "isLegends": false,
+    "isForgeWorld": false,
+    "confidence": "low",
+    "signals": [],
+    "score": 0
+  },
+  "scrapedAt": "2026-01-10T05:21:13.221Z"
+}

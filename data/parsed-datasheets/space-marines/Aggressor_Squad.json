@@ -1,0 +1,144 @@
+{
+  "name": "Aggressor Squad",
+  "faction": "Space Marines",
+  "subfaction": "Space Wolves",
+  "role": "Other",
+  "keywords": [
+    "INFANTRY",
+    "IMPERIUM",
+    "GRAVIS",
+    "AGGRESSOR SQUAD",
+    "ADEPTUS ASTARTES"
+  ],
+  "stats": {
+    "movement": "5\"",
+    "toughness": 6,
+    "save": "3+",
+    "invulnerableSave": "",
+    "wounds": 3,
+    "leadership": 6,
+    "objectiveControl": 1
+  },
+  "composition": "1 Aggressor Sergeant, 2-5 Aggressors",
+  "compositionData": [
+    {
+      "name": "Aggressor Sergeant",
+      "role": "leader",
+      "count": 1,
+      "woundsPerModel": 3
+    },
+    {
+      "name": "Aggressor",
+      "role": "regular",
+      "count": 2,
+      "woundsPerModel": 3
+    }
+  ],
+  "unitSize": "3-6",
+  "leaderRules": "This unit can be led by the following units: Apothecary Biologis, Captain In Gravis Armour, Iron Father Feirros, Marneus Calgar, Tor Garadon",
+  "leaderAbilities": "",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Auto boltstorm gauntlets",
+      "range": "18\"",
+      "type": "Ranged",
+      "attacks": "3",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "TWIN-LINKED"
+      ]
+    },
+    {
+      "name": "Flamestorm gauntlets",
+      "range": "12\"",
+      "type": "Ranged",
+      "attacks": "D6+1",
+      "ballisticSkill": "N/A",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "IGNORES COVER",
+        "TORRENT",
+        "TWIN-LINKED"
+      ]
+    },
+    {
+      "name": "Fragstorm grenade launcher",
+      "range": "18\"",
+      "type": "Ranged",
+      "attacks": "D6",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "BLAST"
+      ]
+    },
+    {
+      "name": "Twin power fists",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "3",
+      "ballisticSkill": "",
+      "weaponSkill": "3+",
+      "strength": "8",
+      "armorPenetration": "-2",
+      "damage": "2",
+      "abilities": [
+        "TWIN-LINKED"
+      ]
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Oath of Moment",
+      "type": "faction",
+      "description": "If your Army Faction is Adeptus Astartes, at the start of your Command phase, you can select one unit from your opponent’s army. Until the start of your next Command phase, each time a model from your army with this ability makes an attack that targets that enemy unit, you can re-roll the Hit roll.",
+      "triggerPhase": [
+        "Command"
+      ],
+      "triggerSubphase": "Start of Phase",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Close-quarters Firepower",
+      "type": "unit",
+      "description": "Each time a model in this unit makes a ranged attack that targets the closest eligible target, improve the Armour Penetration characteristic of that attack by 1.",
+      "triggerPhase": [
+        "Shooting"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [
+    {
+      "description": "All models in this unit can each have their flamestorm gauntlets replaced with 1 auto boltstorm gauntlets and 1 fragstorm grenade launcher.",
+      "pointsCost": 0
+    }
+  ],
+  "pointsCost": 95,
+  "pointsTiers": [
+    {
+      "models": 3,
+      "points": 95
+    },
+    {
+      "models": 6,
+      "points": 190
+    }
+  ]
+}

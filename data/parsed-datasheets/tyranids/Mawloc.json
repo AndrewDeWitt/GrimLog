@@ -1,0 +1,124 @@
+{
+  "name": "Mawloc",
+  "faction": "Tyranids",
+  "subfaction": "",
+  "role": "Monster",
+  "keywords": [
+    "MONSTER",
+    "GREAT DEVOURER",
+    "VANGUARD INVADER",
+    "BURROWER",
+    "MAWLOC",
+    "TYRANIDS"
+  ],
+  "stats": {
+    "movement": "10\"",
+    "toughness": 10,
+    "save": "3+",
+    "invulnerableSave": "",
+    "wounds": 14,
+    "leadership": 8,
+    "objectiveControl": 4
+  },
+  "composition": "1 Mawloc",
+  "compositionData": [
+    {
+      "name": "Mawloc",
+      "role": "regular",
+      "count": 1,
+      "woundsPerModel": 14
+    }
+  ],
+  "unitSize": "1",
+  "leaderRules": "",
+  "leaderAbilities": "",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Distensible jaw",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "1",
+      "ballisticSkill": "",
+      "weaponSkill": "3+",
+      "strength": "5",
+      "armorPenetration": "0",
+      "damage": "3",
+      "abilities": [
+        "ANTI-INFANTRY 4+",
+        "DEVASTATING WOUNDS",
+        "EXTRA ATTACKS"
+      ]
+    },
+    {
+      "name": "Mawloc scything talons",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "16",
+      "ballisticSkill": "",
+      "weaponSkill": "3+",
+      "strength": "8",
+      "armorPenetration": "-2",
+      "damage": "1",
+      "abilities": []
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Deep Strike",
+      "type": "core",
+      "description": "This model can be set up on the battlefield using the Deep Strike ability.",
+      "triggerPhase": [
+        "Deployment"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Synapse",
+      "type": "faction",
+      "description": "Synapse.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Terror From The Deep",
+      "type": "unit",
+      "description": "Each time this model is set up on the battlefield using the Deep Strike ability, roll one D6 for each enemy unit within 12\" of this model: on a 2-4, that unit suffers D3 mortal wounds; on a 5+, that unit suffers 3 mortal wounds and must take a Battle-shock test.",
+      "triggerPhase": [
+        "Deployment"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Damaged: 1-5 Wounds Remaining",
+      "type": "unit",
+      "description": "While this model has 1-5 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.",
+      "triggerPhase": [
+        "Fight"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [],
+  "pointsCost": 135,
+  "pointsTiers": [
+    {
+      "models": 1,
+      "points": 135
+    }
+  ]
+}

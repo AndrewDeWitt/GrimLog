@@ -1,0 +1,247 @@
+{
+  "name": "Dreadnought",
+  "faction": "Adeptus Astartes",
+  "subfaction": "Space Wolves",
+  "role": "Other",
+  "keywords": [
+    "VEHICLE",
+    "WALKER",
+    "SMOKE",
+    "IMPERIUM",
+    "DREADNOUGHT",
+    "DEATHWING",
+    "ADEPTUS ASTARTES"
+  ],
+  "stats": {
+    "movement": "6\"",
+    "toughness": 9,
+    "save": "2+",
+    "invulnerableSave": "",
+    "wounds": 8,
+    "leadership": 6,
+    "objectiveControl": 3
+  },
+  "composition": "1 Dreadnought",
+  "compositionData": [
+    {
+      "name": "Dreadnought",
+      "role": "regular",
+      "count": 1,
+      "woundsPerModel": 8
+    }
+  ],
+  "unitSize": "1",
+  "leaderRules": "",
+  "leaderAbilities": "",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Assault cannon",
+      "range": "24\"",
+      "type": "Ranged",
+      "attacks": "6",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "6",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "DEVASTATING WOUNDS"
+      ]
+    },
+    {
+      "name": "Heavy flamer",
+      "range": "12\"",
+      "type": "Ranged",
+      "attacks": "D6",
+      "ballisticSkill": "N/A",
+      "weaponSkill": "",
+      "strength": "5",
+      "armorPenetration": "-1",
+      "damage": "1",
+      "abilities": [
+        "IGNORES COVER",
+        "TORRENT"
+      ]
+    },
+    {
+      "name": "Heavy plasma cannon – standard",
+      "range": "36\"",
+      "type": "Ranged",
+      "attacks": "D3",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "7",
+      "armorPenetration": "-2",
+      "damage": "2",
+      "abilities": [
+        "BLAST"
+      ]
+    },
+    {
+      "name": "Heavy plasma cannon – supercharge",
+      "range": "36\"",
+      "type": "Ranged",
+      "attacks": "D3",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "8",
+      "armorPenetration": "-3",
+      "damage": "3",
+      "abilities": [
+        "BLAST",
+        "HAZARDOUS"
+      ]
+    },
+    {
+      "name": "Missile launcher – frag",
+      "range": "48\"",
+      "type": "Ranged",
+      "attacks": "D6",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "BLAST"
+      ]
+    },
+    {
+      "name": "Missile launcher – krak",
+      "range": "48\"",
+      "type": "Ranged",
+      "attacks": "1",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "9",
+      "armorPenetration": "-2",
+      "damage": "D6",
+      "abilities": []
+    },
+    {
+      "name": "Multi-melta",
+      "range": "18\"",
+      "type": "Ranged",
+      "attacks": "2",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "9",
+      "armorPenetration": "-4",
+      "damage": "D6",
+      "abilities": [
+        "MELTA 2"
+      ]
+    },
+    {
+      "name": "Storm bolter",
+      "range": "24\"",
+      "type": "Ranged",
+      "attacks": "2",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "RAPID FIRE 2"
+      ]
+    },
+    {
+      "name": "Twin lascannon",
+      "range": "48\"",
+      "type": "Ranged",
+      "attacks": "1",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "12",
+      "armorPenetration": "-3",
+      "damage": "D6+1",
+      "abilities": [
+        "TWIN-LINKED"
+      ]
+    },
+    {
+      "name": "Close combat weapon",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "5",
+      "ballisticSkill": "",
+      "weaponSkill": "3+",
+      "strength": "6",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": []
+    },
+    {
+      "name": "Dreadnought combat weapon",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "5",
+      "ballisticSkill": "",
+      "weaponSkill": "3+",
+      "strength": "12",
+      "armorPenetration": "-2",
+      "damage": "3",
+      "abilities": []
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Deadly Demise 1",
+      "type": "core",
+      "description": "When this model is destroyed, roll one D6. On a 6, each unit within 6\" suffers 1 mortal wound.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": true,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Oath of Moment",
+      "type": "faction",
+      "description": "If your Army Faction is Adeptus Astartes, at the start of your Command phase, you can select one unit from your opponent’s army. Until the start of your next Command phase, each time a model from your army with this ability makes an attack that targets that unit, you can re-roll the Hit roll.",
+      "triggerPhase": [
+        "Command"
+      ],
+      "triggerSubphase": "Start of Phase",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Wisdom of the Ancients (Aura)",
+      "type": "unit",
+      "description": "While a friendly ADEPTUS ASTARTES INFANTRY unit is within 6\" of this model, each time a model in that unit makes an attack, re-roll a Hit roll of 1.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [
+        "ADEPTUS ASTARTES",
+        "INFANTRY"
+      ],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [
+    {
+      "description": "This model’s assault cannon can be replaced with one of the following: 1 heavy plasma cannon, 1 multi-melta, 1 twin lascannon",
+      "pointsCost": 0
+    },
+    {
+      "description": "This model’s Dreadnought combat weapon and storm bolter can be replaced with one of the following: 1 missile launcher and 1 close combat weapon, 1 heavy flamer and 1 Dreadnought combat weapon",
+      "pointsCost": 0
+    }
+  ],
+  "pointsCost": 135,
+  "pointsTiers": [
+    {
+      "models": 1,
+      "points": 135
+    }
+  ]
+}

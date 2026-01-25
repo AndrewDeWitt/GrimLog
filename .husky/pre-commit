@@ -1,0 +1,19 @@
+# Run secret detection before commit
+echo "Running pre-commit security checks..."
+
+# Check for secrets using gitleaks (if installed)
+if command -v gitleaks &> /dev/null; then
+    echo "Checking for secrets..."
+    gitleaks protect --staged --verbose
+    if [ $? -ne 0 ]; then
+        echo "Secret detected! Commit blocked."
+        echo "If this is a false positive, you can bypass with: git commit --no-verify"
+        exit 1
+    fi
+else
+    echo "Warning: gitleaks not installed. Skipping secret detection."
+    echo "Install with: brew install gitleaks (macOS) or see https://github.com/gitleaks/gitleaks"
+fi
+
+# Run lint-staged
+npx lint-staged

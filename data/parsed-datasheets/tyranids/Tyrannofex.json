@@ -1,0 +1,174 @@
+{
+  "name": "Tyrannofex",
+  "faction": "Tyranids",
+  "subfaction": "",
+  "role": "Character",
+  "keywords": [
+    "MONSTER",
+    "GREAT DEVOURER",
+    "TYRANNOFEX",
+    "TYRANIDS"
+  ],
+  "stats": {
+    "movement": "9\"",
+    "toughness": 12,
+    "save": "2+",
+    "invulnerableSave": "",
+    "wounds": 16,
+    "leadership": 8,
+    "objectiveControl": 5
+  },
+  "composition": "1 Tyrannofex",
+  "compositionData": [
+    {
+      "name": "Tyrannofex",
+      "role": "leader",
+      "count": 1,
+      "woundsPerModel": 16
+    }
+  ],
+  "unitSize": "1",
+  "leaderRules": "",
+  "leaderAbilities": "",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Acid spray [torrent]",
+      "range": "18\"",
+      "type": "Torrent",
+      "attacks": "D6+6",
+      "ballisticSkill": "",
+      "weaponSkill": "",
+      "strength": "6",
+      "armorPenetration": "-2",
+      "damage": "2",
+      "abilities": [
+        "TORRENT"
+      ]
+    },
+    {
+      "name": "Fleshborer hive [heavy, sustained hits 1, twin-linked]",
+      "range": "24\"",
+      "type": "Heavy 20",
+      "attacks": "20",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "5",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "HEAVY",
+        "SUSTAINED HITS 1",
+        "TWIN-LINKED"
+      ]
+    },
+    {
+      "name": "Rupture cannon [heavy]",
+      "range": "48\"",
+      "type": "Heavy 2",
+      "attacks": "2",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "8",
+      "armorPenetration": "-4",
+      "damage": "D6+6",
+      "abilities": [
+        "HEAVY"
+      ]
+    },
+    {
+      "name": "Stinger salvoes",
+      "range": "24\"",
+      "type": "Assault 8",
+      "attacks": "8",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "5",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": []
+    },
+    {
+      "name": "Powerful limbs",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "4",
+      "ballisticSkill": "",
+      "weaponSkill": "3+",
+      "strength": "8",
+      "armorPenetration": "0",
+      "damage": "2",
+      "abilities": []
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Deadly Demise",
+      "type": "core",
+      "description": "D6",
+      "triggerPhase": [
+        "General"
+      ],
+      "triggerSubphase": "",
+      "isReactive": true,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Synapse",
+      "type": "faction",
+      "description": "Synapse",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [
+        "TYRANIDS"
+      ],
+      "effects": null
+    },
+    {
+      "name": "Resilient Organism",
+      "type": "unit",
+      "description": "Once per battle, when an attack is allocated to this model, you can change the Damage characteristic of that attack to 0.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": true,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Damaged: 1-5 Wounds Remaining",
+      "type": "unit",
+      "description": "While this model has 1-5 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.",
+      "triggerPhase": [
+        "Shooting",
+        "Fight"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [
+    {
+      "description": "Replace this model’s fleshborer hive with acid spray",
+      "pointsCost": 0
+    },
+    {
+      "description": "Replace this model’s fleshborer hive with rupture cannon",
+      "pointsCost": 0
+    }
+  ],
+  "pointsCost": 200,
+  "pointsTiers": [
+    {
+      "models": 1,
+      "points": 200
+    }
+  ]
+}

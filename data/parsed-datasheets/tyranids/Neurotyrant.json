@@ -1,0 +1,154 @@
+{
+  "name": "Neurotyrant",
+  "faction": "TYRANIDS",
+  "subfaction": "",
+  "role": "Character",
+  "keywords": [
+    "MONSTER",
+    "CHARACTER",
+    "FLY",
+    "PSYKER",
+    "GREAT DEVOURER",
+    "SYNAPSE",
+    "NEUROTYRANT"
+  ],
+  "stats": {
+    "movement": "6\"",
+    "toughness": 8,
+    "save": "4+",
+    "invulnerableSave": "4+",
+    "wounds": 9,
+    "leadership": 7,
+    "objectiveControl": 3
+  },
+  "composition": "1 Neurotyrant",
+  "compositionData": [
+    {
+      "name": "Neurotyrant",
+      "role": "leader",
+      "count": 1,
+      "woundsPerModel": 9
+    }
+  ],
+  "unitSize": "1",
+  "leaderRules": "This model can be attached to the following units: Neurogaunts, Tyrant Guard, Zoanthropes",
+  "leaderAbilities": "Node Lash (Psychic): While this model is leading a unit, each time a model in that unit makes an attack, add 1 to the Hit roll. If the target is Battle-shocked, add 1 to the Wound roll as well.",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Psychic scream",
+      "range": "18\"",
+      "type": "Psychic",
+      "attacks": "2D6",
+      "ballisticSkill": "N/A",
+      "weaponSkill": "",
+      "strength": "5",
+      "armorPenetration": "-1",
+      "damage": "2",
+      "abilities": [
+        "IGNORES COVER",
+        "PSYCHIC",
+        "TORRENT"
+      ]
+    },
+    {
+      "name": "Neurotyrant claws and lashes",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "6",
+      "ballisticSkill": "",
+      "weaponSkill": "3+",
+      "strength": "5",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": []
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Leader",
+      "type": "core",
+      "description": "This model is a Leader.",
+      "triggerPhase": [
+        "Keyword"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Synapse",
+      "type": "faction",
+      "description": "Synapse — While a friendly TYRANIDS unit is within Synapse Range of one or more friendly models with this keyword, that unit is considered to be in Synapse and is affected accordingly.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [
+        "TYRANIDS"
+      ],
+      "effects": null
+    },
+    {
+      "name": "Shadow in the Warp",
+      "type": "faction",
+      "description": "Shadow in the Warp — A faction-wide psychic effect. When you unleash the Shadow in the Warp, enemy units on the battlefield must take Battle-shock tests as described by the Shadow in the Warp rules.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Node Lash (Psychic)",
+      "type": "leader",
+      "description": "While this model is leading a unit, each time a model in that unit makes an attack, add 1 to the Hit roll. If the target is Battle-shocked, add 1 to the Wound roll as well.",
+      "triggerPhase": [
+        "Shooting",
+        "Fight"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Psychic Terror (Psychic)",
+      "type": "unit",
+      "description": "If one or more models from your army with this ability are on the battlefield when you unleash the Shadow in the Warp, subtract 1 from the Battle-shock test each enemy unit on the battlefield must take as a result.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Neuroloids",
+      "type": "unit",
+      "description": "In your Command phase, you can select up to two friendly TYRANIDS units within 18\" of this model’s unit. Until the start of your next Command phase, the selected units are always considered to be within Synapse Range of your army. (Place a Neuroloid token next to each selected unit to remind you.)",
+      "triggerPhase": [
+        "Command"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": [
+        "TYRANIDS"
+      ],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [],
+  "pointsCost": 105,
+  "pointsTiers": [
+    {
+      "models": 1,
+      "points": 105
+    }
+  ]
+}

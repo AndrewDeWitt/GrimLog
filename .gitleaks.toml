@@ -1,0 +1,49 @@
+# Gitleaks configuration for Grimlog
+# https://github.com/gitleaks/gitleaks
+
+title = "Grimlog Gitleaks Config"
+
+[extend]
+# Use the default gitleaks config as a base
+useDefault = true
+
+# Paths to ignore
+[allowlist]
+paths = [
+    '''node_modules''',
+    '''\.next''',
+    '''\.git''',
+    '''package-lock\.json''',
+    '''\.env\.example''',
+    '''docs/''',
+]
+
+# Supabase anon keys are designed to be public - they only allow 
+# operations permitted by Row Level Security (RLS)
+# These are NOT secrets - the service_role key is the actual secret
+# Allowlist specific historical commits containing anon keys in example files
+commits = [
+    "45e1d7e8ada9d8b2691ff268b4b5524e6e8c6735",
+    "901f729cb245827d35da5d224db7b927e150542a",
+    "cfe8dc07e8e27239da197586932b551b7a77a0cd",
+]
+
+# Additional rules for Supabase-specific secrets
+[[rules]]
+id = "supabase-service-role-key"
+description = "Supabase Service Role Key"
+regex = '''sbp_[a-zA-Z0-9]{40,}'''
+tags = ["key", "supabase"]
+
+[[rules]]
+id = "supabase-jwt-secret"
+description = "Supabase JWT Secret"
+regex = '''super-secret-jwt-token-with-at-least-32-characters'''
+tags = ["key", "supabase"]
+
+# Entropy-based detection for high-entropy strings
+[[rules]]
+id = "generic-api-key"
+description = "Generic API Key"
+regex = '''(?i)(api[_-]?key|apikey|secret[_-]?key)['"]?\s*[:=]\s*['"]([a-zA-Z0-9_\-]{20,})['"]'''
+tags = ["key", "api"]

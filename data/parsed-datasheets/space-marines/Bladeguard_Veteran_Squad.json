@@ -1,0 +1,164 @@
+{
+  "name": "Bladeguard Veteran Squad",
+  "faction": "Adeptus Astartes",
+  "subfaction": "Space Wolves",
+  "role": "Other",
+  "keywords": [
+    "INFANTRY",
+    "GRENADES",
+    "IMPERIUM",
+    "TACTICUS",
+    "BLADEGUARD VETERAN SQUAD",
+    "DEATHWING",
+    "ADEPTUS ASTARTES"
+  ],
+  "stats": {
+    "movement": "6\"",
+    "toughness": 4,
+    "save": "3+",
+    "invulnerableSave": "4+",
+    "wounds": 3,
+    "leadership": 6,
+    "objectiveControl": 1
+  },
+  "composition": "1 Bladeguard Veteran Sergeant, 2-5 Bladeguard Veterans",
+  "compositionData": [
+    {
+      "name": "Bladeguard Veteran Sergeant",
+      "role": "leader",
+      "count": 1,
+      "woundsPerModel": 3
+    },
+    {
+      "name": "Bladeguard Veteran",
+      "role": "regular",
+      "count": 2,
+      "woundsPerModel": 3
+    }
+  ],
+  "unitSize": "3-6",
+  "leaderRules": "This unit can be led by the following units: Adrax Agatone, Bladeguard Ancient, Captain, Captain Sicarius, Captain Titus, Chaplain, Chief Librarian Tigurius, Judiciar, Kor’sarro Khan, Lieutenant, Marneus Calgar, Marneus Calgar in Armour of Antilochus, Pedro Kantor, Uriel Ventris, Chaplain Kastiel, Judiciar Xacharus, Asmodai, Azrael, Ezekiel, Lazarus, Captain Tycho, Gabriel Seth, Primaris Company Champion",
+  "leaderAbilities": "",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Heavy bolt pistol",
+      "range": "18\"",
+      "type": "Pistol",
+      "attacks": "1",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "-1",
+      "damage": "1",
+      "abilities": [
+        "PISTOL"
+      ]
+    },
+    {
+      "name": "Neo-volkite pistol",
+      "range": "12\"",
+      "type": "Pistol",
+      "attacks": "1",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "5",
+      "armorPenetration": "0",
+      "damage": "2",
+      "abilities": [
+        "PISTOL",
+        "DEVASTATING WOUNDS"
+      ]
+    },
+    {
+      "name": "Plasma pistol – standard",
+      "range": "12\"",
+      "type": "Pistol",
+      "attacks": "1",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "7",
+      "armorPenetration": "-2",
+      "damage": "1",
+      "abilities": [
+        "PISTOL"
+      ]
+    },
+    {
+      "name": "Plasma pistol – supercharge",
+      "range": "12\"",
+      "type": "Pistol",
+      "attacks": "1",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "8",
+      "armorPenetration": "-3",
+      "damage": "2",
+      "abilities": [
+        "PISTOL",
+        "HAZARDOUS"
+      ]
+    },
+    {
+      "name": "Master-crafted power weapon",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "4",
+      "ballisticSkill": "",
+      "weaponSkill": "3+",
+      "strength": "5",
+      "armorPenetration": "-2",
+      "damage": "2",
+      "abilities": []
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Oath of Moment",
+      "type": "faction",
+      "description": "Each time a model from your army with this ability makes an attack, if the target of that attack is the unit you selected for this ability this battle round, you can re-roll the Hit roll.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [
+        "ADEPTUS ASTARTES"
+      ],
+      "effects": null
+    },
+    {
+      "name": "Bladeguard",
+      "type": "unit",
+      "description": "At the start of the Fight phase, you can select one of the following abilities to apply to models in this unit until the end of the phase: Swords of the Chapter: Each time a model in this unit makes a melee attack, re-roll a Hit roll of 1. Shields of the Chapter: Each time an invulnerable saving throw is made for a model in this unit, re-roll a saving throw of 1.",
+      "triggerPhase": [
+        "Fight"
+      ],
+      "triggerSubphase": "Start of Phase",
+      "isReactive": true,
+      "requiredKeywords": [],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [
+    {
+      "description": "The Bladeguard Veteran Sergeant’s heavy bolt pistol can be replaced with 1 neo-volkite pistol",
+      "pointsCost": 0
+    },
+    {
+      "description": "The Bladeguard Veteran Sergeant’s heavy bolt pistol can be replaced with 1 plasma pistol",
+      "pointsCost": 0
+    }
+  ],
+  "pointsCost": 80,
+  "pointsTiers": [
+    {
+      "models": 3,
+      "points": 80
+    },
+    {
+      "models": 6,
+      "points": 170
+    }
+  ]
+}

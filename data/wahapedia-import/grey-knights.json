@@ -1,0 +1,774 @@
+{
+  "$schema": "../import-schema.json",
+  "_scrapedAt": "2025-12-01T15:44:00.069Z",
+  "_sourceUrl": "https://wahapedia.ru/wh40k10ed/factions/grey-knights/",
+  "faction": {
+    "name": "Grey Knights",
+    "keywords": [
+      "GREY KNIGHTS"
+    ],
+    "parentFaction": null,
+    "isDivergent": false
+  },
+  "armyRules": [
+    {
+      "name": "Gate of Infinity",
+      "description": "If your Army Faction is GREY KNIGHTS, at the end of your opponent’s Fight phase, you can select a number of units (see below) from your army that are on the battlefield (excluding units that are within Engagement Range of one or more enemy units), provided every model in those units has this ability. The maximum number of units you can select depends on the battle size, as follows:\nBATTLE SIZENUMBER OF UNITSIncursionUp to 2 unitsStrike ForceUp to 3 unitsOnslaughtUp to 4 units\nOnce you have made your selections, remove those units from the battlefield and place them into Strategic Reserves.",
+      "flavorText": "Few can command the powers of the Warp with anything like the skill and control of the Grey Knights. So masterful is their sorcery that they can conjure glowing empyric gateways to step in and out of reality. In this way, they swiftly outflank their foes and redeploy their forces to counter threats, kept safe during their split-second Warp travel by the intricate wards worked into their wargear."
+    }
+  ],
+  "detachments": [
+    {
+      "name": "Brotherhood Strike",
+      "abilityName": "Fury of Titan",
+      "abilityDescription": "Each time a unit from your army is set up using the Deep Strike ability, until the end of the turn, each time a model in that unit makes an attack, re-roll a Hit roll of 1 and re-roll a Wound roll of 1.",
+      "abilityFlavorText": "Erupting from whirling Warp gates with their Nemesis blades blazing, squads of Grey Knights cut a bloody path through their enemies before the foe even realise their peril.",
+      "stratagems": [
+        {
+          "name": "TRUESILVER CHANNELLING",
+          "cpCost": 2,
+          "type": "Strategic Ploy",
+          "when": "Fight phase.",
+          "target": "One GREY KNIGHTS INFANTRY unit from your army that has not been selected to fight this phase.",
+          "effect": "Until the end of the phase, Psychic weapons equipped by models in your unit have the [DEVASTATING WOUNDS] ability.",
+          "restrictions": null,
+          "triggerPhase": [
+            "Fight"
+          ],
+          "isReactive": false
+        },
+        {
+          "name": "COMBAT MANIFESTATION",
+          "cpCost": 1,
+          "type": "Epic Deed",
+          "when": "Your Movement phase.",
+          "target": "One GREY KNIGHTS unit from your army that is arriving using the Deep Strike ability this phase.",
+          "effect": "Set your unit up anywhere on the battlefield that is more than 6\" horizontally away from all enemy units, but until the end of the turn, it is not eligible to declare a charge.",
+          "restrictions": null,
+          "triggerPhase": [
+            "Movement"
+          ],
+          "isReactive": false
+        },
+        {
+          "name": "PURGATION PATTERN",
+          "cpCost": 1,
+          "type": "Battle Tactic",
+          "when": "Your Shooting phase.",
+          "target": "One GREY KNIGHTS unit from your army that was set up using the Deep Strike ability this turn and has not been selected to shoot this phase.",
+          "effect": "Until the end of the phase, weapons equipped by models in your unit have the [SUSTAINED HITS 1] ability.",
+          "restrictions": null,
+          "triggerPhase": [
+            "Shooting"
+          ],
+          "isReactive": false
+        },
+        {
+          "name": "DUTY UNENDING",
+          "cpCost": 1,
+          "type": "Strategic Ploy",
+          "when": "Your opponent’s Movement phase, just after an enemy unit within Engagement Range of one or more GREY KNIGHTS units from your army Falls Back.",
+          "target": "One of those GREY KNIGHTS units that is not within Engagement Range of one or more enemy units.",
+          "effect": "If your unit has the Deep Strike ability, it can be placed into Strategic Reserves.",
+          "restrictions": null,
+          "triggerPhase": [
+            "Movement"
+          ],
+          "isReactive": true
+        },
+        {
+          "name": "SHINING VEIL",
+          "cpCost": 1,
+          "type": "Battle Tactic",
+          "when": "Your opponent’s Shooting phase, just after an enemy unit has selected its targets.",
+          "target": "s.TARGET: One GREY KNIGHTS unit that was selected as the target of one or more of the attacking unit’s attacks.",
+          "effect": "Until the end of the phase, your unit has the Stealth ability.",
+          "restrictions": null,
+          "triggerPhase": [
+            "Shooting"
+          ],
+          "isReactive": true
+        },
+        {
+          "name": "EXPEDITIOUS EXIT",
+          "cpCost": 2,
+          "type": "Strategic Ploy",
+          "when": "End of your opponent’s Fight phase.",
+          "target": "One GREY KNIGHTS PSYKER INFANTRY unit from your army.",
+          "effect": "If every model in your unit has the Deep Strike ability, remove your unit from the battlefield and place it into Strategic Reserves.Designer’s Note: This Stratagem allows you to remove a unit in addition to those removed using the Gate of Infinity rule, and it allows you to remove a unit within Engagement Range of one or more enemy units.",
+          "restrictions": null,
+          "triggerPhase": [
+            "Fight"
+          ],
+          "isReactive": true
+        }
+      ],
+      "enhancements": [
+        {
+          "name": "Banishing Wave (Psychic)",
+          "pointsCost": 20,
+          "description": "GREY KNIGHTS model only. Each time the bearer’s unit is set up using the Deep Strike ability, roll one D6 for each enemy unit within 12\" of the bearer: on a 2-5, that unit suffers 1 mortal wound; on a 6, that unit suffers D3 mortal wounds.",
+          "flavorText": "This warrior mystic harnesses the empyric overspill of teleport flares and Warp gates, channelling them into shock waves of purifying flame.",
+          "restrictions": [
+            "GREY KNIGHTS"
+          ]
+        },
+        {
+          "name": "Blinding Aura",
+          "pointsCost": 10,
+          "description": "GREY KNIGHTS model only. Each time the bearer’s unit is set up using the Deep Strike ability, until the end of the turn, enemy units cannot use the Fire Overwatch Stratagem to shoot at the bearer’s unit.",
+          "flavorText": "A coruscating curtain of sorcerous energies surrounds this battle-brother, its radiance too fierce for any but the most strong-willed to look upon.",
+          "restrictions": [
+            "GREY KNIGHTS"
+          ]
+        },
+        {
+          "name": "Purity of Purpose",
+          "pointsCost": 15,
+          "description": "GREY KNIGHTS model only. Each time the bearer’s unit is set up using the Deep Strike ability, until the end of the turn, you can re-roll Charge rolls made for the bearer’s unit.",
+          "flavorText": "This warrior’s single-minded devotion to duty is exemplary, driving them into the fiercest fires of battle with no thought of hesitation.",
+          "restrictions": [
+            "GREY KNIGHTS"
+          ]
+        },
+        {
+          "name": "Tome of Forbidden Ways",
+          "pointsCost": 25,
+          "description": "GREY KNIGHTS model only. While the bearer is on the battlefield or in Strategic Reserves, add 1 to the number of units from your army that you can select for the Gate of Infinity rule.",
+          "flavorText": "Drawn from the Chambers of Purity under special dispensation, this ancient book reveals sorcerous paths that none but the bravest and most mighty dare walk.",
+          "restrictions": [
+            "GREY KNIGHTS"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Hallowed Conclave",
+      "abilityName": "Duty Before All",
+      "abilityDescription": "GREY KNIGHTS TERMINATOR units from your army are eligible to shoot and declare a charge in a turn in which they Fell Back.",
+      "abilityFlavorText": "Every Grey Knights Terminator is a tower of strength, a massively armoured living war engine clad in warded truesilver. Seeking to bar the path of such warriors, to entrap them or deny their will, is as futile a course of action as trying to halt an avalanche with bare hands alone.",
+      "stratagems": [
+        {
+          "name": "GIANTS OF THE BATTLEFIELD",
+          "cpCost": 1,
+          "type": "Battle Tactic",
+          "when": "Fight phase.",
+          "target": "One GREY KNIGHTS TERMINATOR unit from your army that has not been selected to fight this phase.",
+          "effect": "Until the end of the phase, add 1 to the Attacks characteristic of melee weapons equipped by models in your unit.",
+          "restrictions": null,
+          "triggerPhase": [
+            "Fight"
+          ],
+          "isReactive": false
+        },
+        {
+          "name": "UNENDING FIDELITY",
+          "cpCost": 1,
+          "type": "Strategic Ploy",
+          "when": "Your opponent’s Shooting phase or the Fight phase, just after an enemy unit has selected its targets.",
+          "target": "s.TARGET: One GREY KNIGHTS INFANTRY unit from your army that was selected as the target of one or more of the attacking unit’s attacks.",
+          "effect": "Until the end of the phase, each time a model in your unit is destroyed, if that model has not shot or fought this phase, roll one D6. On a 4+, do not remove the destroyed model from play; it can shoot or fight after the attacking unit has finished making its attacks, and is then removed from play.",
+          "restrictions": null,
+          "triggerPhase": [
+            "Shooting",
+            "Fight"
+          ],
+          "isReactive": true
+        },
+        {
+          "name": "POINT-BLANK PURGATION",
+          "cpCost": 1,
+          "type": "Strategic Ploy",
+          "when": "Your Shooting phase.",
+          "target": "One GREY KNIGHTS INFANTRY unit from your army that has not been selected to shoot this phase.",
+          "effect": "Until the end of the phase, storm bolter weapons equipped by models in your unit have the [PISTOL] and [TWIN-LINKED] abilities.",
+          "restrictions": null,
+          "triggerPhase": [
+            "Shooting"
+          ],
+          "isReactive": false
+        },
+        {
+          "name": "GRIND THEM UNDERFOOT",
+          "cpCost": 1,
+          "type": "Strategic Ploy",
+          "when": "Your Charge phase, just after a GREY KNIGHTS TERMINATOR unit from your army ends a Charge move.",
+          "target": "That GREY KNIGHTS unit.",
+          "effect": "Select one enemy unit within Engagement Range of your unit, then roll one D6 for each model in your unit that is within Engagement Range of that enemy unit: for each 4+, that enemy unit suffers 1 mortal wound (to a maximum of 6 mortal wounds).",
+          "restrictions": null,
+          "triggerPhase": [
+            "Charge"
+          ],
+          "isReactive": false
+        },
+        {
+          "name": "PRECOGNITIVE STRATEGIES",
+          "cpCost": 1,
+          "type": "Strategic Ploy",
+          "when": "Your opponent’s Movement phase, just after an enemy unit ends a Normal, Advance or Fall Back move.",
+          "target": "One GREY KNIGHTS INFANTRY unit from your army that is within 9\" of that enemy unit and not within Engagement Range of one or more enemy units.",
+          "effect": "Your unit can make a Normal move of up to D6\".",
+          "restrictions": null,
+          "triggerPhase": [
+            "Movement"
+          ],
+          "isReactive": true
+        },
+        {
+          "name": "SHINING RESOLVE",
+          "cpCost": 1,
+          "type": "Strategic Ploy",
+          "when": "Your opponent’s Shooting phase, just after an enemy unit has selected its targets.",
+          "target": "s.TARGET: One GREY KNIGHTS INFANTRY unit from your army that was selected as the target of one or more of the attacking unit’s attacks.",
+          "effect": "Until the end of the phase, each time an attack targets your unit, if the Strength characteristic of that attack is greater than the Toughness characteristic of your unit, subtract 1 from the Wound roll.",
+          "restrictions": null,
+          "triggerPhase": [
+            "Shooting"
+          ],
+          "isReactive": true
+        }
+      ],
+      "enhancements": [
+        {
+          "name": "Eye of the Augurium",
+          "pointsCost": 25,
+          "description": "GREY KNIGHTS model only. Once per battle round, the bearer can use this Enhancement. If it does, you can target the bearer’s unit with the Fire Overwatch or Heroic Intervention Stratagem for 0CP, and can do so even if you have already targeted a different unit with that Stratagem this turn.",
+          "flavorText": "A miniature facsimile of the silver mirrors used by the Prognosticars, this artefact affords its bearer a glimpse of where they will be needed most in the heat of battle.",
+          "restrictions": [
+            "GREY KNIGHTS"
+          ]
+        },
+        {
+          "name": "Inescapable Judgement (Psychic)",
+          "pointsCost": 20,
+          "description": "GREY KNIGHTS model only. Each time an enemy unit within Engagement Range of the bearer’s unit Falls Back, the bearer can use this Enhancement. If it does, roll one D6: on a 2-5, that enemy unit suffers D3 mortal wounds; on a 6, that enemy unit suffers D3+3 mortal wounds. These mortal wounds are Psychic Attacks.",
+          "flavorText": "So crushing is this warrior’s psychic presence that those he scorns as cowards are slain even as they flee, withering beneath the weight of his disgust.",
+          "restrictions": [
+            "GREY KNIGHTS"
+          ]
+        },
+        {
+          "name": "Sanctic Reaper",
+          "pointsCost": 15,
+          "description": "GREY KNIGHTS TERMINATOR model only. Add 3 to the Attacks characteristic of the bearer’s melee weapons.",
+          "flavorText": "A veteran of dozens of purgation campaigns, this champion has honed his combat style to cut a bloody path through massed foes easily.",
+          "restrictions": [
+            "GREY KNIGHTS TERMINATOR"
+          ]
+        },
+        {
+          "name": "Nemesis Rounds",
+          "pointsCost": 10,
+          "description": "GREY KNIGHTS TERMINATOR model only. Each time you target the bearer’s unit with the Fire Overwatch Stratagem, hits are scored on unmodified Hit rolls of 5+ while resolving that Stratagem.",
+          "flavorText": "Empowered through the invocation of true names and carved spells of seeking, each of these precious rounds veers unerringly toward its intended target.",
+          "restrictions": [
+            "GREY KNIGHTS TERMINATOR"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Banishers",
+      "abilityName": "Channelled Force",
+      "abilityDescription": "Each time a GREY KNIGHTS unit from your army is selected to fight, that unit can take a Leadership test. If that test is passed, select one of the following rules. Until the end of the phase, that unit has that rule.\n• Melee weapons equipped by models in this unit with the [psychic] ability also have the [sustained hits 1] ability.\n• Melee weapons equipped by models in this unit with the [psychic] ability also have the [LETHAL HITS] ability.",
+      "abilityFlavorText": "So potent is the interwoven mind-choir of this strike force that each individual can syphon off a portion of its gestalt might to empower their weapons of war without diminishing the whole. The result is Nemesis force weapons that blaze like caged psychic stars, leaving trails of witchfire blazing behind every swing and blasting victims into nothing with a single strike.",
+      "stratagems": [
+        {
+          "name": "HEXWROUGHT REPRISAL",
+          "cpCost": 1,
+          "type": "Epic Deed",
+          "when": "End of any phase.",
+          "target": "One GREY KNIGHTS PSYKER unit from your army that is on the battlefield and suffered one or more mortal wounds this phase.",
+          "effect": "Select one enemy unit which inflicted one or more mortal wounds on your unit this phase, then roll a number of dice equal to the number of mortal wounds your unit suffered this phase: for each 2+, that enemy unit suffers one mortal wound (to a maximum of 6 mortal wounds). These mortal wounds are Psychic Attacks.",
+          "restrictions": null,
+          "triggerPhase": [
+            "Any"
+          ],
+          "isReactive": false
+        },
+        {
+          "name": "WARDING CHANT",
+          "cpCost": 1,
+          "type": "Epic Deed",
+          "when": "Your opponent’s Shooting phase or the Fight phase, just after an enemy unit has selected its targets.",
+          "target": "s.TARGET: One GREY KNIGHTS PSYKER unit from your army that was selected as the target of one or more of the attacking unit’s attacks.",
+          "effect": "Until the end of the phase, models in your unit have the Feel No Pain 5+ ability against attacks with an unmodified Damage characteristic of 1.",
+          "restrictions": null,
+          "triggerPhase": [
+            "Shooting",
+            "Fight"
+          ],
+          "isReactive": true
+        },
+        {
+          "name": "CHAOS BANE",
+          "cpCost": 1,
+          "type": "Epic Deed",
+          "when": "Your Shooting phase.",
+          "target": "One GREY KNIGHTS PSYKER unit from your army that has not been selected to shoot this phase.",
+          "effect": "Until the end of the phase, ranged weapons equipped by models in your unit have the [ANTI-CHAOS 4+] ability.",
+          "restrictions": null,
+          "triggerPhase": [
+            "Shooting"
+          ],
+          "isReactive": false
+        },
+        {
+          "name": "CELERITY",
+          "cpCost": 1,
+          "type": "Epic Deed",
+          "when": "Your Charge phase.",
+          "target": "One GREY KNIGHTS PSYKER INFANTRY unit from your army.",
+          "effect": "Until the end of the turn, your unit is eligible to declare a charge in a turn in which it Advanced.",
+          "restrictions": null,
+          "triggerPhase": [
+            "Charge"
+          ],
+          "isReactive": false
+        },
+        {
+          "name": "CIRCLE OF SANCTUARY",
+          "cpCost": 1,
+          "type": "Epic Deed",
+          "when": "Start of your opponent’s Movement phase.",
+          "target": "One GREY KNIGHTS CHARACTER model from your army.",
+          "effect": "Until the end of the phase, enemy units that are set up on the battlefield as Reinforcements cannot be set up within 12\" horizontally of your model.",
+          "restrictions": null,
+          "triggerPhase": [
+            "Movement"
+          ],
+          "isReactive": true
+        },
+        {
+          "name": "SHADOW OF ANARCH",
+          "cpCost": 1,
+          "type": "Epic Deed",
+          "when": "Your opponent’s Movement phase, just after an enemy unit ends a Normal, Advance or Fall Back move.",
+          "target": "One GREY KNIGHTS PSYKER unit from your army that is within 9\" of that enemy unit and is not within Engagement Range of one or more enemy units.",
+          "effect": "Your unit can make a Normal move of up to 6\" or, if it has the Deep Strike ability, it can be placed into Strategic Reserves.",
+          "restrictions": null,
+          "triggerPhase": [
+            "Movement"
+          ],
+          "isReactive": true
+        }
+      ],
+      "enhancements": [
+        {
+          "name": "Sigil of the Hunt",
+          "pointsCost": 10,
+          "description": "GREY KNIGHTS model only. In your Shooting phase, each time a model in the bearer’s unit makes an attack, re-roll a Hit roll of 1.",
+          "flavorText": "Wrought from truesilver and noctilith, this ancient arcane sigil renders its bearer and comrades supernaturally accurate in battle.",
+          "restrictions": [
+            "GREY KNIGHTS"
+          ]
+        },
+        {
+          "name": "The Ephemeral Tome",
+          "pointsCost": 15,
+          "description": "GREY KNIGHTS INFANTRY model only. At the start of your Shooting phase, if the bearer’s unit is not within Engagement Range of one or more enemy units, the bearer can use this Enhancement. If it does, the bearer’s unit can make a Normal move of up to D6\", and until the end of the turn, the bearer’s unit is not eligible to declare a charge.",
+          "flavorText": "A sorcerous volume whose treatises on the impermanence of reality change constantly, this tome’s harnessed power allows the bearer to flicker in and out of phase with realspace.",
+          "restrictions": [
+            "GREY KNIGHTS INFANTRY"
+          ]
+        },
+        {
+          "name": "The Sixty-sixth Seal",
+          "pointsCost": 25,
+          "description": "GREY KNIGHTS model only. In your Shooting phase, each time a model in the bearer’s unit makes an attack, improve the Armour Penetration characteristic of that attack by 1.",
+          "flavorText": "One of the six hundred and sixty-six seals of purity once affixed to the tomb of Vasandrius, the talismanic properties of this artefact lend a keen edge of sacred intolerance to their bearer’s armaments.",
+          "restrictions": [
+            "GREY KNIGHTS"
+          ]
+        },
+        {
+          "name": "Pyresoul (Psychic)",
+          "pointsCost": 20,
+          "description": "GREY KNIGHTS model only. At the start of your Shooting phase, the bearer can use this Enhancement. If it does, select one enemy unit within 24\" of and visible to the bearer; that unit suffers D3 mortal wounds.",
+          "flavorText": "So fiercely do the psychic flames of this warrior’s soul burn that they can be conjured forth in blazing columns of spiritual immolation to annihilate the foe.",
+          "restrictions": [
+            "GREY KNIGHTS"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Sanctic Spearhead",
+      "abilityName": "Mailed Fist",
+      "abilityDescription": "Each time a GREY KNIGHTS VEHICLE unit from your army Advances, do not make an Advance roll for it; until the end of the phase, add 6\" to the Move characteristic of models in that unit, and until the end of the turn, ranged weapons equipped by models in that unit have the [ASSAULT] ability.",
+      "abilityFlavorText": "Such concentrations of the Grey Knights’ armoured power are only unleashed when time is of the essence, and the price of defeat would be utterly disastrous. Knowing all this, these hosts strike with tremendous force and unstoppable momentum, a mailed fist driven straight down the enemy’s throat.",
+      "stratagems": [
+        {
+          "name": "TRUESILVER WILL",
+          "cpCost": 1,
+          "type": "Epic Deed",
+          "when": "Any phase, just after a GREY KNIGHTS PSYKER VEHICLE unit from your army suffers a mortal wound.",
+          "target": "That GREY KNIGHTS PSYKER VEHICLE unit.",
+          "effect": "Until the end of the phase, models in your unit have the Feel No Pain 4+ ability against mortal wounds.",
+          "restrictions": null,
+          "triggerPhase": [
+            "Any"
+          ],
+          "isReactive": false
+        },
+        {
+          "name": "ABOMINUS-CLASS TARGETS",
+          "cpCost": 1,
+          "type": "Battle Tactic",
+          "when": "Your Shooting phase or the Fight phase.",
+          "target": "One GREY KNIGHTS unit from your army that has not been selected to shoot or fight this phase.",
+          "effect": "Until the end of the phase, each time a model in your unit makes an attack that targets a MONSTER or VEHICLE unit, add 1 to the Wound roll.",
+          "restrictions": null,
+          "triggerPhase": [
+            "Shooting",
+            "Fight"
+          ],
+          "isReactive": false
+        },
+        {
+          "name": "ARMOURED AEGIS",
+          "cpCost": 1,
+          "type": "Strategic Ploy",
+          "when": "Your Command phase.",
+          "target": "One GREY KNIGHTS PSYKER VEHICLE unit from your army.",
+          "effect": "One model in your unit regains up to 3 lost wounds.",
+          "restrictions": null,
+          "triggerPhase": [
+            "Command"
+          ],
+          "isReactive": false
+        },
+        {
+          "name": "REDOUBLED ASSAULT",
+          "cpCost": 1,
+          "type": "Strategic Ploy",
+          "when": "Your Movement phase, just after a GREY KNIGHTS VEHICLE unit from your army Falls Back.",
+          "target": "That GREY KNIGHTS VEHICLE unit.",
+          "effect": "Until the end of the turn, your unit is eligible to shoot and declare a charge in a turn in which it Fell Back.",
+          "restrictions": null,
+          "triggerPhase": [
+            "Movement"
+          ],
+          "isReactive": false
+        },
+        {
+          "name": "FORCE WAVE",
+          "cpCost": 1,
+          "type": "Strategic Ploy",
+          "when": "Your Movement phase or your Charge phase.",
+          "target": "One GREY KNIGHTS VEHICLE unit from your army that has not been selected to move or charge this phase.",
+          "effect": "Until the end of the phase, each time your unit makes a Normal, Advance or Charge move, it can move horizontally through terrain features.",
+          "restrictions": null,
+          "triggerPhase": [
+            "Movement",
+            "Charge"
+          ],
+          "isReactive": false
+        },
+        {
+          "name": "ARGENT WRATH",
+          "cpCost": 1,
+          "type": "Strategic Ploy",
+          "when": "Your Charge phase, just after a GREY KNIGHTS VEHICLE unit from your army ends a Charge move.",
+          "target": "That GREY KNIGHTS VEHICLE unit.",
+          "effect": "Each enemy unit within 3\" of your unit must take a Battle-shock test, subtracting 1 from that test.",
+          "restrictions": null,
+          "triggerPhase": [
+            "Charge"
+          ],
+          "isReactive": false
+        }
+      ],
+      "enhancements": [
+        {
+          "name": "Driven by Duty",
+          "pointsCost": 10,
+          "description": "GREY KNIGHTS WALKER model only. Each time the bearer’s unit Piles In or Consolidates, the bearer can move up to 6\" instead of up to 3\".",
+          "flavorText": "So single-minded is this warrior in their devotion to the Grey Knights’ duty that they press ever forward without pause or respite.",
+          "restrictions": [
+            "GREY KNIGHTS WALKER"
+          ]
+        },
+        {
+          "name": "Quickening Foci",
+          "pointsCost": 15,
+          "description": "GREY KNIGHTS INFANTRY model only. In your Movement phase, each time the bearer’s unit disembarks from a TRANSPORT, until the end of the turn, you can re-roll Charge rolls made for that unit.",
+          "flavorText": "Worked into purity seals or armour inscriptions, these cantrips of haste lend the bearer and their comrades a sudden burst of supernatural speed.",
+          "restrictions": [
+            "GREY KNIGHTS INFANTRY"
+          ]
+        },
+        {
+          "name": "Sigil of Exigence",
+          "pointsCost": 30,
+          "description": "GREY KNIGHTS model only. Once per battle, in your opponent’s Shooting phase, when the bearer’s unit is selected as the target of a ranged attack, you can remove the bearer’s unit from the battlefield and then set it back up again anywhere on the battlefield that is more than 9\" horizontally away from all enemy units. If the bearer’s unit is no longer an eligible target, your opponent can then select new targets for any attacks that had targeted the bearer’s unit.",
+          "flavorText": "This powerful and ancient sorcerous ward reacts to imminent peril by wrenching the bearer momentarily out of sync with reality itself.",
+          "restrictions": [
+            "GREY KNIGHTS"
+          ]
+        },
+        {
+          "name": "Spiritus Machina",
+          "pointsCost": 25,
+          "description": "GREY KNIGHTS INFANTRY model only. In your Shooting phase, each time the bearer’s unit is selected to shoot, if the bearer’s unit disembarked from a TRANSPORT this turn, until the end of the phase, each time a model in the bearer’s unit makes an attack, you can re-roll the Wound roll.",
+          "flavorText": "Thought to date back to Old Night, this device allows the bearer to draw targeting data from machine spirit senses and entwine it with their own perceptions.",
+          "restrictions": [
+            "GREY KNIGHTS INFANTRY"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Augurium Task Force",
+      "abilityName": "Prescient Redeployment",
+      "abilityDescription": "From the second battle round onwards, at the start of your Movement phase, if you did not select the maximum number of GREY KNIGHTS units from your army using the Gate of Infinity ability at the end of your opponent’s previous turn, you can select one GREY KNIGHTS unit from your army that is on the battlefield that could have been selected using the Gate of Infinity ability. Remove that unit from the battlefield and place it into Strategic Reserves.\nDesigner’s Note: This means that your unit can retain its position on the battlefield at the end of your Command phase, and then be placed into Strategic Reserves at the start of your Movement phase, to set it up again in your Reinforcements step in another position.",
+      "abilityFlavorText": "Combining the psychic disciplines of precognition and translocation, the Grey Knights rapidly relocate in response to strategic manoeuvres the foe has yet to make.",
+      "stratagems": [
+        {
+          "name": "AGGRESSIVE ANTICIPATION",
+          "cpCost": 1,
+          "type": "Battle Tactic",
+          "when": "Your Shooting phase or the Fight phase.",
+          "target": "One GREY KNIGHTS PSYKER unit from your army that has not been selected to shoot or fight this phase.",
+          "effect": "Until the end of the phase, each time a model in your unit makes an attack, you can ignore any or all modifiers to that attack’s Weapon Skill or Ballistic Skill characteristics and/or any or all modifiers to the Hit roll.",
+          "restrictions": null,
+          "triggerPhase": [
+            "Shooting",
+            "Fight"
+          ],
+          "isReactive": false
+        },
+        {
+          "name": "APPOINTED HOUR",
+          "cpCost": 1,
+          "type": "Battle Tactic",
+          "when": "Your Shooting phase or the Fight phase.",
+          "target": "One GREY KNIGHTS PSYKER unit from your army that has not been selected to shoot or fight this phase.",
+          "effect": "Until the end of the phase, each time a model in your unit makes an attack, an unmodified Hit roll of 5+ scores a Critical Hit.",
+          "restrictions": null,
+          "triggerPhase": [
+            "Shooting",
+            "Fight"
+          ],
+          "isReactive": false
+        },
+        {
+          "name": "FOREWARNED EVASION",
+          "cpCost": 1,
+          "type": "Epic Deed",
+          "when": "Your opponent’s Shooting phase or the Fight phase, just after an enemy unit has selected its targets.",
+          "target": "s.TARGET: One GREY KNIGHTS WALKER unit from your army that was selected as the target of one or more of the attacking unit’s attacks.",
+          "effect": "Until the end of the phase, each time an attack targets your unit, subtract 1 from the Hit roll.",
+          "restrictions": null,
+          "triggerPhase": [
+            "Shooting",
+            "Fight"
+          ],
+          "isReactive": true
+        },
+        {
+          "name": "NECESSARY END",
+          "cpCost": 1,
+          "type": "Epic Deed",
+          "when": "Fight phase, just after an enemy unit has selected its targets.",
+          "target": "s.TARGET: One GREY KNIGHTS INFANTRY unit from your army that was selected as the target of one or more of the attacking unit’s attacks.",
+          "effect": "Until the end of the phase, each time a model in your unit is destroyed, if that model has not fought this phase, roll one D6. If the result is greater than the current battle round number, do not remove the destroyed model from play; it can fight after the attacking unit has finished making its attacks, and is then removed from play.",
+          "restrictions": null,
+          "triggerPhase": [
+            "Fight"
+          ],
+          "isReactive": true
+        },
+        {
+          "name": "REDIRECTED STRIKE",
+          "cpCost": 1,
+          "type": "Epic Deed",
+          "when": "End of your Command phase.",
+          "target": "One GREY KNIGHTS PSYKER unit from your army that is not within Engagement Range of one or more enemy units.",
+          "effect": "If your unit has the Deep Strike ability, it can be placed into Strategic Reserves.Designer’s Note: This Stratagem lets players utilise abilities that retain control of objective markers and react to their missions and objectives with this unit.",
+          "restrictions": null,
+          "triggerPhase": [
+            "Command"
+          ],
+          "isReactive": false
+        },
+        {
+          "name": "MIRAGE OF ECHOES",
+          "cpCost": 1,
+          "type": "Strategic Ploy",
+          "when": "The Reinforcements step of your opponent’s Movement phase, just after an enemy unit is set up.",
+          "target": "One GREY KNIGHTS PSYKER unit from your army that is within 12\" of that enemy unit and is not within Engagement Range of one or more enemy units.",
+          "effect": "If your unit has the Deep Strike ability, it can be placed into Strategic Reserves.",
+          "restrictions": null,
+          "triggerPhase": [
+            "Movement"
+          ],
+          "isReactive": true
+        }
+      ],
+      "enhancements": [
+        {
+          "name": "Grimoire of Conjunctions",
+          "pointsCost": 10,
+          "description": "GREY KNIGHTS model only. Once per battle, at the start of the Fight phase, the bearer can use this Enhancement. If it does, until the end of the phase, add 4 to the Strength characteristic of melee weapons equipped by the bearer.",
+          "flavorText": "This crumbling and code-locked tome details propitious astrological conjunctions beneath whose prophesied stars powerful foes may be struck down.",
+          "restrictions": [
+            "GREY KNIGHTS"
+          ]
+        },
+        {
+          "name": "Shield of Prophecy",
+          "pointsCost": 20,
+          "description": "GREY KNIGHTS model only. Once per battle, at the start of the battle round, the bearer can use this Enhancement. If it does, until the end of the battle round, add 2 to the Toughness characteristic of models in the bearer’s unit.",
+          "flavorText": "Foreknowledge of the foe’s offensive capabilities allows tailored incantations of warding to be unleashed at the critical moment.",
+          "restrictions": [
+            "GREY KNIGHTS"
+          ]
+        },
+        {
+          "name": "A Foot in the Future",
+          "pointsCost": 15,
+          "description": "GREY KNIGHTS model only. Each time the bearer’s unit is set up in your Reinforcements step, the bearer can use this Enhancement. If it does, the bearer’s unit can make a Normal move of up to D6\", and until the end of the turn, the bearer’s unit is not eligible to declare a Charge.",
+          "flavorText": "Stratego-prescient telecasts scroll over this warrior’s heads-up display, providing them with tactical battlefield foretellings to which they swiftly react.",
+          "restrictions": [
+            "GREY KNIGHTS"
+          ]
+        },
+        {
+          "name": "Doomseer’s Amulet",
+          "pointsCost": 25,
+          "description": "GREY KNIGHTS model only. Each time the bearer’s unit is set up in your Reinforcements step, the bearer can use this Enhancement. If it does, select one enemy unit within 12\" of and visible to the bearer. That enemy unit must take a Battle-shock test, subtracting 1 from that test.",
+          "flavorText": "The cruel powers of this forbidden artefact cause foes to perceive the wearer as a death omen drawn from their culture, manifested to prophecy their doom.",
+          "restrictions": [
+            "GREY KNIGHTS"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Warpbane Task Force",
+      "abilityName": "Hallowed Ground",
+      "abilityDescription": "Certain areas of the battlefield are within your army’s Hallowed Ground, as follows:\n• Your deployment zone is always within your army’s Hallowed Ground.\n• The area of the battlefield within 6\" of one or more PURIFIER SQUAD units from your army is within your army’s Hallowed Ground.\n• At the start of any phase, if you control at least half of the objective markers within No Man’s Land, until the end of that phase, No Man’s Land is within your army’s Hallowed Ground.\n• At the start of any phase, if you control at least half of the objective markers within your opponent’s deployment zone, until the end of that phase, your opponent’s deployment zone is within your army’s Hallowed Ground.\nEach time a model in a GREY KNIGHTS unit from your army makes a ranged attack that targets a visible target or makes a melee attack, re-roll a Hit roll of 1. If that unit is a PURIFIER SQUAD and/or is wholly within your army’s Hallowed Ground, you can re-roll the Hit roll instead.",
+      "abilityFlavorText": "Purging corrupted nodes of Warp energy, the Grey Knights establish an ever-expanding area of hallowed ground within which their psychic powers and indomitable resolve are greatly enhanced.",
+      "stratagems": [
+        {
+          "name": "SANCTIFIED KILL ZONE",
+          "cpCost": 1,
+          "type": "Battle Tactic",
+          "when": "Your Shooting phase or the Fight phase.",
+          "target": "One GREY KNIGHTS unit from your army that has not been selected to shoot or fight this phase and that is wholly within your army’s Hallowed Ground.",
+          "effect": "Until the end of the phase, each time a model in your unit makes an attack, re-roll a Wound roll of 1, or, re-roll the Wound roll instead if your unit is a PURIFIER SQUAD.",
+          "restrictions": null,
+          "triggerPhase": [
+            "Shooting",
+            "Fight"
+          ],
+          "isReactive": false
+        },
+        {
+          "name": "FLAMES OF SANCTITY",
+          "cpCost": 1,
+          "type": "Strategic Ploy",
+          "when": "End of the Fight phase.",
+          "target": "One PURIFIER SQUAD unit from your army that was eligible to fight this phase.",
+          "effect": "Roll one D6 for each enemy unit within 6\" of your unit, adding 1 to the result if your unit includes CASTELLAN CROWE: on a 4+, that enemy unit suffers D3 mortal wounds.",
+          "restrictions": null,
+          "triggerPhase": [
+            "Fight"
+          ],
+          "isReactive": false
+        },
+        {
+          "name": "HALLOWED BEACON",
+          "cpCost": 1,
+          "type": "Battle Tactic",
+          "when": "Reinforcements step of your Movement phase.",
+          "target": "One GREY KNIGHTS INFANTRY unit (excluding TERMINATOR units) that is arriving using the Deep Strike ability this phase.",
+          "effect": "Set up your unit wholly within your army’s Hallowed Ground and more than 6\" horizontally away from all enemy units.",
+          "restrictions": null,
+          "triggerPhase": [
+            "Movement"
+          ],
+          "isReactive": false
+        },
+        {
+          "name": "FIRES OF COVENANT",
+          "cpCost": 1,
+          "type": "Battle Tactic",
+          "when": "Start of your opponent’s Movement phase.",
+          "target": "One GREY KNIGHTS INFANTRY unit from your army.",
+          "effect": "Until the end of the phase, each time an enemy unit is set up or ends a Normal, Advance or Fall Back move within 6\" of your unit, roll one D6, adding 2 to the result if your unit is wholly within your army’s Hallowed Ground: on a 4+, that enemy unit suffers D3 mortal wounds.",
+          "restrictions": null,
+          "triggerPhase": [
+            "Movement"
+          ],
+          "isReactive": true
+        },
+        {
+          "name": "AEGIS ETERNAL",
+          "cpCost": 1,
+          "type": "Battle Tactic",
+          "when": "Your opponent’s Shooting phase, just after an enemy unit has selected its targets.",
+          "target": "s.TARGET: One GREY KNIGHTS INFANTRY unit from your army that was selected as the target of one or more of the attacking unit’s attacks.",
+          "effect": "Until the end of the phase, models in your unit that are wholly within your Hallowed Ground have a 4+ invulnerable save.",
+          "restrictions": null,
+          "triggerPhase": [
+            "Shooting"
+          ],
+          "isReactive": true
+        },
+        {
+          "name": "REPELLING SPHERE",
+          "cpCost": 1,
+          "type": "Battle Tactic",
+          "when": "Start of your opponent’s Charge phase.",
+          "target": "One GREY KNIGHTS INFANTRY unit from your army.",
+          "effect": "Until the end of the phase, each time an enemy unit declares a charge and your unit is one of the targets of that charge, subtract 1 from the Charge roll, or subtract 2 instead if your unit is wholly within your army’s Hallowed Ground.",
+          "restrictions": null,
+          "triggerPhase": [
+            "Charge"
+          ],
+          "isReactive": true
+        }
+      ],
+      "enhancements": [
+        {
+          "name": "Mandulian Reliquary",
+          "pointsCost": 20,
+          "description": "GREY KNIGHTS model only. While the bearer’s unit is not Battle-shocked, add 3 to the bearer’s Objective Control characteristic.",
+          "flavorText": "This reliquary contains a single finger bone taken from the body of the feted former Grand Master, Mandulis. It serves as a symbol of unity and duty.",
+          "restrictions": [
+            "GREY KNIGHTS"
+          ]
+        },
+        {
+          "name": "Radiant Champion",
+          "pointsCost": 15,
+          "description": "GREY KNIGHTS INFANTRY model only. The bearer’s melee weapons have the [PRECISION] ability, and while the bearer is wholly within your army’s Hallowed Ground, each time a melee attack made by the bearer scores a wound, the target of that attack suffers 1 mortal wound in addition to any normal damage.",
+          "flavorText": "This warrior is a master slayer whose blade has found the cursed hearts of countless corrupted foes. When fighting within realms cleansed by eldritch power, his psychic might manifests in a nimbus of searing light, and his strikes inflict terrible wounds upon flesh and soul.",
+          "restrictions": [
+            "GREY KNIGHTS INFANTRY"
+          ]
+        },
+        {
+          "name": "Phial of the Abyss",
+          "pointsCost": 25,
+          "description": "GREY KNIGHTS INFANTRY model only. Models in the bearer’s unit have the Stealth ability.",
+          "flavorText": "Gifted by the Prognosticars of the Augurium, this ampoule contains cosmic energies syphoned from the event horizon of a Warp singularity. At the prophesied hour, the vial shatters, its contents swirling around the bearer and wreathing them in a localised field of time and light distortion.",
+          "restrictions": [
+            "GREY KNIGHTS INFANTRY"
+          ]
+        },
+        {
+          "name": "Paragon of Sanctity",
+          "pointsCost": 10,
+          "description": "GREY KNIGHTS model only. Once per battle, at the start of any phase, the bearer can select one friendly GREY KNIGHTS unit within 18\" of and visible to it. If it does, until the end of the phase, that unit is within your army’s Hallowed Ground.",
+          "flavorText": "This warrior sorcerer lends their spiritual strength to allies fighting amidst unholy corruption, bolstering their spiritual resolve.",
+          "restrictions": [
+            "GREY KNIGHTS"
+          ]
+        }
+      ]
+    }
+  ]
+}

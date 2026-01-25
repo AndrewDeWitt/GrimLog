@@ -1,0 +1,98 @@
+{
+  "name": "Spore Mines",
+  "faction": "Tyranids",
+  "subfaction": "",
+  "role": "Other",
+  "keywords": [
+    "BEAST",
+    "FLY",
+    "GREAT DEVOURER",
+    "SPORE MINES",
+    "TYRANIDS"
+  ],
+  "stats": {
+    "movement": "4\"",
+    "toughness": 1,
+    "save": "7+",
+    "invulnerableSave": "",
+    "wounds": 1,
+    "leadership": 8,
+    "objectiveControl": 0
+  },
+  "composition": "3-6 Spore Mines",
+  "compositionData": [
+    {
+      "name": "Spore Mine",
+      "role": "regular",
+      "count": 3,
+      "woundsPerModel": 1
+    }
+  ],
+  "unitSize": "3-6",
+  "leaderRules": "",
+  "leaderAbilities": "",
+  "transportCapacity": "",
+  "weapons": [],
+  "abilities": [
+    {
+      "name": "Deep Strike",
+      "type": "core",
+      "description": "Deep Strike.",
+      "triggerPhase": [
+        "Deployment"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Synapse",
+      "type": "faction",
+      "description": "Synapse.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Bio-minefield",
+      "type": "unit",
+      "description": "Enemy units cannot start or end an Advance move within 6\" of this unit.",
+      "triggerPhase": [
+        "Movement"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Floating Death",
+      "type": "unit",
+      "description": "Each time this unit or an enemy unit ends a move, for each model in this unit that is within 3\" of one or more enemy units, select one of those enemy units. That model in this unit is destroyed, then roll one D6: on a 2-5, that enemy unit suffers 1 mortal wound; on a 6, that enemy unit suffers D3 mortal wounds.",
+      "triggerPhase": [
+        "Movement"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": true,
+      "requiredKeywords": [],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [],
+  "pointsCost": 0,
+  "pointsTiers": [
+    {
+      "models": 3,
+      "points": 55
+    },
+    {
+      "models": 6,
+      "points": 110
+    }
+  ]
+}

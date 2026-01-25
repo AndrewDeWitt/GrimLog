@@ -1,0 +1,127 @@
+{
+  "name": "Von Ryan’s Leapers",
+  "faction": "Tyranids",
+  "subfaction": "",
+  "role": "Elites",
+  "keywords": [
+    "INFANTRY",
+    "GREAT DEVOURER",
+    "VANGUARD INVADER",
+    "VON RYAN'S LEAPERS",
+    "FIGHTS FIRST",
+    "INFILTRATORS",
+    "STEALTH",
+    "SYNAPSE",
+    "TYRANIDS"
+  ],
+  "stats": {
+    "movement": "10\"",
+    "toughness": 5,
+    "save": "4+",
+    "invulnerableSave": "6+",
+    "wounds": 3,
+    "leadership": 8,
+    "objectiveControl": 1
+  },
+  "composition": "3-6 Von Ryan’s Leapers",
+  "compositionData": [
+    {
+      "name": "Von Ryan's Leaper",
+      "role": "regular",
+      "count": 3,
+      "woundsPerModel": 3
+    }
+  ],
+  "unitSize": "3-6",
+  "leaderRules": "",
+  "leaderAbilities": "",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Leaper’s talons",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "6",
+      "ballisticSkill": "",
+      "weaponSkill": "3+",
+      "strength": "5",
+      "armorPenetration": "-1",
+      "damage": "1",
+      "abilities": []
+    }
+  ],
+  "abilities": [
+    {
+      "name": "FIGHTS FIRST",
+      "type": "core",
+      "description": "FIGHTS FIRST (core ability).",
+      "triggerPhase": [
+        "Fight"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "INFILTRATORS",
+      "type": "core",
+      "description": "INFILTRATORS (core ability).",
+      "triggerPhase": [
+        "Deployment"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "STEALTH",
+      "type": "core",
+      "description": "STEALTH (core ability).",
+      "triggerPhase": [
+        "Keyword"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "SYNAPSE",
+      "type": "faction",
+      "description": "SYNAPSE (faction ability).",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "POUNCING LEAP",
+      "type": "unit",
+      "description": "You can target this unit with the Heroic Intervention Stratagem for 0CP, and can do so even if you have already used that Stratagem on a different unit this phase.",
+      "triggerPhase": [
+        "General"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [],
+  "pointsCost": 70,
+  "pointsTiers": [
+    {
+      "models": 3,
+      "points": 70
+    },
+    {
+      "models": 6,
+      "points": 140
+    }
+  ]
+}

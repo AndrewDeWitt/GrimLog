@@ -1,0 +1,15 @@
+{
+  "name": "Venerable Dreadnought",
+  "url": "https://wahapedia.ru/wh40k10ed/factions/space-marines/Venerable-Dreadnought-1",
+  "category": "Other",
+  "faction": "space-marines",
+  "subfaction": "space-wolves",
+  "classification": {
+    "isLegends": false,
+    "isForgeWorld": false,
+    "confidence": "low",
+    "signals": [],
+    "score": 0
+  },
+  "scrapedAt": "2026-01-10T05:23:09.631Z"
+}

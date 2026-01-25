@@ -1,0 +1,207 @@
+{
+  "name": "Assault Intercessor Squad",
+  "faction": "Space Marines",
+  "subfaction": "Space Wolves",
+  "role": "Battleline",
+  "keywords": [
+    "INFANTRY",
+    "BATTLELINE",
+    "GRENADES",
+    "IMPERIUM",
+    "TACTICUS",
+    "ASSAULT INTERCESSOR SQUAD",
+    "ADEPTUS ASTARTES"
+  ],
+  "stats": {
+    "movement": "6\"",
+    "toughness": 4,
+    "save": "3+",
+    "invulnerableSave": "",
+    "wounds": 2,
+    "leadership": 6,
+    "objectiveControl": 2
+  },
+  "composition": "1 Assault Intercessor Sergeant, 4-9 Assault Intercessors",
+  "compositionData": [
+    {
+      "name": "Assault Intercessor Sergeant",
+      "role": "leader",
+      "count": 1,
+      "woundsPerModel": 2
+    },
+    {
+      "name": "Assault Intercessor",
+      "role": "regular",
+      "count": 4,
+      "woundsPerModel": 2
+    }
+  ],
+  "unitSize": "5-10",
+  "leaderRules": "",
+  "leaderAbilities": "",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Hand flamer",
+      "range": "12\"",
+      "type": "Pistol",
+      "attacks": "D6",
+      "ballisticSkill": "N/A",
+      "weaponSkill": "",
+      "strength": "3",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "IGNORES COVER",
+        "TORRENT"
+      ]
+    },
+    {
+      "name": "Heavy bolt pistol",
+      "range": "18\"",
+      "type": "Pistol",
+      "attacks": "1",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "-1",
+      "damage": "1",
+      "abilities": []
+    },
+    {
+      "name": "Plasma pistol – standard",
+      "range": "12\"",
+      "type": "Pistol",
+      "attacks": "1",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "7",
+      "armorPenetration": "-2",
+      "damage": "1",
+      "abilities": []
+    },
+    {
+      "name": "Plasma pistol – supercharge",
+      "range": "12\"",
+      "type": "Pistol",
+      "attacks": "1",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "8",
+      "armorPenetration": "-3",
+      "damage": "2",
+      "abilities": [
+        "HAZARDOUS"
+      ]
+    },
+    {
+      "name": "Astartes chainsword",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "4",
+      "ballisticSkill": "",
+      "weaponSkill": "3+",
+      "strength": "4",
+      "armorPenetration": "-1",
+      "damage": "1",
+      "abilities": []
+    },
+    {
+      "name": "Power fist",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "3",
+      "ballisticSkill": "",
+      "weaponSkill": "3+",
+      "strength": "8",
+      "armorPenetration": "-2",
+      "damage": "2",
+      "abilities": []
+    },
+    {
+      "name": "Power weapon",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "4",
+      "ballisticSkill": "",
+      "weaponSkill": "3+",
+      "strength": "5",
+      "armorPenetration": "-2",
+      "damage": "1",
+      "abilities": []
+    },
+    {
+      "name": "Thunder hammer",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "3",
+      "ballisticSkill": "",
+      "weaponSkill": "4+",
+      "strength": "8",
+      "armorPenetration": "-2",
+      "damage": "2",
+      "abilities": [
+        "DEVASTATING WOUNDS"
+      ]
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Oath of Moment",
+      "type": "faction",
+      "description": "If your Army Faction is Adeptus Astartes, at the start of your Command phase, you select one unit from your opponent’s army. Until the start of your next Command phase, each time a model from your army with this ability makes an attack that targets that enemy unit, you can re-roll the Hit roll.",
+      "triggerPhase": [
+        "Command"
+      ],
+      "triggerSubphase": "Start of Phase",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Shock Assault",
+      "type": "unit",
+      "description": "Each time a model in this unit targets an enemy unit with a melee attack, re-roll a Wound roll of 1. If that enemy unit is within range of an objective marker, you can re-roll the Wound roll instead.",
+      "triggerPhase": [
+        "Fight"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [
+    {
+      "description": "The Assault Intercessor Sergeant’s heavy bolt pistol can be replaced with 1 hand flamer.",
+      "pointsCost": 0
+    },
+    {
+      "description": "The Assault Intercessor Sergeant’s heavy bolt pistol can be replaced with 1 plasma pistol.",
+      "pointsCost": 0
+    },
+    {
+      "description": "The Assault Intercessor Sergeant’s Astartes chainsword can be replaced with 1 power fist.",
+      "pointsCost": 0
+    },
+    {
+      "description": "The Assault Intercessor Sergeant’s Astartes chainsword can be replaced with 1 power weapon.",
+      "pointsCost": 0
+    },
+    {
+      "description": "The Assault Intercessor Sergeant’s Astartes chainsword can be replaced with 1 thunder hammer.",
+      "pointsCost": 0
+    }
+  ],
+  "pointsCost": 75,
+  "pointsTiers": [
+    {
+      "models": 5,
+      "points": 75
+    },
+    {
+      "models": 10,
+      "points": 150
+    }
+  ]
+}

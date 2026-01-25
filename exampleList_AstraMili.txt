@@ -1,0 +1,52 @@
++++++++++++++++++++++++++++++++++++++++++++++++
++ FACTION KEYWORD: Imperium - Astra Militarum
++ DETACHMENT: Hammer of the Emperor
++ TOTAL ARMY POINTS: 2000pts
++
++ WARLORD: Char2: Rogal Dorn Commander
++ ENHANCEMENT: 
++ NUMBER OF UNITS: 15
++ SECONDARY: - Bring It Down: (6x2) + (2x4) - Assassination: 3 Characters
++++++++++++++++++++++++++++++++++++++++++++++++
+
+Char1: 6x Gaunt’s Ghosts (100 pts)
+• 5x Tanith Ghost
+    1 with Tanith Ghost, Bragg's autocannon, Straight silver knife
+    1 with Tanith Ghost, Corbec's hot-shot lascarbine, Straight silver knife
+    1 with Tanith Ghost, Larkin's long-las, Straight silver knife
+    1 with Tanith Ghost, Lascarbine, Mkoll's straight silver knife
+    1 with Tanith Ghost, Rawne's lascarbine, Straight silver knife
+• 1x Ibram Gaunt: Bolt pistol, Gaunt's chainsword
+Char2: 1x Rogal Dorn Commander (275 pts): Warlord, Armoured tracks, Heavy stubber, Pulveriser cannon, 2x Heavy stubber, 2x Multi-melta, Coaxial autocannon, Oppressor cannon
+Char3: 1x Rogal Dorn Commander (275 pts): Armoured tracks, Heavy stubber, Pulveriser cannon, 2x Heavy stubber, 2x Multi-melta, Coaxial autocannon, Oppressor cannon
+
+10x Cadian Shock Troops (65 pts)
+• 9x Shock Trooper
+    6 with Shock Trooper, Close combat weapon, Lasgun
+    1 with Vox-caster, Shock Trooper, Close combat weapon, Lasgun
+    1 with Shock Trooper, Close combat weapon, Meltagun
+    1 with Shock Trooper, Close combat weapon, Plasma gun
+• 1x Shock Trooper Sergeant: Close combat weapon, Sergeant's autogun
+
+6x Bullgryn Squad (200 pts)
+• 1x Bullgryn Bone 'ead: Brute shield, Close combat weapon, Bullgryn maul
+• 5x Bullgryn: 5 with Brute shield, Close combat weapon, Bullgryn maul
+6x Bullgryn Squad (200 pts)
+• 1x Bullgryn Bone 'ead: Brute shield, Close combat weapon, Bullgryn maul
+• 5x Bullgryn: 5 with Brute shield, Close combat weapon, Bullgryn maul
+5x Krieg Combat Engineers (60 pts)
+• 4x Krieg Combat Engineer
+    2 with Krieg Combat Engineers, Close combat weapon, Combat shotgun
+    1 with Krieg Combat Engineers, Close combat weapon, Flamer
+    1 with Remote mine, Krieg Combat Engineers, Autopistol, Close combat weapon
+• 1x Krieg Engineer Watchmaster: Plasma pistol, Power weapon
+5x Ratlings (60 pts): 5 with Close combat weapon, Sniper rifle
+5x Attilan Rough Riders (60 pts)
+• 1x Rough Rider Sergeant: Lasgun, Laspistol, Steed's hooves, Power sabre, Hunting lance
+• 4x Rough Rider: 4 with Hunting lance, Lasgun, Laspistol, Steed's hooves
+1x Hellhound (125 pts): Hunter-killer missile, Inferno cannon, Heavy flamer, Armoured tracks
+1x Leman Russ Exterminator (180 pts): Armoured tracks, Exterminator autocannon, Hunter-killer missile, Lascannon, 2x Multi-melta, Heavy stubber
+1x Leman Russ Vanquisher (145 pts): Armoured tracks, Vanquisher battle cannon, Hunter-killer missile, Lascannon, 2x Multi-melta, Heavy stubber
+1x Leman Russ Vanquisher (145 pts): Armoured tracks, Vanquisher battle cannon, Hunter-killer missile, Lascannon, 2x Multi-melta, Heavy stubber
+1x Scout Sentinels (55 pts): Close combat weapon, Hunter-killer missile, Sentinel chainsaw, Lascannon
+1x Scout Sentinels (55 pts): Close combat weapon, Hunter-killer missile, Sentinel chainsaw, Lascannon

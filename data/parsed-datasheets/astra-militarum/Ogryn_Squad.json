@@ -1,0 +1,107 @@
+{
+  "name": "Ogryn Squad",
+  "faction": "Astra Militarum",
+  "subfaction": "",
+  "role": "Other",
+  "keywords": [
+    "INFANTRY",
+    "GRENADES",
+    "IMPERIUM",
+    "OGRYN",
+    "OGRYN SQUAD"
+  ],
+  "stats": {
+    "movement": "6\"",
+    "toughness": 6,
+    "save": "5+",
+    "invulnerableSave": "",
+    "wounds": 3,
+    "leadership": 7,
+    "objectiveControl": 1
+  },
+  "composition": "1 Ogryn Bone ‘ead, 2-5 Ogryns",
+  "compositionData": [
+    {
+      "name": "Ogryn Bone ‘ead",
+      "role": "leader",
+      "count": 1,
+      "woundsPerModel": 3
+    },
+    {
+      "name": "Ogryn",
+      "role": "regular",
+      "count": 2,
+      "woundsPerModel": 3
+    }
+  ],
+  "unitSize": "3-6",
+  "leaderRules": "",
+  "leaderAbilities": "",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Ripper gun rapid fire 3",
+      "range": "18\"",
+      "type": "Ranged",
+      "attacks": "3",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "5",
+      "armorPenetration": "-1",
+      "damage": "2",
+      "abilities": [
+        "RAPID FIRE 3"
+      ]
+    },
+    {
+      "name": "Ripper gun",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "4",
+      "ballisticSkill": "",
+      "weaponSkill": "3+",
+      "strength": "6",
+      "armorPenetration": "-1",
+      "damage": "1",
+      "abilities": []
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Feel No Pain 6+",
+      "type": "core",
+      "description": "Each time this model would lose a wound, roll one D6: on a 6, that wound is not lost.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": true,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Point-blank Barrage",
+      "type": "unit",
+      "description": "Each time a model in this unit makes a ranged attack that targets the closest eligible target, improve the Armour Penetration characteristic of that attack by 1.",
+      "triggerPhase": [
+        "Shooting"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [],
+  "pointsCost": 60,
+  "pointsTiers": [
+    {
+      "models": 3,
+      "points": 60
+    },
+    {
+      "models": 6,
+      "points": 130
+    }
+  ]
+}

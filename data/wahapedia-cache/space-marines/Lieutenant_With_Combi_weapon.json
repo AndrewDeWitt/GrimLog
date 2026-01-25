@@ -1,0 +1,15 @@
+{
+  "name": "Lieutenant With Combi-weapon",
+  "url": "https://wahapedia.ru/wh40k10ed/factions/space-marines/Lieutenant-With-Combi-weapon",
+  "category": "Characters",
+  "faction": "space-marines",
+  "subfaction": "space-wolves",
+  "classification": {
+    "isLegends": false,
+    "isForgeWorld": false,
+    "confidence": "low",
+    "signals": [],
+    "score": 0
+  },
+  "scrapedAt": "2026-01-10T05:18:02.172Z"
+}

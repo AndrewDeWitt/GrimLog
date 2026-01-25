@@ -1,0 +1,106 @@
+{
+  "name": "Barbgaunts",
+  "faction": "Tyranids",
+  "subfaction": "",
+  "role": "Other",
+  "keywords": [
+    "INFANTRY",
+    "GREAT DEVOURER",
+    "BARBGAUNTS",
+    "TYRANIDS",
+    "SYNAPSE",
+    "BLAST",
+    "HEAVY"
+  ],
+  "stats": {
+    "movement": "6\"",
+    "toughness": 4,
+    "save": "4+",
+    "invulnerableSave": "",
+    "wounds": 2,
+    "leadership": 8,
+    "objectiveControl": 1
+  },
+  "composition": "5-10 Barbgaunts",
+  "compositionData": [
+    {
+      "name": "Barbgaunt",
+      "role": "regular",
+      "count": 5,
+      "woundsPerModel": 2
+    }
+  ],
+  "unitSize": "5-10",
+  "leaderRules": "",
+  "leaderAbilities": "",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Barblauncher",
+      "range": "24\"",
+      "type": "Heavy D6",
+      "attacks": "D6",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "5",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "BLAST",
+        "HEAVY"
+      ]
+    },
+    {
+      "name": "Chitinous claws and teeth",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "1",
+      "ballisticSkill": "",
+      "weaponSkill": "4+",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": []
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Synapse",
+      "type": "faction",
+      "description": "Synapse",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Disruption Bombardment",
+      "type": "unit",
+      "description": "In your Shooting phase, after this unit has shot, select one enemy INFANTRY unit hit by one or more of those attacks. Until the end of your opponent’s next turn, that enemy unit is disrupted. While a unit is disrupted, subtract 2 from its Move characteristic and subtract 2 from Advance and Charge rolls made for it.",
+      "triggerPhase": [
+        "Shooting"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": [
+        "INFANTRY"
+      ],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [],
+  "pointsCost": 55,
+  "pointsTiers": [
+    {
+      "models": 5,
+      "points": 55
+    },
+    {
+      "models": 10,
+      "points": 110
+    }
+  ]
+}

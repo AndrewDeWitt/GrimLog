@@ -1,0 +1,197 @@
+{
+  "name": "Eliminator Squad",
+  "faction": "Space Marines",
+  "subfaction": "Space Wolves",
+  "role": "Other",
+  "keywords": [
+    "INFANTRY",
+    "GRENADES",
+    "IMPERIUM",
+    "PHOBOS",
+    "ELIMINATOR SQUAD",
+    "ADEPTUS ASTARTES"
+  ],
+  "stats": {
+    "movement": "6\"",
+    "toughness": 4,
+    "save": "3+",
+    "invulnerableSave": "",
+    "wounds": 2,
+    "leadership": 6,
+    "objectiveControl": 1
+  },
+  "composition": "1 Eliminator Sergeant, 2 Eliminators",
+  "compositionData": [
+    {
+      "name": "Eliminator Sergeant",
+      "role": "leader",
+      "count": 1,
+      "woundsPerModel": 2
+    },
+    {
+      "name": "Eliminator",
+      "role": "regular",
+      "count": 2,
+      "woundsPerModel": 2
+    }
+  ],
+  "unitSize": "3",
+  "leaderRules": "This unit can be led by the following units: Captain In Phobos Armour, Librarian In Phobos Armour",
+  "leaderAbilities": "",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Bolt pistol",
+      "range": "12\"",
+      "type": "Pistol",
+      "attacks": "1",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "PISTOL"
+      ]
+    },
+    {
+      "name": "Bolt sniper rifle",
+      "range": "36\"",
+      "type": "Heavy, Precision",
+      "attacks": "1",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "5",
+      "armorPenetration": "-2",
+      "damage": "3",
+      "abilities": [
+        "HEAVY",
+        "PRECISION"
+      ]
+    },
+    {
+      "name": "Instigator bolt carbine",
+      "range": "24\"",
+      "type": "Precision",
+      "attacks": "1",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "-2",
+      "damage": "2",
+      "abilities": [
+        "PRECISION"
+      ]
+    },
+    {
+      "name": "Las fusil",
+      "range": "36\"",
+      "type": "Heavy",
+      "attacks": "1",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "9",
+      "armorPenetration": "-3",
+      "damage": "D6",
+      "abilities": [
+        "HEAVY"
+      ]
+    },
+    {
+      "name": "Close combat weapon",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "3",
+      "ballisticSkill": "",
+      "weaponSkill": "3+",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": []
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Infiltrators",
+      "type": "core",
+      "description": "Models with this ability can be set up anywhere on the battlefield that is more than 9\" away from the enemy deployment zone and any enemy models.",
+      "triggerPhase": [
+        "Deployment"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Stealth",
+      "type": "core",
+      "description": "If every model in a unit has this ability, then each time a ranged attack is made against it, subtract 1 from the Hit roll.",
+      "triggerPhase": [
+        "Keyword"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Oath of Moment",
+      "type": "faction",
+      "description": "If your Army Faction is Adeptus Astartes, at the start of your Command phase, you can select one unit from your opponent’s army. Until the start of your next Command phase, each time a model from your army with this ability makes an attack that targets that enemy unit, you can re-roll the Hit roll.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Reposition Under Covering Fire",
+      "type": "unit",
+      "description": "In your Shooting phase, after this unit has shot, if it contains an Eliminator Sergeant equipped with an instigator bolt carbine, this unit can make a Normal move. If it does so, until the end of the turn, this unit is not eligible to declare a charge.",
+      "triggerPhase": [
+        "Shooting"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Mark the Target",
+      "type": "unit",
+      "description": "Each time this unit Remains Stationary, until the start of your next Movement phase, ranged weapons equipped by models in this unit have the [DEVASTATING WOUNDS] ability.",
+      "triggerPhase": [
+        "Movement",
+        "Shooting"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [
+    {
+      "description": "The Eliminator Sergeant’s bolt sniper rifle can be replaced with 1 instigator bolt carbine",
+      "pointsCost": 0
+    },
+    {
+      "description": "The Eliminator Sergeant’s bolt sniper rifle can be replaced with 1 las fusil",
+      "pointsCost": 0
+    },
+    {
+      "description": "All Eliminators in this unit can each have their bolt sniper rifle replaced with 1 las fusil",
+      "pointsCost": 0
+    }
+  ],
+  "pointsCost": 85,
+  "pointsTiers": [
+    {
+      "models": 3,
+      "points": 85
+    }
+  ]
+}

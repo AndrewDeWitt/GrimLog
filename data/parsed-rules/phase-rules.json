@@ -1,0 +1,298 @@
+{
+  "rules": [
+    {
+      "name": "Redeployments",
+      "phase": "All",
+      "timing": "start",
+      "rule": "Redeployments are resolved after the Deploy Armies step (or Deploy Crusade Armies) and before Determine First Turn; players alternate resolving them starting with the Attacker; redeployed units are removed and then redeployed using normal setup rules.",
+      "description": "Rules that allow redeploying certain units after both armies are deployed (for example, a named ability) are always resolved after the Deploy Armies step (or, for a Crusade battle, after the Deploy Crusade Armies step) and before the Determine First Turn step, and before determining who has the first turn. When a player uses such a rule, they remove that unit or units from the battlefield, then deploy them again using all the normal rules (for example, if all the models in one of these units have the Infiltrators ability, that unit's player can set that unit up using that ability). Players alternate resolving any such rules, starting with the Attacker.",
+      "sourceId": "core-rules-updates-2024",
+      "sourceName": "Core Rules Updates",
+      "sourceVersion": "2024.10",
+      "extractedAt": "2025-11-12T14:01:20.786Z"
+    },
+    {
+      "name": "Out-of-Phase Rules (general)",
+      "phase": "All",
+      "timing": "during",
+      "rule": "When a rule lets a model/unit act 'as if' it were a phase (an out-of-phase action), it only permits the specified action and does not allow other rules that would normally be used in that phase to be used.",
+      "description": "Some rules allow a model or unit to move, shoot, charge or fight outside of the normal turn sequence (e.g. Fire Overwatch). When using out-of-phase rules to perform an action as if it were one of your phases, you cannot use any other rules that are normally triggered in that phase. For example, enabling a unit to shoot in your opponent's Movement phase does not trigger abilities or Stratagems that would normally be used in your Shooting phase; only the specified action is allowed.",
+      "sourceId": "core-rules-updates-2024",
+      "sourceName": "Core Rules Updates",
+      "sourceVersion": "2024.10",
+      "extractedAt": "2025-11-12T14:01:20.786Z"
+    },
+    {
+      "name": "Persisting Effects",
+      "phase": "All",
+      "timing": "during",
+      "rule": "Persisting effects continue to apply for their full duration even if the affected unit embarks, disembarks, or an Attached unit ceases to be attached.",
+      "description": "Some rules apply an effect that lasts until a certain duration has passed (e.g. until the start of your next turn). Such effects are known as persisting effects. If a persisting effect applies to a unit when it embarks within a TRANSPORT, make a note of that effect and its duration; if that unit disembarks for any reason, any persisting effects continue to apply to that unit for their full duration. If a persisting effect applies to an Attached unit and that unit ceases to be an Attached unit (because either all of its Bodyguard models or all of its Leader models are destroyed), any persisting effects continue to apply to the surviving unit(s) for their full duration.",
+      "sourceId": "core-rules-updates-2024",
+      "sourceName": "Core Rules Updates",
+      "sourceVersion": "2024.10",
+      "extractedAt": "2025-11-12T14:01:20.786Z"
+    },
+    {
+      "name": "Start-of-Phase/Turn/Battle Round Priority",
+      "phase": "All",
+      "timing": "start",
+      "rule": "Rules that take effect at the start of a phase, turn or battle round must be fully resolved before rules that do not specify they take effect at the start of that phase/turn/round; an opponent's rule explicitly triggered by a start-of-phase rule may be applied at the stated time.",
+      "description": "If some rules take effect at the start of a phase, turn or battle round and another rule takes effect during that same phase, turn or battle round without specifying the start, in most cases the latter cannot take effect before all start-of-phase/turn/round rules are resolved. The exception is that if you use a rule that takes effect at the start of a phase or turn and your opponent has a rule that is explicitly triggered as a result of your rule taking effect, their rule can take effect at the time stated (for example, an immediate response Stratagem triggered 'just after' a mortal wound allocation caused by a start-of-phase effect).",
+      "sourceId": "core-rules-updates-2024",
+      "sourceName": "Core Rules Updates",
+      "sourceVersion": "2024.10",
+      "extractedAt": "2025-11-12T14:01:20.786Z"
+    },
+    {
+      "name": "End of Phase/Step Resolution Order",
+      "phase": "All",
+      "timing": "end",
+      "rule": "Rules that take effect at the end of a phase/step only take effect after all other rules that would take place in that phase/step have been resolved; the next phase/step does not start until all end-of-phase/step rules are resolved.",
+      "description": "Rules that specify that they take place at the end of a phase/step only take effect after any other rules that would take place in that phase/step have been resolved. This means you cannot use rules that would take place during a phase/step once an end-of-phase rule has taken effect. The next phase/step does not start until after all such rules have been resolved. (For rules used at the end of the Command phase, see the rules used at the end of the Command phase.)",
+      "sourceId": "core-rules-updates-2024",
+      "sourceName": "Core Rules Updates",
+      "sourceVersion": "2024.10",
+      "extractedAt": "2025-11-12T14:01:20.786Z"
+    },
+    {
+      "name": "Rules vs Scoring Timing (Primary/Secondary)",
+      "phase": "All",
+      "timing": "end",
+      "rule": "If rules take effect with the same timing as when Primary and Secondary Missions are checked, those rules are resolved before missions are checked for scoring VP.",
+      "description": "If there are rules that take effect with the same timing as when Primary and Secondary Missions are checked for scoring VP, those rules are resolved before the Primary and Secondary Missions are checked for scoring VP. All rules take effect before any Primary or Secondary Missions are checked for scoring VP.",
+      "sourceId": "core-rules-updates-2024",
+      "sourceName": "Core Rules Updates",
+      "sourceVersion": "2024.10",
+      "extractedAt": "2025-11-12T14:01:20.786Z"
+    },
+    {
+      "name": "Command Phase — CP Gain Limit Per Battle Round",
+      "phase": "Command",
+      "timing": "during",
+      "rule": "Outside of the 1CP gained at the start of the Command phase, each player can only gain at most 1CP per battle round from other sources (this includes CP gained at the start of the Command phase).",
+      "description": "Outside of the 1CP players gain at the start of the Command phase, each player can only gain a total of 1CP per battle round, regardless of the source (this includes other CP gained at the start of the Command phase). CP granted by abilities that explicitly give more than 1CP in a battle round still apply (they ignore this limit if explicitly stated). Also, CP gained at the start of the Command phase as a result of any ability counts towards the 1CP per battle round limit.",
+      "sourceId": "core-rules-updates-2024",
+      "sourceName": "Core Rules Updates",
+      "sourceVersion": "2024.10",
+      "extractedAt": "2025-11-12T14:01:20.786Z"
+    },
+    {
+      "name": "Command Phase — Stratagem Timing in Command Phase",
+      "phase": "Command",
+      "timing": "during",
+      "rule": "If a Stratagem used in the Command phase does not explicitly state it takes place in the Battle-shock step or at the end of the Command phase, it is resolved in the Command step.",
+      "description": "If a Stratagem used in the Command phase does not explicitly state that it is used in the Battle-shock step or at the end of the Command phase, it is always used in the (Command) step. This clarifies where in the Command phase such Stratagems are applied.",
+      "sourceId": "core-rules-updates-2024",
+      "sourceName": "Core Rules Updates",
+      "sourceVersion": "2024.10",
+      "extractedAt": "2025-11-12T14:01:20.786Z"
+    },
+    {
+      "name": "Battle-shock — Test Procedure (Below Half-strength)",
+      "phase": "Command",
+      "timing": "during",
+      "rule": "In the Battle-shock step, each unit that is Below Half-strength must take a Battle-shock test (roll 2D6); if the total is less than that unit's best Leadership, the unit is Battle-shocked until the start of its controller's next Command phase.",
+      "description": "Battle-shock Tests: Roll 2D6 for each unit in your army that is Below Half-strength in your Command phase. If the result is less than the unit’s Leadership characteristic, then until the start of your next Command phase, that unit is Battle-shocked. While Battle-shocked, the unit suffers the effects of being Battle-shocked (see core rules). Note that this is true even if that unit is subsequently destroyed, and destroyed units do not have to take Battle-shock tests.",
+      "sourceId": "core-rules-updates-2024",
+      "sourceName": "Core Rules Updates",
+      "sourceVersion": "2024.10",
+      "extractedAt": "2025-11-12T14:01:20.786Z"
+    },
+    {
+      "name": "Battle-shock — Tests Outside the Command Phase",
+      "phase": "All",
+      "timing": "during",
+      "rule": "Rules can require Battle-shock tests in other phases; units already Battle-shocked must still take such tests but passing or failing those additional tests does not change their Battle-shocked status.",
+      "description": "Some rules require a unit to take a Battle-shock test during a phase other than the Command phase, and even when not Below Half-strength. Units that are already Battle-shocked must still take another Battle-shock test in such cases, in case this result triggers any additional effects, but passing or failing that test does not change that unit’s Battle-shocked status (i.e. a pass will not result in that unit no longer being Battle-shocked, and a failure will not result in that unit being Battle-shocked for any longer duration). Destroyed units do not have to take Battle-shock tests, and abilities cannot make a destroyed unit take a Battle-shock test.",
+      "sourceId": "core-rules-updates-2024",
+      "sourceName": "Core Rules Updates",
+      "sourceVersion": "2024.10",
+      "extractedAt": "2025-11-12T14:01:20.786Z"
+    },
+    {
+      "name": "Battle-shock — Starting Strength vs Below Half-strength",
+      "phase": "Command",
+      "timing": "during",
+      "rule": "In the Battle-shock step, if a unit is required to take a Battle-shock test for being Below its Starting Strength, it does not also have to take a test for being Below Half-strength.",
+      "description": "In the Battle-shock step of the Command phase, if for any reason a unit is forced to take a Battle-shock test for being below its Starting Strength, unless otherwise stated, that unit does not also have to take a Battle-shock test for being Below Half-strength. This prevents duplicative tests for the same event in that step.",
+      "sourceId": "core-rules-updates-2024",
+      "sourceName": "Core Rules Updates",
+      "sourceVersion": "2024.10",
+      "extractedAt": "2025-11-12T14:01:20.786Z"
+    },
+    {
+      "name": "Battle-shock — Status and Scope",
+      "phase": "Command",
+      "timing": "during",
+      "rule": "While a unit is Battle-shocked, all models in that unit are also Battle-shocked; Battle-shock status lasts until the start of that player's next Command phase.",
+      "description": "While a unit is Battle-shocked, all models in that unit are also Battle-shocked. Regardless of when a unit from your army becomes Battle-shocked, it remains so only until the start of your next Command phase.",
+      "sourceId": "core-rules-updates-2024",
+      "sourceName": "Core Rules Updates",
+      "sourceVersion": "2024.10",
+      "extractedAt": "2025-11-12T14:01:20.786Z"
+    },
+    {
+      "name": "Movement — Unit Coherency Precondition for Setup and Moves",
+      "phase": "Movement",
+      "timing": "during",
+      "rule": "If a model cannot be set up or cannot end a move in Unit Coherency (or obey another stated setup restriction), the unit cannot be set up or cannot make that move; models are returned to previous positions if the move cannot be completed.",
+      "description": "If for any reason a model cannot be set up in Unit Coherency, or cannot be set up following any restrictions stated by other rules (e.g. while setting up using the Deep Strike ability), that unit cannot be set up. If a unit cannot end a move in Unit Coherency, it cannot make that move and its models are returned to their previous positions.",
+      "sourceId": "core-rules-updates-2024",
+      "sourceName": "Core Rules Updates",
+      "sourceVersion": "2024.10",
+      "extractedAt": "2025-11-12T14:01:20.786Z"
+    },
+    {
+      "name": "Movement — Normal Move Limit",
+      "phase": "Movement",
+      "timing": "during",
+      "rule": "A unit cannot make more than one Normal move per phase.",
+      "description": "A unit cannot make more than one Normal move per phase. (This is a global restriction on Normal moves.)",
+      "sourceId": "core-rules-updates-2024",
+      "sourceName": "Core Rules Updates",
+      "sourceVersion": "2024.10",
+      "extractedAt": "2025-11-12T14:01:20.786Z"
+    },
+    {
+      "name": "Movement — Surge Moves (out-of-phase moves)",
+      "phase": "Movement",
+      "timing": "during",
+      "rule": "Out-of-phase 'surge' moves: each unit only one surge move per phase; a unit cannot surge while Battle-shocked; a unit cannot surge while within Engagement Range of enemy units.",
+      "description": "Some rules enable units to make out-of-phase 'surge' moves when a certain trigger occurs (e.g. Blood Surge). Unless otherwise stated, the following restrictions apply to all such moves: each unit can only make one 'surge' move per phase; a unit cannot make a 'surge' move while it is Battle-shocked; a unit cannot make a 'surge' move while it is within Engagement Range of one or more enemy units.",
+      "sourceId": "core-rules-updates-2024",
+      "sourceName": "Core Rules Updates",
+      "sourceVersion": "2024.10",
+      "extractedAt": "2025-11-12T14:01:20.786Z"
+    },
+    {
+      "name": "Movement — Surge Move Dice Result Use",
+      "phase": "Movement",
+      "timing": "during",
+      "rule": "If an out-of-phase surge move distance is determined by a dice result, you may move up to that result and may choose to move 0\"; the unit still counts as having made that move.",
+      "description": "If a rule enables a unit to make an out-of-phase 'surge' move determined by a dice result (e.g. a D6\" move), that unit may move any distance up to the dice result; you can choose not to move the unit after seeing the dice result, but the unit still counts as having made that move for the purposes of other rules (even if you choose to move it 0\").",
+      "sourceId": "core-rules-updates-2024",
+      "sourceName": "Core Rules Updates",
+      "sourceVersion": "2024.10",
+      "extractedAt": "2025-11-12T14:01:20.786Z"
+    },
+    {
+      "name": "Movement — Straight Lines and Pivoting",
+      "phase": "Movement",
+      "timing": "during",
+      "rule": "When moving in a straight line, measure from the same point on the base at start and end of that line; the first pivot in a model's move subtracts its pivot value from remaining distance (only once per move).",
+      "description": "Each time you move a model in a straight line, measure the distance from the same point on its base at the start and end of that line. Each time you pivot a model, rotate it any amount around its central axis. The first time you pivot during a model's move, subtract that model's pivot value from the remaining distance it can move during that move; if there is not enough distance left to do this, it cannot pivot. The distance is only reduced once for that move regardless of further pivots. The rules give pivot values for different model types.",
+      "sourceId": "core-rules-updates-2024",
+      "sourceName": "Core Rules Updates",
+      "sourceVersion": "2024.10",
+      "extractedAt": "2025-11-12T14:01:20.786Z"
+    },
+    {
+      "name": "Movement/Reserves — Count as Having Made a Normal Move (Reserves/Disembark)",
+      "phase": "Movement",
+      "timing": "during",
+      "rule": "A unit set up from Reserves counts as having made a Normal move in that turn; units disembarking from a TRANSPORT that made a Normal move this phase also count as having made a Normal move.",
+      "description": "Reserves units always count as having made a Normal move in the turn they are set up on the battlefield. This clarifies they cannot move further in this phase but have not 'Remained Stationary'. Similarly, a unit that disembarks from a TRANSPORT that made a Normal move this phase also counts as having made a Normal move. This affects which triggers and Stratagems can be used (such arrivals do not trigger 'after a unit makes a Normal move' effects).",
+      "sourceId": "core-rules-updates-2024",
+      "sourceName": "Core Rules Updates",
+      "sourceVersion": "2024.10",
+      "extractedAt": "2025-11-12T14:01:20.786Z"
+    },
+    {
+      "name": "Scouts x — Pre-battle Normal Move",
+      "phase": "Movement",
+      "timing": "start",
+      "rule": "If every model in a unit has Scouts x, at the start of the first battle round (before the first turn) it may make a Normal move up to x\" where each model may move up to x\" even if that exceeds its Move characteristic; such units must end more than 9\" horizontally from all enemy models.",
+      "description": "Some units have 'Scouts x' listed. If every model in a unit has this ability, then at the start of the first battle round, before the first turn begins, it can make a Normal move of up to x\"; while making that move, the distance moved by each model can be greater than that model's Move characteristic, as long as it is not greater than x\". A unit that moves using this ability must end that move more than 9\" horizontally away from all enemy models. If both players have such units, the player taking the first turn moves their units first.",
+      "sourceId": "core-rules-updates-2024",
+      "sourceName": "Core Rules Updates",
+      "sourceVersion": "2024.10",
+      "extractedAt": "2025-11-12T14:01:20.786Z"
+    },
+    {
+      "name": "Deep Strike vs Strategic Reserves Choice",
+      "phase": "Movement",
+      "timing": "during",
+      "rule": "If a unit with Deep Strike arrives from Strategic Reserves, the controlling player may choose to set it up using Strategic Reserves rules or using the Deep Strike ability.",
+      "description": "If a unit with the Deep Strike ability arrives from Strategic Reserves, the controlling player can choose for that unit to be set up either using the rules for Strategic Reserves or using the Deep Strike ability. This also applies if a unit with Deep Strike is placed into Strategic Reserves during the battle.",
+      "sourceId": "core-rules-updates-2024",
+      "sourceName": "Core Rules Updates",
+      "sourceVersion": "2024.10",
+      "extractedAt": "2025-11-12T14:01:20.786Z"
+    },
+    {
+      "name": "Fire Overwatch (out-of-phase shooting limitation)",
+      "phase": "All",
+      "timing": "during",
+      "rule": "When a unit is enabled to shoot out-of-phase (e.g. by Fire Overwatch), it may only perform the specified shooting action and may not use other rules normally triggered in the Shooting phase; additionally Fire Overwatch imposes a hit roll restriction while in effect.",
+      "description": "Fire Overwatch is a Stratagem that allows a unit to shoot in your opponent's Movement or Charge phase as if it were your Shooting phase. Because this is an out-of-phase rule, it only allows the unit to perform the specified action (shooting) and does not trigger other rules normally used in your Shooting phase (e.g. abilities that take effect 'In your Shooting phase, after this model has shot' have no effect). The Fire Overwatch Stratagem also imposes that, until the end of the phase, each time a model in the unit makes a ranged attack an unmodified Hit roll of 6 is required to score a hit (irrespective of Ballistic Skill or modifiers). You can only use the Stratagem once per turn and cannot target TITANIC units.",
+      "sourceId": "core-rules-updates-2024",
+      "sourceName": "Core Rules Updates",
+      "sourceVersion": "2024.10",
+      "extractedAt": "2025-11-12T14:01:20.786Z"
+    },
+    {
+      "name": "Firing Deck (TRANSPORT shooting)",
+      "phase": "Shooting",
+      "timing": "during",
+      "rule": "When a TRANSPORT with 'Firing Deck x' is selected to shoot, it may be treated as equipped with one ranged weapon (excluding [ONE SHOT]) from up to x embarked models whose units have not shot this phase; until it resolves those attacks those embarked units cannot shoot this phase.",
+      "description": "Some TRANSPORT models have 'Firing Deck x'. Each time such a model is selected to shoot in the Shooting phase, you can select up to x models embarked within it whose units have not already shot this phase. For each selected embarked model select one ranged weapon it is equipped with (excluding weapons with the [ONE SHOT] ability). Until the TRANSPORT has resolved all of its attacks, it counts as being equipped with all those selected weapons in addition to its other weapons. Until the end of the phase, those selected models' units are not eligible to shoot.",
+      "sourceId": "core-rules-updates-2024",
+      "sourceName": "Core Rules Updates",
+      "sourceVersion": "2024.10",
+      "extractedAt": "2025-11-12T14:01:20.786Z"
+    },
+    {
+      "name": "Shooting — Eligibility to Be Selected to Shoot",
+      "phase": "Shooting",
+      "timing": "start",
+      "rule": "A unit cannot be selected to shoot unless at least one model in that unit has an eligible target for one or more of its ranged weapons.",
+      "description": "Unless at least one model in a unit has an eligible target for one or more of its ranged weapons, that model's unit cannot be selected to shoot. This prevents selecting units to 'shoot at nothing' and affects triggers that rely on a unit being selected to shoot.",
+      "sourceId": "core-rules-updates-2024",
+      "sourceName": "Core Rules Updates",
+      "sourceVersion": "2024.10",
+      "extractedAt": "2025-11-12T14:01:20.786Z"
+    },
+    {
+      "name": "Rapid Ingress (Reserves arrival timing)",
+      "phase": "Movement",
+      "timing": "end",
+      "rule": "Rapid Ingress used at the end of the opponent's Movement phase lets a Reserves unit arrive as if it were the Reinforcements step of your Movement phase (including Deep Strike setup if all models have Deep Strike), but cannot be used to arrive in a battle round the unit otherwise could not arrive in.",
+      "description": "RAPID INGRESS (1CP) is used at the end of your opponent's Movement phase to allow one unit in Reserves to arrive on the battlefield as if it were the Reinforcements step of your Movement phase. If every model in that unit has Deep Strike you may set it up using the Deep Strike ability. Restriction: you cannot use this Stratagem to enable a unit to arrive on the battlefield during a battle round it would not normally be able to do so in.",
+      "sourceId": "core-rules-updates-2024",
+      "sourceName": "Core Rules Updates",
+      "sourceVersion": "2024.10",
+      "extractedAt": "2025-11-12T14:01:20.786Z"
+    },
+    {
+      "name": "Heroic Intervention (out-of-phase Charge)",
+      "phase": "Charge",
+      "timing": "during",
+      "rule": "Heroic Intervention can be used in the opponent's Charge phase just after an enemy unit ends a Charge move to declare a charge with one of your eligible units as if it were your Charge phase; that charge is resolved normally as a Charge move.",
+      "description": "HEROIC INTERVENTION (1CP) is used in your opponent's Charge phase, just after an enemy unit ends a Charge move. Target one unit from your army that is within 6\" of that enemy unit and would be eligible to declare a charge against that enemy unit if it were your Charge phase. Your unit now declares a charge that targets only that enemy unit, and you resolve that charge as if it were your Charge phase. Restrictions: VEHICLE units can only be selected if they are WALKER. Note that even if this charge is successful, your unit does not receive any Charge bonus this turn.",
+      "sourceId": "core-rules-updates-2024",
+      "sourceName": "Core Rules Updates",
+      "sourceVersion": "2024.10",
+      "extractedAt": "2025-11-12T14:01:20.786Z"
+    },
+    {
+      "name": "Tank Shock (VEHICLE post-charge mortal wounds)",
+      "phase": "Charge",
+      "timing": "end",
+      "rule": "After a VEHICLE unit ends a Charge move, Tank Shock lets you roll D6s equal to a selected VEHICLE model's Toughness; each 5+ inflicts 1 mortal wound (max 6) on a selected enemy unit within Engagement Range.",
+      "description": "TANK SHOCK (1CP): WHEN: Your Charge phase, just after a VEHICLE unit from your army ends a Charge move. EFFECT: Select one enemy unit within Engagement Range of your unit, and select one VEHICLE model in your unit that is within Engagement Range of that enemy unit. Roll a number of D6 equal to the Toughness characteristic of the selected VEHICLE model. For each 5+, that enemy unit suffers 1 mortal wound (to a maximum of 6 mortal wounds).",
+      "sourceId": "core-rules-updates-2024",
+      "sourceName": "Core Rules Updates",
+      "sourceVersion": "2024.10",
+      "extractedAt": "2025-11-12T14:01:20.786Z"
+    }
+  ],
+  "sources": [
+    {
+      "id": "core-rules-updates-2024",
+      "name": "Core Rules Updates",
+      "version": "2024.10",
+      "lastExtracted": "2025-11-12T14:01:20.786Z"
+    }
+  ]
+}

@@ -1,0 +1,173 @@
+{
+  "name": "Desolation Squad",
+  "faction": "Space Marines",
+  "subfaction": "Space Wolves",
+  "role": "Other",
+  "keywords": [
+    "INFANTRY",
+    "GRENADES",
+    "IMPERIUM",
+    "TACTICUS",
+    "DESOLATION SQUAD",
+    "ADEPTUS ASTARTES"
+  ],
+  "stats": {
+    "movement": "6\"",
+    "toughness": 4,
+    "save": "3+",
+    "invulnerableSave": "",
+    "wounds": 2,
+    "leadership": 6,
+    "objectiveControl": 1
+  },
+  "composition": "1 Desolation Sergeant, 4 Desolation Marines",
+  "compositionData": [
+    {
+      "name": "Desolation Sergeant",
+      "role": "leader",
+      "count": 1,
+      "woundsPerModel": 2
+    },
+    {
+      "name": "Desolation Marine",
+      "role": "regular",
+      "count": 4,
+      "woundsPerModel": 2
+    }
+  ],
+  "unitSize": "5",
+  "leaderRules": "This unit can be led by the following units: Ancient, Apothecary, Chief Librarian Tigurius, Librarian, Techmarine, Sanguinary Priest, Brother Corbulo.",
+  "leaderAbilities": "",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Bolt pistol",
+      "range": "12\"",
+      "type": "Pistol",
+      "attacks": "1",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "PISTOL"
+      ]
+    },
+    {
+      "name": "Castellan launcher",
+      "range": "36\"",
+      "type": "Ranged",
+      "attacks": "D3",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "BLAST",
+        "INDIRECT FIRE"
+      ]
+    },
+    {
+      "name": "Superfrag rocket launcher",
+      "range": "48\"",
+      "type": "Ranged",
+      "attacks": "D6+1",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "5",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "BLAST",
+        "HEAVY"
+      ]
+    },
+    {
+      "name": "Superkrak rocket launcher",
+      "range": "48\"",
+      "type": "Ranged",
+      "attacks": "1",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "10",
+      "armorPenetration": "-2",
+      "damage": "D6+1",
+      "abilities": [
+        "HEAVY"
+      ]
+    },
+    {
+      "name": "Vengor launcher",
+      "range": "48\"",
+      "type": "Ranged",
+      "attacks": "D6",
+      "ballisticSkill": "2+",
+      "weaponSkill": "",
+      "strength": "7",
+      "armorPenetration": "-1",
+      "damage": "2",
+      "abilities": [
+        "BLAST",
+        "INDIRECT FIRE"
+      ]
+    },
+    {
+      "name": "Close combat weapon",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "3",
+      "ballisticSkill": "",
+      "weaponSkill": "3+",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": []
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Oath of Moment",
+      "type": "faction",
+      "description": "If your Army Faction is Adeptus Astartes, at the start of your Command phase, you can select one unit from your opponent’s army. Until the start of your next Command phase, each time a model from your army with this ability makes an attack that targets that enemy unit, you can re-roll the Hit roll.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Targeter Optics",
+      "type": "unit",
+      "description": "Each time this unit Remains Stationary, until the start of your next Movement phase, ranged weapons equipped by models in this unit have the [IGNORES COVER] ability.",
+      "triggerPhase": [
+        "Movement",
+        "Shooting"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [
+    {
+      "description": "All of the models in this unit can each have their superfrag rocket launcher replaced with 1 superkrak rocket launcher.",
+      "pointsCost": 0
+    },
+    {
+      "description": "The Desolation Sergeant’s superfrag rocket launcher or superkrak rocket launcher can be replaced with 1 vengor launcher.",
+      "pointsCost": 0
+    }
+  ],
+  "pointsCost": 200,
+  "pointsTiers": [
+    {
+      "models": 5,
+      "points": 200
+    }
+  ]
+}

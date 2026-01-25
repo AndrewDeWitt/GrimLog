@@ -1,0 +1,117 @@
+{
+  "name": "Taurox",
+  "faction": "Astra Militarum",
+  "subfaction": "",
+  "role": "Dedicated Transports",
+  "keywords": [
+    "VEHICLE",
+    "IMPERIUM",
+    "SQUADRON",
+    "TRANSPORT",
+    "DEDICATED TRANSPORT",
+    "TAUROX"
+  ],
+  "stats": {
+    "movement": "12\"",
+    "toughness": 8,
+    "save": "3+",
+    "invulnerableSave": "",
+    "wounds": 10,
+    "leadership": 7,
+    "objectiveControl": 2
+  },
+  "composition": "1 Taurox",
+  "compositionData": [
+    {
+      "name": "Taurox",
+      "role": "regular",
+      "count": 1,
+      "woundsPerModel": 10
+    }
+  ],
+  "unitSize": "1",
+  "leaderRules": "",
+  "leaderAbilities": "",
+  "transportCapacity": "This model has a transport capacity of 12 ASTRA MILITARUM INFANTRY models. Each OGRYN model takes up the space of 3 models. It cannot transport ARTILLERY models.",
+  "weapons": [
+    {
+      "name": "Twin autocannon",
+      "range": "48\"",
+      "type": "Twin-linked",
+      "attacks": "2",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "9",
+      "armorPenetration": "-1",
+      "damage": "3",
+      "abilities": [
+        "TWIN-LINKED"
+      ]
+    },
+    {
+      "name": "Storm bolter",
+      "range": "24\"",
+      "type": "Rapid Fire 2",
+      "attacks": "2",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "RAPID FIRE 2"
+      ]
+    },
+    {
+      "name": "Armoured tracks",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "3",
+      "ballisticSkill": "",
+      "weaponSkill": "4+",
+      "strength": "6",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": []
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Deadly Demise D3",
+      "type": "core",
+      "description": "When this model is destroyed, roll one D6. On a 6, it explodes and each unit within 6\" suffers D3 mortal wounds.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": true,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Rapid Deployment",
+      "type": "unit",
+      "description": "Units can disembark from this TRANSPORT after it has Advanced. Units that do so count as having made a Normal move that phase, and cannot declare a charge in the same turn, but can otherwise act normally.",
+      "triggerPhase": [
+        "Movement"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [
+    {
+      "description": "This model can be equipped with 1 storm bolter.",
+      "pointsCost": 0
+    }
+  ],
+  "pointsCost": 75,
+  "pointsTiers": [
+    {
+      "models": 1,
+      "points": 75
+    }
+  ]
+}

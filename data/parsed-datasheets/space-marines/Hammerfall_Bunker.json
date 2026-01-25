@@ -1,0 +1,187 @@
+{
+  "name": "Hammerfall Bunker",
+  "faction": "Space Marines",
+  "subfaction": "SPACE WOLVES",
+  "role": "Fortification",
+  "keywords": [
+    "FORTIFICATION",
+    "VEHICLE",
+    "IMPERIUM",
+    "HAMMERFALL BUNKER",
+    "ADEPTUS ASTARTES"
+  ],
+  "stats": {
+    "movement": "-",
+    "toughness": 12,
+    "save": "2+",
+    "invulnerableSave": "",
+    "wounds": 14,
+    "leadership": 6,
+    "objectiveControl": 0
+  },
+  "composition": "1 Hammerfall Bunker",
+  "compositionData": [
+    {
+      "name": "Hammerfall Bunker",
+      "role": "regular",
+      "count": 1,
+      "woundsPerModel": 14
+    }
+  ],
+  "unitSize": "1",
+  "leaderRules": "",
+  "leaderAbilities": "",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Hammerfall heavy bolter array",
+      "range": "36\"",
+      "type": "Heavy 6",
+      "attacks": "6",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "5",
+      "armorPenetration": "-1",
+      "damage": "2",
+      "abilities": [
+        "SUSTAINED HITS 1",
+        "TWIN-LINKED"
+      ]
+    },
+    {
+      "name": "Hammerfall heavy flamer array",
+      "range": "12\"",
+      "type": "Heavy 2D6",
+      "attacks": "2D6",
+      "ballisticSkill": "N/A",
+      "weaponSkill": "",
+      "strength": "5",
+      "armorPenetration": "-1",
+      "damage": "1",
+      "abilities": [
+        "IGNORES COVER",
+        "TORRENT",
+        "TWIN-LINKED"
+      ]
+    },
+    {
+      "name": "Hammerfall missile launcher \u00013 superfrag [blast]",
+      "range": "48\"",
+      "type": "Heavy 2D6+2",
+      "attacks": "2D6+2",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "BLAST"
+      ]
+    },
+    {
+      "name": "Hammerfall missile launcher \u00013 superkrak",
+      "range": "48\"",
+      "type": "Heavy 2",
+      "attacks": "2",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "10",
+      "armorPenetration": "-2",
+      "damage": "2D6+1",
+      "abilities": []
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Deadly Demise",
+      "type": "core",
+      "description": "Deadly Demise D6",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": true,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Oath of Moment",
+      "type": "faction",
+      "description": "Oath of Moment",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Fortification",
+      "type": "unit",
+      "description": "While an enemy unit is only within Engagement Range of one or more FORTIFICATIONS from your army: That unit can still be selected as the target of ranged attacks, but each time such an attack is made, unless it is made with a Pistol, subtract 1 from the Hit roll. Models in that unit do not need to take Desperate Escape tests due to Falling Back while Battle-shocked, except for those that will move over enemy models when doing so.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [
+        "FORTIFICATION"
+      ],
+      "effects": null
+    },
+    {
+      "name": "Ceramite Cover",
+      "type": "unit",
+      "description": "Each time a ranged attack is allocated to a model, if that model is not fully visible to every model in the attacking unit because of this FORTIFICATION, that model has the Benefit of Cover against that attack.",
+      "triggerPhase": [
+        "Shooting"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": [
+        "FORTIFICATION"
+      ],
+      "effects": null
+    },
+    {
+      "name": "Defensive Array",
+      "type": "unit",
+      "description": "You can target this FORTIFICATION with the Fire Overwatch Stratagem for 0CP, and can do so even if you have already targeted another unit with that Stratagem this turn. This FORTIFICATION can only be targeted with that Stratagem once per turn.",
+      "triggerPhase": [
+        "Command"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [
+        "FORTIFICATION"
+      ],
+      "effects": null
+    },
+    {
+      "name": "Damaged: 1-5 Wounds Remaining",
+      "type": "unit",
+      "description": "While this model has 1-5 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.",
+      "triggerPhase": [
+        "Shooting"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [
+    {
+      "description": "This model’s Hammerfall heavy bolter array can be replaced with 1 Hammerfall heavy flamer array.",
+      "pointsCost": 0
+    }
+  ],
+  "pointsCost": 175,
+  "pointsTiers": [
+    {
+      "models": 1,
+      "points": 175
+    }
+  ]
+}

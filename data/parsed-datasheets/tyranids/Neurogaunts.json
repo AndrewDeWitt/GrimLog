@@ -1,0 +1,82 @@
+{
+  "name": "Neurogaunts",
+  "faction": "Tyranids",
+  "subfaction": "",
+  "role": "Other",
+  "keywords": [
+    "INFANTRY",
+    "GREAT DEVOURER",
+    "ENDLESS MULTITUDE",
+    "NEUROGAUNTS"
+  ],
+  "stats": {
+    "movement": "6\"",
+    "toughness": 3,
+    "save": "6+",
+    "invulnerableSave": "",
+    "wounds": 1,
+    "leadership": 8,
+    "objectiveControl": 1
+  },
+  "composition": "1-2 Neurogaunt Nodebeasts, 10-20 Neurogaunts",
+  "compositionData": [
+    {
+      "name": "Neurogaunt Nodebeast",
+      "role": "regular",
+      "count": 1,
+      "woundsPerModel": 1
+    },
+    {
+      "name": "Neurogaunt",
+      "role": "regular",
+      "count": 10,
+      "woundsPerModel": 1
+    }
+  ],
+  "unitSize": "10-20",
+  "leaderRules": "This unit can be led by a Neurotyrant.",
+  "leaderAbilities": "",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Chitinous claws and teeth",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "1",
+      "ballisticSkill": "",
+      "weaponSkill": "4+",
+      "strength": "3",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": []
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Neurocytes",
+      "type": "faction",
+      "description": "While this unit is within Synapse Range of a friendly TYRANIDS unit (excluding NEUROGAUNT units), it has the SYNAPSE keyword.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [
+        "TYRANIDS"
+      ],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [],
+  "pointsCost": 45,
+  "pointsTiers": [
+    {
+      "models": 11,
+      "points": 45
+    },
+    {
+      "models": 22,
+      "points": 90
+    }
+  ]
+}

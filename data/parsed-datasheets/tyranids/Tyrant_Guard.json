@@ -1,0 +1,125 @@
+{
+  "name": "Tyrant Guard",
+  "faction": "Tyranids",
+  "subfaction": "",
+  "role": "Elites",
+  "keywords": [
+    "INFANTRY",
+    "GREAT DEVOURER",
+    "TYRANT GUARD",
+    "TYRANIDS"
+  ],
+  "stats": {
+    "movement": "6\"",
+    "toughness": 8,
+    "save": "3+",
+    "invulnerableSave": "",
+    "wounds": 4,
+    "leadership": 8,
+    "objectiveControl": 1
+  },
+  "composition": "3-6 Tyrant Guard",
+  "compositionData": [
+    {
+      "name": "Tyrant Guard",
+      "role": "regular",
+      "count": 3,
+      "woundsPerModel": 4
+    }
+  ],
+  "unitSize": "3-6",
+  "leaderRules": "This unit can be led by: Hive Tyrant, Neurotyrant, The Swarmlord",
+  "leaderAbilities": "",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Scything talons and rending claws",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "5",
+      "ballisticSkill": "",
+      "weaponSkill": "3+",
+      "strength": "5",
+      "armorPenetration": "-1",
+      "damage": "1",
+      "abilities": []
+    },
+    {
+      "name": "Bone cleaver, lash whip and rending claws",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "3",
+      "ballisticSkill": "",
+      "weaponSkill": "3+",
+      "strength": "5",
+      "armorPenetration": "-1",
+      "damage": "2",
+      "abilities": []
+    },
+    {
+      "name": "Crushing claws and rending claws [twin-linked]",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "2",
+      "ballisticSkill": "",
+      "weaponSkill": "4+",
+      "strength": "8",
+      "armorPenetration": "-2",
+      "damage": "2",
+      "abilities": [
+        "TWIN-LINKED"
+      ]
+    }
+  ],
+  "abilities": [
+    {
+      "name": "SYNAPSE",
+      "type": "faction",
+      "description": "Synapse",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [
+        "SYNAPSE"
+      ],
+      "effects": null
+    },
+    {
+      "name": "GUARDIAN ORGANISM",
+      "type": "unit",
+      "description": "While a CHARACTER model is leading this unit, that CHARACTER has the Feel No Pain 5+ ability.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [
+        "CHARACTER"
+      ],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [
+    {
+      "description": "Any number of models can each have their scything talons and rending claws replaced with 1 bone cleaver, lash whip and rending claws.",
+      "pointsCost": 0
+    },
+    {
+      "description": "Any number of models can each have their scything talons and rending claws replaced with 1 crushing claws and rending claws.",
+      "pointsCost": 0
+    }
+  ],
+  "pointsCost": 80,
+  "pointsTiers": [
+    {
+      "models": 3,
+      "points": 80
+    },
+    {
+      "models": 6,
+      "points": 160
+    }
+  ]
+}

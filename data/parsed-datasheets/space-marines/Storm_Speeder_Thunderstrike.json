@@ -1,0 +1,151 @@
+{
+  "name": "Storm Speeder Thunderstrike",
+  "faction": "Space Marines",
+  "subfaction": "Space Wolves",
+  "role": "Vehicle",
+  "keywords": [
+    "VEHICLE",
+    "FLY",
+    "IMPERIUM",
+    "STORM SPEEDER THUNDERSTRIKE",
+    "RAVENWING",
+    "ADEPTUS ASTARTES"
+  ],
+  "stats": {
+    "movement": "14\"",
+    "toughness": 9,
+    "save": "3+",
+    "invulnerableSave": "",
+    "wounds": 11,
+    "leadership": 6,
+    "objectiveControl": 3
+  },
+  "composition": "1 Storm Speeder Thunderstrike",
+  "compositionData": [
+    {
+      "name": "Storm Speeder Thunderstrike",
+      "role": "regular",
+      "count": 1,
+      "woundsPerModel": 11
+    }
+  ],
+  "unitSize": "1",
+  "leaderRules": "",
+  "leaderAbilities": "",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Stormfury missiles",
+      "range": "48\"",
+      "type": "Assault 1",
+      "attacks": "1",
+      "ballisticSkill": "2+",
+      "weaponSkill": "",
+      "strength": "12",
+      "armorPenetration": "-3",
+      "damage": "D6+1",
+      "abilities": []
+    },
+    {
+      "name": "Thunderstrike las-talon",
+      "range": "36\"",
+      "type": "Assault 2",
+      "attacks": "2",
+      "ballisticSkill": "2+",
+      "weaponSkill": "",
+      "strength": "9",
+      "armorPenetration": "-3",
+      "damage": "D6+1",
+      "abilities": []
+    },
+    {
+      "name": "Twin Icarus rocket pod [ANTI-FLY 2+, TWIN-LINKED]",
+      "range": "24\"",
+      "type": "Assault D3",
+      "attacks": "D3",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "8",
+      "armorPenetration": "-1",
+      "damage": "2",
+      "abilities": [
+        "ANTI-FLY 2+",
+        "TWIN-LINKED"
+      ]
+    },
+    {
+      "name": "Close combat weapon",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "4",
+      "ballisticSkill": "",
+      "weaponSkill": "3+",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": []
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Deadly Demise D3",
+      "type": "core",
+      "description": "Deadly Demise D3",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": true,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Deep Strike",
+      "type": "core",
+      "description": "Deep Strike",
+      "triggerPhase": [
+        "Deployment"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Oath of Moment",
+      "type": "faction",
+      "description": "Oath of Moment",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Thunderstrike",
+      "type": "unit",
+      "description": "Each time this model has shot, select one enemy MONSTER or VEHICLE unit that was hit by one or more attacks made by this model this phase. Until the end of the phase, each time a friendly ADEPTUS ASTARTES unit makes a ranged attack that targets that enemy unit, add 1 to the Wound roll.",
+      "triggerPhase": [
+        "Shooting"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [
+        "ADEPTUS ASTARTES",
+        "MONSTER",
+        "VEHICLE"
+      ],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [],
+  "pointsCost": 150,
+  "pointsTiers": [
+    {
+      "models": 1,
+      "points": 150
+    }
+  ]
+}

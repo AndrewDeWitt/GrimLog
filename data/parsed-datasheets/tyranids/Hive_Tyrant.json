@@ -1,0 +1,210 @@
+{
+  "name": "Hive Tyrant",
+  "faction": "Tyranids",
+  "subfaction": "",
+  "role": "Character",
+  "keywords": [
+    "MONSTER",
+    "CHARACTER",
+    "PSYKER",
+    "GREAT DEVOURER",
+    "SYNAPSE",
+    "HIVE TYRANT",
+    "TYRANIDS"
+  ],
+  "stats": {
+    "movement": "8\"",
+    "toughness": 10,
+    "save": "2+",
+    "invulnerableSave": "4+",
+    "wounds": 10,
+    "leadership": 7,
+    "objectiveControl": 3
+  },
+  "composition": "1 Hive Tyrant",
+  "compositionData": [
+    {
+      "name": "Hive Tyrant",
+      "role": "leader",
+      "count": 1,
+      "woundsPerModel": 10
+    }
+  ],
+  "unitSize": "1",
+  "leaderRules": "This model can be attached to the following unit: Tyrant Guard",
+  "leaderAbilities": "",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Heavy venom cannon [blast]",
+      "range": "36\"",
+      "type": "Heavy D3",
+      "attacks": "D3",
+      "ballisticSkill": "2+",
+      "weaponSkill": "",
+      "strength": "9",
+      "armorPenetration": "-2",
+      "damage": "3",
+      "abilities": [
+        "BLAST"
+      ]
+    },
+    {
+      "name": "Stranglethorn cannon [blast]",
+      "range": "36\"",
+      "type": "Heavy D6",
+      "attacks": "D6",
+      "ballisticSkill": "2+",
+      "weaponSkill": "",
+      "strength": "12",
+      "armorPenetration": "-1",
+      "damage": "2",
+      "abilities": [
+        "BLAST"
+      ]
+    },
+    {
+      "name": "Monstrous bonesword and lash whip [twin-linked]",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "6",
+      "ballisticSkill": "",
+      "weaponSkill": "2+",
+      "strength": "9",
+      "armorPenetration": "-2",
+      "damage": "3",
+      "abilities": [
+        "TWIN-LINKED"
+      ]
+    },
+    {
+      "name": "Monstrous scything talons [extra attacks]",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "4",
+      "ballisticSkill": "",
+      "weaponSkill": "2+",
+      "strength": "7",
+      "armorPenetration": "-2",
+      "damage": "2",
+      "abilities": [
+        "EXTRA ATTACKS"
+      ]
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Deadly Demise D3",
+      "type": "core",
+      "description": "Deadly Demise D3",
+      "triggerPhase": [
+        "General"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Leader",
+      "type": "core",
+      "description": "Leader",
+      "triggerPhase": [
+        "Keyword"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Shadow in the Warp",
+      "type": "faction",
+      "description": "Shadow in the Warp",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Synapse",
+      "type": "faction",
+      "description": "Synapse",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Will of the Hive Mind",
+      "type": "faction",
+      "description": "Once per battle round, one model from your army with this ability can use it when a friendly TYRANIDS unit within 12\" of that model is targeted with a Stratagem. If it does, reduce the CP cost of that usage of that Stratagem by 1CP.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [
+        "TYRANIDS"
+      ],
+      "effects": null
+    },
+    {
+      "name": "Onslaught (Aura, Psychic)",
+      "type": "unit",
+      "description": "While a friendly TYRANIDS unit is within 6\" of this model, ranged weapons equipped by models in that unit have the [ASSAULT] and [LETHAL HITS] abilities.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [
+        "TYRANIDS"
+      ],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [
+    {
+      "description": "This model’s monstrous bonesword and lash whip can be replaced with 1 heavy venom cannon.",
+      "pointsCost": 0
+    },
+    {
+      "description": "This model’s monstrous bonesword and lash whip can be replaced with 1 stranglethorn cannon.",
+      "pointsCost": 0
+    },
+    {
+      "description": "This model’s monstrous bonesword and lash whip can be replaced with 1 monstrous scything talons.",
+      "pointsCost": 0
+    },
+    {
+      "description": "This model’s monstrous scything talons can be replaced with 1 heavy venom cannon.",
+      "pointsCost": 0
+    },
+    {
+      "description": "This model’s monstrous scything talons can be replaced with 1 stranglethorn cannon.",
+      "pointsCost": 0
+    },
+    {
+      "description": "This model cannot be equipped with both a stranglethorn cannon and a heavy venom cannon.",
+      "pointsCost": 0
+    },
+    {
+      "description": "This model cannot be equipped with more than 1 heavy venom cannon, and it cannot be equipped with more than 1 stranglethorn cannon.",
+      "pointsCost": 0
+    }
+  ],
+  "pointsCost": 195,
+  "pointsTiers": [
+    {
+      "models": 1,
+      "points": 195
+    }
+  ]
+}

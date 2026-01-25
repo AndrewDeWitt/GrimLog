@@ -1,0 +1,125 @@
+{
+  "name": "Bladeguard Ancient",
+  "faction": "Adeptus Astartes",
+  "subfaction": "Space Wolves",
+  "role": "Character",
+  "keywords": [
+    "INFANTRY",
+    "CHARACTER",
+    "GRENADES",
+    "IMPERIUM",
+    "TACTICUS",
+    "ANCIENT",
+    "BLADEGUARD ANCIENT",
+    "DEATHWING",
+    "ADEPTUS ASTARTES"
+  ],
+  "stats": {
+    "movement": "6\"",
+    "toughness": 4,
+    "save": "3+",
+    "invulnerableSave": "4+",
+    "wounds": 4,
+    "leadership": 6,
+    "objectiveControl": 1
+  },
+  "composition": "1 Bladeguard Ancient",
+  "compositionData": [
+    {
+      "name": "Bladeguard Ancient",
+      "role": "leader",
+      "count": 1,
+      "woundsPerModel": 4
+    }
+  ],
+  "unitSize": "1",
+  "leaderRules": "This model can be attached to the following unit: Bladeguard Veteran Squad. You can attach this model to the above unit even if one CAPTAIN, CHAPTER MASTER or LIEUTENANT model has already been attached to it. If you do, and that Bodyguard unit is destroyed, the LEADER units attached to it become separate units, with their original Starting Strengths.",
+  "leaderAbilities": "",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Heavy bolt pistol",
+      "range": "18\"",
+      "type": "Pistol",
+      "attacks": "1",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "-1",
+      "damage": "1",
+      "abilities": [
+        "PISTOL"
+      ]
+    },
+    {
+      "name": "Close combat weapon",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "5",
+      "ballisticSkill": "",
+      "weaponSkill": "2+",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": []
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Leader",
+      "type": "core",
+      "description": "This model can be attached to a unit.",
+      "triggerPhase": [
+        "Keyword"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Oath of Moment",
+      "type": "faction",
+      "description": "If your Army Faction is Adeptus Astartes, at the start of your Command phase, you can select one unit from your opponent’s army. Until the start of your next Command phase, each time a model from your army with this ability makes an attack that targets that unit, you can re-roll the Hit roll.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Astartes Banner",
+      "type": "unit",
+      "description": "While this model is leading a unit, add 1 to the Objective Control characteristic of models in that unit.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Deeds of Heroism",
+      "type": "unit",
+      "description": "Once per battle, when this model is selected to fight, it can use this ability. If it does, until the end of the phase, add 1 to the Attacks characteristic of melee weapons equipped by models in this model’s unit.",
+      "triggerPhase": [
+        "Fight"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": true,
+      "requiredKeywords": [],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [],
+  "pointsCost": 45,
+  "pointsTiers": [
+    {
+      "models": 1,
+      "points": 45
+    }
+  ]
+}

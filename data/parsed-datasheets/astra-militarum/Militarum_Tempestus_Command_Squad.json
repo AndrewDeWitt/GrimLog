@@ -1,0 +1,395 @@
+{
+  "name": "Militarum Tempestus Command Squad",
+  "faction": "Astra Militarum",
+  "subfaction": "Militarum Tempestus",
+  "role": "Character",
+  "keywords": [
+    "INFANTRY",
+    "GRENADES",
+    "IMPERIUM",
+    "MILITARUM TEMPESTUS",
+    "COMMAND SQUAD",
+    "CHARACTER",
+    "OFFICER"
+  ],
+  "stats": {
+    "movement": "6\"",
+    "toughness": 3,
+    "save": "4+",
+    "invulnerableSave": "",
+    "wounds": 1,
+    "leadership": 7,
+    "objectiveControl": 1
+  },
+  "composition": "1 Tempestor Prime, 4 Tempestus Scions",
+  "compositionData": [
+    {
+      "name": "Tempestor Prime",
+      "role": "leader",
+      "count": 1,
+      "woundsPerModel": 1
+    },
+    {
+      "name": "Tempestus Scion",
+      "role": "regular",
+      "count": 4,
+      "woundsPerModel": 1
+    }
+  ],
+  "unitSize": "5",
+  "leaderRules": "This model can be attached to the following unit: Tempestus Scions",
+  "leaderAbilities": "This unit’s OFFICER can issue 1 Order to a REGIMENT unit.",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Bolt pistol",
+      "range": "12\"",
+      "type": "Pistol",
+      "attacks": "1",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "PISTOL"
+      ]
+    },
+    {
+      "name": "Flamer",
+      "range": "12\"",
+      "type": "Torrent",
+      "attacks": "D6",
+      "ballisticSkill": "N/A",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "IGNORES COVER",
+        "TORRENT"
+      ]
+    },
+    {
+      "name": "Grenade launcher – frag",
+      "range": "24\"",
+      "type": "Blast",
+      "attacks": "D3",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "BLAST"
+      ]
+    },
+    {
+      "name": "Grenade launcher – krak",
+      "range": "24\"",
+      "type": "Ranged",
+      "attacks": "1",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "9",
+      "armorPenetration": "-2",
+      "damage": "D3",
+      "abilities": []
+    },
+    {
+      "name": "Hot-shot lasgun",
+      "range": "24\"",
+      "type": "Rapid Fire 1",
+      "attacks": "1",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "3",
+      "armorPenetration": "-1",
+      "damage": "1",
+      "abilities": [
+        "RAPID FIRE 1"
+      ]
+    },
+    {
+      "name": "Hot-shot laspistol",
+      "range": "12\"",
+      "type": "Pistol",
+      "attacks": "1",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "3",
+      "armorPenetration": "-1",
+      "damage": "1",
+      "abilities": [
+        "PISTOL"
+      ]
+    },
+    {
+      "name": "Hot-shot volley gun",
+      "range": "30\"",
+      "type": "Heavy",
+      "attacks": "2",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "-1",
+      "damage": "1",
+      "abilities": [
+        "RAPID FIRE 2"
+      ]
+    },
+    {
+      "name": "Meltagun",
+      "range": "12\"",
+      "type": "Melta 2",
+      "attacks": "1",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "9",
+      "armorPenetration": "-4",
+      "damage": "D6",
+      "abilities": [
+        "MELTA 2"
+      ]
+    },
+    {
+      "name": "Plasma gun – standard",
+      "range": "24\"",
+      "type": "Rapid Fire 1",
+      "attacks": "1",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "7",
+      "armorPenetration": "-2",
+      "damage": "1",
+      "abilities": [
+        "RAPID FIRE 1"
+      ]
+    },
+    {
+      "name": "Plasma gun – supercharge",
+      "range": "24\"",
+      "type": "Rapid Fire 1",
+      "attacks": "1",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "8",
+      "armorPenetration": "-3",
+      "damage": "2",
+      "abilities": [
+        "HAZARDOUS",
+        "RAPID FIRE 1"
+      ]
+    },
+    {
+      "name": "Plasma pistol – standard",
+      "range": "12\"",
+      "type": "Pistol",
+      "attacks": "1",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "7",
+      "armorPenetration": "-2",
+      "damage": "1",
+      "abilities": [
+        "PISTOL"
+      ]
+    },
+    {
+      "name": "Plasma pistol – supercharge",
+      "range": "12\"",
+      "type": "Pistol",
+      "attacks": "1",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "8",
+      "armorPenetration": "-3",
+      "damage": "2",
+      "abilities": [
+        "HAZARDOUS",
+        "PISTOL"
+      ]
+    },
+    {
+      "name": "Close combat weapon",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "2",
+      "ballisticSkill": "",
+      "weaponSkill": "4+",
+      "strength": "3",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": []
+    },
+    {
+      "name": "Tempestus dagger",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "4",
+      "ballisticSkill": "",
+      "weaponSkill": "3+",
+      "strength": "3",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": []
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Deep Strike",
+      "type": "core",
+      "description": "During the Declare Formations step, if every model in a unit has this ability, you can set it up in Reinforcements instead of setting it up on the battlefield.",
+      "triggerPhase": [
+        "Deployment"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Leader",
+      "type": "core",
+      "description": "This model can be attached to a Bodyguard unit to form a Combined unit.",
+      "triggerPhase": [
+        "Keyword"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Voice of Command",
+      "type": "faction",
+      "description": "This unit’s OFFICER can issue 1 Order to a REGIMENT unit.",
+      "triggerPhase": [
+        "Command"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [
+        "REGIMENT"
+      ],
+      "effects": null
+    },
+    {
+      "name": "Tempestor Prime",
+      "type": "unit",
+      "description": "While this unit contains a Tempestor Prime, ranged weapons equipped by models in this unit have the [SUSTAINED HITS 1] ability.",
+      "triggerPhase": [
+        "Shooting"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Medi-pack",
+      "type": "wargear",
+      "description": "At the start of your Command phase, if the bearer’s unit is below its Starting Strength, you can return up to D3 destroyed Tempestus Scions models to this unit.",
+      "triggerPhase": [
+        "Command"
+      ],
+      "triggerSubphase": "Start of Phase",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": {
+        "wounds": null,
+        "toughness": null,
+        "save": null,
+        "invulnerableSave": null,
+        "movement": null
+      }
+    },
+    {
+      "name": "Regimental Standard",
+      "type": "wargear",
+      "description": "Add 1 to the Objective Control characteristic of models in the bearer’s unit.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": {
+        "wounds": null,
+        "toughness": null,
+        "save": null,
+        "invulnerableSave": null,
+        "movement": null
+      }
+    },
+    {
+      "name": "Command Rod",
+      "type": "wargear",
+      "description": "While the bearer is leading a unit, that unit can be affected by up to two different Orders at the same time.",
+      "triggerPhase": [
+        "Command"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": {
+        "wounds": null,
+        "toughness": null,
+        "save": null,
+        "invulnerableSave": null,
+        "movement": null
+      }
+    },
+    {
+      "name": "Master Vox",
+      "type": "wargear",
+      "description": "Each time the OFFICER in the bearer’s unit issues an Order, it can issue it to an eligible unit up to 24\" away.",
+      "triggerPhase": [
+        "Command"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": {
+        "wounds": null,
+        "toughness": null,
+        "save": null,
+        "invulnerableSave": null,
+        "movement": null
+      }
+    }
+  ],
+  "wargearOptions": [
+    {
+      "description": "Any number of Tempestus Scions can each have their hot-shot lasgun replaced with one of the following: 1 flamer, 1 grenade launcher, 1 hot-shot volley gun, 1 meltagun, 1 plasma gun (cannot select same weapon more than once per unit).",
+      "pointsCost": 0
+    },
+    {
+      "description": "1 Tempestus Scion equipped with a hot-shot lasgun can be equipped with 1 regimental standard.",
+      "pointsCost": 0
+    },
+    {
+      "description": "1 Tempestus Scion’s hot-shot lasgun can be replaced with 1 hot-shot laspistol and 1 master vox.",
+      "pointsCost": 0
+    },
+    {
+      "description": "1 Tempestus Scion’s hot-shot lasgun can be replaced with 1 hot-shot laspistol and 1 medi-pack.",
+      "pointsCost": 0
+    },
+    {
+      "description": "1 Tempestus Scion’s hot-shot lasgun can be replaced with 1 hot-shot lasgun, 1 hot-shot laspistol and 1 medi-pack.",
+      "pointsCost": 0
+    },
+    {
+      "description": "The Tempestor Prime’s bolt pistol can be replaced with 1 plasma pistol or 1 command rod.",
+      "pointsCost": 0
+    }
+  ],
+  "pointsCost": 85,
+  "pointsTiers": [
+    {
+      "models": 5,
+      "points": 85
+    }
+  ]
+}

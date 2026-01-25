@@ -1,0 +1,42 @@
+{
+  "success": true,
+  "found": true,
+  "unitName": "Adrax Agatone",
+  "faction": "Space Marines",
+  "source": {
+    "sourceId": "reddit-f146b950c9bd",
+    "sourceType": "reddit",
+    "contentTitle": "Is Adrax worth taking?",
+    "authorName": "r/Salamanders40k - u/Orn100",
+    "url": "https://www.reddit.com/r/Salamanders40k/comments/1om1ifl/is_adrax_worth_taking/",
+    "fetchedAt": "2025-12-27T12:04:22.878220"
+  },
+  "context": {
+    "tierRank": "A",
+    "tierReasoning": "He is described as a 'beast' and 'one of the best melee units in the game' for Space Marines. While he requires a transport (Land Raider) to be fully competitive, his ability to grant full wound rerolls to Bladeguard makes them a top-tier threat.",
+    "bestTargets": [
+      "Enemy characters (via Epic Challenge)",
+      "Elite melee units (e.g., Khorne Berzerkers)",
+      "High-toughness targets",
+      "Units on objectives"
+    ],
+    "counters": [
+      "Lack of mobility (needs a transport to be effective)",
+      "Kiting (if not in a Land Raider or Gladius detachment)"
+    ],
+    "synergies": [
+      "Bladeguard Veterans (provides reroll 1s to hit and high durability)",
+      "Lieutenant (provides Lethal Hits)",
+      "Judiciar (provides Fights First for a 'walking death trap' unit)",
+      "Land Raider (essential for Assault Ramp delivery)",
+      "Company Heroes (niche use for objective holding and durability)"
+    ],
+    "playstyleNotes": "Adrax should lead a 6-man Bladeguard Veteran squad to maximize his full wound reroll buff. Use him to aggressively take the center or clear objectives. His ability to halve enemy Objective Control (OC) makes him a strong objective-clearing tool.",
+    "deploymentTips": "Always deploy Adrax inside a Land Raider with a 6-man Bladeguard Veteran squad. The Land Raider's Assault Ramp is essential for ensuring he reaches combat effectively.",
+    "detachmentNotes": "He is exceptionally strong in the Gladius Strike Force because Combat Doctrines provide the Advance and Charge capability he lacks, and stratagems can grant +1 to Wound (Lance) and +1 AP. He is also used in Firestorm Assault Force, though mobility is more of a concern there.",
+    "equipmentRecommendations": "Pair him with a Lieutenant equipped with the 'War-tempered Artifice' enhancement for a Strength 11 Power Fist to complement Adrax's Damage 3 hammer.",
+    "pointsEfficiency": "Described as having some of the best damage-per-point efficiency in the Space Marine roster when leading a supported Bladeguard unit.",
+    "additionalNotes": "Adrax is considered a superior melee leader for Salamanders, often preferred over Vulkan He'stan for pure damage output. His Malleus Noctum hammer is noted for its Damage 3 profile, which is highly effective in the current meta.",
+    "confidence": 100
+  }
+}

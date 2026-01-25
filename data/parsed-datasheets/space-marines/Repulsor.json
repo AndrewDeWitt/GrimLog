@@ -1,0 +1,220 @@
+{
+  "name": "Repulsor",
+  "faction": "Space Marines",
+  "subfaction": "Space Wolves",
+  "role": "Transport",
+  "keywords": [
+    "VEHICLE",
+    "SMOKE",
+    "TRANSPORT",
+    "IMPERIUM",
+    "REPULSOR",
+    "DEATHWING"
+  ],
+  "stats": {
+    "movement": "10\"",
+    "toughness": 12,
+    "save": "3+",
+    "invulnerableSave": "",
+    "wounds": 16,
+    "leadership": 6,
+    "objectiveControl": 5
+  },
+  "composition": "1 Repulsor",
+  "compositionData": [
+    {
+      "name": "Repulsor",
+      "role": "regular",
+      "count": 1,
+      "woundsPerModel": 16
+    }
+  ],
+  "unitSize": "1",
+  "leaderRules": "",
+  "leaderAbilities": "",
+  "transportCapacity": "This model has a transport capacity of 14 ADEPTUS ASTARTES INFANTRY models. Each JUMP PACK, WULFEN, GRAVIS or TERMINATOR model takes up the space of 2 models and each CENTURION model takes up the space of 3 models.",
+  "weapons": [
+    {
+      "name": "Heavy onslaught gatling cannon",
+      "range": "24\"",
+      "type": "Assault 12",
+      "attacks": "12",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "6",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "DEVASTATING WOUNDS"
+      ]
+    },
+    {
+      "name": "Hunter-slayer missile",
+      "range": "48\"",
+      "type": "Heavy 1",
+      "attacks": "1",
+      "ballisticSkill": "2+",
+      "weaponSkill": "",
+      "strength": "14",
+      "armorPenetration": "-3",
+      "damage": "D6",
+      "abilities": [
+        "INDIRECT FIRE",
+        "ONE SHOT"
+      ]
+    },
+    {
+      "name": "Las-talon",
+      "range": "36\"",
+      "type": "Heavy 2",
+      "attacks": "2",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "10",
+      "armorPenetration": "-3",
+      "damage": "D6+1",
+      "abilities": []
+    },
+    {
+      "name": "Repulsor defensive array",
+      "range": "24\"",
+      "type": "Assault 18",
+      "attacks": "18",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": []
+    },
+    {
+      "name": "Twin heavy bolter",
+      "range": "36\"",
+      "type": "Heavy 3",
+      "attacks": "3",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "5",
+      "armorPenetration": "-1",
+      "damage": "2",
+      "abilities": [
+        "SUSTAINED HITS 1",
+        "TWIN-LINKED"
+      ]
+    },
+    {
+      "name": "Twin lascannon",
+      "range": "48\"",
+      "type": "Heavy 1",
+      "attacks": "1",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "12",
+      "armorPenetration": "-3",
+      "damage": "D6+1",
+      "abilities": [
+        "TWIN-LINKED"
+      ]
+    },
+    {
+      "name": "Armoured hull",
+      "range": "Melee",
+      "type": "Melee 6",
+      "attacks": "6",
+      "ballisticSkill": "",
+      "weaponSkill": "4+",
+      "strength": "8",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": []
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Deadly Demise D6",
+      "type": "core",
+      "description": "Deadly Demise D6",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": true,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Oath of Moment",
+      "type": "faction",
+      "description": "Oath of Moment",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Emergency Combat Embarkation",
+      "type": "unit",
+      "description": "Once per turn, in your opponent’s Charge phase, after an enemy unit has selected targets for its charge but before it makes a Charge move, you can select one ADEPTUS ASTARTES unit from your army that was selected as a target of that charge. Provided that unit is not within Engagement Range of one or more enemy units and every model in that unit is within 3\" of this TRANSPORT, it can embark within this TRANSPORT. The charging unit can then select new targets for its charge.",
+      "triggerPhase": [
+        "Charge"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": true,
+      "requiredKeywords": [
+        "ADEPTUS ASTARTES"
+      ],
+      "effects": null
+    },
+    {
+      "name": "DAMAGED: 1-5 WOUNDS REMAINING",
+      "type": "unit",
+      "description": "While this model has 1-5 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.",
+      "triggerPhase": [
+        "Shooting",
+        "Fight"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "ONE SHOT",
+      "type": "wargear",
+      "description": "The bearer can only shoot with this weapon once per battle.",
+      "triggerPhase": [
+        "Shooting"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": {
+        "wounds": null,
+        "toughness": null,
+        "save": null,
+        "invulnerableSave": null,
+        "movement": null
+      }
+    }
+  ],
+  "wargearOptions": [
+    {
+      "description": "This model’s twin heavy bolter can be replaced with 1 twin lascannon.",
+      "pointsCost": 0
+    },
+    {
+      "description": "This model’s heavy onslaught gatling cannon can be replaced with 1 las-talon.",
+      "pointsCost": 0
+    }
+  ],
+  "pointsCost": 180,
+  "pointsTiers": [
+    {
+      "models": 1,
+      "points": 180
+    }
+  ]
+}

@@ -1,0 +1,145 @@
+{
+  "name": "Terminator Assault Squad",
+  "faction": "Space Marines",
+  "subfaction": "Deathwing",
+  "role": "Other",
+  "keywords": [
+    "INFANTRY",
+    "IMPERIUM",
+    "TERMINATOR",
+    "TERMINATOR ASSAULT SQUAD",
+    "DEATHWING",
+    "ADEPTUS ASTARTES"
+  ],
+  "stats": {
+    "movement": "5\"",
+    "toughness": 5,
+    "save": "2+",
+    "invulnerableSave": "4+",
+    "wounds": 3,
+    "leadership": 6,
+    "objectiveControl": 1
+  },
+  "composition": "1 Assault Terminator Sergeant; 4-9 Assault Terminators",
+  "compositionData": [
+    {
+      "name": "Assault Terminator Sergeant",
+      "role": "leader",
+      "count": 1,
+      "woundsPerModel": 3
+    },
+    {
+      "name": "Assault Terminator",
+      "role": "regular",
+      "count": 4,
+      "woundsPerModel": 3
+    }
+  ],
+  "unitSize": "5-10",
+  "leaderRules": "This unit can be led by the following units: Ancient In Terminator Armour; Captain In Terminator Armour; Chaplain In Terminator Armour; Darnath Lysander; Librarian In Terminator Armour; Belial; Deathwing Strikemaster; Wolf Guard Battle Leader In Terminator Armour",
+  "leaderAbilities": "",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Thunder hammer",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "3",
+      "ballisticSkill": "",
+      "weaponSkill": "4+",
+      "strength": "8",
+      "armorPenetration": "-2",
+      "damage": "2",
+      "abilities": [
+        "DEVASTATING WOUNDS"
+      ]
+    },
+    {
+      "name": "Twin lightning claws",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "5",
+      "ballisticSkill": "",
+      "weaponSkill": "3+",
+      "strength": "5",
+      "armorPenetration": "-2",
+      "damage": "1",
+      "abilities": [
+        "TWIN-LINKED"
+      ]
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Deep Strike",
+      "type": "core",
+      "description": "This unit can Deep Strike.",
+      "triggerPhase": [
+        "Deployment"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Teleport Homer",
+      "type": "faction",
+      "description": "At the start of the battle, you can set up one Teleport Homer token for this unit anywhere on the battlefield that is not in your opponent’s deployment zone. If you do, once per battle, you can target this unit with the Rapid Ingress Stratagem for 0CP, but when resolving that Stratagem, you must set this unit up within 3\" horizontally of that token and not within 9\" horizontally of any enemy models. That token is then removed.",
+      "triggerPhase": [
+        "Deployment"
+      ],
+      "triggerSubphase": "Start of Phase",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Terminatus Assault",
+      "type": "faction",
+      "description": "Each time this unit ends a Charge move, each enemy unit within Engagement Range of this unit must take a Battle-shock test.",
+      "triggerPhase": [
+        "Charge"
+      ],
+      "triggerSubphase": "End of Phase",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Storm Shield",
+      "type": "wargear",
+      "description": "The bearer has a Wounds characteristic of 4.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": {
+        "wounds": 4,
+        "toughness": null,
+        "save": null,
+        "invulnerableSave": null,
+        "movement": null
+      }
+    }
+  ],
+  "wargearOptions": [
+    {
+      "description": "Any number of models can each have their thunder hammer and storm shield replaced with 1 twin lightning claws.",
+      "pointsCost": 0
+    }
+  ],
+  "pointsCost": 180,
+  "pointsTiers": [
+    {
+      "models": 5,
+      "points": 180
+    },
+    {
+      "models": 10,
+      "points": 360
+    }
+  ]
+}

@@ -1,0 +1,146 @@
+{
+  "name": "Storm Speeder Hammerstrike",
+  "faction": "Space Marines",
+  "subfaction": "Space Wolves",
+  "role": "Other",
+  "keywords": [
+    "VEHICLE",
+    "FLY",
+    "IMPERIUM",
+    "STORM SPEEDER HAMMERSTRIKE",
+    "RAVENWING",
+    "ADEPTUS ASTARTES"
+  ],
+  "stats": {
+    "movement": "14\"",
+    "toughness": 9,
+    "save": "3+",
+    "invulnerableSave": "",
+    "wounds": 11,
+    "leadership": 6,
+    "objectiveControl": 3
+  },
+  "composition": "1 Storm Speeder Hammerstrike",
+  "compositionData": [
+    {
+      "name": "Storm Speeder Hammerstrike",
+      "role": "regular",
+      "count": 1,
+      "woundsPerModel": 11
+    }
+  ],
+  "unitSize": "1",
+  "leaderRules": "",
+  "leaderAbilities": "",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Hammerstrike missile launcher",
+      "range": "36\"",
+      "type": "",
+      "attacks": "2",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "9",
+      "armorPenetration": "-3",
+      "damage": "D6",
+      "abilities": []
+    },
+    {
+      "name": "Krakstorm grenade launcher",
+      "range": "18\"",
+      "type": "",
+      "attacks": "1",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "9",
+      "armorPenetration": "-1",
+      "damage": "D3",
+      "abilities": []
+    },
+    {
+      "name": "Melta destroyer",
+      "range": "18\"",
+      "type": "",
+      "attacks": "3",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "9",
+      "armorPenetration": "-4",
+      "damage": "D6",
+      "abilities": [
+        "MELTA 2"
+      ]
+    },
+    {
+      "name": "Close combat weapon",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "4",
+      "ballisticSkill": "",
+      "weaponSkill": "3+",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": []
+    }
+  ],
+  "abilities": [
+    {
+      "name": "DEADLY DEMISE",
+      "type": "core",
+      "description": "Deadly Demise D3",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": true,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "DEEP STRIKE",
+      "type": "core",
+      "description": "Deep Strike",
+      "triggerPhase": [
+        "Deployment"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "OATH OF MOMENT",
+      "type": "faction",
+      "description": "Oath of Moment",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "HAMMERSTRIKE",
+      "type": "unit",
+      "description": "Each time this model has shot, select one enemy unit that was hit by one or more attacks made by this model this phase. Until the end of the phase, that enemy unit cannot have the Benefit of Cover.",
+      "triggerPhase": [
+        "Shooting"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [],
+  "pointsCost": 125,
+  "pointsTiers": [
+    {
+      "models": 1,
+      "points": 125
+    }
+  ]
+}

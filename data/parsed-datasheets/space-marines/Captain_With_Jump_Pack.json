@@ -1,0 +1,255 @@
+{
+  "name": "Captain With Jump Pack",
+  "faction": "Adeptus Astartes",
+  "subfaction": "Space Wolves",
+  "role": "Character",
+  "keywords": [
+    "INFANTRY",
+    "CHARACTER",
+    "JUMP PACK",
+    "FLY",
+    "GRENADES",
+    "IMPERIUM",
+    "TACTICUS",
+    "CAPTAIN",
+    "ADEPTUS ASTARTES"
+  ],
+  "stats": {
+    "movement": "12\"",
+    "toughness": 4,
+    "save": "3+",
+    "invulnerableSave": "4+",
+    "wounds": 5,
+    "leadership": 6,
+    "objectiveControl": 1
+  },
+  "composition": "1 Captain with Jump Pack",
+  "compositionData": [
+    {
+      "name": "Captain with Jump Pack",
+      "role": "leader",
+      "count": 1,
+      "woundsPerModel": 5
+    }
+  ],
+  "unitSize": "1",
+  "leaderRules": "This model can be attached to the following units: Assault Intercessors With Jump Packs, Vanguard Veteran Squad With Jump Packs, Sanguinary Guard, Talonstrike Kill Team, Assault Squad with Jump Packs, Skyclaws, Wolf Guard",
+  "leaderAbilities": "Angel’s Wrath: While this model is leading a unit, each time that unit ends a Charge move, until the end of the turn, add 1 to the Strength characteristic of melee weapons equipped by models in that unit.",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Hand flamer",
+      "range": "12\"",
+      "type": "Pistol",
+      "attacks": "D6",
+      "ballisticSkill": "N/A",
+      "weaponSkill": "",
+      "strength": "3",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "IGNORES COVER",
+        "PISTOL",
+        "TORRENT"
+      ]
+    },
+    {
+      "name": "Heavy bolt pistol",
+      "range": "18\"",
+      "type": "Pistol",
+      "attacks": "1",
+      "ballisticSkill": "2+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "-1",
+      "damage": "1",
+      "abilities": [
+        "PISTOL"
+      ]
+    },
+    {
+      "name": "Plasma pistol – standard",
+      "range": "12\"",
+      "type": "Pistol",
+      "attacks": "1",
+      "ballisticSkill": "2+",
+      "weaponSkill": "",
+      "strength": "7",
+      "armorPenetration": "-2",
+      "damage": "1",
+      "abilities": [
+        "PISTOL"
+      ]
+    },
+    {
+      "name": "Plasma pistol – supercharge",
+      "range": "12\"",
+      "type": "Pistol",
+      "attacks": "1",
+      "ballisticSkill": "2+",
+      "weaponSkill": "",
+      "strength": "8",
+      "armorPenetration": "-3",
+      "damage": "2",
+      "abilities": [
+        "HAZARDOUS",
+        "PISTOL"
+      ]
+    },
+    {
+      "name": "Astartes chainsword",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "7",
+      "ballisticSkill": "",
+      "weaponSkill": "2+",
+      "strength": "4",
+      "armorPenetration": "-1",
+      "damage": "1",
+      "abilities": []
+    },
+    {
+      "name": "Power fist",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "5",
+      "ballisticSkill": "",
+      "weaponSkill": "2+",
+      "strength": "8",
+      "armorPenetration": "-2",
+      "damage": "2",
+      "abilities": []
+    },
+    {
+      "name": "Relic weapon",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "6",
+      "ballisticSkill": "",
+      "weaponSkill": "2+",
+      "strength": "5",
+      "armorPenetration": "-2",
+      "damage": "2",
+      "abilities": []
+    },
+    {
+      "name": "Thunder hammer",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "5",
+      "ballisticSkill": "",
+      "weaponSkill": "3+",
+      "strength": "8",
+      "armorPenetration": "-2",
+      "damage": "2",
+      "abilities": [
+        "DEVASTATING WOUNDS"
+      ]
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Deep Strike",
+      "type": "core",
+      "description": "During the Declare Formations step, if every model in a unit has this ability, you can set it up in Reserves instead of setting it up on the battlefield. If you do, in the Reinforcements step of one of your Movement phases you can set up this unit anywhere on the battlefield that is more than 9\" away from all enemy models.",
+      "triggerPhase": [
+        "Deployment"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Leader",
+      "type": "core",
+      "description": "This model can be attached to a unit to lead it.",
+      "triggerPhase": [
+        "Keyword"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Oath of Moment",
+      "type": "faction",
+      "description": "If your Army Faction is Adeptus Astartes, at the start of your Command phase, you can select one unit from your opponent’s army. Until the start of your next Command phase, each time a model from your army with this ability makes an attack that targets that enemy unit, you can re-roll the Hit roll.",
+      "triggerPhase": [
+        "Command"
+      ],
+      "triggerSubphase": "Start of Phase",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Angel’s Wrath",
+      "type": "unit",
+      "description": "While this model is leading a unit, each time that unit ends a Charge move, until the end of the turn, add 1 to the Strength characteristic of melee weapons equipped by models in that unit.",
+      "triggerPhase": [
+        "Charge"
+      ],
+      "triggerSubphase": "End of Phase",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Rites of Battle",
+      "type": "unit",
+      "description": "Once per battle round, one unit from your army with this ability can use it when its unit is targeted with a Stratagem. If it does, reduce the CP cost of that use of that Stratagem by 1CP.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": true,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Relic Shield",
+      "type": "wargear",
+      "description": "The bearer has a Wounds characteristic of 6.",
+      "triggerPhase": [
+        "General"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": {
+        "wounds": 6,
+        "toughness": null,
+        "save": null,
+        "invulnerableSave": null,
+        "movement": null
+      }
+    }
+  ],
+  "wargearOptions": [
+    {
+      "description": "This model’s heavy bolt pistol can be replaced with one of the following: 1 plasma pistol; 1 hand flamer",
+      "pointsCost": 0
+    },
+    {
+      "description": "This model’s Astartes chainsword can be replaced with one of the following: 1 power fist; 1 relic weapon",
+      "pointsCost": 0
+    },
+    {
+      "description": "This model’s heavy bolt pistol and Astartes chainsword can be replaced with 1 thunder hammer and 1 relic shield.",
+      "pointsCost": 0
+    },
+    {
+      "description": "If this model is equipped with a heavy bolt pistol and an Astartes chainsword, it can be equipped with 1 relic shield. This model’s heavy bolt pistol and Astartes chainsword cannot be replaced.",
+      "pointsCost": 0
+    }
+  ],
+  "pointsCost": 75,
+  "pointsTiers": [
+    {
+      "models": 1,
+      "points": 75
+    }
+  ]
+}

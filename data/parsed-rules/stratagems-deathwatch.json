@@ -1,0 +1,88 @@
+{
+  "stratagems": [
+    {
+      "name": "ARMOUR OF CONTEMPT",
+      "type": "Battle Tactic",
+      "cpCost": "1",
+      "phase": "Any",
+      "fluff": "",
+      "when": "Your opponent’s Shooting phase or the Fight phase, just after an enemy unit has selected its",
+      "target": "s.TARGET: One ADEPTUS ASTARTES unit from your army that was selected as the target of one or more of the attacking unit’s attacks.",
+      "effect": "Until the attacking unit has finished making its attacks, each time an attack targets your unit, worsen the Armour Penetration characteristic of that attack by 1.",
+      "restrictions": "",
+      "detachment": "Black Spear Task Force",
+      "faction": "Deathwatch",
+      "source": "Wahapedia Scrape"
+    },
+    {
+      "name": "ADAPTIVE TACTICS",
+      "type": "Strategic Ploy",
+      "cpCost": "1",
+      "phase": "Any",
+      "fluff": "",
+      "when": "Your Command phase.",
+      "target": "Up to two KILL TEAM units from your army, or one other ADEPTUS ASTARTES unit from your army.",
+      "effect": "For each unit targeted, select Furor Tactics, Malleus Tactics or Purgatus Tactics. Until the start of your next Command phase, that Mission Tactic is active for that unit instead of any Mission Tactic that is active for your army.",
+      "restrictions": "",
+      "detachment": "Black Spear Task Force",
+      "faction": "Deathwatch",
+      "source": "Wahapedia Scrape"
+    },
+    {
+      "name": "HELLFIRE ROUNDS",
+      "type": "Wargear",
+      "cpCost": "1",
+      "phase": "Any",
+      "fluff": "",
+      "when": "Your Shooting phase.",
+      "target": "One KILL TEAM unit from your army that has not been selected to shoot this phase.",
+      "effect": "Until the end of the phase, ranged weapons (excluding Devastating Wounds weapons) equipped by models in your unit have the [ANTI-INFANTRY 2+] and [ANTI-MONSTER 5+] abilities.",
+      "restrictions": "You cannot select any units that have already been targeted with either the Kraken Rounds or Dragonfire Rounds Stratagems this phase.",
+      "detachment": "Black Spear Task Force",
+      "faction": "Deathwatch",
+      "source": "Wahapedia Scrape"
+    },
+    {
+      "name": "KRAKEN ROUNDS",
+      "type": "Wargear",
+      "cpCost": "1",
+      "phase": "Any",
+      "fluff": "",
+      "when": "Your Shooting phase.",
+      "target": "One KILL TEAM unit from your army that has not been selected to shoot this phase.",
+      "effect": "Until the end of the phase, improve the Armour Penetration characteristic of ranged weapons equipped by models in your unit by 1 and improve the Range characteristic of those weapons by 6\".",
+      "restrictions": "You cannot select any units that have already been targeted with either the Dragonfire Rounds or Hellfire Rounds Stratagems this phase.",
+      "detachment": "Black Spear Task Force",
+      "faction": "Deathwatch",
+      "source": "Wahapedia Scrape"
+    },
+    {
+      "name": "DRAGONFIRE ROUNDS",
+      "type": "Wargear",
+      "cpCost": "1",
+      "phase": "Any",
+      "fluff": "",
+      "when": "Your Shooting phase.",
+      "target": "One KILL TEAM unit from your army that has not been selected to shoot this phase.",
+      "effect": "Until the end of the phase, ranged weapons equipped by models in your unit have the [ASSAULT] and [IGNORES COVER] abilities.",
+      "restrictions": "You cannot select any units that have already been targeted with either the Kraken Rounds or Hellfire Rounds Stratagems this phase.",
+      "detachment": "Black Spear Task Force",
+      "faction": "Deathwatch",
+      "source": "Wahapedia Scrape"
+    },
+    {
+      "name": "SITE-TO-SITE TELEPORTATION",
+      "type": "Strategic Ploy",
+      "cpCost": "1",
+      "phase": "Any",
+      "fluff": "",
+      "when": "End of your opponent’s Fight phase.",
+      "target": "Up to two KILL TEAM units from your army, or one other ADEPTUS ASTARTES INFANTRY unit from your army, if those units are not within Engagement Range of one or more enemy units.",
+      "effect": "Remove those units from the battlefield and place them into Strategic Reserves. Until the end of your next Movement phase, models in those units that do not have the Deep Strike ability have the Deep Strike ability.",
+      "restrictions": "",
+      "detachment": "Black Spear Task Force",
+      "faction": "Deathwatch",
+      "source": "Wahapedia Scrape"
+    }
+  ]
+}

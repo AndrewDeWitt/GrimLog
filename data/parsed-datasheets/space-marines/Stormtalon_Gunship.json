@@ -1,0 +1,207 @@
+{
+  "name": "Stormtalon Gunship",
+  "faction": "Space Marines",
+  "subfaction": "Space Wolves",
+  "role": "Other",
+  "keywords": [
+    "VEHICLE",
+    "FLY",
+    "AIRCRAFT",
+    "IMPERIUM",
+    "STORMTALON GUNSHIP",
+    "RAVENWING",
+    "ADEPTUS ASTARTES"
+  ],
+  "stats": {
+    "movement": "20\"",
+    "toughness": 8,
+    "save": "3+",
+    "invulnerableSave": "",
+    "wounds": 10,
+    "leadership": 6,
+    "objectiveControl": 0
+  },
+  "composition": "1 Stormtalon Gunship",
+  "compositionData": [
+    {
+      "name": "Stormtalon Gunship",
+      "role": "regular",
+      "count": 1,
+      "woundsPerModel": 10
+    }
+  ],
+  "unitSize": "1",
+  "leaderRules": "",
+  "leaderAbilities": "",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Skyhammer missile launcher",
+      "range": "48\"",
+      "type": "Heavy 3",
+      "attacks": "3",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "8",
+      "armorPenetration": "-1",
+      "damage": "D3",
+      "abilities": [
+        "ANTI-FLY 2+",
+        "TWIN-LINKED"
+      ]
+    },
+    {
+      "name": "Twin assault cannon",
+      "range": "24\"",
+      "type": "Assault 6",
+      "attacks": "6",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "6",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "DEVASTATING WOUNDS",
+        "TWIN-LINKED"
+      ]
+    },
+    {
+      "name": "Twin heavy bolter",
+      "range": "36\"",
+      "type": "Assault 3",
+      "attacks": "3",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "5",
+      "armorPenetration": "-1",
+      "damage": "2",
+      "abilities": [
+        "SUSTAINED HITS 1",
+        "TWIN-LINKED"
+      ]
+    },
+    {
+      "name": "Twin lascannon",
+      "range": "48\"",
+      "type": "Heavy 1",
+      "attacks": "1",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "12",
+      "armorPenetration": "-3",
+      "damage": "D6+1",
+      "abilities": [
+        "TWIN-LINKED"
+      ]
+    },
+    {
+      "name": "Typhoon missile launcher – frag",
+      "range": "48\"",
+      "type": "Heavy 2D6",
+      "attacks": "2D6",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "BLAST"
+      ]
+    },
+    {
+      "name": "Typhoon missile launcher – krak",
+      "range": "48\"",
+      "type": "Heavy 2",
+      "attacks": "2",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "9",
+      "armorPenetration": "-2",
+      "damage": "D6",
+      "abilities": []
+    },
+    {
+      "name": "Armoured hull",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "3",
+      "ballisticSkill": "",
+      "weaponSkill": "4+",
+      "strength": "6",
+      "armorPenetration": "0",
+      "damage": "1W",
+      "abilities": []
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Deadly Demise D3",
+      "type": "core",
+      "description": "Deadly Demise D3",
+      "triggerPhase": [
+        "General"
+      ],
+      "triggerSubphase": "",
+      "isReactive": true,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Hover",
+      "type": "core",
+      "description": "Hover",
+      "triggerPhase": [
+        "General"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Oath of Moment",
+      "type": "faction",
+      "description": "Oath of Moment",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Strafing Run",
+      "type": "unit",
+      "description": "Each time this model makes a ranged attack that targets a unit that cannot Fly, add 1 to the Hit roll.",
+      "triggerPhase": [
+        "Shooting"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [
+    {
+      "description": "Replace skyhammer missile launcher with 1 twin heavy bolter",
+      "pointsCost": 0
+    },
+    {
+      "description": "Replace skyhammer missile launcher with 1 twin lascannon",
+      "pointsCost": 0
+    },
+    {
+      "description": "Replace skyhammer missile launcher with 1 typhoon missile launcher",
+      "pointsCost": 0
+    }
+  ],
+  "pointsCost": 165,
+  "pointsTiers": [
+    {
+      "models": 1,
+      "points": 165
+    }
+  ]
+}

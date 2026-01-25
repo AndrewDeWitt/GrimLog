@@ -1,0 +1,190 @@
+{
+  "name": "Invictor Tactical Warsuit",
+  "faction": "Space Marines",
+  "subfaction": "space-wolves",
+  "role": "Other",
+  "keywords": [
+    "VEHICLE",
+    "WALKER",
+    "IMPERIUM",
+    "PHOBOS",
+    "INVICTOR TACTICAL WARSUIT",
+    "ADEPTUS ASTARTES"
+  ],
+  "stats": {
+    "movement": "8\"",
+    "toughness": 8,
+    "save": "3+",
+    "invulnerableSave": "",
+    "wounds": 12,
+    "leadership": 6,
+    "objectiveControl": 4
+  },
+  "composition": "1 Invictor Tactical Warsuit",
+  "compositionData": [
+    {
+      "name": "Invictor Tactical Warsuit",
+      "role": "regular",
+      "count": 1,
+      "woundsPerModel": 12
+    }
+  ],
+  "unitSize": "1",
+  "leaderRules": "",
+  "leaderAbilities": "",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Fragstorm grenade launcher",
+      "range": "18\"",
+      "type": "Blast D6",
+      "attacks": "D6",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "BLAST"
+      ]
+    },
+    {
+      "name": "Heavy bolter (sustained hits 1)",
+      "range": "36\"",
+      "type": "Heavy 3",
+      "attacks": "3",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "5",
+      "armorPenetration": "-1",
+      "damage": "2",
+      "abilities": [
+        "SUSTAINED HITS 1"
+      ]
+    },
+    {
+      "name": "Incendium cannon (ignores cover, torrent)",
+      "range": "12\"",
+      "type": "D6",
+      "attacks": "D6",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "6",
+      "armorPenetration": "-1",
+      "damage": "1",
+      "abilities": [
+        "IGNORES COVER",
+        "TORRENT"
+      ]
+    },
+    {
+      "name": "Twin ironhail autocannon (twin-linked)",
+      "range": "48\"",
+      "type": "Heavy 3",
+      "attacks": "3",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "9",
+      "armorPenetration": "-1",
+      "damage": "3",
+      "abilities": [
+        "TWIN-LINKED"
+      ]
+    },
+    {
+      "name": "Twin ironhail heavy stubber (rapid fire 3, twin-linked)",
+      "range": "36\"",
+      "type": "Rapid Fire 3",
+      "attacks": "3",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "RAPID FIRE 3",
+        "TWIN-LINKED"
+      ]
+    },
+    {
+      "name": "Invictor fist",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "5",
+      "ballisticSkill": "",
+      "weaponSkill": "3+",
+      "strength": "14",
+      "armorPenetration": "-2",
+      "damage": "3",
+      "abilities": []
+    }
+  ],
+  "abilities": [
+    {
+      "name": "DEADLY DEMISE",
+      "type": "core",
+      "description": "Deadly Demise D3",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": true,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "SCOUTS",
+      "type": "core",
+      "description": "Scouts 8\"",
+      "triggerPhase": [
+        "Deployment"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "OATH OF MOMENT — COMBAT SUPPORT",
+      "type": "faction",
+      "description": "Combat Support: Once per turn, in your opponent’s Shooting phase, when a friendly ADEPTUS ASTARTES PHOBOS INFANTRY unit within 6\" of this model is selected as the target of an attack, one model from your army with this ability can use it. If it does, after that enemy unit has finished making its attacks, that model can shoot as if it were your Shooting phase, but when resolving those attacks it can only target that enemy unit (and only if it is an eligible target).",
+      "triggerPhase": [
+        "Shooting"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": true,
+      "requiredKeywords": [
+        "ADEPTUS ASTARTES",
+        "PHOBOS",
+        "INFANTRY"
+      ],
+      "effects": null
+    },
+    {
+      "name": "DAMAGED: 1-4 WOUNDS REMAINING",
+      "type": "unit",
+      "description": "DAMAGED: 1-4 WOUNDS REMAINING\nWhile this model has 1-4 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.",
+      "triggerPhase": [
+        "Shooting",
+        "Fight"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [
+    {
+      "description": "This model’s incendium cannon can be replaced with 1 twin ironhail autocannon.",
+      "pointsCost": 0
+    }
+  ],
+  "pointsCost": 125,
+  "pointsTiers": [
+    {
+      "models": 1,
+      "points": 125
+    }
+  ]
+}

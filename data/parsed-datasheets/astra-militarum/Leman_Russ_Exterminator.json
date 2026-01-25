@@ -1,0 +1,256 @@
+{
+  "name": "Leman Russ Exterminator",
+  "faction": "Astra Militarum",
+  "subfaction": "",
+  "role": "Other",
+  "keywords": [
+    "VEHICLE",
+    "SMOKE",
+    "IMPERIUM",
+    "SQUADRON",
+    "LEMAN RUSS EXTERMINATOR"
+  ],
+  "stats": {
+    "movement": "10\"",
+    "toughness": 11,
+    "save": "2+",
+    "invulnerableSave": "",
+    "wounds": 13,
+    "leadership": 7,
+    "objectiveControl": 3
+  },
+  "composition": "1 Leman Russ Exterminator",
+  "compositionData": [
+    {
+      "name": "Leman Russ Exterminator",
+      "role": "regular",
+      "count": 1,
+      "woundsPerModel": 13
+    }
+  ],
+  "unitSize": "1",
+  "leaderRules": "",
+  "leaderAbilities": "",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Exterminator autocannon",
+      "range": "48\"",
+      "type": "Rapid Fire 4, Twin-linked",
+      "attacks": "4",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "9",
+      "armorPenetration": "-1",
+      "damage": "3",
+      "abilities": [
+        "RAPID FIRE 4",
+        "TWIN-LINKED"
+      ]
+    },
+    {
+      "name": "Heavy bolter",
+      "range": "36\"",
+      "type": "Sustained Hits 1",
+      "attacks": "3",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "5",
+      "armorPenetration": "-1",
+      "damage": "2",
+      "abilities": [
+        "SUSTAINED HITS 1"
+      ]
+    },
+    {
+      "name": "Heavy flamer",
+      "range": "12\"",
+      "type": "Ignores Cover, Torrent",
+      "attacks": "D6",
+      "ballisticSkill": "N/A",
+      "weaponSkill": "",
+      "strength": "5",
+      "armorPenetration": "-1",
+      "damage": "1",
+      "abilities": [
+        "IGNORES COVER",
+        "TORRENT"
+      ]
+    },
+    {
+      "name": "Heavy stubber",
+      "range": "36\"",
+      "type": "Rapid Fire 3",
+      "attacks": "3",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "RAPID FIRE 3"
+      ]
+    },
+    {
+      "name": "Hunter-killer missile",
+      "range": "48\"",
+      "type": "One Shot",
+      "attacks": "1",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "14",
+      "armorPenetration": "-3",
+      "damage": "D6",
+      "abilities": [
+        "ONE SHOT"
+      ]
+    },
+    {
+      "name": "Lascannon",
+      "range": "48\"",
+      "type": "Lascannon",
+      "attacks": "1",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "12",
+      "armorPenetration": "-3",
+      "damage": "D6+1",
+      "abilities": []
+    },
+    {
+      "name": "Multi-melta",
+      "range": "18\"",
+      "type": "Melta 2",
+      "attacks": "2",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "9",
+      "armorPenetration": "-4",
+      "damage": "D6",
+      "abilities": [
+        "MELTA 2"
+      ]
+    },
+    {
+      "name": "Plasma cannon – standard",
+      "range": "36\"",
+      "type": "Blast",
+      "attacks": "D3",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "7",
+      "armorPenetration": "-2",
+      "damage": "1",
+      "abilities": [
+        "BLAST"
+      ]
+    },
+    {
+      "name": "Plasma cannon – supercharge",
+      "range": "36\"",
+      "type": "Blast, Hazardous",
+      "attacks": "D3",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "8",
+      "armorPenetration": "-3",
+      "damage": "2",
+      "abilities": [
+        "BLAST",
+        "HAZARDOUS"
+      ]
+    },
+    {
+      "name": "Storm bolter",
+      "range": "24\"",
+      "type": "Rapid Fire 2",
+      "attacks": "2",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "RAPID FIRE 2"
+      ]
+    },
+    {
+      "name": "Armoured tracks",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "6",
+      "ballisticSkill": "",
+      "weaponSkill": "4+",
+      "strength": "7",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": []
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Deadly Demise D3",
+      "type": "core",
+      "description": "When this model is destroyed, roll one D3. For each point of the result, each unit within 6\" of this model suffers 1 mortal wound.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": true,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Withering Hail",
+      "type": "unit",
+      "description": "In your Shooting phase, after this model has shot, select one enemy unit hit by one or more of those attacks made with its exterminator autocannon. Until the end of the phase, each time a friendly ASTRA MILITARUM unit makes an attack that targets that enemy unit, improve the Armour Penetration characteristic of that attack by 1. The same enemy unit can only be affected by this ability once per phase.",
+      "triggerPhase": [
+        "Shooting"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": [
+        "ASTRA MILITARUM"
+      ],
+      "effects": null
+    },
+    {
+      "name": "Damaged: 1-4 WOUNDS REMAINING",
+      "type": "unit",
+      "description": "While this model has 1-4 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.",
+      "triggerPhase": [
+        "Shooting",
+        "Fight"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [
+    {
+      "description": "This model’s lascannon can be replaced with one of the following: 1 heavy bolter; 1 heavy flamer",
+      "pointsCost": 0
+    },
+    {
+      "description": "This model can be equipped with one of the following: 2 heavy bolters; 2 heavy flamers; 2 multi-meltas; 2 plasma cannons",
+      "pointsCost": 0
+    },
+    {
+      "description": "This model can be equipped with one of the following: 1 heavy stubber; 1 storm bolter",
+      "pointsCost": 0
+    },
+    {
+      "description": "This model can be equipped with 1 hunter-killer missile.",
+      "pointsCost": 0
+    }
+  ],
+  "pointsCost": 180,
+  "pointsTiers": [
+    {
+      "models": 1,
+      "points": 180
+    }
+  ]
+}

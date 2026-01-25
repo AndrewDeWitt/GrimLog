@@ -1,0 +1,100 @@
+{
+  "name": "Aegis Defence Line",
+  "faction": "Astra Militarum",
+  "subfaction": "",
+  "role": "Fortifications",
+  "keywords": [
+    "FORTIFICATION",
+    "IMPERIUM",
+    "AEGIS DEFENCE LINE"
+  ],
+  "stats": {
+    "movement": "0\"",
+    "toughness": 12,
+    "save": "2+",
+    "invulnerableSave": "",
+    "wounds": 10,
+    "leadership": 7,
+    "objectiveControl": 0
+  },
+  "composition": "1 Aegis Defence Line",
+  "compositionData": [
+    {
+      "name": "Aegis Defence Line",
+      "role": "regular",
+      "count": 1,
+      "woundsPerModel": 10
+    }
+  ],
+  "unitSize": "1",
+  "leaderRules": "",
+  "leaderAbilities": "",
+  "transportCapacity": "",
+  "weapons": [],
+  "abilities": [
+    {
+      "name": "Emplacement Platform",
+      "type": "unit",
+      "description": "Friendly ASTRA MILITARUM INFANTRY models can be set up or end any type of move on top of the platform section of this FORTIFICATION.",
+      "triggerPhase": [
+        "Deployment",
+        "Movement"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [
+        "ASTRA MILITARUM",
+        "INFANTRY"
+      ],
+      "effects": null
+    },
+    {
+      "name": "Reinforced Cover",
+      "type": "unit",
+      "description": "Each time a ranged attack is allocated to a model, if that model is not fully visible to every model in the attacking unit because of this FORTIFICATION, that model has the Benefit of Cover against that attack.",
+      "triggerPhase": [
+        "Shooting"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": true,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Defence Line",
+      "type": "unit",
+      "description": "While an ASTRA MILITARUM INFANTRY model has the Benefit of Cover as a result of this terrain feature (see above), that model has a 4+ invulnerable save.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": true,
+      "requiredKeywords": [
+        "ASTRA MILITARUM",
+        "INFANTRY"
+      ],
+      "effects": null
+    },
+    {
+      "name": "Fortification",
+      "type": "core",
+      "description": "While an enemy unit is only within Engagement Range of one or more FORTIFICATIONS from your army: That unit can still be selected as the target of ranged attacks, but each time such an attack is made, unless it is made with a Pistol, subtract 1 from the Hit roll. Models in that unit do not need to take Desperate Escape tests due to Falling Back while Battle-shocked, except for those that will move over enemy models when doing so.",
+      "triggerPhase": [
+        "Shooting",
+        "Movement"
+      ],
+      "triggerSubphase": "",
+      "isReactive": true,
+      "requiredKeywords": [],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [],
+  "pointsCost": 145,
+  "pointsTiers": [
+    {
+      "models": 1,
+      "points": 145
+    }
+  ]
+}

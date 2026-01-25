@@ -1,0 +1,50 @@
+Test (590 Points)
+
+Space Marines
+Firestorm Assault Force
+Incursion (1,000 Points)
+
+CHARACTERS
+
+Captain (80 Points)
+  • 1x Bolt Pistol
+  • 1x Close combat weapon
+  • 1x Master-crafted bolter
+
+Librarian (65 Points)
+  • 1x Bolt pistol
+  • 1x Force weapon
+  • 1x Smite
+
+BATTLELINE
+
+Tactical Squad (140 Points)
+  • 1x Tactical Sergeant
+     ◦ 1x Bolt pistol
+     ◦ 1x Boltgun
+     ◦ 1x Close combat weapon
+  • 8x Tactical Marine
+     ◦ 8x Bolt pistol
+     ◦ 8x Boltgun
+     ◦ 8x Close combat weapon
+  • 1x Tactical Marine
+     ◦ 1x Bolt pistol
+     ◦ 1x Boltgun
+     ◦ 1x Close combat weapon
+
+OTHER DATASHEETS
+
+Dreadnought (135 Points)
+  • 1x Assault cannon
+  • 1x Dreadnought combat weapon
+  • 1x Storm bolter
+
+Terminator Squad (170 Points)
+  • 1x Terminator Sergeant
+     ◦ 1x Power fist
+     ◦ 1x Storm bolter
+  • 4x Terminator
+     ◦ 4x Power fist
+     ◦ 4x Storm bolter
+
+Exported with App Version: v1.41.0 (3), Data Version: v685

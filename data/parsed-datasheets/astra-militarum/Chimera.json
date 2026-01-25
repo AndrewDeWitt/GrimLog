@@ -1,0 +1,213 @@
+{
+  "name": "Chimera",
+  "faction": "Astra Militarum",
+  "subfaction": "",
+  "role": "Dedicated Transports",
+  "keywords": [
+    "VEHICLE",
+    "SMOKE",
+    "IMPERIUM",
+    "SQUADRON",
+    "TRANSPORT",
+    "DEDICATED TRANSPORT",
+    "CHIMERA"
+  ],
+  "stats": {
+    "movement": "10\"",
+    "toughness": 9,
+    "save": "3+",
+    "invulnerableSave": "",
+    "wounds": 11,
+    "leadership": 7,
+    "objectiveControl": 2
+  },
+  "composition": "1 Chimera",
+  "compositionData": [
+    {
+      "name": "Chimera",
+      "role": "regular",
+      "count": 1,
+      "woundsPerModel": 11
+    }
+  ],
+  "unitSize": "1",
+  "leaderRules": "",
+  "leaderAbilities": "",
+  "transportCapacity": "This model has a transport capacity of 12 ASTRA MILITARUM INFANTRY models. Each OGRYN model takes up the space of 3 models. It cannot transport ARTILLERY models.",
+  "weapons": [
+    {
+      "name": "Heavy bolter",
+      "range": "36\"",
+      "type": "Sustained Hits 1",
+      "attacks": "3",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "5",
+      "armorPenetration": "-1",
+      "damage": "2",
+      "abilities": [
+        "SUSTAINED HITS 1"
+      ]
+    },
+    {
+      "name": "Heavy flamer",
+      "range": "12\"",
+      "type": "Ignores Cover, Torrent",
+      "attacks": "D6",
+      "ballisticSkill": "N/A",
+      "weaponSkill": "",
+      "strength": "5",
+      "armorPenetration": "-1",
+      "damage": "1",
+      "abilities": [
+        "IGNORES COVER",
+        "TORRENT"
+      ]
+    },
+    {
+      "name": "Heavy stubber",
+      "range": "36\"",
+      "type": "Rapid Fire 3",
+      "attacks": "3",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "RAPID FIRE 3"
+      ]
+    },
+    {
+      "name": "Hunter-killer missile",
+      "range": "48\"",
+      "type": "One Shot",
+      "attacks": "1",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "14",
+      "armorPenetration": "-3",
+      "damage": "D6",
+      "abilities": [
+        "ONE SHOT"
+      ]
+    },
+    {
+      "name": "Lasgun array",
+      "range": "24\"",
+      "type": "Rapid Fire 6",
+      "attacks": "6",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "3",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "RAPID FIRE 6"
+      ]
+    },
+    {
+      "name": "Multi-laser",
+      "range": "36\"",
+      "type": "Ranged",
+      "attacks": "4",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "6",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": []
+    },
+    {
+      "name": "Storm bolter",
+      "range": "24\"",
+      "type": "Rapid Fire 2",
+      "attacks": "2",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "RAPID FIRE 2"
+      ]
+    },
+    {
+      "name": "Armoured tracks",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "3",
+      "ballisticSkill": "",
+      "weaponSkill": "4+",
+      "strength": "6",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": []
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Deadly Demise D3",
+      "type": "core",
+      "description": "When this model is destroyed, roll one D6. On a 6, it explodes and each unit within 6\" suffers D3 mortal wounds.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": true,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Firing Deck 2",
+      "type": "core",
+      "description": "Each time this TRANSPORT model is selected to shoot, up to 2 models embarked within it can also shoot.",
+      "triggerPhase": [
+        "Shooting"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Mobile Command Vehicle",
+      "type": "unit",
+      "description": "In your Command phase, one OFFICER model embarked within this TRANSPORT can issue Orders even though it is not on the battlefield. When doing so, measure distances to and from this TRANSPORT.",
+      "triggerPhase": [
+        "Command"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": [
+        "OFFICER"
+      ],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [
+    {
+      "description": "This model’s heavy bolter can be replaced with 1 heavy flamer.",
+      "pointsCost": 0
+    },
+    {
+      "description": "This model’s multi-laser can be replaced with one of the following: 1 heavy bolter, 1 heavy flamer.",
+      "pointsCost": 0
+    },
+    {
+      "description": "This model can be equipped with one of the following: 1 heavy stubber, 1 storm bolter.",
+      "pointsCost": 0
+    },
+    {
+      "description": "This model can be equipped with 1 hunter-killer missile.",
+      "pointsCost": 0
+    }
+  ],
+  "pointsCost": 85,
+  "pointsTiers": [
+    {
+      "models": 1,
+      "points": 85
+    }
+  ]
+}

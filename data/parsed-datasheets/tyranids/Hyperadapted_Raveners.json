@@ -1,0 +1,178 @@
+{
+  "name": "Hyperadapted Raveners",
+  "faction": "tyranids",
+  "subfaction": "",
+  "role": "Character",
+  "keywords": [
+    "INFANTRY",
+    "GREAT DEVOURER",
+    "VANGUARD INVADER",
+    "BURROWERS",
+    "HYPERADAPTED RAVENERS",
+    "CHARACTER",
+    "SYNAPSE",
+    "TYRANIDS"
+  ],
+  "stats": {
+    "movement": "10\"",
+    "toughness": 5,
+    "save": "4+",
+    "invulnerableSave": "",
+    "wounds": 6,
+    "leadership": 7,
+    "objectiveControl": 1
+  },
+  "composition": "1 Ravener Prime, 4 Raveners",
+  "compositionData": [
+    {
+      "name": "Ravener Prime",
+      "role": "leader",
+      "count": 1,
+      "woundsPerModel": 6
+    },
+    {
+      "name": "Ravener",
+      "role": "regular",
+      "count": 4,
+      "woundsPerModel": 3
+    }
+  ],
+  "unitSize": "5",
+  "leaderRules": "This model can be attached to the following unit: Raveners",
+  "leaderAbilities": "",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Venom bolt",
+      "range": "12\"",
+      "type": "Assault",
+      "attacks": "D6+3",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "6",
+      "armorPenetration": "-1",
+      "damage": "1",
+      "abilities": [
+        "ASSAULT",
+        "IGNORES COVER",
+        "TORRENT"
+      ]
+    },
+    {
+      "name": "Prime claws and talons",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "6",
+      "ballisticSkill": "",
+      "weaponSkill": "3+",
+      "strength": "5",
+      "armorPenetration": "-2",
+      "damage": "2",
+      "abilities": [
+        "ANTI-MONSTER 5+",
+        "ANTI-VEHICLE 5+",
+        "TWIN-LINKED"
+      ]
+    },
+    {
+      "name": "Ravener heavy claws and talons",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "3",
+      "ballisticSkill": "",
+      "weaponSkill": "3+",
+      "strength": "5",
+      "armorPenetration": "-2",
+      "damage": "2",
+      "abilities": [
+        "ANTI-MONSTER 5+",
+        "ANTI-VEHICLE 5+",
+        "TWIN-LINKED"
+      ]
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Deep Strike",
+      "type": "core",
+      "description": "Deep Strike.",
+      "triggerPhase": [
+        "Deployment"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Leader",
+      "type": "core",
+      "description": "Leader.",
+      "triggerPhase": [
+        "Keyword"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Shadow In The Warp (Ravener Prime only)",
+      "type": "faction",
+      "description": "Shadow In The Warp (Ravener Prime only).",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [
+        "RAVENER PRIME"
+      ],
+      "effects": null
+    },
+    {
+      "name": "Synapse",
+      "type": "faction",
+      "description": "Synapse.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Alpha Invader",
+      "type": "unit",
+      "description": "Weapons equipped by models in this unit have the [SUSTAINED HITS 1] ability.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Hypersensory Array",
+      "type": "unit",
+      "description": "Once per battle round, you can target this unit with the Rapid Ingress or Heroic Intervention Stratagem for 0CP, and can do so even if you have already targeted a different unit with that Stratagem this turn.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [],
+  "pointsCost": 165,
+  "pointsTiers": [
+    {
+      "models": 5,
+      "points": 165
+    }
+  ]
+}

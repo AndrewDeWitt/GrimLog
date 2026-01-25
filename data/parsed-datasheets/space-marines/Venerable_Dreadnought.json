@@ -1,0 +1,234 @@
+{
+  "name": "Venerable Dreadnought",
+  "faction": "Space Marines",
+  "subfaction": "Space Wolves",
+  "role": "Other",
+  "keywords": [
+    "VEHICLE",
+    "WALKER",
+    "SMOKE",
+    "IMPERIUM",
+    "DREADNOUGHT",
+    "VENERABLE DREADNOUGHT",
+    "ADEPTUS ASTARTES",
+    "SPACE WOLVES"
+  ],
+  "stats": {
+    "movement": "8\"",
+    "toughness": 9,
+    "save": "2+",
+    "invulnerableSave": "",
+    "wounds": 8,
+    "leadership": 6,
+    "objectiveControl": 3
+  },
+  "composition": "1 Venerable Dreadnought",
+  "compositionData": [
+    {
+      "name": "Venerable Dreadnought",
+      "role": "regular",
+      "count": 1,
+      "woundsPerModel": 8
+    }
+  ],
+  "unitSize": "1",
+  "leaderRules": "",
+  "leaderAbilities": "",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Assault cannon [devastating wounds]",
+      "range": "24\"",
+      "type": "Assault 6",
+      "attacks": "6",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "6",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "DEVASTATING WOUNDS"
+      ]
+    },
+    {
+      "name": "Heavy flamer [ignores cover, torrent]",
+      "range": "12\"",
+      "type": "Heavy D6",
+      "attacks": "D6",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "5",
+      "armorPenetration": "-1",
+      "damage": "1",
+      "abilities": [
+        "IGNORES COVER",
+        "TORRENT"
+      ]
+    },
+    {
+      "name": "Helfrost cannon – dispersed [torrent]",
+      "range": "12\"",
+      "type": "Heavy D6",
+      "attacks": "D6",
+      "ballisticSkill": "N/A",
+      "weaponSkill": "",
+      "strength": "6",
+      "armorPenetration": "-1",
+      "damage": "2",
+      "abilities": [
+        "TORRENT"
+      ]
+    },
+    {
+      "name": "Helfrost cannon – focused",
+      "range": "36\"",
+      "type": "Heavy 1",
+      "attacks": "1",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "10",
+      "armorPenetration": "-3",
+      "damage": "5",
+      "abilities": []
+    },
+    {
+      "name": "Multi-melta [melta 2]",
+      "range": "18\"",
+      "type": "Heavy 2",
+      "attacks": "2",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "9",
+      "armorPenetration": "-4",
+      "damage": "D6",
+      "abilities": [
+        "MELTA 2"
+      ]
+    },
+    {
+      "name": "Storm bolter [rapid fire 2]",
+      "range": "24\"",
+      "type": "Assault 2",
+      "attacks": "2",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "RAPID FIRE 2"
+      ]
+    },
+    {
+      "name": "Dreadnought combat weapon",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "5",
+      "ballisticSkill": "",
+      "weaponSkill": "3+",
+      "strength": "12",
+      "armorPenetration": "-2",
+      "damage": "3",
+      "abilities": []
+    },
+    {
+      "name": "Fenrisian greataxe – strike",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "6",
+      "ballisticSkill": "",
+      "weaponSkill": "3+",
+      "strength": "10",
+      "armorPenetration": "-2",
+      "damage": "D6+1",
+      "abilities": []
+    },
+    {
+      "name": "Fenrisian greataxe – sweep",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "12",
+      "ballisticSkill": "",
+      "weaponSkill": "3+",
+      "strength": "6",
+      "armorPenetration": "-2",
+      "damage": "1",
+      "abilities": []
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Deadly Demise 1",
+      "type": "core",
+      "description": "Deadly Demise 1",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": true,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Oath of Moment — Fervour of the Ancients (Aura)",
+      "type": "faction",
+      "description": "Fervour of the Ancients (Aura): While a friendly SPACE WOLVES unit is within 6\" of this model, add 1 to Advance and Charge rolls made for that unit.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [
+        "SPACE WOLVES"
+      ],
+      "effects": null
+    },
+    {
+      "name": "Blizzard Shield",
+      "type": "wargear",
+      "description": "The bearer has a 4+ invulnerable save.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": {
+        "wounds": null,
+        "toughness": null,
+        "save": null,
+        "invulnerableSave": "4+",
+        "movement": null
+      }
+    }
+  ],
+  "wargearOptions": [
+    {
+      "description": "This model’s assault cannon can be replaced with 1 helfrost cannon",
+      "pointsCost": 0
+    },
+    {
+      "description": "This model’s assault cannon can be replaced with 1 multi-melta",
+      "pointsCost": 0
+    },
+    {
+      "description": "This model’s storm bolter can be replaced with 1 heavy flamer",
+      "pointsCost": 0
+    },
+    {
+      "description": "This model’s assault cannon, storm bolter and Dreadnought combat weapon can be replaced with 1 Fenrisian greataxe, 1 blizzard shield and 1 storm bolter",
+      "pointsCost": 0
+    },
+    {
+      "description": "This model’s assault cannon, storm bolter and Dreadnought combat weapon can be replaced with 1 Fenrisian greataxe, 1 blizzard shield and 1 heavy flamer",
+      "pointsCost": 0
+    }
+  ],
+  "pointsCost": 165,
+  "pointsTiers": [
+    {
+      "models": 1,
+      "points": 165
+    }
+  ]
+}

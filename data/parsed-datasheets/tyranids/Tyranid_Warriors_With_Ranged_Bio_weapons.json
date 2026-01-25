@@ -1,0 +1,190 @@
+{
+  "name": "Tyranid Warriors With Ranged Bio-weapons",
+  "faction": "Tyranids",
+  "subfaction": "",
+  "role": "Elites",
+  "keywords": [
+    "INFANTRY",
+    "GREAT DEVOURER",
+    "SYNAPSE",
+    "TYRANID WARRIORS WITH RANGED BIO-WEAPONS"
+  ],
+  "stats": {
+    "movement": "6\"",
+    "toughness": 5,
+    "save": "4+",
+    "invulnerableSave": "",
+    "wounds": 3,
+    "leadership": 7,
+    "objectiveControl": 2
+  },
+  "composition": "1 Tyranid Prime, 2-5 Tyranid Warriors",
+  "compositionData": [
+    {
+      "name": "Tyranid Prime",
+      "role": "leader",
+      "count": 1,
+      "woundsPerModel": 3
+    },
+    {
+      "name": "Tyranid Warrior",
+      "role": "regular",
+      "count": 2,
+      "woundsPerModel": 3
+    }
+  ],
+  "unitSize": "1 Tyranid Prime, 2-5 Tyranid Warriors",
+  "leaderRules": "This unit can be led by the following unit: Winged Tyranid Prime",
+  "leaderAbilities": "",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Barbed strangler",
+      "range": "36\"",
+      "type": "Blast",
+      "attacks": "D6+1",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "6",
+      "armorPenetration": "-1",
+      "damage": "1",
+      "abilities": [
+        "BLAST"
+      ]
+    },
+    {
+      "name": "Deathspitter",
+      "range": "24\"",
+      "type": "Assault 3",
+      "attacks": "3",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "5",
+      "armorPenetration": "-1",
+      "damage": "1",
+      "abilities": []
+    },
+    {
+      "name": "Devourer",
+      "range": "18\"",
+      "type": "Assault 5",
+      "attacks": "5",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "5",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": []
+    },
+    {
+      "name": "Spinefists",
+      "range": "12\"",
+      "type": "Assault 2, Pistol, Twin-linked",
+      "attacks": "2",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "ASSAULT",
+        "PISTOL",
+        "TWIN-LINKED"
+      ]
+    },
+    {
+      "name": "Venom cannon",
+      "range": "36\"",
+      "type": "Blast",
+      "attacks": "D3",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "9",
+      "armorPenetration": "-2",
+      "damage": "2",
+      "abilities": [
+        "BLAST"
+      ]
+    },
+    {
+      "name": "Tyranid Warrior claws and talons",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "5",
+      "ballisticSkill": "",
+      "weaponSkill": "3+",
+      "strength": "5",
+      "armorPenetration": "-1",
+      "damage": "1",
+      "abilities": []
+    }
+  ],
+  "abilities": [
+    {
+      "name": "SHADOW IN THE WARP",
+      "type": "faction",
+      "description": "Shadow in the Warp",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "SYNAPSE",
+      "type": "faction",
+      "description": "Synapse",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "ADAPTABLE PREDATORS",
+      "type": "unit",
+      "description": "This unit is eligible to shoot and declare a charge in a turn in which it Fell Back.",
+      "triggerPhase": [
+        "Shooting",
+        "Charge"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [
+    {
+      "description": "Any number of models can each have their devourer replaced with 1 deathspitter.",
+      "pointsCost": 0
+    },
+    {
+      "description": "Any number of models can each have their devourer replaced with 1 spinefists.",
+      "pointsCost": 0
+    },
+    {
+      "description": "For every 3 models in this unit, 1 model’s devourer can be replaced with 1 barbed strangler.",
+      "pointsCost": 0
+    },
+    {
+      "description": "For every 3 models in this unit, 1 model’s devourer can be replaced with 1 venom cannon.",
+      "pointsCost": 0
+    }
+  ],
+  "pointsCost": 65,
+  "pointsTiers": [
+    {
+      "models": 3,
+      "points": 65
+    },
+    {
+      "models": 6,
+      "points": 130
+    }
+  ]
+}

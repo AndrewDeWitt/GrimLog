@@ -1,0 +1,122 @@
+{
+  "name": "Toxicrene",
+  "faction": "Tyranids",
+  "subfaction": "",
+  "role": "Monster",
+  "keywords": [
+    "MONSTER",
+    "GREAT DEVOURER",
+    "TOXICRENE",
+    "TYRANIDS"
+  ],
+  "stats": {
+    "movement": "8\"",
+    "toughness": 11,
+    "save": "3+",
+    "invulnerableSave": "",
+    "wounds": 14,
+    "leadership": 8,
+    "objectiveControl": 4
+  },
+  "composition": "1 Toxicrene",
+  "compositionData": [
+    {
+      "name": "Toxicrene",
+      "role": "regular",
+      "count": 1,
+      "woundsPerModel": 14
+    }
+  ],
+  "unitSize": "1",
+  "leaderRules": "",
+  "leaderAbilities": "",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Massive toxic lashes",
+      "range": "9\"",
+      "type": "Assault 2D6",
+      "attacks": "2D6",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "6",
+      "armorPenetration": "-1",
+      "damage": "2",
+      "abilities": [
+        "ANTI-INFANTRY 2+"
+      ]
+    },
+    {
+      "name": "Massive toxic lashes",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "12",
+      "ballisticSkill": "",
+      "weaponSkill": "3+",
+      "strength": "6",
+      "armorPenetration": "-1",
+      "damage": "2",
+      "abilities": [
+        "ANTI-INFANTRY 2+"
+      ]
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Deadly Demise D3",
+      "type": "core",
+      "description": "Deadly Demise D3",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": true,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Synapse",
+      "type": "faction",
+      "description": "Synapse",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Grasping Tendrils",
+      "type": "unit",
+      "description": "Grasping Tendrils: Each time an enemy unit (excluding TITANIC units) within Engagement Range of one or more units from your army with this ability is selected to Fall Back, you can roll one D6: on a 3+, that enemy unit must Remain Stationary instead.",
+      "triggerPhase": [
+        "Movement"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": true,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Hypertoxic Miasma (Aura)",
+      "type": "unit",
+      "description": "Hypertoxic Miasma (Aura): At the end of your Movement phase, roll one D6 for each enemy unit within 6\" of this model: on a 2-3, that unit suffers 1 mortal wound; on a 4-5, that unit suffers D3 mortal wounds; on a 6, that unit suffers D6 mortal wounds.",
+      "triggerPhase": [
+        "Movement"
+      ],
+      "triggerSubphase": "End of Phase",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [],
+  "pointsCost": 150,
+  "pointsTiers": [
+    {
+      "models": 1,
+      "points": 150
+    }
+  ]
+}

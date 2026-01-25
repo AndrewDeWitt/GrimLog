@@ -1,0 +1,179 @@
+{
+  "name": "Lieutenant With Combi-weapon",
+  "faction": "Space Marines",
+  "subfaction": "Space Wolves",
+  "role": "Character",
+  "keywords": [
+    "INFANTRY",
+    "CHARACTER",
+    "GRENADES",
+    "IMPERIUM",
+    "PHOBOS",
+    "LIEUTENANT",
+    "LIEUTENANT WITH COMBI-WEAPON",
+    "ADEPTUS ASTARTES"
+  ],
+  "stats": {
+    "movement": "6\"",
+    "toughness": 4,
+    "save": "3plus",
+    "invulnerableSave": "",
+    "wounds": 4,
+    "leadership": 6,
+    "objectiveControl": 1
+  },
+  "composition": "1 Lieutenant with Combi-weapon",
+  "compositionData": [
+    {
+      "name": "Lieutenant with Combi-weapon",
+      "role": "leader",
+      "count": 1,
+      "woundsPerModel": 4
+    }
+  ],
+  "unitSize": "1",
+  "leaderRules": "",
+  "leaderAbilities": "",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Combi-weapon",
+      "range": "24\"",
+      "type": "Ranged",
+      "attacks": "1",
+      "ballisticSkill": "3plus",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "ANTI-INFANTRY 4plus",
+        "DEVASTATING WOUNDS",
+        "RAPID FIRE 1"
+      ]
+    },
+    {
+      "name": "Paired combat blades",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "5",
+      "ballisticSkill": "",
+      "weaponSkill": "2plus",
+      "strength": "4",
+      "armorPenetration": "-1",
+      "damage": "1",
+      "abilities": [
+        "ANTI-INFANTRY 4plus",
+        "SUSTAINED HITS 1"
+      ]
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Feel No Pain 5plus",
+      "type": "core",
+      "description": "Models with this ability have a Feel No Pain 5plus ability.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": true,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Infiltrators",
+      "type": "core",
+      "description": "During deployment, if every model in this unit has this ability, then when you set this unit up, it can be set up anywhere on the battlefield that is more than 9\" away from the enemy deployment zone and any enemy models.",
+      "triggerPhase": [
+        "Deployment"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Lone Operative",
+      "type": "core",
+      "description": "Unless part of an Attached unit, this unit can only be selected as the target of a ranged attack if the attacking model is within 12\".",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": true,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Stealth",
+      "type": "core",
+      "description": "If every model in a unit has this ability, then each time a ranged attack is made against it, subtract 1 from the Hit roll.",
+      "triggerPhase": [
+        "Keyword"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Oath of Moment",
+      "type": "faction",
+      "description": "If your Army Faction is Adeptus Astartes, at the start of your Command phase, you can select one unit from your opponent's army. Until the start of your next Command phase, each time a model from your army with this ability makes an attack that targets that enemy unit, you can re-roll the Hit roll.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Priority Objective Identified",
+      "type": "unit",
+      "description": "At the start of the first battle round, if your army includes one or more models with this ability, you can select one objective marker on the battlefield. Until the end of the battle, while one or more models with this ability are on the battlefield, each time a friendly ADEPTUS ASTARTES model makes an attack that targets an enemy unit that is within range of that objective marker, re-roll a Wound roll of 1.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "Start of Phase",
+      "isReactive": false,
+      "requiredKeywords": [
+        "ADEPTUS ASTARTES"
+      ],
+      "effects": null
+    },
+    {
+      "name": "Evade and Survive",
+      "type": "unit",
+      "description": "Once per turn, when an enemy unit ends a Normal, Advance or Fall Back move within 9\" of this unit, if this unit is not within Engagement Range of one or more enemy units, it can make a Normal move.",
+      "triggerPhase": [
+        "Movement"
+      ],
+      "triggerSubphase": "End of Phase",
+      "isReactive": true,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Last Survivor",
+      "type": "unit",
+      "description": "This model cannot be selected as your Warlord.",
+      "triggerPhase": [
+        "General"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [],
+  "pointsCost": 70,
+  "pointsTiers": [
+    {
+      "models": 1,
+      "points": 70
+    }
+  ]
+}

@@ -1,0 +1,203 @@
+{
+  "name": "Stormlord",
+  "faction": "Astra Militarum",
+  "subfaction": "",
+  "role": "Other",
+  "keywords": [
+    "VEHICLE",
+    "TITANIC",
+    "SMOKE",
+    "IMPERIUM",
+    "TRANSPORT",
+    "STORMLORD"
+  ],
+  "stats": {
+    "movement": "12\"",
+    "toughness": 13,
+    "save": "2+",
+    "invulnerableSave": "",
+    "wounds": 24,
+    "leadership": 7,
+    "objectiveControl": 8
+  },
+  "composition": "1 Stormlord",
+  "compositionData": [
+    {
+      "name": "Stormlord",
+      "role": "regular",
+      "count": 1,
+      "woundsPerModel": 24
+    }
+  ],
+  "unitSize": "1",
+  "leaderRules": "",
+  "leaderAbilities": "",
+  "transportCapacity": "40 ASTRA MILITARUM INFANTRY models. Each OGRYN model takes up the space of 3 models. It cannot transport ARTILLERY models.",
+  "weapons": [
+    {
+      "name": "Heavy stubber",
+      "range": "36\"",
+      "type": "Rapid Fire 3",
+      "attacks": "3",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "RAPID FIRE 3"
+      ]
+    },
+    {
+      "name": "Lascannon",
+      "range": "48\"",
+      "type": "Heavy",
+      "attacks": "1",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "12",
+      "armorPenetration": "-3",
+      "damage": "D6+1",
+      "abilities": []
+    },
+    {
+      "name": "Twin heavy bolter",
+      "range": "36\"",
+      "type": "Sustained Hits 1, Twin-linked",
+      "attacks": "3",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "5",
+      "armorPenetration": "-1",
+      "damage": "2",
+      "abilities": [
+        "SUSTAINED HITS 1",
+        "TWIN-LINKED"
+      ]
+    },
+    {
+      "name": "Twin heavy flamer",
+      "range": "12\"",
+      "type": "Ignores Cover, Torrent, Twin-linked",
+      "attacks": "D6",
+      "ballisticSkill": "N/A",
+      "weaponSkill": "",
+      "strength": "5",
+      "armorPenetration": "-1",
+      "damage": "1",
+      "abilities": [
+        "IGNORES COVER",
+        "TORRENT",
+        "TWIN-LINKED"
+      ]
+    },
+    {
+      "name": "Vulcan mega-bolter",
+      "range": "48\"",
+      "type": "Sustained Hits 1",
+      "attacks": "20",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "6",
+      "armorPenetration": "-1",
+      "damage": "2",
+      "abilities": [
+        "SUSTAINED HITS 1"
+      ]
+    },
+    {
+      "name": "Armoured tracks",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "6",
+      "ballisticSkill": "",
+      "weaponSkill": "4+",
+      "strength": "8",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": []
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Deadly Demise D6+2",
+      "type": "core",
+      "description": "When this model is destroyed, roll one D6. On a 6, it explodes and each unit within 6\" suffers D6+2 mortal wounds.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": true,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Firing Deck 12",
+      "type": "core",
+      "description": "Each time this TRANSPORT shoots, you can select up to 12 models embarked within it. For each of those models, you can choose one ranged weapon that model is equipped with. Until that TRANSPORT has resolved all of its attacks, it is also equipped with those weapons.",
+      "triggerPhase": [
+        "Shooting"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Mount Up!",
+      "type": "unit",
+      "description": "At the end of your opponent’s Movement phase, if there are no models currently embarked within this TRANSPORT, you can select one friendly ASTRA MILITARUM INFANTRY unit (excluding ARTILLERY units) that is wholly within 6\" of this TRANSPORT. Unless that unit is within Engagement Range of one or more enemy units, it can embark within this TRANSPORT.",
+      "triggerPhase": [
+        "Movement"
+      ],
+      "triggerSubphase": "End of Phase",
+      "isReactive": true,
+      "requiredKeywords": [
+        "ASTRA MILITARUM",
+        "INFANTRY"
+      ],
+      "effects": null
+    },
+    {
+      "name": "Damaged: 1-8 Wounds Remaining",
+      "type": "unit",
+      "description": "While this model has 1-8 wounds remaining, subtract 4 from its Objective Control characteristic and each time this model makes an attack, subtract 1 from the Hit roll.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": true,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Voice of Command",
+      "type": "faction",
+      "description": "This unit can be affected by Astra Militarum Orders.",
+      "triggerPhase": [
+        "Command"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [
+    {
+      "description": "This model’s 2 twin heavy flamers can be replaced with 2 twin heavy bolters.",
+      "pointsCost": 0
+    },
+    {
+      "description": "This model can be equipped with one of the following: 2 lascannons and 2 twin heavy bolters; 2 lascannons and 2 twin heavy flamers",
+      "pointsCost": 0
+    }
+  ],
+  "pointsCost": 430,
+  "pointsTiers": [
+    {
+      "models": 1,
+      "points": 430
+    }
+  ]
+}

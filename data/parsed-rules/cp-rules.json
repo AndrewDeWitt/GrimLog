@@ -1,0 +1,155 @@
+{
+  "rules": [
+    {
+      "name": "CP Gained at the Start of the Command Phase",
+      "category": "gain",
+      "rule": "Each player gains 1 Command Point (CP) at the start of their Command phase.",
+      "limit": 1,
+      "description": "Players gain 1CP at the start of the Command phase (the default CP gain each Command phase). This is referred to in the rules as the 1CP players gain at the start of the Command phase.",
+      "sourceId": "core-rules-updates-2024",
+      "sourceName": "Core Rules Updates",
+      "sourceVersion": "2024.10",
+      "extractedAt": "2025-11-12T13:59:23.272Z"
+    },
+    {
+      "name": "Per-battle-round CP Gain Limit",
+      "category": "limit",
+      "rule": "Outside of the 1CP gained at the start of the Command phase, each player can only gain a total of 1CP per battle round from all other sources.",
+      "limit": 1,
+      "description": "\"Outside of the 1CP players gain at the start of the Command phase (see right), each player can only gain a total of 1CP per battle round, regardless of the source [this includes other CP gained at the start of the Command phase].\" In effect: baseline 1CP at start of Command phase; beyond that baseline, a player may normally gain at most 1 additional CP per battle round from any sources.",
+      "sourceId": "core-rules-updates-2024",
+      "sourceName": "Core Rules Updates",
+      "sourceVersion": "2024.10",
+      "extractedAt": "2025-11-12T13:59:23.272Z"
+    },
+    {
+      "name": "CP Gained at Start from Abilities Counts Toward Per-Round Limit",
+      "category": "limit",
+      "rule": "CP gained at the start of the Command phase as a result of an ability counts toward the per-battle-round CP gain limit.",
+      "limit": 1,
+      "description": "\"CP gained at the start of the Command phase as a result of any ability (e.g. The Swarmlord's Hive Commander ability) count towards the 1CP gained per battle round limit.\" In other words, CP awarded by abilities that would be gained at the start of the Command phase are considered when enforcing the per-battle-round gain limit.",
+      "sourceId": "core-rules-updates-2024",
+      "sourceName": "Core Rules Updates",
+      "sourceVersion": "2024.10",
+      "extractedAt": "2025-11-12T13:59:23.272Z"
+    },
+    {
+      "name": "CP From Discarding Secondary Mission Cards",
+      "category": "gain",
+      "rule": "CP gained for discarding Secondary Mission cards (mission-pack rewards) counts toward the per-battle-round CP gain limit.",
+      "limit": null,
+      "description": "\"Gaining CP From Mission Cards: When playing a mission that gives a player one or more CP for discarding Secondary Mission cards, that CP counts towards the limit on the number of CP that player can gain that battle round.\" This means CP awarded by mission card discard effects is not exempt from the per-battle-round limit.",
+      "sourceId": "core-rules-updates-2024",
+      "sourceName": "Core Rules Updates",
+      "sourceVersion": "2024.10",
+      "extractedAt": "2025-11-12T13:59:23.272Z"
+    },
+    {
+      "name": "Once-per-battle CP Exceptions",
+      "category": "limit",
+      "rule": "If a rule that takes effect once per battle explicitly gives more than the usual CP limit in a battle round, that effect ignores the per-battle-round CP gain limitation.",
+      "limit": null,
+      "description": "Q/A: \"If a rule that takes effect once per battle explicitly gives a player more than 1CP in a battle round (e.g. the Imperial Knights Code Chivalric army rule), does that rule ignore the limitations on how many CP a player can gain in a battle round? A: Yes.\" Such once-per-battle CP grants can exceed the normal per-battle-round CP gain limits.",
+      "sourceId": "core-rules-updates-2024",
+      "sourceName": "Core Rules Updates",
+      "sourceVersion": "2024.10",
+      "extractedAt": "2025-11-12T13:59:23.272Z"
+    },
+    {
+      "name": "Stratagem CP Cost Modification by Abilities",
+      "category": "spend",
+      "rule": "Abilities can modify the CP cost of a Stratagem even if that Stratagem targets both friendly and enemy units or multiple friendly units.",
+      "limit": null,
+      "description": "Q/A entries: \"If a Stratagem targets both one or more units from my army and one or more units from my opponent’s army, can I use an ability to modify that Stratagem’s CP cost? A: Yes.\" and \"If a Stratagem targets two or more units from my army, can I use an ability to modify that Stratagem’s CP cost? A: Yes.\" Abilities (or rules) that modify Stratagem costs can be applied in these cases.",
+      "sourceId": "core-rules-updates-2024",
+      "sourceName": "Core Rules Updates",
+      "sourceVersion": "2024.10",
+      "extractedAt": "2025-11-12T13:59:23.272Z"
+    },
+    {
+      "name": "COMMAND RE-ROLL Stratagem (1CP)",
+      "category": "spend",
+      "rule": "COMMAND RE-ROLL costs 1CP to use.",
+      "limit": 1,
+      "description": "COMMAND RE-ROLL (1CP) CORE – BATTLE TACTIC STRATAGEM. WHEN: Any phase, just after you make an Advance roll, a Charge roll, a Desperate Escape test or a Hazardous test for a unit from your army, or a Hit roll, a Wound roll, a Damage roll or a saving throw for a model in that unit, or a roll to determine the number of attacks made with a weapon equipped by a model in that unit. If you are using fast dice rolling, this Stratagem can still be used after rolling multiple rolls or saving throws at once. TARGET: That unit or model from your army. EFFECT: You re-roll that roll, test or saving throw. If you are using fast dice rolling, select one of those rolls or saving throws to re-roll.",
+      "sourceId": "core-rules-updates-2024",
+      "sourceName": "Core Rules Updates",
+      "sourceVersion": "2024.10",
+      "extractedAt": "2025-11-12T13:59:23.272Z"
+    },
+    {
+      "name": "INSANE BRAVERY Stratagem (1CP)",
+      "category": "spend",
+      "rule": "INSANE BRAVERY costs 1CP to use.",
+      "limit": 1,
+      "description": "INSANE BRAVERY (1CP) CORE – EPIC DEED STRATAGEM. WHEN: Battle-shock step of your Command phase, just before you take a Battle-shock test for a unit from your army. TARGET: That unit from your army. EFFECT: Your unit automatically passes that Battle-shock test. RESTRICTIONS: You cannot use this Stratagem more than once per battle.",
+      "sourceId": "core-rules-updates-2024",
+      "sourceName": "Core Rules Updates",
+      "sourceVersion": "2024.10",
+      "extractedAt": "2025-11-12T13:59:23.272Z"
+    },
+    {
+      "name": "GRENADE Stratagem (1CP)",
+      "category": "spend",
+      "rule": "GRENADE costs 1CP to use.",
+      "limit": 1,
+      "description": "GRENADE (1CP) CORE – WARGEAR STRATAGEM. WHEN: Your Shooting phase. TARGET: One GRENADES unit from your army (excluding units that Advanced, Fell Back or have shot this turn) that is not within Engagement Range of one or more enemy units. EFFECT: Select one GRENADES model in your unit and one enemy unit that is not within Engagement Range of one or more units from your army and is within 8\" of and visible to your GRENADES model. Roll six D6: for each 4+, that enemy unit suffers 1 mortal wound.",
+      "sourceId": "core-rules-updates-2024",
+      "sourceName": "Core Rules Updates",
+      "sourceVersion": "2024.10",
+      "extractedAt": "2025-11-12T13:59:23.272Z"
+    },
+    {
+      "name": "TANK SHOCK Stratagem (1CP)",
+      "category": "spend",
+      "rule": "TANK SHOCK costs 1CP to use.",
+      "limit": 1,
+      "description": "TANK SHOCK (1CP) CORE — STRATEGIC PLOY STRATAGEM. WHEN: Your Charge phase, just after a VEHICLE unit from your army ends a Charge move. TARGET: That VEHICLE unit. EFFECT: Select one enemy unit within Engagement Range of your unit, and select one VEHICLE model in your unit that is within Engagement Range of that enemy unit. Roll a number of D6 equal to the Toughness characteristic of the selected VEHICLE model. For each 5+, that enemy unit suffers 1 mortal wound (to a maximum of 6 mortal wounds).",
+      "sourceId": "core-rules-updates-2024",
+      "sourceName": "Core Rules Updates",
+      "sourceVersion": "2024.10",
+      "extractedAt": "2025-11-12T13:59:23.272Z"
+    },
+    {
+      "name": "RAPID INGRESS Stratagem (1CP)",
+      "category": "spend",
+      "rule": "RAPID INGRESS costs 1CP to use.",
+      "limit": 1,
+      "description": "RAPID INGRESS (1CP) CORE — STRATEGIC PLOY STRATAGEM. WHEN: End of your opponent's Movement phase. TARGET: One unit from your army that is in Reserves. EFFECT: Your unit can arrive on the battlefield as if it were the Reinforcements step of your Movement phase, and if every model in that unit has the Deep Strike ability, you can set that unit up as described in the Deep Strike ability (even though it is not your Movement phase). RESTRICTIONS: You cannot use this Stratagem to enable a unit to arrive on the battlefield during a battle round it would not normally be able to do so in.",
+      "sourceId": "core-rules-updates-2024",
+      "sourceName": "Core Rules Updates",
+      "sourceVersion": "2024.10",
+      "extractedAt": "2025-11-12T13:59:23.272Z"
+    },
+    {
+      "name": "FIRE OVERWATCH Stratagem (1CP)",
+      "category": "spend",
+      "rule": "FIRE OVERWATCH costs 1CP to use.",
+      "limit": 1,
+      "description": "FIRE OVERWATCH (1CP) CORE — STRATEGIC PLOY STRATAGEM. WHEN: Your opponent's Movement or Charge phase, just after an enemy unit is set up or when an enemy unit starts or ends a Normal, Advance or Fall Back move, or declares a charge. TARGET: One unit from your army that is within 24\" of that enemy unit and that would be eligible to shoot it if it were your Shooting phase. EFFECT: If that enemy unit is visible to your unit, your unit can shoot that enemy unit as if it were your Shooting phase. RESTRICTIONS: You cannot target a TITANIC unit with this Stratagem. Until the end of the phase, each time a model in your unit makes a ranged attack, an unmodified Hit roll of 6 is required to score a hit, irrespective of the attacking weapon's Ballistic Skill or any modifiers. You can only use this Stratagem once per turn.",
+      "sourceId": "core-rules-updates-2024",
+      "sourceName": "Core Rules Updates",
+      "sourceVersion": "2024.10",
+      "extractedAt": "2025-11-12T13:59:23.272Z"
+    },
+    {
+      "name": "HEROIC INTERVENTION Stratagem (1CP)",
+      "category": "spend",
+      "rule": "HEROIC INTERVENTION costs 1CP to use.",
+      "limit": 1,
+      "description": "HEROIC INTERVENTION (1CP) CORE — STRATEGIC PLOY STRATAGEM. WHEN: Your opponent's Charge phase, just after an enemy unit ends a Charge move. TARGET: One unit from your army that is within 6\" of that enemy unit and would be eligible to declare a charge against that enemy unit if it were your Charge phase. EFFECT: Your unit now declares a charge that targets only that enemy unit, and you resolve that charge as if it were your Charge phase. RESTRICTIONS: You can only select a VEHICLE unit from your army if it is a WALKER. Note that even if this charge is successful, your unit does not receive any Charge bonus this turn.",
+      "sourceId": "core-rules-updates-2024",
+      "sourceName": "Core Rules Updates",
+      "sourceVersion": "2024.10",
+      "extractedAt": "2025-11-12T13:59:23.272Z"
+    }
+  ],
+  "sources": [
+    {
+      "id": "core-rules-updates-2024",
+      "name": "Core Rules Updates",
+      "version": "2024.10",
+      "lastExtracted": "2025-11-12T13:59:23.272Z"
+    }
+  ]
+}

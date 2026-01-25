@@ -1,0 +1,102 @@
+{
+  "name": "Fenrisian Wolves",
+  "faction": "Space Marines",
+  "subfaction": "Space Wolves",
+  "role": "Other",
+  "keywords": [
+    "BEASTS",
+    "IMPERIUM",
+    "FENRISIAN WOLVES",
+    "ADEPTUS ASTARTES",
+    "SPACE WOLVES"
+  ],
+  "stats": {
+    "movement": "10\"",
+    "toughness": 4,
+    "save": "6+",
+    "invulnerableSave": "",
+    "wounds": 1,
+    "leadership": 8,
+    "objectiveControl": 0
+  },
+  "composition": "5-10 Fenrisian Wolves",
+  "compositionData": [
+    {
+      "name": "Fenrisian Wolves",
+      "role": "regular",
+      "count": 5,
+      "woundsPerModel": 1
+    }
+  ],
+  "unitSize": "5-10",
+  "leaderRules": "",
+  "leaderAbilities": "",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Teeth and claws",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "3",
+      "ballisticSkill": "",
+      "weaponSkill": "4+",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": []
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Oath of Moment",
+      "type": "faction",
+      "description": "If your Army Faction is Adeptus Astartes, at the start of your Command phase, you can select one unit from your opponent's army. Until the start of your next Command phase, each time a model from your army with this ability makes an attack that targets that enemy unit, you can re-roll the Hit roll.",
+      "triggerPhase": [
+        "Command"
+      ],
+      "triggerSubphase": "Start of Phase",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Predatory Instinct",
+      "type": "unit",
+      "description": "Once per turn, when an enemy unit ends a Normal, Advance or Fall Back move within 9\" of this unit, it can make a Normal move of up to D6\".",
+      "triggerPhase": [
+        "Movement"
+      ],
+      "triggerSubphase": "",
+      "isReactive": true,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Hunting Hounds",
+      "type": "unit",
+      "description": "While this unit is within 6\" of one or more friendly SPACE WOLVES CHARACTER models (excluding WULFEN models), if this unit is not Battle-shocked, models in it have an Objective Control characteristic of 1.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [
+        "SPACE WOLVES",
+        "CHARACTER"
+      ],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [],
+  "pointsCost": 40,
+  "pointsTiers": [
+    {
+      "models": 5,
+      "points": 40
+    },
+    {
+      "models": 10,
+      "points": 80
+    }
+  ]
+}

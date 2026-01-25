@@ -1,0 +1,188 @@
+{
+  "name": "Valkyrie",
+  "faction": "Astra Militarum",
+  "subfaction": "",
+  "role": "Other",
+  "keywords": [
+    "VEHICLE",
+    "FLY",
+    "AIRCRAFT",
+    "IMPERIUM",
+    "TRANSPORT",
+    "VALKYRIE"
+  ],
+  "stats": {
+    "movement": "20+\"",
+    "toughness": 10,
+    "save": "2+",
+    "invulnerableSave": "",
+    "wounds": 14,
+    "leadership": 7,
+    "objectiveControl": 0
+  },
+  "composition": "1 Valkyrie",
+  "compositionData": [
+    {
+      "name": "Valkyrie",
+      "role": "regular",
+      "count": 1,
+      "woundsPerModel": 14
+    }
+  ],
+  "unitSize": "1",
+  "leaderRules": "",
+  "leaderAbilities": "",
+  "transportCapacity": "12 ASTRA MILITARUM INFANTRY models. Each OGRYN model takes up the space of 3 models. It cannot transport ARTILLERY models.",
+  "weapons": [
+    {
+      "name": "Heavy bolter",
+      "range": "36\"",
+      "type": "Ranged",
+      "attacks": "3",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "5",
+      "armorPenetration": "-1",
+      "damage": "2",
+      "abilities": [
+        "SUSTAINED HITS 1"
+      ]
+    },
+    {
+      "name": "Hellstrike missiles",
+      "range": "48\"",
+      "type": "Ranged",
+      "attacks": "1",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "10",
+      "armorPenetration": "-3",
+      "damage": "D6",
+      "abilities": [
+        "ANTI-FLY 2+"
+      ]
+    },
+    {
+      "name": "Lascannon",
+      "range": "48\"",
+      "type": "Ranged",
+      "attacks": "1",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "12",
+      "armorPenetration": "-3",
+      "damage": "D6+1",
+      "abilities": []
+    },
+    {
+      "name": "Multi-laser",
+      "range": "36\"",
+      "type": "Ranged",
+      "attacks": "4",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "6",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": []
+    },
+    {
+      "name": "Multiple rocket pod",
+      "range": "36\"",
+      "type": "Ranged",
+      "attacks": "D6",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "6",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "BLAST"
+      ]
+    },
+    {
+      "name": "Armoured hull",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "3",
+      "ballisticSkill": "",
+      "weaponSkill": "4+",
+      "strength": "6",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": []
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Deadly Demise D6",
+      "type": "core",
+      "description": "When this model is destroyed, roll one D6. On a 6, each unit within 6\" suffers D6 mortal wounds.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": true,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Hover",
+      "type": "core",
+      "description": "Your model has a Movement characteristic of 20\" and loses the AIRCRAFT keyword.",
+      "triggerPhase": [
+        "Deployment"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Airborne Insertion",
+      "type": "unit",
+      "description": "At the end of your opponent’s Movement phase, one or more units embarked within this TRANSPORT can disembark from it.",
+      "triggerPhase": [
+        "Movement"
+      ],
+      "triggerSubphase": "End of Phase",
+      "isReactive": true,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Damaged: 1-5 Wounds Remaining",
+      "type": "unit",
+      "description": "While this model has 1-5 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.",
+      "triggerPhase": [
+        "Shooting",
+        "Fight"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": true,
+      "requiredKeywords": [],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [
+    {
+      "description": "This model’s multi-laser can be replaced with 1 lascannon.",
+      "pointsCost": 0
+    },
+    {
+      "description": "This model’s hellstrike missiles can be replaced with 2 multiple rocket pods.",
+      "pointsCost": 0
+    },
+    {
+      "description": "This model can be equipped with 2 heavy bolters.",
+      "pointsCost": 0
+    }
+  ],
+  "pointsCost": 190,
+  "pointsTiers": [
+    {
+      "models": 1,
+      "points": 190
+    }
+  ]
+}

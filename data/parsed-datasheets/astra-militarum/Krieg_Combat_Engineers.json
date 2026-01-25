@@ -1,0 +1,271 @@
+{
+  "name": "Krieg Combat Engineers",
+  "faction": "Astra Militarum",
+  "subfaction": "",
+  "role": "Other",
+  "keywords": [
+    "INFANTRY",
+    "SMOKE",
+    "GRENADES",
+    "IMPERIUM",
+    "REGIMENT",
+    "KRIEG COMBAT ENGINEERS"
+  ],
+  "stats": {
+    "movement": "6\"",
+    "toughness": 3,
+    "save": "4+",
+    "invulnerableSave": "",
+    "wounds": 1,
+    "leadership": 7,
+    "objectiveControl": 1
+  },
+  "composition": "1 Krieg Engineer Watchmaster, 4-9 Krieg Combat Engineers",
+  "compositionData": [
+    {
+      "name": "Krieg Engineer Watchmaster",
+      "role": "leader",
+      "count": 1,
+      "woundsPerModel": 1
+    },
+    {
+      "name": "Krieg Combat Engineer",
+      "role": "regular",
+      "count": 4,
+      "woundsPerModel": 1
+    }
+  ],
+  "unitSize": "5-10",
+  "leaderRules": "This unit can be led by the following units: Commissar, Krieg Command Squad, Lord Solar Leontus, Ministorum Priest, Primaris Psyker, Tech-Priest Enginseer",
+  "leaderAbilities": "",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Autopistol",
+      "range": "12\"",
+      "type": "Pistol",
+      "attacks": "1",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "3",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "PISTOL"
+      ]
+    },
+    {
+      "name": "Bolt pistol",
+      "range": "12\"",
+      "type": "Pistol",
+      "attacks": "1",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "PISTOL"
+      ]
+    },
+    {
+      "name": "Combat shotgun",
+      "range": "12\"",
+      "type": "Assault",
+      "attacks": "2",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "ASSAULT"
+      ]
+    },
+    {
+      "name": "Flamer",
+      "range": "12\"",
+      "type": "Ranged",
+      "attacks": "D6",
+      "ballisticSkill": "N/A",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "IGNORES COVER",
+        "TORRENT"
+      ]
+    },
+    {
+      "name": "Hand flamer",
+      "range": "12\"",
+      "type": "Pistol",
+      "attacks": "D6",
+      "ballisticSkill": "N/A",
+      "weaponSkill": "",
+      "strength": "3",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "IGNORES COVER",
+        "PISTOL",
+        "TORRENT"
+      ]
+    },
+    {
+      "name": "Plasma pistol – standard",
+      "range": "12\"",
+      "type": "Pistol",
+      "attacks": "1",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "7",
+      "armorPenetration": "-2",
+      "damage": "1",
+      "abilities": [
+        "PISTOL"
+      ]
+    },
+    {
+      "name": "Plasma pistol – supercharge",
+      "range": "12\"",
+      "type": "Pistol",
+      "attacks": "1",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "8",
+      "armorPenetration": "-3",
+      "damage": "2",
+      "abilities": [
+        "HAZARDOUS",
+        "PISTOL"
+      ]
+    },
+    {
+      "name": "Chainsword",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "4",
+      "ballisticSkill": "",
+      "weaponSkill": "4+",
+      "strength": "3",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": []
+    },
+    {
+      "name": "Close combat weapon",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "2",
+      "ballisticSkill": "",
+      "weaponSkill": "4+",
+      "strength": "3",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": []
+    },
+    {
+      "name": "Power weapon",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "3",
+      "ballisticSkill": "",
+      "weaponSkill": "4+",
+      "strength": "4",
+      "armorPenetration": "-2",
+      "damage": "1",
+      "abilities": []
+    },
+    {
+      "name": "Trench club",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "2",
+      "ballisticSkill": "",
+      "weaponSkill": "4+",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": []
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Scouts 6\"",
+      "type": "core",
+      "description": "Scouts 6\"",
+      "triggerPhase": [
+        "Deployment"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Grenadiers",
+      "type": "unit",
+      "description": "Once per turn, you can target this unit with the Grenade Stratagem for 0CP.",
+      "triggerPhase": [
+        "Shooting"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Remote Mine",
+      "type": "wargear",
+      "description": "Once per battle, at the start of your Shooting phase, you can select one enemy unit within 9\" of and visible to the bearer and roll one D6: on a 3+, that enemy unit suffers D3 mortal wounds, or 2D3 mortal wounds instead if it is a VEHICLE or FORTIFICATIONS unit. Designer’s Note: Place a Remote Mine token next to the unit, removing it once this ability has been used.",
+      "triggerPhase": [
+        "Shooting"
+      ],
+      "triggerSubphase": "Start of Phase",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": {
+        "wounds": null,
+        "toughness": null,
+        "save": null,
+        "invulnerableSave": null,
+        "movement": null
+      }
+    }
+  ],
+  "wargearOptions": [
+    {
+      "description": "1 Krieg Combat Engineer's autopistol and trench club can be replaced with 1 flamer and 1 close combat weapon.",
+      "pointsCost": 0
+    },
+    {
+      "description": "1 Krieg Combat Engineer’s autopistol and trench club can be replaced with 1 autopistol, 1 remote mine and 1 close combat weapon.",
+      "pointsCost": 0
+    },
+    {
+      "description": "Any number of models can each have their autopistol and trench club replaced with 1 combat shotgun and 1 close combat weapon.",
+      "pointsCost": 0
+    },
+    {
+      "description": "The Krieg Engineer Watchmaster’s autopistol can be replaced with one of the following: 1 bolt pistol, 1 hand flamer, 1 plasma pistol.",
+      "pointsCost": 0
+    },
+    {
+      "description": "The Krieg Engineer Watchmaster’s trench club can be replaced with one of the following: 1 chainsword, 1 power weapon.",
+      "pointsCost": 0
+    }
+  ],
+  "pointsCost": 60,
+  "pointsTiers": [
+    {
+      "models": 5,
+      "points": 60
+    },
+    {
+      "models": 10,
+      "points": 95
+    }
+  ]
+}

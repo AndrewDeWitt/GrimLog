@@ -1,0 +1,173 @@
+{
+  "name": "Lieutenant In Phobos Armour",
+  "faction": "Space Marines",
+  "subfaction": "Space Wolves",
+  "role": "Character",
+  "keywords": [
+    "INFANTRY",
+    "CHARACTER",
+    "GRENADES",
+    "IMPERIUM",
+    "PHOBOS",
+    "LIEUTENANT",
+    "ADEPTUS ASTARTES"
+  ],
+  "stats": {
+    "movement": "6\"",
+    "toughness": 4,
+    "save": "3+",
+    "invulnerableSave": "",
+    "wounds": 4,
+    "leadership": 6,
+    "objectiveControl": 1
+  },
+  "composition": "1 Lieutenant in Phobos Armour",
+  "compositionData": [
+    {
+      "name": "Lieutenant In Phobos Armour",
+      "role": "leader",
+      "count": 1,
+      "woundsPerModel": 4
+    }
+  ],
+  "unitSize": "1",
+  "leaderRules": "This model can be attached to the following units: Incursor Squad, Infiltrator Squad, Reiver Squad, Spectrus Kill Team, Hounds Of Morkai. You can attach this model to a unit it can lead even if one CAPTAIN or CHAPTER MASTER model has already been attached to it. If you do, and that Bodyguard unit is destroyed, the Leader units attached to it become separate units, with their original Starting Strengths.",
+  "leaderAbilities": "",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Bolt pistol",
+      "range": "12\"",
+      "type": "Pistol",
+      "attacks": "1",
+      "ballisticSkill": "2+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "PISTOL"
+      ]
+    },
+    {
+      "name": "Master-crafted scoped bolt carbine",
+      "range": "24\"",
+      "type": "Ranged",
+      "attacks": "2",
+      "ballisticSkill": "2+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "2",
+      "abilities": []
+    },
+    {
+      "name": "Paired combat blades",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "5",
+      "ballisticSkill": "",
+      "weaponSkill": "2+",
+      "strength": "4",
+      "armorPenetration": "-1",
+      "damage": "1",
+      "abilities": [
+        "SUSTAINED HITS 1"
+      ]
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Deep Strike",
+      "type": "core",
+      "description": "During the Declare Battle Formations step, if every model in this unit has this ability, you can set it up in High Orbit instead of setting it up on the battlefield. If you do, then in the Reinforcements step of one of your Movement phases you can set up this unit anywhere on the battlefield that is more than 9\" away from all enemy models.",
+      "triggerPhase": [
+        "Deployment"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Infiltrators",
+      "type": "core",
+      "description": "During deployment, if every model in this unit has this ability, then when you set it up, it can be set up anywhere on the battlefield that is more than 9\" away from the enemy deployment zone and all enemy models.",
+      "triggerPhase": [
+        "Deployment"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Leader",
+      "type": "core",
+      "description": "This model can be attached to a Bodyguard unit to form a Combined unit.",
+      "triggerPhase": [
+        "Keyword"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Scouts 6\"",
+      "type": "core",
+      "description": "If every model in this unit has this ability, then at the start of the first battle round, before the first turn begins, it can make a Normal move of up to 6\".",
+      "triggerPhase": [
+        "Deployment"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Oath of Moment",
+      "type": "faction",
+      "description": "If your Army Faction is Adeptus Astartes, at the start of your Command phase, you can select one unit from your opponent’s army. Until the start of your next Command phase, each time a model from your army with this ability makes an attack that targets that enemy unit, you can re-roll the Hit roll.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Tactical Precision",
+      "type": "unit",
+      "description": "While this model is leading a unit, weapons equipped by models in that unit have the [LETHAL HITS] ability.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Strategic Dispersal",
+      "type": "unit",
+      "description": "In your Shooting phase, after this model’s unit has shot, if it is not within Engagement Range of one or more enemy units, it can make a Normal move of up to 6\". If it does, until the end of the turn, that unit is not eligible to declare a charge.",
+      "triggerPhase": [
+        "Shooting"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [],
+  "pointsCost": 55,
+  "pointsTiers": [
+    {
+      "models": 1,
+      "points": 55
+    }
+  ]
+}

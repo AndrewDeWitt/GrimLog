@@ -1,0 +1,276 @@
+{
+  "name": "Stormraven Gunship",
+  "faction": "Space Marines",
+  "subfaction": "Space Wolves",
+  "role": "Vehicle",
+  "keywords": [
+    "VEHICLE",
+    "FLY",
+    "AIRCRAFT",
+    "TRANSPORT",
+    "IMPERIUM",
+    "STORMRAVEN GUNSHIP",
+    "RAVENWING",
+    "ADEPTUS ASTARTES"
+  ],
+  "stats": {
+    "movement": "20+\"",
+    "toughness": 10,
+    "save": "3+",
+    "invulnerableSave": "",
+    "wounds": 14,
+    "leadership": 6,
+    "objectiveControl": 0
+  },
+  "composition": "1 Stormraven Gunship",
+  "compositionData": [
+    {
+      "name": "Stormraven Gunship",
+      "role": "regular",
+      "count": 1,
+      "woundsPerModel": 14
+    }
+  ],
+  "unitSize": "1",
+  "leaderRules": "",
+  "leaderAbilities": "",
+  "transportCapacity": "Transport capacity of 12 ADEPTUS ASTARTES INFANTRY models and 1 DREADNOUGHT model. Each JUMP PACK, WULFEN, GRAVIS or TERMINATOR model takes up the space of 2 models and each CENTURION model takes up the space of 3 models.",
+  "weapons": [
+    {
+      "name": "Hurricane bolter",
+      "range": "24\"",
+      "type": "Assault 6",
+      "attacks": "6",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "RAPID FIRE 6",
+        "TWIN-LINKED"
+      ]
+    },
+    {
+      "name": "Stormstrike missile launcher",
+      "range": "48\"",
+      "type": "Heavy 1",
+      "attacks": "1",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "10",
+      "armorPenetration": "-2",
+      "damage": "3",
+      "abilities": []
+    },
+    {
+      "name": "Twin assault cannon",
+      "range": "24\"",
+      "type": "Assault 6",
+      "attacks": "6",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "6",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "DEVASTATING WOUNDS",
+        "TWIN-LINKED"
+      ]
+    },
+    {
+      "name": "Twin heavy bolter",
+      "range": "36\"",
+      "type": "Heavy 3",
+      "attacks": "3",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "5",
+      "armorPenetration": "-1",
+      "damage": "2",
+      "abilities": [
+        "SUSTAINED HITS 1",
+        "TWIN-LINKED"
+      ]
+    },
+    {
+      "name": "Twin heavy plasma cannon — standard",
+      "range": "36\"",
+      "type": "Heavy D3",
+      "attacks": "D3",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "7",
+      "armorPenetration": "-2",
+      "damage": "2",
+      "abilities": [
+        "BLAST",
+        "TWIN-LINKED"
+      ]
+    },
+    {
+      "name": "Twin heavy plasma cannon — supercharge",
+      "range": "36\"",
+      "type": "Heavy D3",
+      "attacks": "D3",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "8",
+      "armorPenetration": "-3",
+      "damage": "3",
+      "abilities": [
+        "BLAST",
+        "HAZARDOUS",
+        "TWIN-LINKED"
+      ]
+    },
+    {
+      "name": "Twin lascannon",
+      "range": "48\"",
+      "type": "Heavy 1",
+      "attacks": "1",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "12",
+      "armorPenetration": "-3",
+      "damage": "D6+1",
+      "abilities": [
+        "TWIN-LINKED"
+      ]
+    },
+    {
+      "name": "Twin multi-melta",
+      "range": "18\"",
+      "type": "Heavy 2",
+      "attacks": "2",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "9",
+      "armorPenetration": "-4",
+      "damage": "D6",
+      "abilities": [
+        "MELTA 2",
+        "TWIN-LINKED"
+      ]
+    },
+    {
+      "name": "Typhoon missile launcher — frag",
+      "range": "48\"",
+      "type": "Heavy 2D6",
+      "attacks": "2D6",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "BLAST"
+      ]
+    },
+    {
+      "name": "Typhoon missile launcher — krak",
+      "range": "48\"",
+      "type": "Heavy 2",
+      "attacks": "2",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "9",
+      "armorPenetration": "-2",
+      "damage": "D6",
+      "abilities": []
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Deadly Demise",
+      "type": "core",
+      "description": "Deadly Demise D6",
+      "triggerPhase": [
+        "General"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Hover",
+      "type": "core",
+      "description": "Hover",
+      "triggerPhase": [
+        "General"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Oath of Moment",
+      "type": "faction",
+      "description": "Oath of Moment",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Armoured Resilience",
+      "type": "unit",
+      "description": "Each time an attack is allocated to this model, subtract 1 from the Damage characteristic of that attack.",
+      "triggerPhase": [
+        "Shooting",
+        "Fight"
+      ],
+      "triggerSubphase": "",
+      "isReactive": true,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Damaged: 1-5 Wounds Remaining",
+      "type": "unit",
+      "description": "While this model has 1-5 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.",
+      "triggerPhase": [
+        "Shooting",
+        "Fight"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [
+    {
+      "description": "This model’s twin assault cannon can be replaced with 1 twin heavy plasma cannon.",
+      "pointsCost": 0
+    },
+    {
+      "description": "This model’s twin assault cannon can be replaced with 1 twin lascannon.",
+      "pointsCost": 0
+    },
+    {
+      "description": "This model’s typhoon missile launcher can be replaced with 1 twin heavy bolter.",
+      "pointsCost": 0
+    },
+    {
+      "description": "This model’s typhoon missile launcher can be replaced with 1 twin multi-melta.",
+      "pointsCost": 0
+    },
+    {
+      "description": "This model can be equipped with 2 hurricane bolters.",
+      "pointsCost": 0
+    }
+  ],
+  "pointsCost": 280,
+  "pointsTiers": [
+    {
+      "models": 1,
+      "points": 280
+    }
+  ]
+}

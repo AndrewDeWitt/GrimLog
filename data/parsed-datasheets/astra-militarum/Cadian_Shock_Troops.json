@@ -1,0 +1,271 @@
+{
+  "name": "Cadian Shock Troops",
+  "faction": "Astra Militarum",
+  "subfaction": "Cadian",
+  "role": "Battleline",
+  "keywords": [
+    "INFANTRY",
+    "BATTLELINE",
+    "IMPERIUM",
+    "GRENADES",
+    "REGIMENT",
+    "PLATOON",
+    "CADIAN",
+    "CADIAN SHOCK TROOPS"
+  ],
+  "stats": {
+    "movement": "6\"",
+    "toughness": 3,
+    "save": "5+",
+    "invulnerableSave": "",
+    "wounds": 1,
+    "leadership": 7,
+    "objectiveControl": 2
+  },
+  "composition": "1 Shock Trooper Sergeant and 9 Shock Troopers",
+  "compositionData": [
+    {
+      "name": "Shock Trooper Sergeant",
+      "role": "leader",
+      "count": 1,
+      "woundsPerModel": 1
+    },
+    {
+      "name": "Shock Trooper",
+      "role": "regular",
+      "count": 9,
+      "woundsPerModel": 1
+    }
+  ],
+  "unitSize": "10-20",
+  "leaderRules": "This unit can have up to two Leader units attached to it, provided no more than one of those units is a COMMAND SQUAD unit. If it does, and this Bodyguard unit is destroyed, the Leader units attached to it become separate units, with their original Starting Strengths.",
+  "leaderAbilities": "",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Bolt pistol",
+      "range": "12\"",
+      "type": "Pistol",
+      "attacks": "1",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "PISTOL"
+      ]
+    },
+    {
+      "name": "Flamer",
+      "range": "12\"",
+      "type": "Torrent",
+      "attacks": "D6",
+      "ballisticSkill": "N/A",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "IGNORES COVER",
+        "TORRENT"
+      ]
+    },
+    {
+      "name": "Grenade launcher – frag",
+      "range": "24\"",
+      "type": "Blast",
+      "attacks": "D3",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "BLAST"
+      ]
+    },
+    {
+      "name": "Grenade launcher – krak",
+      "range": "24\"",
+      "type": "Ranged",
+      "attacks": "1",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "9",
+      "armorPenetration": "-2",
+      "damage": "D3",
+      "abilities": []
+    },
+    {
+      "name": "Lasgun",
+      "range": "24\"",
+      "type": "Rapid Fire 1",
+      "attacks": "1",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "3",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "RAPID FIRE 1"
+      ]
+    },
+    {
+      "name": "Laspistol",
+      "range": "12\"",
+      "type": "Pistol",
+      "attacks": "1",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "3",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "PISTOL"
+      ]
+    },
+    {
+      "name": "Meltagun",
+      "range": "12\"",
+      "type": "Melta 2",
+      "attacks": "1",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "9",
+      "armorPenetration": "-4",
+      "damage": "D6",
+      "abilities": [
+        "MELTA 2"
+      ]
+    },
+    {
+      "name": "Plasma gun – standard",
+      "range": "24\"",
+      "type": "Rapid Fire 1",
+      "attacks": "1",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "7",
+      "armorPenetration": "-2",
+      "damage": "1",
+      "abilities": [
+        "RAPID FIRE 1"
+      ]
+    },
+    {
+      "name": "Plasma gun – supercharge",
+      "range": "24\"",
+      "type": "Hazardous, Rapid Fire 1",
+      "attacks": "1",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "8",
+      "armorPenetration": "-3",
+      "damage": "2",
+      "abilities": [
+        "HAZARDOUS",
+        "RAPID FIRE 1"
+      ]
+    },
+    {
+      "name": "Sergeant's autogun",
+      "range": "24\"",
+      "type": "Ranged",
+      "attacks": "2",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "3",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": []
+    },
+    {
+      "name": "Chainsword",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "3",
+      "ballisticSkill": "",
+      "weaponSkill": "4+",
+      "strength": "3",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": []
+    },
+    {
+      "name": "Close combat weapon",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "1",
+      "ballisticSkill": "",
+      "weaponSkill": "4+",
+      "strength": "3",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": []
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Shock Troops",
+      "type": "unit",
+      "description": "At the end of your Command phase, if this unit is within range of an objective marker you control, that objective marker remains under your control, even if you have no models within range of it, until your opponent controls it at the start or end of any turn.",
+      "triggerPhase": [
+        "Command"
+      ],
+      "triggerSubphase": "End of Phase",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Vox-caster",
+      "type": "wargear",
+      "description": "Each time you target the bearer’s unit with a Stratagem, roll one D6, adding 1 to the result if there are one or more friendly OFFICER models within 6\": on a 5+, you gain 1CP.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": true,
+      "requiredKeywords": [
+        "OFFICER"
+      ],
+      "effects": {
+        "wounds": null,
+        "toughness": null,
+        "save": null,
+        "invulnerableSave": null,
+        "movement": null
+      }
+    }
+  ],
+  "wargearOptions": [
+    {
+      "description": "For every 10 models in this unit, up to 2 Shock Troopers can each have their lasgun replaced with one of the following: 1 flamer, 1 grenade launcher, 1 meltagun, 1 plasma gun",
+      "pointsCost": 0
+    },
+    {
+      "description": "For every 10 models in this unit, 1 Shock Trooper equipped with a lasgun can be equipped with 1 vox-caster (that model’s lasgun cannot be replaced).",
+      "pointsCost": 0
+    },
+    {
+      "description": "Any number of Shock Trooper Sergeants can each have their laspistol replaced with 1 bolt pistol.",
+      "pointsCost": 0
+    },
+    {
+      "description": "Any number of Shock Trooper Sergeants can each have their laspistol and chainsword replaced with 1 Sergeant's autogun and 1 close combat weapon.",
+      "pointsCost": 0
+    }
+  ],
+  "pointsCost": 65,
+  "pointsTiers": [
+    {
+      "models": 10,
+      "points": 65
+    },
+    {
+      "models": 20,
+      "points": 120
+    }
+  ]
+}

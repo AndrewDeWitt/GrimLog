@@ -1,0 +1,394 @@
+{
+  "faction": {
+    "name": "Blood Angels",
+    "keywords": [
+      "BLOOD ANGELS",
+      "ADEPTUS ASTARTES"
+    ],
+    "parentFaction": "Space Marines"
+  },
+  "armyRules": [
+    {
+      "name": "Oath of Moment",
+      "description": "If your Army Faction is ADEPTUS ASTARTES, at the start of your Command phase, select one unit from your opponent’s army. Until the start of your next Command phase, that enemy unit is your Oath of Moment target. Each time a model with this ability makes an attack that targets your Oath of Moment target:\n• You can re-roll the Hit roll.\n• If you are using a Codex: Space Marines Detachment and your army does not include one or more units with the BLACK TEMPLARS, BLOOD ANGELS, DARK ANGELS, DEATHWATCH or SPACE WOLVES keywords, add 1 to the Wound roll as well.",
+      "flavorText": "In battle, Space Marines swear mighty oaths to destroy the enemies of the Emperor and uphold the honour of their Chapter, and such vows are sacrosanct. When the Angels of Death strike, they do so with the precision of a surgeon and the force of a thunderbolt. Experience and strategic expertise help them to read the shifting shape of the battle with post-human speed and clarity, directing their wrath towards one priority target after another. Command assets are annihilated, leaving the enemy reeling leaderless. Heavy armour, potent artillery and the vaunted elites of the foe’s forces are laid waste with horrifying speed, until the Emperor’s Angels of Death stand victorious over a field of smouldering wreckage and bolt-riddled corpses, and honour is finally satisfied."
+    }
+  ],
+  "detachments": [
+    {
+      "name": "The Lost Brethren",
+      "abilityName": "A Noble Death in Combat",
+      "abilityDescription": "Each time a DEATH COMPANY model from your army makes a melee attack, re-roll a Wound roll of 1 if that model’s unit is below its Starting Strength; if that model’s unit is Below Half-strength, you can re-roll the Wound roll instead.\nKEYWORDS\nIf you select this Detachment, DEATH COMPANY MARINES and DEATH COMPANY MARINES WITH BOLT RIFLES units from your army have the BATTLELINE keyword.\nRESTRICTIONS\nYour army can include BLOOD ANGELS units, but it cannot include any ADEPTUS ASTARTES units drawn from any other Chapter.",
+      "abilityFlavorText": "For the lost brothers of the Death Company one final battle remains. The sacrifice of each fallen warrior inspires his surviving brothers to ever greater acts of savage violence.",
+      "stratagems": [
+        {
+          "name": "GLORIOUS SACRIFICE",
+          "cpCost": 1,
+          "type": "Epic Deed",
+          "when": "Any phase.",
+          "target": "One DEATH COMPANY unit from your army that was just destroyed while it was within range of an objective marker you controlled. You can use this Stratagem on that unit even though it was just destroyed.",
+          "effect": "That objective marker remains under your control, even if you have no models within range of it, until your opponent controls it at the start or end of any turn.",
+          "restrictions": null,
+          "triggerPhase": [
+            "Any"
+          ],
+          "isReactive": false
+        },
+        {
+          "name": "ARMOUR OF CONTEMPT",
+          "cpCost": 1,
+          "type": "Battle Tactic",
+          "when": "Your opponent’s Shooting phase or the Fight phase, just after an enemy unit has selected its targets.",
+          "target": "s.TARGET: One ADEPTUS ASTARTES unit from your army that was selected as the target of one or more of the attacking unit’s attacks.",
+          "effect": "Until the attacking unit has finished making its attacks, each time an attack targets your unit, worsen the Armour Penetration characteristic of that attack by 1.",
+          "restrictions": null,
+          "triggerPhase": [
+            "Shooting",
+            "Fight"
+          ],
+          "isReactive": true
+        },
+        {
+          "name": "FINAL RETRIBUTION",
+          "cpCost": 1,
+          "type": "Epic Deed",
+          "when": "Fight phase, just after an enemy unit has selected its targets.",
+          "target": "s.TARGET: One DEATH COMPANY unit from your army that was selected as the target of one or more of the attacking unit’s attacks.",
+          "effect": "Until the end of the phase, each time a model in your unit is destroyed, if that model has not fought this phase, roll one D6, adding 1 to the result if your unit is within 12\" of one or more friendly CHAPLAIN models; on a 4+, do not remove it from play. The destroyed model can fight after the attacking unit has finished making its attacks, and is then removed from play.",
+          "restrictions": null,
+          "triggerPhase": [
+            "Fight"
+          ],
+          "isReactive": true
+        },
+        {
+          "name": "FURIOUS ONSLAUGHT",
+          "cpCost": 1,
+          "type": "Battle Tactic",
+          "when": "Fight phase.",
+          "target": "One DEATH COMPANY unit from your army, just before that unit Piles-in.",
+          "effect": "Until the end of the phase, each time a model in your unit makes a Pile-in move, it can move up to D3+3\" instead of up to 3\". If your unit is within 12\" of one or more friendly CHAPLAIN models, or if it is below Starting Strength, it can move up to 6\" instead. In either case, it can only do so provided your unit ends that Pile-in move in Unit Coherency and within Engagement Range of one or more enemy units.",
+          "restrictions": null,
+          "triggerPhase": [
+            "Fight"
+          ],
+          "isReactive": false
+        },
+        {
+          "name": "LOST TO RAGE",
+          "cpCost": 1,
+          "type": "Battle Tactic",
+          "when": "Fight phase.",
+          "target": "One DEATH COMPANY unit from your army that is below Starting Strength and has not been selected to fight this phase.",
+          "effect": "Until the end of the phase, improve the Attacks, Stength and Armour Penetration characteristics of melee weapons equipped by models in your unit by 1 and, unless your unit is within 12\" of one or more friendly CHAPLAIN models, until the end of the phase, those weapons have the [HAZARDOUS] ability.",
+          "restrictions": null,
+          "triggerPhase": [
+            "Fight"
+          ],
+          "isReactive": false
+        },
+        {
+          "name": "WRATHFUL RAMPAGE",
+          "cpCost": 1,
+          "type": "Strategic Ploy",
+          "when": "Your Movement phase, just after a DEATH COMPANY unit from your army Advances.",
+          "target": "That DEATH COMPANY unit.",
+          "effect": "Until the end of the turn, your unit is eligible to declare a charge in a turn in which it Advanced. If your unit is within 12\" of one or more friendly CHAPLAIN models, or it is below its Starting Strength, until the end of the turn, your unit is eligible to shoot and declare a charge in a turn in which it Advanced.",
+          "restrictions": null,
+          "triggerPhase": [
+            "Movement"
+          ],
+          "isReactive": false
+        }
+      ],
+      "enhancements": [
+        {
+          "name": "Sanguinius’ Grace",
+          "pointsCost": 20,
+          "description": "DEATH COMPANY model only. Once per battle, at the end of the Fight phase, if the bearer is within Engagement Range of three or more enemy models, the bearer can fight one additional time.",
+          "flavorText": "As maddening hallucinatory memories of long-forgotten battles flash across this warriors mind, he is granted a sliver of the Primarchs combat prowess.",
+          "restrictions": [
+            "DEATH COMPANY"
+          ]
+        },
+        {
+          "name": "Blood Shard",
+          "pointsCost": 25,
+          "description": "DEATH COMPANY model only. The first time the bearer is destroyed, at the end of the phase, roll one D6: on a 2+, set the bearer back up on the battlefield as close as possible to where it was destroyed and not within Engagement Range of any enemy units, with 3 wounds remaining.",
+          "flavorText": "Spiritual energy flows from this crimson gem, filling its bearer with a ferocious desire to tear their foes limb from limb. Those infused with its energies may fight on despite suffering seemingly mortal wounds.",
+          "restrictions": [
+            "DEATH COMPANY"
+          ]
+        },
+        {
+          "name": "To Slay the Warmaster",
+          "pointsCost": 15,
+          "description": "DEATH COMPANY model only. Once per battle, at the start of the Fight phase, if the bearer is within Engagement Range of one or more enemy CHARACTER units, you can select one of those CHARACTER units and roll six D6: for each 4+, one CHARACTER model in that unit suffers 1 mortal wound.",
+          "flavorText": "Overcome by maddening hallucinations, this warrior sees in all enemy champions glimmers of Horus' dark majesty and thus strives to destroy them.",
+          "restrictions": [
+            "DEATH COMPANY"
+          ]
+        },
+        {
+          "name": "Vengeful Onslaught",
+          "pointsCost": 10,
+          "description": "DEATH COMPANY model only. It the bearer is destroyed, until the end of your next turn, each time a friendly DEATH COMPANY model makes an attack, add 1 to the 1 Hit roll.",
+          "flavorText": "This Son of Sanguinius appears to the brothers of the Death Company as a paragon of their Primarchs martial prowess. Should he fall in battle, the vengeful fury of the Lost will be inflamed.",
+          "restrictions": [
+            "DEATH COMPANY"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "The Angelic Host",
+      "abilityName": "Upon Wings of Fire",
+      "abilityDescription": "At the end of your opponent s turn, you can select a number of ADEPTUS ASTARTES JUMP PACK units from your army (excluding units that are within Engagement Range of one or more enemy units). The maximum number of units you can select depends on the battle size, as follows:\nBATTLE SIZEUNITSIncursionUp to 1 units Strike ForceUp to 2 units OnslaughtUp to 3 units \nOnce you have made your selections, remove those units from the battlefield and place them into Strategic Reserves. In the Reinforcements step of your next Movement phase, set each of those units up using their Deep Strike ability.\nRESTRICTIONS\nYour army can include BLOOD ANGELS units, but it cannot include any ADEPTUS ASTARTES units drawn from any other Chapter.",
+      "abilityFlavorText": "The Blood Angels soar high above the battlefield before plummeting to strike their foes with bone-shattering force. They are true masters of the war-torn skies.",
+      "stratagems": [
+        {
+          "name": "UNBRIDLED ARDOUR",
+          "cpCost": 1,
+          "type": "Epic Deed",
+          "when": "Any phase.",
+          "target": "One ADEPTUS ASTARTES unit from your army that was just destroyed. You can use this Stratagem on that unit even though it was just destroyed.",
+          "effect": "Until the end of the battle, each time a friendly SANGUINARY GUARD unit makes an attack that targets the enemy unit that just destroyed your unit, you can re-roll the Hit roll and you can re-roll the Wound roll.",
+          "restrictions": null,
+          "triggerPhase": [
+            "Any"
+          ],
+          "isReactive": false
+        },
+        {
+          "name": "ARMOUR OF CONTEMPT",
+          "cpCost": 1,
+          "type": "Battle Tactic",
+          "when": "Your opponent’s Shooting phase or the Fight phase, just after an enemy unit has selected its targets.",
+          "target": "s.TARGET: One ADEPTUS ASTARTES unit from your army that was selected as the target of one or more of the attacking unit’s attacks.",
+          "effect": "Until the attacking unit has finished making its attacks, each time an attack targets your unit, worsen the Armour Penetration characteristic of that attack by 1.",
+          "restrictions": null,
+          "triggerPhase": [
+            "Shooting",
+            "Fight"
+          ],
+          "isReactive": true
+        },
+        {
+          "name": "ANGEL’S SACRIFICE",
+          "cpCost": 1,
+          "type": "Battle Tactic",
+          "when": "Start of the Fight phase.",
+          "target": "One ADEPTUS ASTARTES JUMP PACK unit from your army.",
+          "effect": "Until the end of the phase, each time an enemy model within Engagement Range of your unit selects its targets, it must select your unit as the target of all of its attacks.",
+          "restrictions": null,
+          "triggerPhase": [
+            "Fight"
+          ],
+          "isReactive": false
+        },
+        {
+          "name": "MARTIAL EXEMPLARS",
+          "cpCost": 1,
+          "type": "Battle Tactic",
+          "when": "Fight phase.",
+          "target": "One ADEPTUS ASTARTES JUMP PACK unit from your army that has not been selected to fight this phase.",
+          "effect": "Until the end of the phase, melee weapons equipped by models in your unit have the [LETHAL HITS] and [PRECISION] abilities.",
+          "restrictions": null,
+          "triggerPhase": [
+            "Fight"
+          ],
+          "isReactive": false
+        },
+        {
+          "name": "DESCENT OF ANGELS",
+          "cpCost": 1,
+          "type": "Epic Deed",
+          "when": "Your Movement phase.",
+          "target": "One ADEPTUS ASTARTES JUMP PACK unit from your army that is arriving using the Deep Strike ability this phase.",
+          "effect": "Your unit can be set up anywhere on the battlefield that is more than 6\" horizontally away from all enemy units.",
+          "restrictions": "A unit targeted by this Stratagem is not eligible to declare a charge in the same turn.",
+          "triggerPhase": [
+            "Movement"
+          ],
+          "isReactive": false
+        },
+        {
+          "name": "DEATH FROM THE SKIES",
+          "cpCost": 1,
+          "type": "Epic Deed",
+          "when": "Your Movement phase, just after an ADEPTUS ASTARTES JUMP PACK unit from your army Advances or Falls Back.",
+          "target": "That ADEPTUS ASTARTES JUMP PACK unit.",
+          "effect": "Until the end of the turn, your unit is eligible to shoot and declare a charge in a turn in which it Advanced or Fell Back.",
+          "restrictions": null,
+          "triggerPhase": [
+            "Movement"
+          ],
+          "isReactive": false
+        }
+      ],
+      "enhancements": [
+        {
+          "name": "Artisan of War",
+          "pointsCost": 20,
+          "description": "ADEPTUS ASTARTES JUMP PACK model only. Improve the Armour Penetration characteristic of the bearers weapons by 1, and the bearer has a Save characteristic of 2+.",
+          "flavorText": "This warrior is a true artist both on and off the battlefield. His talents are reflected in the exquisite workmanship of his wargear, for he insists upon personally crafting his weapons of war.",
+          "restrictions": [
+            "ADEPTUS ASTARTES JUMP PACK"
+          ]
+        },
+        {
+          "name": "Visage of Death",
+          "pointsCost": 15,
+          "description": "ADEPTUS ASTARTES JUMP PACK model only. In the Battle-shock step of your opponents Command phase, each enemy unit (excluding MONSTERS and VEHICLES) within Engagement Range of the bearer must take a Battle-shock test.",
+          "flavorText": "This exquisitely crafted death mask is a thing of dark beauty to the Blood Angels, and a sign of impending doom to their enemies. A neural amplifier embedded within the expressionless face of this macabre item serves to magnify the aura of fear it projects.",
+          "restrictions": [
+            "ADEPTUS ASTARTES JUMP PACK"
+          ]
+        },
+        {
+          "name": "Archangel’s Shard",
+          "pointsCost": 15,
+          "description": "ADEPTUS ASTARTES JUMP PACK model only. The bearer’s melee weapons have the [Anti-Chaos 5+] and [Lance] abilities.",
+          "flavorText": "When Sanguinius battled Horus, his magnificent blade was tragically shattered against the Warmasters profane battle plate. The shards were gathered up and new swords forged to incorporate them, each one gifted to a different successor Chapter.",
+          "restrictions": [
+            "ADEPTUS ASTARTES JUMP PACK"
+          ]
+        },
+        {
+          "name": "Gleaming Pinions",
+          "pointsCost": 25,
+          "description": "ADEPTUS ASTARTES JUMP PACK model only. Once per turn, when an enemy unit ends a Normal, Advance or Fall Back move within 9\" of the bearer, if this bearer’s unit is not within Engagement Range of one or more enemy units, it can make a Normal move of up to 6\".",
+          "flavorText": "The elaborately crafted ailerons of this jump pack allow the wearer to manoeuvre, twist and bank at incredible speeds.",
+          "restrictions": [
+            "ADEPTUS ASTARTES JUMP PACK"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Angelic Inheritors",
+      "abilityName": "Legacy of the Angel",
+      "abilityDescription": "At the start of the first battle round, select two of the Angelic Legacy abilities listed below. Until the end of the battle, those Angelic Legacy abilities are active and their effects apply to all ADEPTUS ASTARTES CHARACTER units from your army.\nSanguinary Grace: This unit is eligible to shoot and declare a charge in a turn in which it Fell Back.\nCarmine Wrath: Each time a model in this unit makes an attack, re-roll a Hit roll of 1 and re-roll a Wound roll of 1.\nTheir Appointed Hour: You can re-roll Advance and Charge rolls made for this unit.\nRestrictions\nYour army can include BLOOD ANGELS units, but it cannot include ADEPTUS ASTARTES units drawn from any other Chapter.",
+      "abilityFlavorText": "Never do the Blood Angels stand taller or strive harder than when faced with seemingly impossible odds. At such times, the Sons of Sanguinius delve deep into their souls for preternatural reserves of determination, fury and focus. Sometimes, they even touch upon the uncertain gift of prophecy that was said to be their gene-sire’s boon and his curse.",
+      "stratagems": [
+        {
+          "name": "ARMOUR OF CONTEMPT",
+          "cpCost": 1,
+          "type": "Battle Tactic",
+          "when": "Your opponent’s Shooting phase or the Fight phase, just after an enemy unit has selected its targets.",
+          "target": "s.TARGET: One ADEPTUS ASTARTES unit from your army that was selected as the target of one or more of the attacking unit’s attacks.",
+          "effect": "Until the attacking unit has finished making its attacks, each time an attack targets your unit, worsen the Armour Penetration characteristic of that attack by 1.",
+          "restrictions": null,
+          "triggerPhase": [
+            "Shooting",
+            "Fight"
+          ],
+          "isReactive": true
+        },
+        {
+          "name": "FOCUSED FURY",
+          "cpCost": 1,
+          "type": "Battle Tactic",
+          "when": "Fight phase.",
+          "target": "One ADEPTUS ASTARTES unit from your army that has not been selected to fight this phase.",
+          "effect": "Until the end of the phase, melee weapons equipped by models in your unit have the [LETHAL HITS] ability. If your unit is a CHARACTER unit, until the end of the phase, those weapons have the [LANCE] ability as well.",
+          "restrictions": null,
+          "triggerPhase": [
+            "Fight"
+          ],
+          "isReactive": false
+        },
+        {
+          "name": "INSTANT OF GRACE",
+          "cpCost": 1,
+          "type": "Epic Deed",
+          "when": "Your Command phase.",
+          "target": "One ADEPTUS ASTARTES INFANTRY unit from your army.",
+          "effect": "Select one non-CHARACTER model in your unit. Until the start of your next Command phase, your model has the CHARACTER keyword.Designer’s Note: While in effect, your model’s unit is therefore a CHARACTER unit, meaning it can interact with the Legacy of the Angel Detachment rule, in addition to other rules that interact with CHARACTER units.",
+          "restrictions": null,
+          "triggerPhase": [
+            "Command"
+          ],
+          "isReactive": false
+        },
+        {
+          "name": "STRIKE NOW FOR GLORY",
+          "cpCost": 1,
+          "type": "Strategic Ploy",
+          "when": "Your Shooting phase.",
+          "target": "One ADEPTUS ASTARTES unit from your army that has not been selected to shoot this phase.",
+          "effect": "Until the end of the phase, ranged weapons equipped by models in your unit have the [SUSTAINED HITS 1] ability.",
+          "restrictions": null,
+          "triggerPhase": [
+            "Shooting"
+          ],
+          "isReactive": false
+        },
+        {
+          "name": "IN THE SHADOW OF GREAT WINGS",
+          "cpCost": 1,
+          "type": "Battle Tactic",
+          "when": "Your opponent’s Shooting phase, just after an enemy unit has selected its targets.",
+          "target": "s.TARGET: One ADEPTUS ASTARTES CHARACTER unit from your army that was selected as the target of one or more of the attacking unit’s attacks.",
+          "effect": "Until the end of the phase, your unit can only be selected as the target of a ranged attack if the attacking model is within 18\".",
+          "restrictions": null,
+          "triggerPhase": [
+            "Shooting"
+          ],
+          "isReactive": true
+        },
+        {
+          "name": "UNTO THE BURNING SKIES",
+          "cpCost": 1,
+          "type": "Strategic Ploy",
+          "when": "End of your opponent’s Fight phase.",
+          "target": "One ADEPTUS ASTARTES JUMP PACK unit from your army. You cannot target a unit that is within Engagement Range of one or more enemy units, unless it is THE SANGUINOR.",
+          "effect": "Remove your unit from the battlefield and place it into Strategic Reserves.",
+          "restrictions": null,
+          "triggerPhase": [
+            "Fight"
+          ],
+          "isReactive": true
+        }
+      ],
+      "enhancements": [
+        {
+          "name": "Prescient Flash",
+          "pointsCost": 20,
+          "description": "ADEPTUS ASTARTES model only. Models in the bearer’s unit have the Scouts 6\" ability.",
+          "flavorText": "A flash of foresight and clarity sings through this warrior’s blood and guides his steps into battle.",
+          "restrictions": [
+            "ADEPTUS ASTARTES"
+          ]
+        },
+        {
+          "name": "Troubling Visions",
+          "pointsCost": 15,
+          "description": "ADEPTUS ASTARTES model only. Once per battle, in your Command phase, the bearer can use this Enhancement. When it does, until the start of your next Command phase, all Angelic Legacy abilities are active for the bearer’s unit, instead of only two of them.",
+          "flavorText": "In the long run, these strange and intrusive visions of bloodshed bode terribly ill for this champion of the Blood Angels. In this instance, though, they bring him closer than ever to the glory of his gene-sire.",
+          "restrictions": [
+            "ADEPTUS ASTARTES"
+          ]
+        },
+        {
+          "name": "Blazing Icon",
+          "pointsCost": 20,
+          "description": "ADEPTUS ASTARTES INFANTRY model only. Enemy units cannot use the Fire Overwatch Stratagem to shoot at the bearer’s unit.",
+          "flavorText": "What was before merely a decorative blood drop pendant now shines with a seemingly miraculous light as bright as any star. The foe are forced to avert their gaze from its wrathful magnificence.",
+          "restrictions": [
+            "ADEPTUS ASTARTES INFANTRY"
+          ]
+        },
+        {
+          "name": "Ordained Sacrifice",
+          "pointsCost": 25,
+          "description": "ADEPTUS ASTARTES model only. The first time the bearer is destroyed, roll one D6 at the end of the phase: on a 2+, set the bearer back up on the battlefield as close as possible to where it was destroyed and not within Engagement Range of one or more enemy units, with 3 wounds remaining.",
+          "flavorText": "Knowing only too well the desperate and vital nature of the battle before him, this scion of Sanguinius echoes his Primarch’s resolute determination to fight on even beyond what seems the doors of certain death.",
+          "restrictions": [
+            "ADEPTUS ASTARTES"
+          ]
+        }
+      ]
+    }
+  ]
+}

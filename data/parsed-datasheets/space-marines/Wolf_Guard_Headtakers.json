@@ -1,0 +1,192 @@
+{
+  "name": "Wolf Guard Headtakers",
+  "faction": "Space Marines",
+  "subfaction": "Space Wolves",
+  "role": "Other",
+  "keywords": [
+    "INFANTRY",
+    "IMPERIUM",
+    "TACTICUS",
+    "WOLF GUARD",
+    "HEADTAKERS",
+    "BEASTS",
+    "HUNTING WOLVES",
+    "ADEPTUS ASTARTES",
+    "SPACE WOLVES"
+  ],
+  "stats": {
+    "movement": "7\"",
+    "toughness": 4,
+    "save": "3+",
+    "invulnerableSave": "",
+    "wounds": 3,
+    "leadership": 6,
+    "objectiveControl": 1
+  },
+  "composition": "3-6 Wolf Guard Headtakers; 0-6 Hunting Wolves",
+  "compositionData": [
+    {
+      "name": "Wolf Guard Headtaker",
+      "role": "regular",
+      "count": 3,
+      "woundsPerModel": 3
+    },
+    {
+      "name": "Hunting Wolf",
+      "role": "regular",
+      "count": 0,
+      "woundsPerModel": 1
+    }
+  ],
+  "unitSize": "3-6",
+  "leaderRules": "This unit can be led by: Iron Priest, Njal Stormcaller, Ragnar Blackmane, Ulrik The Slayer, Wolf Guard Battle Leader, Wolf Priest, Krom Dragongaze",
+  "leaderAbilities": "",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Heavy bolt pistol",
+      "range": "18\"",
+      "type": "Pistol",
+      "attacks": "1",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "-1",
+      "damage": "1",
+      "abilities": []
+    },
+    {
+      "name": "Master-crafted power weapon",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "4",
+      "ballisticSkill": "",
+      "weaponSkill": "3+",
+      "strength": "5",
+      "armorPenetration": "-2",
+      "damage": "2",
+      "abilities": []
+    },
+    {
+      "name": "Paired master-crafted power weapons",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "6",
+      "ballisticSkill": "",
+      "weaponSkill": "3+",
+      "strength": "5",
+      "armorPenetration": "-2",
+      "damage": "2",
+      "abilities": []
+    },
+    {
+      "name": "Teeth and claws",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "3",
+      "ballisticSkill": "",
+      "weaponSkill": "4+",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": []
+    }
+  ],
+  "abilities": [
+    {
+      "name": "LET LOOSE THE WOLVES",
+      "type": "faction",
+      "description": "At the start of the Declare Battle Formations step, split this unit into two units, one containing all of its HEADTAKERS models and one containing all of its HUNTING WOLVES models, with new Starting Strengths accordingly.",
+      "triggerPhase": [
+        "Deployment"
+      ],
+      "triggerSubphase": "Start of Phase",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "HEADHUNTERS",
+      "type": "faction",
+      "description": "At the start of the battle, select one unit from your opponent’s army to be this unit’s quarry. Weapons equipped by HEADTAKERS models in this unit have the [DEVASTATING WOUNDS] and [PRECISION] abilities while targeting its quarry. Each time this unit’s quarry is destroyed, select one new enemy unit to be this unit’s quarry. This ability can be used even if this unit is embarked within a TRANSPORT.",
+      "triggerPhase": [
+        "Deployment",
+        "Shooting",
+        "Fight"
+      ],
+      "triggerSubphase": "Start of Phase",
+      "isReactive": false,
+      "requiredKeywords": [
+        "HEADTAKERS"
+      ],
+      "effects": null
+    },
+    {
+      "name": "HUNTING HOUNDS",
+      "type": "faction",
+      "description": "While this unit is within 6\" of one or more friendly SPACE WOLVES CHARACTER models (excluding WULFEN models), if this unit is not Battle-shocked, HUNTING WOLVES models in it have an Objective Control characteristic of 1.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [
+        "HUNTING WOLVES"
+      ],
+      "effects": null
+    },
+    {
+      "name": "STORM SHIELD",
+      "type": "wargear",
+      "description": "The bearer has a 4+ invulnerable save.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": {
+        "wounds": null,
+        "toughness": null,
+        "save": null,
+        "invulnerableSave": "4+",
+        "movement": null
+      }
+    }
+  ],
+  "wargearOptions": [
+    {
+      "description": "All of the models in this unit can each have their master-crafted power weapon and storm shield replaced with 1 paired master-crafted power weapons.",
+      "pointsCost": 0
+    }
+  ],
+  "pointsCost": 85,
+  "pointsTiers": [
+    {
+      "composition": {
+        "Wolf Guard Headtakers": 3
+      },
+      "points": 85
+    },
+    {
+      "composition": {
+        "Wolf Guard Headtakers": 3,
+        "Hunting Wolves": 3
+      },
+      "points": 110
+    },
+    {
+      "composition": {
+        "Wolf Guard Headtakers": 6
+      },
+      "points": 170
+    },
+    {
+      "composition": {
+        "Wolf Guard Headtakers": 6,
+        "Hunting Wolves": 6
+      },
+      "points": 220
+    }
+  ]
+}

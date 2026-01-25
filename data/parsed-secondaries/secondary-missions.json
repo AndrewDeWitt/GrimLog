@@ -1,0 +1,821 @@
+[
+  {
+    "name": "Behind Enemy Lines",
+    "description": "Your orders are clear: break through the enemy and cut off their escape routes.",
+    "fullRules": "When Drawn: If it is the first battle round, you can draw a new Secondary Mission card and shuffle this card back into your Secondary Mission deck.\n\nANY BATTLE ROUND - End of your turn:\n• One unit from your army (excluding AIRCRAFT and Battle-shocked units) is wholly within your opponent's deployment zone: 3VP\n• Two or more units from your army (excluding AIRCRAFT and Battle-shocked units) are wholly within your opponent's deployment zone: 4VP",
+    "missionType": "tactical",
+    "maxVP": null,
+    "vpPerTurnCap": 4,
+    "scoringType": "position_based",
+    "scoringTiming": "end_of_your_turn",
+    "completesOnScore": true,
+    "roundRestrictions": {
+      "minRound": 1,
+      "maxRound": null,
+      "redrawOnRound1": true
+    },
+    "fixedScoring": null,
+    "tacticalScoring": {
+      "options": [
+        { "condition": "1 unit in opponent deployment", "vp": 3 },
+        { "condition": "2+ units in opponent deployment", "vp": 4 }
+      ]
+    },
+    "vpStructure": {
+      "perTurn": true,
+      "multiple": true,
+      "options": [
+        { "condition": "1 unit in opponent deployment", "vp": 3 },
+        { "condition": "2+ units in opponent deployment", "vp": 4 }
+      ]
+    },
+    "hasDrawCondition": true,
+    "drawCondition": "If it is the first battle round, you can draw a new Secondary Mission card",
+    "requiresTargetSelection": false,
+    "targetSelectionRules": null,
+    "requiresAction": false,
+    "actionDetails": null,
+    "trackingConditions": {
+      "tracks": ["unit_position", "deployment_zones"],
+      "conditions": ["Exclude AIRCRAFT", "Exclude Battle-shocked units", "Must be wholly within zone"],
+      "autoScore": false,
+      "manualOnly": true
+    }
+  },
+  {
+    "name": "Storm Hostile Objective",
+    "description": "You must dominate the field of battle. Storm every site of tactical import and leave the foe with no place to hide.",
+    "fullRules": "When Drawn: If it is the first battle round, you can draw a new Secondary Mission card and shuffle this card back into your Secondary Mission deck.\n\nANY BATTLE ROUND - End of your turn:\n• You control one or more objective markers that were controlled by your opponent at the start of the turn: 4VP\n\nSECOND BATTLE ROUND ONWARDS - End of your turn:\n• Your opponent did not control any objective markers at the start of the turn, and you control one or more objective markers that you did not control at the start of the turn: 4VP",
+    "missionType": "tactical",
+    "maxVP": null,
+    "vpPerTurnCap": 4,
+    "scoringType": "objective_control",
+    "scoringTiming": "end_of_your_turn",
+    "completesOnScore": true,
+    "roundRestrictions": {
+      "minRound": 1,
+      "maxRound": null,
+      "redrawOnRound1": true
+    },
+    "fixedScoring": null,
+    "tacticalScoring": {
+      "options": [
+        { "condition": "Captured objective from opponent", "vp": 4 },
+        { "condition": "Captured new objective (R2+ only)", "vp": 4 }
+      ]
+    },
+    "vpStructure": {
+      "perTurn": true,
+      "multiple": true
+    },
+    "hasDrawCondition": true,
+    "drawCondition": "If it is the first battle round, you can draw a new Secondary Mission card",
+    "requiresTargetSelection": false,
+    "targetSelectionRules": null,
+    "requiresAction": false,
+    "actionDetails": null,
+    "trackingConditions": {
+      "tracks": ["objective_control", "turn_start_state"],
+      "conditions": ["Track objective ownership at start of turn"],
+      "autoScore": false,
+      "manualOnly": true
+    }
+  },
+  {
+    "name": "Engage on All Fronts",
+    "description": "This area is of extreme importance. You are to lead an immediate all-out assault to capture it and deny it to our enemy for good.",
+    "fullRules": "When Drawn: If one or more units from your army (excluding AIRCRAFT and Battle-shocked units) are wholly within a table quarter, and those units are more than 6\" away from the centre of the battlefield, you have a presence in that table quarter.\n\nANY BATTLE ROUND - End of your turn:\n• You have a presence in two table quarters: 1VP\n• You have a presence in three table quarters: 2VP\n• You have a presence in four table quarters: 4VP",
+    "missionType": "tactical",
+    "maxVP": null,
+    "vpPerTurnCap": 4,
+    "scoringType": "area_control",
+    "scoringTiming": "end_of_your_turn",
+    "completesOnScore": true,
+    "roundRestrictions": null,
+    "fixedScoring": null,
+    "tacticalScoring": {
+      "options": [
+        { "condition": "2 table quarters", "vp": 1 },
+        { "condition": "3 table quarters", "vp": 2 },
+        { "condition": "4 table quarters", "vp": 4 }
+      ]
+    },
+    "vpStructure": {
+      "perTurn": true,
+      "multiple": true,
+      "options": [
+        { "condition": "2 table quarters", "vp": 1 },
+        { "condition": "3 table quarters", "vp": 2 },
+        { "condition": "4 table quarters", "vp": 4 }
+      ]
+    },
+    "hasDrawCondition": false,
+    "drawCondition": null,
+    "requiresTargetSelection": false,
+    "targetSelectionRules": null,
+    "requiresAction": false,
+    "actionDetails": null,
+    "trackingConditions": {
+      "tracks": ["unit_position", "table_quarters"],
+      "conditions": ["Exclude AIRCRAFT", "Exclude Battle-shocked units", "Must be wholly within quarter", "Must be >6\" from center"],
+      "autoScore": false,
+      "manualOnly": true
+    }
+  },
+  {
+    "name": "Establish Locus",
+    "description": "You must guide allied forces onto the battlefield by any means necessary; this objective must be completed swiftly to pave the road to victory.",
+    "fullRules": "ESTABLISH LOCUS (ACTION)\nStarts: Your Shooting phase\nUnits: One unit from your army\nCompletes: End of your turn, if that unit is within your opponent's deployment zone or within 6\" of the centre of the battlefield\nIf Completed: Your unit establishes a locus\n\nANY BATTLE ROUND - End of your turn:\n• Your unit established a locus this turn and is within 6\" of the centre of the battlefield: 2VP\n• Your unit established a locus this turn and is within your opponent's deployment zone: 4VP",
+    "missionType": "tactical",
+    "maxVP": null,
+    "vpPerTurnCap": 4,
+    "scoringType": "action_based",
+    "scoringTiming": "end_of_your_turn",
+    "completesOnScore": true,
+    "roundRestrictions": null,
+    "fixedScoring": null,
+    "tacticalScoring": {
+      "options": [
+        { "condition": "Locus within 6\" of center", "vp": 2 },
+        { "condition": "Locus in opponent deployment", "vp": 4 }
+      ]
+    },
+    "vpStructure": {
+      "perTurn": true,
+      "multiple": true,
+      "options": [
+        { "condition": "Locus within 6\" of center", "vp": 2 },
+        { "condition": "Locus in opponent deployment", "vp": 4 }
+      ]
+    },
+    "hasDrawCondition": false,
+    "drawCondition": null,
+    "requiresTargetSelection": false,
+    "targetSelectionRules": null,
+    "requiresAction": true,
+    "actionDetails": {
+      "starts": "Shooting",
+      "completes": "end of your turn",
+      "units": "one",
+      "conditions": ["Unit must be within opponent deployment or within 6\" of center"],
+      "location": "Opponent deployment zone or center"
+    },
+    "trackingConditions": {
+      "tracks": ["action_completion", "unit_position"],
+      "conditions": ["Track which units established locus"],
+      "autoScore": false,
+      "manualOnly": true
+    }
+  },
+  {
+    "name": "Cleanse",
+    "description": "Your forces have identified a series of tainted objectives in this area; these locations must be purified.",
+    "fullRules": "CLEANSE (ACTION)\nStarts: Your Shooting phase\nUnits: One or more units from your army within range of an objective marker that is not within your deployment zone\nCompletes: End of your turn, if the unit performing this Action is still within range of the same objective marker and you control that objective marker\nIf Completed: That objective marker is cleansed by your army\n\nANY BATTLE ROUND - End of your turn:\n• One objective marker was cleansed by your army this turn: 2VP (FIXED) / 4VP (TACTICAL)\n• Two or more objective markers were cleansed by your army this turn: 4VP (FIXED) / 5VP (TACTICAL)",
+    "missionType": "both",
+    "maxVP": null,
+    "vpPerTurnCap": 5,
+    "scoringType": "action_based",
+    "scoringTiming": "end_of_your_turn",
+    "completesOnScore": true,
+    "roundRestrictions": null,
+    "fixedScoring": {
+      "options": [
+        { "condition": "1 objective cleansed", "vp": 2 },
+        { "condition": "2+ objectives cleansed", "vp": 4 }
+      ],
+      "vpPerTurnCap": 4
+    },
+    "tacticalScoring": {
+      "options": [
+        { "condition": "1 objective cleansed", "vp": 4 },
+        { "condition": "2+ objectives cleansed", "vp": 5 }
+      ]
+    },
+    "vpStructure": {
+      "perTurn": true,
+      "multiple": true
+    },
+    "hasDrawCondition": false,
+    "drawCondition": null,
+    "requiresTargetSelection": false,
+    "targetSelectionRules": null,
+    "requiresAction": true,
+    "actionDetails": {
+      "starts": "Shooting",
+      "completes": "end of your turn",
+      "units": "one or more",
+      "conditions": ["Within range of objective", "Control objective", "Not in your deployment"],
+      "location": "Objective markers not in your deployment"
+    },
+    "trackingConditions": {
+      "tracks": ["action_completion", "objective_control"],
+      "conditions": ["Track cleansed objectives"],
+      "autoScore": false,
+      "manualOnly": true
+    }
+  },
+  {
+    "name": "Assassination",
+    "description": "The enemy looks to their champions for courage. You must identify and eliminate such targets with extreme prejudice.",
+    "fullRules": "ANY BATTLE ROUND - While this card is active (Fixed Missions):\n• Each time an enemy CHARACTER model with a Wounds characteristic of 4 or higher is destroyed: 4VP\n• Each time an enemy CHARACTER model with a Wounds characteristic of less than 4 is destroyed: 3VP\n\nANY BATTLE ROUND - End of either player's turn (Tactical Missions):\n• One or more enemy CHARACTER models were destroyed this turn: 5VP\n• All enemy CHARACTER models have been destroyed during the battle: 5VP (bonus at battle end)",
+    "missionType": "both",
+    "maxVP": null,
+    "vpPerTurnCap": null,
+    "scoringType": "unit_destruction",
+    "scoringTiming": "while_active",
+    "completesOnScore": false,
+    "roundRestrictions": null,
+    "fixedScoring": {
+      "options": [
+        { "condition": "CHARACTER (4+ wounds) destroyed", "vp": 4 },
+        { "condition": "CHARACTER (<4 wounds) destroyed", "vp": 3 }
+      ],
+      "scoringTiming": "while_active",
+      "perUnit": true,
+      "vpPerTurnCap": null
+    },
+    "tacticalScoring": {
+      "options": [
+        { "condition": "1+ CHARACTER destroyed this turn", "vp": 5 }
+      ],
+      "scoringTiming": "end_of_either_turn",
+      "bonus": { "condition": "All enemy CHARACTERs destroyed", "vp": 5 }
+    },
+    "vpStructure": {
+      "perUnit": true,
+      "multiple": true
+    },
+    "hasDrawCondition": false,
+    "drawCondition": null,
+    "requiresTargetSelection": false,
+    "targetSelectionRules": null,
+    "requiresAction": false,
+    "actionDetails": null,
+    "trackingConditions": {
+      "tracks": ["character_destruction", "wound_characteristics"],
+      "conditions": ["Track CHARACTER models destroyed", "Check wounds characteristic"],
+      "autoScore": true,
+      "manualOnly": false
+    }
+  },
+  {
+    "name": "No Prisoners",
+    "description": "Show no mercy. Exterminate your enemies.",
+    "fullRules": "ANY BATTLE ROUND - While this card is active (Fixed Missions):\n• Each time an enemy Bodyguard unit or enemy non-CHARACTER unit is destroyed: 2VP (UP TO 5VP PER TURN)\n\nANY BATTLE ROUND - While this card is active (Tactical Missions):\n• Each time an enemy unit is destroyed: 2VP (UP TO 5VP PER TURN)\n\nNote: This Secondary Mission cannot be selected as a Fixed Mission in tournament play.",
+    "missionType": "both",
+    "maxVP": null,
+    "vpPerTurnCap": 5,
+    "scoringType": "unit_destruction",
+    "scoringTiming": "while_active",
+    "completesOnScore": false,
+    "roundRestrictions": null,
+    "tournamentRestricted": true,
+    "tournamentRestriction": "Cannot be selected as Fixed Mission in tournament play",
+    "fixedScoring": {
+      "options": [
+        { "condition": "Non-CHARACTER or Bodyguard unit destroyed", "vp": 2 }
+      ],
+      "scoringTiming": "while_active",
+      "perUnit": true,
+      "vpPerTurnCap": 5,
+      "restrictions": ["Only non-CHARACTER units", "Only Bodyguard units"]
+    },
+    "tacticalScoring": {
+      "options": [
+        { "condition": "Any enemy unit destroyed", "vp": 2 }
+      ],
+      "scoringTiming": "while_active",
+      "perUnit": true,
+      "vpPerTurnCap": 5
+    },
+    "vpStructure": {
+      "base": 2,
+      "perUnit": true,
+      "multiple": true
+    },
+    "hasDrawCondition": false,
+    "drawCondition": null,
+    "requiresTargetSelection": false,
+    "targetSelectionRules": null,
+    "requiresAction": false,
+    "actionDetails": null,
+    "trackingConditions": {
+      "tracks": ["unit_destruction"],
+      "conditions": ["Track all enemy units destroyed", "Cap at 5VP per turn"],
+      "autoScore": true,
+      "manualOnly": false
+    }
+  },
+  {
+    "name": "Cull the Horde",
+    "description": "The enemy come forth in teeming masses. Their ranks must be thinned if the day is to be won.",
+    "fullRules": "When Drawn: If there are no enemy units on the battlefield that satisfy the condition below, you can discard this card and draw a new Secondary Mission card.\n\nANY BATTLE ROUND - While this card is active (Fixed Missions):\n• Each time an enemy INFANTRY unit with a Starting Strength of 13+ (including Attached units) is destroyed: 5VP\n\nANY BATTLE ROUND - End of either player's turn (Tactical Missions):\n• One or more enemy INFANTRY units with a Starting Strength of 13+ (including Attached units) were destroyed this turn: 5VP",
+    "missionType": "both",
+    "maxVP": null,
+    "vpPerTurnCap": 5,
+    "scoringType": "unit_destruction",
+    "scoringTiming": "while_active",
+    "completesOnScore": false,
+    "roundRestrictions": null,
+    "fixedScoring": {
+      "options": [
+        { "condition": "INFANTRY unit (13+ Starting Strength) destroyed", "vp": 5 }
+      ],
+      "scoringTiming": "while_active",
+      "perUnit": true
+    },
+    "tacticalScoring": {
+      "options": [
+        { "condition": "1+ INFANTRY unit (13+ Starting Strength) destroyed this turn", "vp": 5 }
+      ],
+      "scoringTiming": "end_of_either_turn"
+    },
+    "vpStructure": {
+      "base": 5,
+      "perUnit": true,
+      "multiple": true
+    },
+    "hasDrawCondition": true,
+    "drawCondition": "If there are no enemy units with 13+ models, can discard and redraw",
+    "requiresTargetSelection": false,
+    "targetSelectionRules": null,
+    "requiresAction": false,
+    "actionDetails": null,
+    "trackingConditions": {
+      "tracks": ["unit_destruction", "starting_strength", "infantry_keyword"],
+      "conditions": ["Track INFANTRY units with 13+ Starting Strength", "Include Attached units"],
+      "autoScore": true,
+      "manualOnly": false
+    }
+  },
+  {
+    "name": "Bring It Down",
+    "description": "The opposing army contains numerous heavily armoured units. You must prioritise their destruction.",
+    "fullRules": "When Drawn: If there are no enemy MONSTER or VEHICLE units on the battlefield, you can discard this card and draw a new Secondary Mission card.\n\nANY BATTLE ROUND - While this card is active (Fixed Missions):\n• Each time an enemy MONSTER or VEHICLE unit is destroyed: 2VP\n• + The total of the Wounds characteristics of the models in that destroyed unit was 15+ (at its Starting Strength): +2VP (CUMULATIVE)\n• + The total of the Wounds characteristics of the models in that destroyed unit was 20+ (at its Starting Strength): +2VP (CUMULATIVE)\n\nANY BATTLE ROUND - End of either player's turn (Tactical Missions):\n• One or more enemy MONSTER or VEHICLE units were destroyed this turn: 4VP",
+    "missionType": "both",
+    "maxVP": null,
+    "vpPerTurnCap": null,
+    "scoringType": "unit_destruction",
+    "scoringTiming": "while_active",
+    "completesOnScore": false,
+    "roundRestrictions": null,
+    "fixedScoring": {
+      "options": [
+        { "condition": "MONSTER/VEHICLE destroyed (base)", "vp": 2 },
+        { "condition": "MONSTER/VEHICLE destroyed (15+ wounds)", "vp": 4, "woundThreshold": 15 },
+        { "condition": "MONSTER/VEHICLE destroyed (20+ wounds)", "vp": 6, "woundThreshold": 20 }
+      ],
+      "bonuses": [
+        { "condition": "15+ wounds at Starting Strength", "vp": 2, "cumulative": true },
+        { "condition": "20+ wounds at Starting Strength", "vp": 2, "cumulative": true }
+      ],
+      "scoringTiming": "while_active",
+      "perUnit": true
+    },
+    "tacticalScoring": {
+      "options": [
+        { "condition": "1+ MONSTER/VEHICLE destroyed this turn", "vp": 4 }
+      ],
+      "scoringTiming": "end_of_either_turn"
+    },
+    "vpStructure": {
+      "base": 2,
+      "bonuses": [
+        { "condition": "15+ wounds", "vp": 2, "cumulative": true },
+        { "condition": "20+ wounds", "vp": 2, "cumulative": true }
+      ],
+      "perUnit": true,
+      "multiple": true
+    },
+    "hasDrawCondition": true,
+    "drawCondition": "If there are no enemy MONSTER or VEHICLE units, can discard and redraw",
+    "requiresTargetSelection": false,
+    "targetSelectionRules": null,
+    "requiresAction": false,
+    "actionDetails": null,
+    "trackingConditions": {
+      "tracks": ["unit_destruction", "wound_characteristics", "monster_vehicle_keywords"],
+      "conditions": ["Track MONSTER/VEHICLE units destroyed", "Calculate total wounds at Starting Strength"],
+      "autoScore": true,
+      "manualOnly": false
+    }
+  },
+  {
+    "name": "Defend Stronghold",
+    "description": "You are charged with the defence of a critical objective. It must not be permitted to fall into enemy hands.",
+    "fullRules": "When Drawn: If it is the first battle round, draw a new Secondary Mission card and shuffle this card back into your Secondary Mission deck.\n\nSECOND BATTLE ROUND ONWARDS - End of your opponent's turn or the end of the battle (whichever comes first):\n• You control one or more objective markers in your deployment zone: 3VP",
+    "missionType": "tactical",
+    "maxVP": null,
+    "vpPerTurnCap": 3,
+    "scoringType": "objective_control",
+    "scoringTiming": "end_of_opponent_turn",
+    "completesOnScore": true,
+    "roundRestrictions": {
+      "minRound": 2,
+      "maxRound": null,
+      "redrawOnRound1": true
+    },
+    "fixedScoring": null,
+    "tacticalScoring": {
+      "options": [
+        { "condition": "Control objective in your deployment zone", "vp": 3 }
+      ]
+    },
+    "vpStructure": {
+      "perTurn": true,
+      "multiple": true
+    },
+    "hasDrawCondition": true,
+    "drawCondition": "If it is the first battle round, draw a new card",
+    "requiresTargetSelection": false,
+    "targetSelectionRules": null,
+    "requiresAction": false,
+    "actionDetails": null,
+    "trackingConditions": {
+      "tracks": ["objective_control", "deployment_zones"],
+      "conditions": ["Only from round 2 onwards", "Score at end of opponent's turn"],
+      "autoScore": false,
+      "manualOnly": true
+    }
+  },
+  {
+    "name": "Marked for Death",
+    "description": "You have been ordered to eliminate specific enemy assets to ensure victory, no matter how insignificant they may seem.",
+    "fullRules": "When Drawn: Your opponent must select three units from their army on the battlefield. If there are only one or two units from their army on the battlefield, they must select those units. The selected units are your Alpha Target units. You can then select one unit from your opponent's army on the battlefield to be your Gamma Target unit. If there are no units from their army on the battlefield, discard this card and draw a new Secondary Mission card.\n\nANY BATTLE ROUND - End of either player's turn:\n• One or more of your Alpha Target units were destroyed (or removed from the battlefield for any other reason) this turn: 5VP\n• None of your Alpha Target units were destroyed (or removed from the battlefield for any other reason) this turn, but your Gamma Target unit was destroyed (or removed from the battlefield for any other reason) this turn: 2VP",
+    "missionType": "tactical",
+    "maxVP": null,
+    "vpPerTurnCap": 5,
+    "scoringType": "unit_destruction",
+    "scoringTiming": "end_of_either_turn",
+    "completesOnScore": true,
+    "roundRestrictions": null,
+    "fixedScoring": null,
+    "tacticalScoring": {
+      "options": [
+        { "condition": "Alpha Target destroyed", "vp": 5, "targetType": "alpha" },
+        { "condition": "Gamma Target destroyed (no Alpha)", "vp": 2, "targetType": "gamma" }
+      ]
+    },
+    "vpStructure": {
+      "perTurn": true,
+      "multiple": true
+    },
+    "hasDrawCondition": true,
+    "drawCondition": "If no enemy units on battlefield, discard and redraw",
+    "requiresTargetSelection": true,
+    "targetSelectionRules": {
+      "alphaTargets": {
+        "count": 3,
+        "selectedBy": "opponent",
+        "minRequired": 1,
+        "description": "Opponent selects 3 Alpha Targets (or 1-2 if fewer units)"
+      },
+      "gammaTarget": {
+        "count": 1,
+        "selectedBy": "you",
+        "description": "You select 1 Gamma Target"
+      }
+    },
+    "requiresAction": false,
+    "actionDetails": null,
+    "trackingConditions": {
+      "tracks": ["unit_destruction", "target_selection"],
+      "conditions": ["Track Alpha and Gamma targets", "Track which targets destroyed each turn"],
+      "autoScore": true,
+      "manualOnly": false
+    }
+  },
+  {
+    "name": "Secure No Man's Land",
+    "description": "You must advance swiftly into no man's land and seize it before the enemy can, lest they take control of the entire battlefield.",
+    "fullRules": "ANY BATTLE ROUND - End of your turn:\n• You control one objective marker in No Man's Land: 2VP\n• You control two or more objective markers in No Man's Land: 5VP",
+    "missionType": "tactical",
+    "maxVP": null,
+    "vpPerTurnCap": 5,
+    "scoringType": "objective_control",
+    "scoringTiming": "end_of_your_turn",
+    "completesOnScore": true,
+    "roundRestrictions": null,
+    "fixedScoring": null,
+    "tacticalScoring": {
+      "options": [
+        { "condition": "1 objective in No Man's Land", "vp": 2 },
+        { "condition": "2+ objectives in No Man's Land", "vp": 5 }
+      ]
+    },
+    "vpStructure": {
+      "perTurn": true,
+      "multiple": true,
+      "options": [
+        { "condition": "1 objective in No Man's Land", "vp": 2 },
+        { "condition": "2+ objectives in No Man's Land", "vp": 5 }
+      ]
+    },
+    "hasDrawCondition": false,
+    "drawCondition": null,
+    "requiresTargetSelection": false,
+    "targetSelectionRules": null,
+    "requiresAction": false,
+    "actionDetails": null,
+    "trackingConditions": {
+      "tracks": ["objective_control", "battlefield_zones"],
+      "conditions": ["Track objectives in No Man's Land"],
+      "autoScore": false,
+      "manualOnly": true
+    }
+  },
+  {
+    "name": "Sabotage",
+    "description": "This region is replete with strategic assets or supply caches vital to your foe. See to it that they are reduced to just so much flaming wreckage.",
+    "fullRules": "SABOTAGE (ACTION)\nStarts: Your Shooting phase\nUnits: One unit from your army that is within a terrain feature and not within your deployment zone\nCompletes: End of your opponent's next turn or the end of the battle (whichever comes first), if your unit is on the battlefield\nIf Completed: Your unit commits sabotage\n\nANY BATTLE ROUND - End of your opponent's turn or the end of the battle (whichever comes first):\n• Your unit committed sabotage this turn and is not within your opponent's deployment zone: 3VP\n• Your unit committed sabotage this turn and is within your opponent's deployment zone: 6VP",
+    "missionType": "tactical",
+    "maxVP": null,
+    "vpPerTurnCap": 6,
+    "scoringType": "action_based",
+    "scoringTiming": "end_of_opponent_turn",
+    "completesOnScore": true,
+    "roundRestrictions": null,
+    "fixedScoring": null,
+    "tacticalScoring": {
+      "options": [
+        { "condition": "Sabotage outside opponent deployment", "vp": 3 },
+        { "condition": "Sabotage in opponent deployment", "vp": 6 }
+      ]
+    },
+    "vpStructure": {
+      "perTurn": true,
+      "multiple": true,
+      "options": [
+        { "condition": "Sabotage outside opponent deployment", "vp": 3 },
+        { "condition": "Sabotage in opponent deployment", "vp": 6 }
+      ]
+    },
+    "hasDrawCondition": false,
+    "drawCondition": null,
+    "requiresTargetSelection": false,
+    "targetSelectionRules": null,
+    "requiresAction": true,
+    "actionDetails": {
+      "starts": "Shooting",
+      "completes": "end of opponent's next turn or end of battle",
+      "units": "one",
+      "conditions": ["Within terrain feature", "Not in your deployment", "Unit must remain on battlefield"],
+      "location": "Terrain feature, not in your deployment"
+    },
+    "trackingConditions": {
+      "tracks": ["action_completion", "unit_position", "terrain"],
+      "conditions": ["Track sabotage actions across turns"],
+      "autoScore": false,
+      "manualOnly": true
+    }
+  },
+  {
+    "name": "Area Denial",
+    "description": "It is critical that this area is dominated. No enemy vanguard or guerrilla units can be allowed to disrupt your plans.",
+    "fullRules": "ANY BATTLE ROUND - End of your turn:\n• One or more units from your army (excluding AIRCRAFT and Battle-shocked units) are within 3\" of the centre of the battlefield, and there are no enemy units within 3\" of the centre of the battlefield: 2VP\n• One or more units from your army (excluding AIRCRAFT and Battle-shocked units) are within 3\" of the centre of the battlefield, and there are no enemy units within 6\" of the centre of the battlefield: 5VP",
+    "missionType": "tactical",
+    "maxVP": null,
+    "vpPerTurnCap": 5,
+    "scoringType": "area_control",
+    "scoringTiming": "end_of_your_turn",
+    "completesOnScore": true,
+    "roundRestrictions": null,
+    "fixedScoring": null,
+    "tacticalScoring": {
+      "options": [
+        { "condition": "Control center, no enemy within 3\"", "vp": 2 },
+        { "condition": "Control center, no enemy within 6\"", "vp": 5 }
+      ]
+    },
+    "vpStructure": {
+      "perTurn": true,
+      "multiple": true,
+      "options": [
+        { "condition": "Control center, no enemy within 3\"", "vp": 2 },
+        { "condition": "Control center, no enemy within 6\"", "vp": 5 }
+      ]
+    },
+    "hasDrawCondition": false,
+    "drawCondition": null,
+    "requiresTargetSelection": false,
+    "targetSelectionRules": null,
+    "requiresAction": false,
+    "actionDetails": null,
+    "trackingConditions": {
+      "tracks": ["unit_position", "center_control"],
+      "conditions": ["Exclude AIRCRAFT", "Exclude Battle-shocked units", "Check enemy proximity"],
+      "autoScore": false,
+      "manualOnly": true
+    }
+  },
+  {
+    "name": "Recover Assets",
+    "description": "You must locate and reclaim scattered strategic assets.",
+    "fullRules": "When Drawn: If you are playing an Incursion mission, or if there are fewer than three units from your army on the battlefield, you can discard this card and draw a new Secondary Mission card.\n\nRECOVER ASSETS (ACTION)\nStarts: Your Shooting phase\nUnits: Two or more units from your army, if each of those units is wholly within a different one of the following areas: your deployment zone; No Man's Land; your opponent's deployment zone\nCompletes: End of your turn, if either two or three of those units are on the battlefield\nIf Completed: Those units recover assets\n\nANY BATTLE ROUND - End of your turn or the end of the battle (whichever comes first):\n• Two of your units recovered assets this turn: 3VP\n• Three or more of your units recovered assets this turn: 5VP",
+    "missionType": "tactical",
+    "maxVP": null,
+    "vpPerTurnCap": 5,
+    "scoringType": "action_based",
+    "scoringTiming": "end_of_your_turn",
+    "completesOnScore": true,
+    "roundRestrictions": null,
+    "fixedScoring": null,
+    "tacticalScoring": {
+      "options": [
+        { "condition": "2 units recovered assets", "vp": 3 },
+        { "condition": "3+ units recovered assets", "vp": 5 }
+      ]
+    },
+    "vpStructure": {
+      "perTurn": true,
+      "multiple": true,
+      "options": [
+        { "condition": "2 units recovered assets", "vp": 3 },
+        { "condition": "3+ units recovered assets", "vp": 5 }
+      ]
+    },
+    "hasDrawCondition": true,
+    "drawCondition": "If Incursion mission or <3 units, can discard and redraw",
+    "requiresTargetSelection": false,
+    "targetSelectionRules": null,
+    "requiresAction": true,
+    "actionDetails": {
+      "starts": "Shooting",
+      "completes": "end of your turn",
+      "units": "two or more",
+      "conditions": ["Each unit in different zone (your deployment, No Man's Land, opponent deployment)", "2-3 units must survive to complete"],
+      "location": "Different battlefield zones"
+    },
+    "trackingConditions": {
+      "tracks": ["action_completion", "unit_position", "battlefield_zones"],
+      "conditions": ["Track units in each zone"],
+      "autoScore": false,
+      "manualOnly": true
+    }
+  },
+  {
+    "name": "A Tempting Target",
+    "description": "An opportunity to seize a valuable asset has been identified, but the enemy are likely to use it as bait in a trap. Move to secure the site, but be wary of enemy ambushes.",
+    "fullRules": "When Drawn: Your opponent must select one objective in No Man's Land to be your Tempting Target objective marker.\n\nANY BATTLE ROUND - End of either player's turn:\n• You control your Tempting Target objective marker: 5VP",
+    "missionType": "tactical",
+    "maxVP": null,
+    "vpPerTurnCap": 5,
+    "scoringType": "objective_control",
+    "scoringTiming": "end_of_either_turn",
+    "completesOnScore": true,
+    "roundRestrictions": null,
+    "fixedScoring": null,
+    "tacticalScoring": {
+      "options": [
+        { "condition": "Control Tempting Target objective", "vp": 5 }
+      ]
+    },
+    "vpStructure": {
+      "perTurn": true,
+      "multiple": true
+    },
+    "hasDrawCondition": false,
+    "drawCondition": null,
+    "requiresTargetSelection": true,
+    "targetSelectionRules": {
+      "objectiveTarget": {
+        "count": 1,
+        "selectedBy": "opponent",
+        "location": "No Man's Land",
+        "description": "Opponent selects one objective in No Man's Land"
+      }
+    },
+    "requiresAction": false,
+    "actionDetails": null,
+    "trackingConditions": {
+      "tracks": ["objective_control", "target_selection"],
+      "conditions": ["Track specific Tempting Target objective"],
+      "autoScore": false,
+      "manualOnly": true
+    }
+  },
+  {
+    "name": "Extend Battle Lines",
+    "description": "The battleground is conquered one yard at a time. Lead your forces forward and establish a strong presence in the area.",
+    "fullRules": "ANY BATTLE ROUND - End of your turn:\n• You control one or more objective markers within your deployment zone and one or more objective markers within No Man's Land: 4VP\n• You control one or more objective markers within No Man's Land: 2VP",
+    "missionType": "tactical",
+    "maxVP": null,
+    "vpPerTurnCap": 4,
+    "scoringType": "objective_control",
+    "scoringTiming": "end_of_your_turn",
+    "completesOnScore": true,
+    "roundRestrictions": null,
+    "fixedScoring": null,
+    "tacticalScoring": {
+      "options": [
+        { "condition": "Control objectives in deployment + No Man's Land", "vp": 4 },
+        { "condition": "Control objectives in No Man's Land only", "vp": 2 }
+      ]
+    },
+    "vpStructure": {
+      "perTurn": true,
+      "multiple": true,
+      "options": [
+        { "condition": "Control objectives in deployment + No Man's Land", "vp": 4 },
+        { "condition": "Control objectives in No Man's Land", "vp": 2 }
+      ]
+    },
+    "hasDrawCondition": false,
+    "drawCondition": null,
+    "requiresTargetSelection": false,
+    "targetSelectionRules": null,
+    "requiresAction": false,
+    "actionDetails": null,
+    "trackingConditions": {
+      "tracks": ["objective_control", "battlefield_zones"],
+      "conditions": ["Track objectives in different zones"],
+      "autoScore": false,
+      "manualOnly": true
+    }
+  },
+  {
+    "name": "Overwhelming Force",
+    "description": "You must scour the enemy from the face of the battlefield.",
+    "fullRules": "ANY BATTLE ROUND - While this card is active:\n• Each time an enemy unit that started the turn within range of an objective marker is destroyed: 3VP (UP TO 5VP PER TURN)\n\nDesigner's Note: Destroyed Leader and Bodyguard units count separately for the purposes of scoring this Secondary Mission, provided that Attached unit started the turn within range of an objective marker.",
+    "missionType": "both",
+    "maxVP": null,
+    "vpPerTurnCap": 5,
+    "scoringType": "unit_destruction",
+    "scoringTiming": "while_active",
+    "completesOnScore": false,
+    "roundRestrictions": null,
+    "fixedScoring": {
+      "options": [
+        { "condition": "Enemy unit destroyed (started on objective)", "vp": 3 }
+      ],
+      "scoringTiming": "while_active",
+      "perUnit": true,
+      "vpPerTurnCap": 5,
+      "notes": ["Leaders and Bodyguards count separately"]
+    },
+    "tacticalScoring": {
+      "options": [
+        { "condition": "Enemy unit destroyed (started on objective)", "vp": 3 }
+      ],
+      "scoringTiming": "while_active",
+      "perUnit": true,
+      "vpPerTurnCap": 5,
+      "notes": ["Leaders and Bodyguards count separately"]
+    },
+    "vpStructure": {
+      "base": 3,
+      "perUnit": true,
+      "multiple": true
+    },
+    "hasDrawCondition": false,
+    "drawCondition": null,
+    "requiresTargetSelection": false,
+    "targetSelectionRules": null,
+    "requiresAction": false,
+    "actionDetails": null,
+    "trackingConditions": {
+      "tracks": ["unit_destruction", "objective_proximity", "turn_start_state"],
+      "conditions": ["Track unit positions at turn start", "Must be within range of objective", "Cap at 5VP per turn", "Leaders and Bodyguards count separately"],
+      "autoScore": true,
+      "manualOnly": false
+    }
+  },
+  {
+    "name": "Display of Might",
+    "description": "Intimidation is the most potent of weapons. Degrade the combat abilities of your opponent to demonstrate your superiority and erode enemy morale.",
+    "fullRules": "When Drawn: If it is the first battle round, draw a new Secondary Mission card and shuffle this card back into your Secondary Mission deck.\n\nSECOND BATTLE ROUND ONWARDS - End of your turn:\n• There are more units from your army than from your opponent's army wholly within No Man's Land: 4VP",
+    "missionType": "tactical",
+    "maxVP": null,
+    "vpPerTurnCap": 4,
+    "scoringType": "area_control",
+    "scoringTiming": "end_of_your_turn",
+    "completesOnScore": true,
+    "roundRestrictions": {
+      "minRound": 2,
+      "maxRound": null,
+      "redrawOnRound1": true
+    },
+    "fixedScoring": null,
+    "tacticalScoring": {
+      "options": [
+        { "condition": "More units than opponent wholly in No Man's Land", "vp": 4 }
+      ]
+    },
+    "vpStructure": {
+      "perTurn": true,
+      "multiple": true
+    },
+    "hasDrawCondition": true,
+    "drawCondition": "If it is the first battle round, draw a new card",
+    "requiresTargetSelection": false,
+    "targetSelectionRules": null,
+    "requiresAction": false,
+    "actionDetails": null,
+    "trackingConditions": {
+      "tracks": ["unit_count", "battlefield_zones"],
+      "conditions": ["Count units wholly in No Man's Land", "Compare your units vs opponent's units"],
+      "autoScore": false,
+      "manualOnly": true
+    }
+  }
+]

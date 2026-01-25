@@ -1,0 +1,253 @@
+{
+  "name": "Armoured Sentinels",
+  "faction": "Astra Militarum",
+  "subfaction": "",
+  "role": "Other",
+  "keywords": [
+    "VEHICLE",
+    "WALKER",
+    "SMOKE",
+    "IMPERIUM",
+    "REGIMENT",
+    "SQUADRON",
+    "ARMOURED SENTINELS"
+  ],
+  "stats": {
+    "movement": "8\"",
+    "toughness": 8,
+    "save": "2+",
+    "invulnerableSave": "",
+    "wounds": 7,
+    "leadership": 7,
+    "objectiveControl": 2
+  },
+  "composition": "1-2 Armoured Sentinels",
+  "compositionData": [
+    {
+      "name": "Armoured Sentinel",
+      "role": "regular",
+      "count": 1,
+      "woundsPerModel": 7
+    }
+  ],
+  "unitSize": "1-2",
+  "leaderRules": "",
+  "leaderAbilities": "",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Autocannon",
+      "range": "48\"",
+      "type": "Heavy",
+      "attacks": "2",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "9",
+      "armorPenetration": "-1",
+      "damage": "3",
+      "abilities": []
+    },
+    {
+      "name": "Heavy flamer",
+      "range": "12\"",
+      "type": "Torrent",
+      "attacks": "D6",
+      "ballisticSkill": "N/A",
+      "weaponSkill": "",
+      "strength": "5",
+      "armorPenetration": "-1",
+      "damage": "1",
+      "abilities": [
+        "IGNORES COVER",
+        "TORRENT"
+      ]
+    },
+    {
+      "name": "Hunter-killer missile",
+      "range": "48\"",
+      "type": "One Shot",
+      "attacks": "1",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "14",
+      "armorPenetration": "-3",
+      "damage": "D6",
+      "abilities": [
+        "ONE SHOT"
+      ]
+    },
+    {
+      "name": "Lascannon",
+      "range": "48\"",
+      "type": "Heavy",
+      "attacks": "1",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "12",
+      "armorPenetration": "-3",
+      "damage": "D6+1",
+      "abilities": []
+    },
+    {
+      "name": "Multi-laser",
+      "range": "36\"",
+      "type": "Ranged",
+      "attacks": "4",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "6",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": []
+    },
+    {
+      "name": "Missile launcher – frag",
+      "range": "48\"",
+      "type": "Heavy",
+      "attacks": "D6",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "BLAST",
+        "HEAVY"
+      ]
+    },
+    {
+      "name": "Missile launcher – krak",
+      "range": "48\"",
+      "type": "Heavy",
+      "attacks": "1",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "9",
+      "armorPenetration": "-2",
+      "damage": "D6",
+      "abilities": [
+        "HEAVY"
+      ]
+    },
+    {
+      "name": "Plasma cannon – standard",
+      "range": "36\"",
+      "type": "Heavy",
+      "attacks": "D3",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "7",
+      "armorPenetration": "-2",
+      "damage": "1",
+      "abilities": [
+        "BLAST"
+      ]
+    },
+    {
+      "name": "Plasma cannon – supercharge",
+      "range": "36\"",
+      "type": "Heavy",
+      "attacks": "D3",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "8",
+      "armorPenetration": "-3",
+      "damage": "2",
+      "abilities": [
+        "BLAST",
+        "HAZARDOUS"
+      ]
+    },
+    {
+      "name": "Close combat weapon",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "2",
+      "ballisticSkill": "",
+      "weaponSkill": "4+",
+      "strength": "6",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": []
+    },
+    {
+      "name": "Sentinel chainsaw",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "3",
+      "ballisticSkill": "",
+      "weaponSkill": "4+",
+      "strength": "6",
+      "armorPenetration": "-1",
+      "damage": "1",
+      "abilities": []
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Deadly Demise 1",
+      "type": "core",
+      "description": "When this model is destroyed, roll one D6. On a 6, each unit within 6\" suffers 1 mortal wound.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": true,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Mobile Hunter-killers",
+      "type": "unit",
+      "description": "Each time a model in this unit makes an attack that targets a MONSTER or VEHICLE unit, you can re-roll the Wound roll.",
+      "triggerPhase": [
+        "Shooting",
+        "Fight"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": [
+        "MONSTER",
+        "VEHICLE"
+      ],
+      "effects": null
+    },
+    {
+      "name": "Voice of Command",
+      "type": "faction",
+      "description": "This unit can be affected by Orders.",
+      "triggerPhase": [
+        "Command"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [
+    {
+      "description": "Any number of models can each have their multi-laser replaced with one of the following: 1 autocannon, 1 heavy flamer, 1 lascannon, 1 missile launcher, 1 plasma cannon.",
+      "pointsCost": 0
+    },
+    {
+      "description": "Any number of models can each be equipped with 1 Sentinel chainsaw.",
+      "pointsCost": 0
+    },
+    {
+      "description": "Any number of models can each be equipped with 1 hunter-killer missile.",
+      "pointsCost": 0
+    }
+  ],
+  "pointsCost": 65,
+  "pointsTiers": [
+    {
+      "models": 1,
+      "points": 65
+    },
+    {
+      "models": 2,
+      "points": 130
+    }
+  ]
+}

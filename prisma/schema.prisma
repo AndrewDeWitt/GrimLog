@@ -1,0 +1,1419 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")       // Pooled connection (port 6543 with ?pgbouncer=true)
+  directUrl = env("DIRECT_URL")         // Direct connection for migrations (port 5432)
+}
+
+model User {
+  id        String   @id // Supabase auth.users.id (UUID)
+  email     String   @unique
+  name      String?
+  avatar    String?
+  isAdmin   Boolean  @default(false) // Admin role for data management
+  dossierCredits Int @default(2) // Free dossier generations for new users
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  players             Player[]
+  armies              Army[]
+  gameSessions        GameSession[]
+  unitIcons           UnitIcon[]
+  ownedDatasheets     Datasheet[]          @relation("DatasheetOwner")
+  datasheetVersions   DatasheetVersion[]   @relation("DatasheetVersionCreator")
+  dossierGenerations  DossierGeneration[]
+  dossierVersions     DossierVersion[]     @relation("DossierVersionCreator")
+}
+
+// User-generated unit icons (stored in Vercel Blob)
+model UnitIcon {
+  id          String     @id @default(uuid())
+  userId      String
+  user        User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  datasheetId String?
+  datasheet   Datasheet? @relation(fields: [datasheetId], references: [id], onDelete: SetNull)
+
+  // Icon identification (for matching without datasheetId)
+  unitName String
+  faction  String
+
+  // Storage
+  blobUrl String // Vercel Blob URL
+  blobKey String // Blob pathname for deletion
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, unitName, faction])
+  @@index([userId])
+  @@index([datasheetId])
+}
+
+// Global unit icons (stored in Supabase Storage)
+model GlobalUnitIcon {
+  id          String     @id @default(uuid())
+  unitName    String
+  faction     String
+  datasheetId String?
+  datasheet   Datasheet? @relation(fields: [datasheetId], references: [id], onDelete: SetNull)
+
+  // Storage location (Supabase Storage)
+  bucket String @default("unit-icons")
+  path   String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([faction, unitName])
+  @@index([datasheetId])
+  @@index([faction])
+}
+
+model Player {
+  id        String   @id @default(uuid())
+  name      String
+  faction   String
+  createdAt DateTime @default(now())
+
+  // Optional link to authenticated user
+  user   User?   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String?
+
+  armies Army[]
+
+  @@index([userId])
+}
+
+model Faction {
+  id              String    @id @default(uuid())
+  name            String    @unique
+  metaData        String? // JSON for icons, colors
+  parentFactionId String?
+  parentFaction   Faction?  @relation("SubFactions", fields: [parentFactionId], references: [id])
+  subFactions     Faction[] @relation("SubFactions")
+
+  // Relations
+  stratagemData                StratagemData[]
+  datasheets                   Datasheet[]
+  factionRules                 FactionRule[]
+  enhancements                 Enhancement[]
+  armies                       Army[]
+  detachments                  Detachment[]
+  competitiveSources           CompetitiveSource[] // Faction-level competitive content sources
+  datasheetCompetitiveContexts DatasheetCompetitiveContext[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([parentFactionId])
+}
+
+// Detachment model - represents army detachments with their abilities
+model Detachment {
+  id          String   @id @default(uuid())
+  name        String // e.g., "Gladius Task Force", "Ironstorm Spearhead"
+  faction     String // e.g., "Space Marines"
+  factionRel  Faction? @relation(fields: [factionId], references: [id])
+  factionId   String?
+  subfaction  String? // e.g., "Space Wolves" for chapter-specific detachments
+  description String?  @db.Text // Detachment overview/flavor text
+
+  // Detachment Ability
+  abilityName        String? // e.g., "Combat Doctrines"
+  abilityDescription String? @db.Text // Full ability text
+
+  // Metadata
+  edition    String   @default("10th")
+  sourceBook String? // e.g., "Codex: Space Marines"
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  // Relations
+  stratagems                   StratagemData[]
+  enhancements                 Enhancement[]
+  competitiveSources           CompetitiveSource[]
+  datasheetCompetitiveContexts DatasheetCompetitiveContext[]
+
+  @@unique([name, faction])
+  @@index([factionId])
+  @@index([faction, subfaction])
+}
+
+model Army {
+  id       String  @id @default(uuid())
+  name     String
+  player   Player? @relation(fields: [playerId], references: [id], onDelete: Cascade)
+  playerId String?
+
+  // Owner of the army (authenticated user)
+  user   User?   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String?
+
+  faction   Faction? @relation(fields: [factionId], references: [id])
+  factionId String?
+
+  pointsLimit          Int     @default(2000)
+  characterAttachments String? @default("{}") // JSON: character-to-unit attachments {"Captain": "Intercessor Squad Alpha"}
+  detachment           String? // The detachment selected for this army (e.g., "Gladius Task Force")
+
+  // Sharing & Visibility
+  visibility String  @default("private") // "private", "link", "public"
+  shareToken String? @unique // For link-based sharing
+
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
+  units             Unit[]
+  stratagems        Stratagem[]
+  attachmentPresets AttachmentPreset[]
+
+  // Game session relations (army can be attacker or defender)
+  attackerSessions GameSession[] @relation("AttackerArmy")
+  defenderSessions GameSession[] @relation("DefenderArmy")
+
+  @@index([userId])
+  @@index([playerId])
+  @@index([visibility]) // For public army queries
+}
+
+model AttachmentPreset {
+  id              String   @id @default(uuid())
+  armyId          String
+  army            Army     @relation(fields: [armyId], references: [id], onDelete: Cascade)
+  name            String
+  attachmentsJson String   @default("{}") // JSON: { "<characterUnitId>": "<targetUnitName>" }
+  isDefault       Boolean  @default(false)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@unique([armyId, name])
+  @@index([armyId])
+  @@index([armyId, isDefault])
+}
+
+// ============================================
+// DATASHEET SYSTEM - Full 10th Edition Rules
+// ============================================
+
+model Datasheet {
+  id         String   @id @default(uuid())
+  name       String
+  faction    String // e.g., "Space Marines"
+  factionRel Faction? @relation(fields: [factionId], references: [id])
+  factionId  String?
+  subfaction String? // e.g., "Space Wolves", "Blood Angels"
+  role       String // "Character", "Battleline", "Elites", "Fast Attack", "Heavy Support", "Dedicated Transport", "Fortification"
+  keywords   String // JSON array of keywords ["INFANTRY", "CHARACTER", "IMPERIUM", etc.]
+
+  // Core Stats
+  movement         String // e.g., "6\"", "12\""
+  toughness        Int // 1-12
+  save             String // e.g., "3+", "4+", "6+"
+  invulnerableSave String? // e.g., "4++", "5++" (optional)
+  wounds           Int // Wounds characteristic
+  leadership       Int // Leadership value
+  objectiveControl Int // OC value
+
+  // Unit Composition
+  composition     String // e.g., "1 Captain", "5-10 Intercessors" (text description)
+  compositionData String? // JSON: detailed composition with roles and wounds per model
+  unitSize        String? // e.g., "1", "5-10", "3-6"
+
+  // Leader Rules
+  leaderRules     String? // Who this leader can attach to
+  leaderAbilities String? // Abilities granted when leading
+
+  // Transport Rules
+  transportCapacity String? // e.g., "10 Infantry models"
+
+  // Points
+  pointsCost  Int // Base points cost (minimum unit size)
+  pointsTiers String? // JSON: [{"models": 5, "points": 170}, {"models": 10, "points": 340}]
+
+  // Metadata
+  edition     String   @default("10th")
+  sourceBook  String? // e.g., "Codex: Space Marines"
+  version     String   @default("1.0") // For errata tracking
+  lastUpdated DateTime @default(now())
+  createdAt   DateTime @default(now())
+
+  // Availability
+  isEnabled Boolean @default(true) // False to hide from army builder (e.g., forbidden units for certain chapters)
+
+  // ============================================
+  // COMPETITIVE CONTEXT (AI-synthesized from sources)
+  // ============================================
+  competitiveTier  String? // "S", "A", "B", "C", "D", "F"
+  tierReasoning    String? @db.Text // Why this tier ranking
+  bestTargets      String? // JSON array: ["Infantry", "Light vehicles"]
+  counters         String? // JSON array: ["Massed anti-tank", "Mortal wounds"]
+  synergies        String? // JSON array: ["Wolf Lord", "Chaplain"]
+  playstyleNotes   String? @db.Text // How to use this unit
+  deploymentTips   String? @db.Text // Deployment advice
+  competitiveNotes String? @db.Text // General competitive notes
+
+  // Aggregation tracking (when context was synthesized from sources)
+  contextLastAggregated DateTime? // When the competitive fields were last synthesized
+  contextSourceCount    Int? // How many non-outdated sources contributed
+  contextConflicts      String?   @db.Text // JSON: detected disagreements between sources
+
+  // Ownership & Versioning
+  isOfficial     Boolean     @default(false) // True for admin-managed GW datasheets
+  ownerId        String? // User who created this (null for official datasheets)
+  owner          User?       @relation("DatasheetOwner", fields: [ownerId], references: [id], onDelete: SetNull)
+  forkedFromId   String? // If forked from another datasheet
+  forkedFrom     Datasheet?  @relation("DatasheetFork", fields: [forkedFromId], references: [id], onDelete: SetNull)
+  forks          Datasheet[] @relation("DatasheetFork")
+  currentVersion Int         @default(1) // Current active version number
+
+  // Sharing & Visibility
+  visibility String  @default("private") // "private", "link", "public"
+  shareToken String? @unique // For link-based sharing
+
+  // Relations
+  weapons                       DatasheetWeapon[]
+  abilities                     DatasheetAbility[]
+  wargearOptions                DatasheetWargear[]
+  unitInstances                 UnitInstance[]                @relation("DatasheetToUnitInstance")
+  units                         Unit[]                        @relation("UnitToDatasheet")
+  unitIcons                     UnitIcon[]
+  globalUnitIcons               GlobalUnitIcon[]
+  versions                      DatasheetVersion[]
+  competitiveContexts           UnitCompetitiveContext[]
+  datasheetSources              DatasheetSource[]
+  datasheetCompetitiveContexts  DatasheetCompetitiveContext[]
+
+  @@unique([name, faction, subfaction, ownerId]) // Allow same name for different users
+  @@index([faction, subfaction])
+  @@index([name])
+  @@index([ownerId])
+  @@index([isOfficial])
+  @@index([isEnabled]) // For filtering available units in army builder
+  @@index([visibility])
+  @@index([forkedFromId])
+}
+
+// Immutable version snapshot for datasheet history
+model DatasheetVersion {
+  id            String    @id @default(uuid())
+  datasheetId   String
+  datasheet     Datasheet @relation(fields: [datasheetId], references: [id], onDelete: Cascade)
+  versionNumber Int // Sequential version (1, 2, 3...)
+  versionLabel  String? // Optional label ("Q4 2024 Balance", "v1.2")
+  snapshotData  String    @db.Text // Full JSON snapshot of datasheet + weapons + abilities
+  changelog     String?   @db.Text // What changed in this version
+  createdAt     DateTime  @default(now())
+  createdById   String? // User ID who created this version (null = system/admin)
+  createdBy     User?     @relation("DatasheetVersionCreator", fields: [createdById], references: [id], onDelete: SetNull)
+
+  @@unique([datasheetId, versionNumber])
+  @@index([datasheetId])
+  @@index([createdById])
+}
+
+model Weapon {
+  id               String  @id @default(uuid())
+  name             String  @unique
+  range            String // e.g., "24\"", "Melee"
+  type             String // e.g., "Assault 2", "Heavy D6", "Melee"
+  attacks          String // e.g., "2", "D6", "3"
+  ballisticSkill   String? // e.g., "3+", "4+" (ranged weapons)
+  weaponSkill      String? // e.g., "3+", "4+" (melee weapons)
+  strength         String // e.g., "4", "8", "User"
+  armorPenetration String // e.g., "0", "-1", "-3"
+  damage           String // e.g., "1", "2", "D6"
+  abilities        String // JSON array of weapon abilities ["RAPID FIRE 2", "ANTI-INFANTRY 4+"]
+
+  // Structured Data for Calculations
+  strengthValue   Int? // Fixed Strength value (e.g., 4, 8)
+  strengthFormula String? // Strength modifier/formula (e.g., "User", "+1", "+2")
+  damageValue     Int? // Fixed Damage value (e.g., 1, 2)
+  damageFormula   String? // Damage dice formula (e.g., "D6", "D6+1", "D3")
+  apValue         Int? // Integer AP value (e.g., 0, -1, -2)
+
+  // Structured Ability Data
+  structuredAbilities String? // JSON array of detailed objects: [{type, kind, value, condition, targetKeyword}]
+
+  // Metadata
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  datasheets DatasheetWeapon[]
+
+  @@index([name])
+}
+
+model DatasheetWeapon {
+  id          String    @id @default(uuid())
+  datasheet   Datasheet @relation(fields: [datasheetId], references: [id], onDelete: Cascade)
+  datasheetId String
+  weapon      Weapon    @relation(fields: [weaponId], references: [id])
+  weaponId    String
+  isDefault   Boolean   @default(true) // True if part of default loadout
+  quantity    String? // e.g., "1", "2", "Up to 4"
+  notes       String? // Special conditions or options
+
+  @@unique([datasheetId, weaponId])
+  @@index([datasheetId])
+  @@index([weaponId])
+}
+
+model Ability {
+  id          String  @id @default(uuid())
+  name        String  @unique
+  type        String // "core", "faction", "unit", "leader", "wargear"
+  description String // Full ability text
+  keywords    String? // JSON array of related keywords
+  phase       String? // When ability is used (optional)
+
+  // Phase-aware metadata for Strategic Assistant
+  // triggerPhase: JSON array of phase values
+  //   Phase-specific: ["Command"], ["Movement"], ["Shooting"], ["Charge"], ["Fight"], or combinations
+  //   Special values (non-phase-relevant):
+  //     ["Deployment"] - Abilities used during deployment/setup (Deep Strike, Scout, Infiltrators)
+  //     ["Keyword"] - Keyword abilities always-on but not phase-actionable (Leader, Stealth)
+  //     ["General"] - General rules not tied to specific phases (Embarking within transports)
+  //   Phase-relevant always-on: ["Any"] - For auras/effects that affect gameplay in phases
+  triggerPhase     String? // JSON array: ["Command", "Shooting"], ["Deployment"], ["Keyword"], ["General"], or ["Any"]
+  triggerSubphase  String? // "Start of Phase", "During Action", "End of Phase"
+  isReactive       Boolean @default(false) // Can be used during opponent's turn
+  requiredKeywords String? // JSON array for keyword filtering
+
+  // Metadata
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  datasheets   DatasheetAbility[]
+  factionRules FactionRule[]
+
+  @@index([name])
+  @@index([type])
+}
+
+model DatasheetAbility {
+  id          String    @id @default(uuid())
+  datasheet   Datasheet @relation(fields: [datasheetId], references: [id], onDelete: Cascade)
+  datasheetId String
+  ability     Ability   @relation(fields: [abilityId], references: [id])
+  abilityId   String
+  source      String    @default("unit") // "core", "faction", "unit", "leader"
+
+  @@unique([datasheetId, abilityId])
+  @@index([datasheetId])
+  @@index([abilityId])
+}
+
+model WargearOption {
+  id          String @id @default(uuid())
+  name        String
+  description String // e.g., "Replace bolt rifle with plasma gun"
+  pointsCost  Int    @default(0) // Additional points
+  type        String // "weapon", "equipment", "upgrade"
+
+  // Metadata
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  datasheets DatasheetWargear[]
+
+  @@index([name])
+}
+
+model DatasheetWargear {
+  id              String        @id @default(uuid())
+  datasheet       Datasheet     @relation(fields: [datasheetId], references: [id], onDelete: Cascade)
+  datasheetId     String
+  wargearOption   WargearOption @relation(fields: [wargearOptionId], references: [id])
+  wargearOptionId String
+  isExclusive     Boolean       @default(false) // True if mutually exclusive with other options
+  group           String? // Group ID for mutually exclusive options
+
+  @@unique([datasheetId, wargearOptionId])
+  @@index([datasheetId])
+  @@index([wargearOptionId])
+}
+
+model FactionRule {
+  id          String   @id @default(uuid())
+  name        String
+  faction     String // e.g., "Space Marines", "Tyranids"
+  factionRel  Faction? @relation(fields: [factionId], references: [id])
+  factionId   String?
+  subfaction  String? // e.g., "Space Wolves", "Blood Angels"
+  type        String // "army_rule", "detachment_rule", "chapter_tactic"
+  description String // Full rule text
+  ability     Ability? @relation(fields: [abilityId], references: [id])
+  abilityId   String?
+
+  // Metadata
+  edition    String   @default("10th")
+  sourceBook String?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@unique([name, faction, subfaction])
+  @@index([faction, subfaction])
+  @@index([type])
+}
+
+model DetachmentRule {
+  id             String  @id @default(uuid())
+  name           String // e.g., "Saga of the Hunter", "Gladius Task Force"
+  faction        String
+  subfaction     String?
+  detachmentName String // e.g., "Gladius Strike Force"
+  type           String // "detachment_ability", "enhancement", "stratagem"
+  description    String // Full rule text
+
+  // For Enhancements
+  pointsCost   Int? // Cost if it's an enhancement
+  restrictions String? // JSON array of restrictions
+
+  // Metadata
+  edition    String   @default("10th")
+  sourceBook String?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@unique([name, faction, detachmentName])
+  @@index([faction, detachmentName])
+  @@index([type])
+}
+
+model StratagemData {
+  id            String      @id @default(uuid())
+  name          String
+  faction       String // e.g., "Space Marines", "Space Wolves"
+  factionRel    Faction?    @relation(fields: [factionId], references: [id])
+  factionId     String?
+  subfaction    String?
+  detachment    String? // Which detachment this belongs to (string for legacy data)
+  detachmentRel Detachment? @relation(fields: [detachmentId], references: [id])
+  detachmentId  String? // Foreign key to Detachment model
+  cpCost        Int // Command Point cost
+  type          String // "Battle Tactic", "Strategic Ploy", "Epic Deed", etc.
+  when          String // When can be used (phase/timing)
+  target        String // What can be targeted
+  effect        String // What the stratagem does
+  restrictions  String? // JSON array of restrictions/conditions
+  keywords      String? // JSON array for matching
+
+  // Phase-aware metadata for Strategic Assistant
+  triggerPhase     String? // JSON array: ["Movement", "Shooting"]
+  triggerSubphase  String? // "Start of Phase", "During Move", "End of Phase"
+  isReactive       Boolean @default(false) // Opponent's turn stratagem
+  requiredKeywords String? // JSON array: ["INFANTRY", "VEHICLE"]
+  usageRestriction String? // "once_per_battle", "once_per_turn", "once_per_phase"
+
+  // Calculator integration - describes how stratagem affects damage calculations
+  calculatorEffect Json? // e.g., { "type": "attacker_modifier", "lethal_hits": true, "crit_hit_on": 5 }
+
+  // Metadata
+  edition    String   @default("10th")
+  sourceBook String?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  // Relations (link to existing Stratagem model used in armies)
+  stratagemLogs StratagemLog[] @relation("StratagemDataToLog")
+
+  @@unique([name, faction, detachment])
+  @@index([faction, subfaction])
+  @@index([detachment])
+  @@index([detachmentId])
+  @@index([name])
+}
+
+// Core Stratagems (universal stratagems not tied to army/detachment)
+model CoreStratagem {
+  id       String @id @default(uuid())
+  name     String @unique
+  cpCost   Int // Command Point cost
+  category String // "Battle Tactic", "Strategic Ploy", "Epic Deed"
+  when     String // Phase/timing description
+  target   String // What can be targeted
+  effect   String // What the stratagem does
+
+  // Phase-aware metadata for Strategic Assistant
+  triggerPhase     String? // JSON array: ["Movement", "Charge"]
+  triggerSubphase  String? // "Start of Phase", "During Move", "End of Phase"
+  isReactive       Boolean @default(false) // Can be used during opponent's turn
+  requiredKeywords String? // JSON array: ["INFANTRY", "VEHICLE"]
+  usageRestriction String? // "once_per_battle", "once_per_turn", "once_per_phase"
+
+  // Calculator integration - describes how stratagem affects damage calculations
+  isCalculatorRelevant Boolean @default(false) // Whether this affects combat calculations
+  calculatorEffect     Json? // e.g., { "type": "attacker_modifier", "hit_on_6_only": true }
+
+  // Metadata
+  edition    String   @default("10th")
+  sourceBook String?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([name])
+}
+
+model Enhancement {
+  id            String      @id @default(uuid())
+  name          String
+  faction       String
+  factionRel    Faction?    @relation(fields: [factionId], references: [id])
+  factionId     String?
+  subfaction    String?
+  detachment    String? // Which detachment this belongs to (string for legacy data)
+  detachmentRel Detachment? @relation(fields: [detachmentId], references: [id])
+  detachmentId  String? // Foreign key to Detachment model
+  pointsCost    Int
+  description   String // Full enhancement text
+  restrictions  String // JSON array - what units can take it
+  keywords      String? // JSON array
+
+  // Metadata
+  edition    String   @default("10th")
+  sourceBook String?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@unique([name, faction, detachment])
+  @@index([faction, subfaction])
+  @@index([detachment])
+  @@index([detachmentId])
+}
+
+model Unit {
+  id            String     @id @default(uuid())
+  name          String
+  datasheet     String
+  keywords      String // JSON array of keywords
+  goal          String? // Pre-game goal for this unit
+  army          Army       @relation(fields: [armyId], references: [id], onDelete: Cascade)
+  armyId        String
+  pointsCost    Int
+  modelCount    Int        @default(1) // Number of models in unit
+  composition   String? // JSON: per-model composition from army list [{role, count, weapons, woundsPerModel}]
+  wargear       String? // JSON array - specific wargear for this unit instance (legacy)
+  enhancements  String? // JSON array - enhancements/upgrades specific to this list
+  weapons       String? // JSON array - matched weapon IDs and profiles
+  abilities     String? // JSON array - matched ability IDs and descriptions
+  needsReview   Boolean    @default(false) // Flag for AI-parsed units that need verification
+  fullDatasheet Datasheet? @relation("UnitToDatasheet", fields: [datasheetId], references: [id])
+  datasheetId   String?
+  createdAt     DateTime   @default(now())
+
+  @@index([armyId])
+  @@index([datasheetId])
+}
+
+model Stratagem {
+  id          String   @id @default(uuid())
+  name        String
+  cpCost      Int
+  phase       String // Command, Movement, Shooting, Charge, Fight
+  description String
+  keywords    String // JSON array for easy matching
+  army        Army     @relation(fields: [armyId], references: [id], onDelete: Cascade)
+  armyId      String
+  createdAt   DateTime @default(now())
+}
+
+model GameSession {
+  id             String  @id @default(uuid())
+  attackerArmyId String? // Made optional - can play without army list
+  attackerArmy   Army?   @relation("AttackerArmy", fields: [attackerArmyId], references: [id])
+
+  // Defender army - linked for full data access (detachment, faction, units)
+  defenderArmyId String?
+  defenderArmy   Army?   @relation("DefenderArmy", fields: [defenderArmyId], references: [id])
+
+  // Owner of the game session (authenticated user)
+  user   User?   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String?
+
+  // Shared session support (JSON array of user IDs who can view this session)
+  sharedWith String? @default("[]") // JSON array: ["user-id-1", "user-id-2"]
+
+  defenderName    String? // Optional - kept for display/legacy
+  defenderFaction String? // Optional - kept for display/legacy
+  startTime       DateTime  @default(now())
+  endTime         DateTime?
+  currentPhase    String    @default("Command")
+  currentTurn     String    @default("attacker") // "attacker" or "defender"
+  battleRound     Int       @default(1)
+  deploymentType  String    @default("crucible-of-battle") // Deployment map type
+  firstTurn       String    @default("attacker") // "attacker" or "defender" - who goes first each round
+  isActive        Boolean   @default(true)
+
+  // Resource Tracking
+  attackerCommandPoints Int @default(0)
+  defenderCommandPoints Int @default(0)
+  attackerVictoryPoints Int @default(0)
+  defenderVictoryPoints Int @default(0)
+
+  // Secondary Objectives (JSON arrays - max 2 per side)
+  attackerSecondaries String? // JSON array of secondary objective names (max 2)
+  defenderSecondaries String? // JSON array of secondary objective names (max 2)
+
+  // Secondary Objectives Progress Tracking (JSON objects)
+  attackerSecondaryProgress String? // JSON: { "Assassination": { vp: 8, progress: {...}, details: [...] } }
+  defenderSecondaryProgress String? // JSON: { "Assassination": { vp: 8, progress: {...}, details: [...] } }
+
+  // Discarded Secondaries (JSON arrays - track which ones can't be drawn again)
+  attackerDiscardedSecondaries String? @default("[]") // JSON array of discarded secondary names
+  defenderDiscardedSecondaries String? @default("[]") // JSON array of discarded secondary names
+
+  // Deck History Tracking (JSON arrays - track all drawn secondaries for deck management)
+  attackerDeckHistory String? @default("[]") // JSON array: [{name, drawnRound, status: "active"|"scored"|"discarded"}]
+  defenderDeckHistory String? @default("[]") // JSON array: [{name, drawnRound, status: "active"|"scored"|"discarded"}]
+
+  // Mission Mode (fixed vs tactical per player)
+  attackerMissionMode String? @default("tactical") // "fixed" or "tactical"
+  defenderMissionMode String? @default("tactical") // "fixed" or "tactical"
+
+  // Target Selection Storage (for Marked for Death, Tempting Target, etc.)
+  attackerTargetSelections String? // JSON: { "Marked for Death": { alpha: [...], gamma: "..." }, "A Tempting Target": { objective: 3 } }
+  defenderTargetSelections String? // JSON: { "Marked for Death": { alpha: [...], gamma: "..." }, "A Tempting Target": { objective: 3 } }
+
+  // Extra CP Tracking (only 1 extra CP per turn from discards/abilities)
+  attackerExtraCPGainedThisTurn Boolean @default(false) // Reset each round
+  defenderExtraCPGainedThisTurn Boolean @default(false) // Reset each round
+
+  // Mission tracking (NEW)
+  primaryMissionId String?
+  primaryMission   PrimaryMission? @relation(fields: [primaryMissionId], references: [id])
+  primaryVPScored  Json? // Track VP by round: { "1": 10, "2": 20, ... }
+
+  // Relations
+  timelineEvents    TimelineEvent[]
+  transcripts       TranscriptHistory[]
+  objectiveMarkers  ObjectiveMarker[]
+  unitInstances     UnitInstance[]
+  combatLogs        CombatLog[]
+  stratagemLogs     StratagemLog[]
+  validationEvents  ValidationEvent[]
+  cpTransactions    CPTransaction[]
+  secondaryProgress SecondaryProgress[]
+  revertActions     RevertAction[]
+
+  @@index([userId])
+  @@index([primaryMissionId])
+}
+
+model TimelineEvent {
+  id            String      @id @default(uuid())
+  gameSession   GameSession @relation(fields: [gameSessionId], references: [id], onDelete: Cascade)
+  gameSessionId String
+  timestamp     DateTime    @default(now())
+  eventType     String // "phase", "stratagem", "deepstrike", "objective", "custom"
+  phase         String?
+  description   String
+  metadata      String? // JSON for additional data
+
+  // Revert tracking
+  isReverted      Boolean   @default(false)
+  revertedAt      DateTime?
+  revertedBy      String? // "user" or "ai" or user ID
+  revertReason    String? // Why it was reverted
+  revertedEventId String? // ID of the revert action event itself
+
+  // Cascade tracking
+  cascadedFrom String? // ID of event that caused this to be reverted
+
+  @@index([gameSessionId, timestamp])
+  @@index([gameSessionId, isReverted]) // For filtering out reverted events
+}
+
+model TranscriptHistory {
+  id            String      @id @default(uuid())
+  gameSession   GameSession @relation(fields: [gameSessionId], references: [id], onDelete: Cascade)
+  gameSessionId String
+  timestamp     DateTime    @default(now())
+  text          String // Raw transcription from Whisper
+  sequenceOrder Int // Sequential order in session for sorting
+  audioLength   Float? // Optional: duration in seconds
+  segments      String? // JSON array of Whisper segments with timestamps [{text, start, end}]
+  wasAnalyzed   Boolean     @default(false) // Track if this transcript triggered full GPT analysis
+
+  @@index([gameSessionId, sequenceOrder])
+  @@index([gameSessionId, wasAnalyzed]) // Index for finding last analyzed transcript
+}
+
+// New: Track objective markers (1-6) and who controls them
+model ObjectiveMarker {
+  id              String      @id @default(uuid())
+  gameSession     GameSession @relation(fields: [gameSessionId], references: [id], onDelete: Cascade)
+  gameSessionId   String
+  objectiveNumber Int // 1-6 typically
+  controlledBy    String // "attacker", "defender", "contested", "none"
+  controllingUnit String? // Name of unit holding objective
+  lastUpdated     DateTime    @default(now())
+
+  @@unique([gameSessionId, objectiveNumber])
+  @@index([gameSessionId])
+}
+
+// New: Track active units in current game with live status
+model UnitInstance {
+  id            String      @id @default(uuid())
+  gameSession   GameSession @relation(fields: [gameSessionId], references: [id], onDelete: Cascade)
+  gameSessionId String
+  unitName      String // Name of the unit
+  owner         String // "attacker" or "defender"
+  datasheet     String // Reference to datasheet name
+  iconUrl       String? // Custom icon URL/path for this unit
+
+  // Link to full datasheet (optional)
+  fullDatasheet Datasheet? @relation("DatasheetToUnitInstance", fields: [datasheetId], references: [id])
+  datasheetId   String?
+
+  // Live status tracking
+  startingModels  Int // Initial model count
+  currentModels   Int // Models still alive
+  startingWounds  Int? // Total wounds (for multi-wound models) - legacy
+  currentWounds   Int? // Wounds remaining - legacy
+  woundsPerModel  Int? // Base wounds per model from datasheet
+  modelsArray     String? // JSON: individual model states [{role, currentWounds, maxWounds}]
+  isDestroyed     Boolean @default(false)
+  isBattleShocked Boolean @default(false)
+
+  // Active effects (buffs/debuffs)
+  activeEffects String? // JSON array: ["cover", "transhuman", "etc"]
+
+  // Character attachment (for attached characters only)
+  attachedToUnit String? // Name of unit this character is attached to
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([gameSessionId, owner])
+  @@index([datasheetId])
+}
+
+// New: Log stratagem uses with details
+model StratagemLog {
+  id            String      @id @default(uuid())
+  gameSession   GameSession @relation(fields: [gameSessionId], references: [id], onDelete: Cascade)
+  gameSessionId String
+  timestamp     DateTime    @default(now())
+
+  stratagemName String
+  cpCost        Int
+  usedBy        String // "attacker" or "defender"
+  phase         String
+  targetUnit    String? // Optional: unit affected
+  description   String?
+
+  // Link to full stratagem data (optional)
+  stratagemData   StratagemData? @relation("StratagemDataToLog", fields: [stratagemDataId], references: [id])
+  stratagemDataId String?
+
+  @@index([gameSessionId, timestamp])
+  @@index([stratagemDataId])
+}
+
+// New: Track combat outcomes for analysis
+model CombatLog {
+  id            String      @id @default(uuid())
+  gameSession   GameSession @relation(fields: [gameSessionId], references: [id], onDelete: Cascade)
+  gameSessionId String
+  timestamp     DateTime    @default(now())
+  battleRound   Int
+  phase         String // "Shooting" or "Fight"
+
+  attackingUnit   String
+  attackingPlayer String // "attacker" or "defender"
+  defendingUnit   String
+  defendingPlayer String // "attacker" or "defender"
+
+  hitsScored      Int?
+  woundsDealt     Int?
+  savesSucceeded  Int?
+  damageInflicted Int?
+  modelsDestroyed Int?
+  unitDestroyed   Boolean @default(false)
+
+  notes String?
+
+  @@index([gameSessionId, timestamp])
+}
+
+// New: Track validation warnings and overrides for analytics
+model ValidationEvent {
+  id            String      @id @default(uuid())
+  gameSession   GameSession @relation(fields: [gameSessionId], references: [id], onDelete: Cascade)
+  gameSessionId String
+  timestamp     DateTime    @default(now())
+
+  toolName   String // Tool that triggered validation
+  severity   String // "info", "warning", "error", "critical"
+  message    String // Validation message
+  rule       String? // Rule ID that was triggered
+  suggestion String? // Suggested fix
+
+  wasOverridden Boolean   @default(false)
+  overriddenAt  DateTime? // When user overrode
+
+  // Context at time of validation
+  battleRound Int?
+  phase       String?
+
+  // Original tool call data (JSON)
+  toolArgs   String? // Arguments passed to tool
+  toolResult String? // Result from tool execution
+
+  @@index([gameSessionId, timestamp])
+  @@index([severity, wasOverridden]) // For analytics
+  @@index([rule]) // For rule-based queries
+}
+
+// ============================================
+// GAMEPLAY RULES SYSTEM - Extensible Rules Framework
+// ============================================
+
+// Generic rule container - supports ANY rule type
+// This is the single source of truth for all game rules
+model GameRule {
+  id String @id @default(uuid())
+
+  // Source tracking
+  sourceId      String
+  sourceName    String
+  sourceVersion String
+  category      String // "primary-missions", "secondary-objectives", "cp-rules", etc.
+
+  // Rule identification
+  ruleType    String // "secondary", "mission", "validation", "cp-rule", "phase-rule"
+  name        String
+  description String @db.Text
+
+  // Flexible rule data (JSON for extensibility)
+  ruleData Json // Contains rule-specific fields
+
+  // Context filtering (controls when this rule appears in AI prompts)
+  applicablePhases String[] // ["Command", "Movement", "Shooting", "Charge", "Fight"]
+  applicableTiers  String[] // ["minimal", "secondaries", "full"]
+  requiredKeywords String[] // ["CHARACTER", "VEHICLE"]
+
+  // Metadata
+  priority Int      @default(1) // For conflict resolution (lower = higher priority)
+  isActive Boolean  @default(true) // Allows versioning (old rules marked inactive)
+  tags     String[] // Searchable tags
+
+  // Audit
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations to specialized views
+  secondaryObjective SecondaryObjective?
+  primaryMission     PrimaryMission?
+
+  @@index([category, isActive])
+  @@index([ruleType, name])
+  @@index([sourceId, sourceVersion])
+}
+
+// Secondary objective system (GameRule-based)
+model SecondaryObjective {
+  id         String   @id @default(uuid())
+  gameRuleId String   @unique
+  gameRule   GameRule @relation(fields: [gameRuleId], references: [id], onDelete: Cascade)
+
+  // Core fields (denormalized from gameRule for fast queries)
+  name        String @unique
+  category    String // "Fixed", "Tactical"
+  type        String // "Assassination", "Bring It Down", "Behind Enemy Lines", etc.
+  scoringType String // "automatic", "per_turn", "end_of_game"
+
+  // VP Calculation (JSON for flexibility)
+  vpCalculation Json // { type: "threshold", thresholds: [{condition, vp}] }
+
+  // Limits
+  maxVPPerTurn Int? // e.g., 5 for No Prisoners (null if no limit)
+  maxVPTotal   Int // Usually 20
+
+  // Rule text
+  description    String @db.Text
+  scoringTrigger String // "CHARACTER destroyed", "Unit in deployment zone"
+
+  // Requirements
+  requiredKeywords String[] // ["CHARACTER"], ["MONSTER", "VEHICLE"]
+
+  // Relations
+  progress SecondaryProgress[]
+
+  // Metadata
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([name])
+  @@index([category])
+  @@index([type])
+}
+
+// Specialized view for primary missions
+model PrimaryMission {
+  id         String   @id @default(uuid())
+  gameRuleId String   @unique
+  gameRule   GameRule @relation(fields: [gameRuleId], references: [id], onDelete: Cascade)
+
+  // Core fields
+  name           String @unique
+  deploymentType String // "Hammer and Anvil", "Dawn of War", "Sweeping Engagement"
+
+  // Scoring rules
+  scoringPhase   String // "Command", "End of Turn"
+  scoringTiming  String // "End of your Command phase"
+  scoringFormula String // "objectives_controlled * 5", "10 VP if center + 2 in your half"
+  maxVP          Int // Usually 50
+
+  // Additional rules
+  specialRules String? @db.Text
+  description  String  @db.Text
+
+  // Relations
+  gameSessions GameSession[]
+
+  // Metadata
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([name])
+}
+
+// CP transaction history for validation and tracking
+model CPTransaction {
+  id            String      @id @default(uuid())
+  gameSessionId String
+  gameSession   GameSession @relation(fields: [gameSessionId], references: [id], onDelete: Cascade)
+
+  // Transaction details
+  player          String // "attacker", "defender"
+  transactionType String // "gain", "spend"
+  amount          Int
+  reason          String // "automatic", "secondary_discard", "stratagem", "ability"
+  stratagemName   String? // If reason is "stratagem"
+
+  // Game context
+  battleRound Int
+  phase       String
+  playerTurn  String // "attacker", "defender"
+
+  // Timestamp
+  timestamp DateTime @default(now())
+
+  @@index([gameSessionId, battleRound, playerTurn])
+  @@index([gameSessionId])
+}
+
+// Secondary objective progress tracking (per game session)
+model SecondaryProgress {
+  id            String      @id @default(uuid())
+  gameSessionId String
+  gameSession   GameSession @relation(fields: [gameSessionId], references: [id], onDelete: Cascade)
+
+  // Secondary reference
+  secondaryObjectiveId String?
+  secondaryObjective   SecondaryObjective? @relation(fields: [secondaryObjectiveId], references: [id])
+
+  // Progress details
+  player        String // "attacker", "defender"
+  secondaryName String // Secondary objective name
+  vpScored      Int    @default(0)
+  maxVP         Int    @default(20)
+
+  // Detailed tracking (JSON)
+  progressData Json? // { targets: [...], turns: {...} }
+
+  // Last scoring
+  lastScoredRound Int?
+  lastScoredPhase String?
+
+  @@unique([gameSessionId, player, secondaryName])
+  @@index([gameSessionId])
+  @@index([secondaryObjectiveId])
+}
+
+// Revert action tracking - audit trail for all reverts
+model RevertAction {
+  id            String      @id @default(uuid())
+  gameSessionId String
+  gameSession   GameSession @relation(fields: [gameSessionId], references: [id], onDelete: Cascade)
+  timestamp     DateTime    @default(now())
+
+  // What was reverted
+  targetEventId     String
+  targetEventType   String
+  targetDescription String
+
+  // How it was reverted
+  revertType    String // "single", "cascade"
+  triggerMethod String // "voice", "manual", "ai-correction"
+  reason        String?
+
+  // Affected events (JSON array of event IDs)
+  affectedEventIds String // JSON array
+
+  // State before/after snapshots (JSON)
+  stateBefore String? // Game state before revert
+  stateAfter  String? // Game state after revert
+
+  @@index([gameSessionId, timestamp])
+}
+
+// ============================================
+// COMPETITIVE CONTEXT SYSTEM
+// ============================================
+
+// Aggregated competitive context per (datasheet, faction, detachment) combination
+// Allows different assessments for the same unit depending on what army plays it
+model DatasheetCompetitiveContext {
+  id          String  @id @default(uuid())
+  datasheetId String
+  datasheet   Datasheet @relation(fields: [datasheetId], references: [id], onDelete: Cascade)
+
+  // Context scope (nullable = generic/universal)
+  factionId    String? // NULL = generic context applicable to all factions
+  faction      Faction? @relation(fields: [factionId], references: [id], onDelete: SetNull)
+  detachmentId String? // NULL = faction-generic (not detachment-specific)
+  detachment   Detachment? @relation(fields: [detachmentId], references: [id], onDelete: SetNull)
+
+  // Competitive assessment
+  competitiveTier  String? // "S", "A", "B", "C", "D", "F"
+  tierReasoning    String? @db.Text // Why this tier ranking
+  bestTargets      String? // JSON array: ["Infantry", "Light vehicles"]
+  counters         String? // JSON array: ["Massed anti-tank", "Mortal wounds"]
+  synergies        String? // JSON array: ["Wolf Lord", "Chaplain"]
+  playstyleNotes   String? @db.Text // How to use this unit
+  deploymentTips   String? @db.Text // Deployment advice
+  competitiveNotes String? @db.Text // General competitive notes
+
+  // Aggregation tracking
+  lastAggregated DateTime? // When context was synthesized from sources
+  sourceCount    Int? // How many sources contributed
+  conflicts      String? @db.Text // JSON: detected disagreements between sources
+
+  // Metadata
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Note: Unique constraint handled by index in migration (COALESCE for NULLs)
+  @@index([datasheetId])
+  @@index([factionId])
+  @@index([detachmentId])
+  @@index([competitiveTier])
+}
+
+// Link datasheets to faction-level sources (created during curation)
+// This is a junction table between CompetitiveSource and Datasheet
+model DatasheetSource {
+  id          String    @id @default(uuid())
+  datasheetId String
+  datasheet   Datasheet @relation(fields: [datasheetId], references: [id], onDelete: Cascade)
+
+  // Required link to the faction-level source
+  competitiveSourceId String
+  competitiveSource   CompetitiveSource @relation(fields: [competitiveSourceId], references: [id], onDelete: Cascade)
+
+  // Curation data (filled during AI curation step)
+  relevanceScore Float? // 0.0-1.0 how relevant this source is to this unit
+  mentionCount   Int? // How many times the unit is mentioned
+  mentionSummary String? @db.Text // Brief summary of what was said about this unit
+
+  // Extraction status (per-unit extraction from the source)
+  status       String    @default("pending") // "pending", "extracted", "error"
+  extractedAt  DateTime?
+  errorMessage String?
+
+  // Extracted context (unit-specific insights from this source)
+  extractedContext String? @db.Text // JSON: the competitive context extracted for THIS unit from this source
+  confidence       Int? // 0-100 confidence in extracted data
+
+  // Outdating support (for when meta shifts or balance updates drop)
+  isOutdated     Boolean   @default(false)
+  outdatedAt     DateTime?
+  outdatedReason String? // e.g., "Pre-January 2025 dataslate", "Superseded by newer analysis"
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([datasheetId, competitiveSourceId])
+  @@index([datasheetId])
+  @@index([competitiveSourceId])
+  @@index([status])
+  @@index([isOutdated])
+}
+
+// Track content sources (YouTube, Reddit, articles, forums) for competitive insights
+// These are FACTION-LEVEL sources that may mention multiple units
+model CompetitiveSource {
+  id         String @id @default(uuid())
+  sourceUrl  String @unique // URL of the source (YouTube, Reddit, article, etc.)
+  sourceType String // "youtube", "reddit", "article", "forum", "discord", "other"
+  sourceId   String? @unique // Platform-specific ID (YouTube video ID, Reddit post ID, etc.)
+
+  // Faction association (sources are added at faction level)
+  factionId String?
+  faction   Faction? @relation(fields: [factionId], references: [id], onDelete: SetNull)
+
+  // Optional detachment association (for detachment-specific guides)
+  detachmentId String?
+  detachment   Detachment? @relation(fields: [detachmentId], references: [id], onDelete: SetNull)
+
+  // Content metadata (generalized from YouTube-specific fields)
+  contentTitle String? // Title of video/post/article (nullable until fetched)
+  authorName   String? // Channel name, subreddit, author, or site name (nullable until fetched)
+  authorId     String? // Platform-specific author ID (channel ID, user ID, etc.)
+  publishedAt  DateTime? // When content was published
+  duration     Int? // Duration in seconds (for videos)
+
+  // Content data
+  content     String? @db.Text // Full transcript/extracted text content
+  contentLang String? // Language of content (e.g., "en")
+
+  // Processing status (pipeline: pending → fetched → curated → extracted)
+  status       String    @default("pending") // "pending", "fetched", "curated", "extracted", "error"
+  errorMessage String?
+  fetchedAt    DateTime? // When content was fetched
+  curatedAt    DateTime? // When AI identified mentioned units
+  extractedAt  DateTime? // When unit-specific context was extracted
+
+  // Curation results (which units were identified by AI)
+  mentionedUnitsJson String? @db.Text // JSON: [{"datasheetId": "...", "datasheetName": "...", "mentionCount": 5, "relevance": 0.8}]
+
+  // Game version context
+  gameVersion     String? // e.g., "Q4 2024", "January 2025 Dataslate"
+  gameVersionDate DateTime? // Approximate date of the game version
+
+  // Metadata
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  unitContexts     UnitCompetitiveContext[]
+  factionContexts  FactionCompetitiveContext[]
+  datasheetSources DatasheetSource[] // Links to specific datasheets (created during curation)
+
+  @@index([sourceType])
+  @@index([authorName])
+  @@index([status])
+  @@index([gameVersion])
+  @@index([factionId])
+  @@index([detachmentId])
+}
+
+// Per-unit competitive insights extracted from content creators
+model UnitCompetitiveContext {
+  id          String     @id @default(uuid())
+  unitName    String
+  faction     String
+  subfaction  String? // e.g., "Space Wolves" for Space Marines subfaction
+  datasheetId String?
+  datasheet   Datasheet? @relation(fields: [datasheetId], references: [id], onDelete: SetNull)
+
+  // Tier ranking
+  tierRank      String? // "S", "A", "B", "C", "D", "F"
+  tierReasoning String? @db.Text // Why this tier was assigned
+  tierContext   String? // "competitive", "casual", "narrative" - what context the tier applies to
+
+  // Matchup insights
+  bestTargets  String? // JSON array: ["Infantry squads", "Light vehicles"]
+  counters     String? // JSON array: ["Massed anti-tank", "Mortal wound spam"]
+  avoidTargets String? // JSON array: units/types this unit should avoid
+
+  // Synergies
+  synergies    String? // JSON array: units that combo well
+  synergyNotes String? @db.Text // Explanation of synergies
+
+  // Playstyle guidance
+  playstyleNotes String? @db.Text // How to use this unit effectively
+  deploymentTips String? @db.Text // Deployment advice
+  phasePriority  String? // JSON: {"Movement": "high", "Shooting": "medium", "Fight": "high"}
+
+  // Point efficiency
+  pointsEfficiency String? // "overcosted", "efficient", "undercosted", "meta-dependent"
+  pointsNotes      String? @db.Text
+
+  // Source tracking
+  sourceId  String
+  source    CompetitiveSource @relation(fields: [sourceId], references: [id], onDelete: Cascade)
+  timestamp String? // Timestamp in video where this unit is discussed (e.g., "12:34")
+
+  // Confidence and review
+  confidence  Int       @default(50) // 0-100 confidence in extracted data
+  needsReview Boolean   @default(true)
+  reviewedAt  DateTime?
+  reviewNotes String?   @db.Text
+
+  // Clarifying questions (JSON array of questions that need answers)
+  clarifyingQuestions String? // JSON: [{"question": "...", "answered": false, "answer": null}]
+
+  // Version tracking
+  gameVersion String? // e.g., "Q4 2024"
+  isStale     Boolean   @default(false) // Marked stale when new balance update drops
+  staleSince  DateTime?
+
+  // Metadata
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([unitName, faction, sourceId])
+  @@index([unitName, faction])
+  @@index([faction])
+  @@index([tierRank])
+  @@index([sourceId])
+  @@index([datasheetId])
+  @@index([gameVersion])
+  @@index([needsReview])
+}
+
+// Faction-level competitive insights
+model FactionCompetitiveContext {
+  id          String  @id @default(uuid())
+  factionName String
+  subfaction  String? // For chapter/subfaction-specific context
+
+  // Meta position
+  metaTier          String? // "S", "A", "B", "C", "D", "F"
+  metaTierReasoning String? @db.Text
+  metaPosition      String? // "top tier", "gatekeeper", "mid tier", "struggling"
+
+  // Playstyle
+  playstyleArchetype String? // "aggressive_melee", "gunline", "balanced", "elite", "horde", "alpha_strike"
+  playstyleNotes     String? @db.Text
+
+  // Strengths and weaknesses
+  strengths  String? // JSON array
+  weaknesses String? // JSON array
+
+  // Detachment recommendations
+  recommendedDetachments String? // JSON array with reasoning: [{"name": "...", "reasoning": "..."}]
+  detachmentNotes        String? @db.Text
+
+  // Matchups
+  favorableMatchups   String? // JSON array: factions this faction beats
+  unfavorableMatchups String? // JSON array: factions that beat this faction
+  matchupNotes        String? @db.Text
+
+  // Key units
+  mustTakeUnits String? // JSON array: auto-include units
+  avoidUnits    String? // JSON array: trap/bad units
+  sleepHitUnits String? // JSON array: underrated units
+
+  // Source tracking
+  sourceId String
+  source   CompetitiveSource @relation(fields: [sourceId], references: [id], onDelete: Cascade)
+
+  // Confidence and review
+  confidence  Int       @default(50)
+  needsReview Boolean   @default(true)
+  reviewedAt  DateTime?
+  reviewNotes String?   @db.Text
+
+  // Clarifying questions
+  clarifyingQuestions String?
+
+  // Version tracking
+  gameVersion String?
+  isStale     Boolean   @default(false)
+  staleSince  DateTime?
+
+  // Metadata
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([factionName, subfaction, sourceId])
+  @@index([factionName])
+  @@index([metaTier])
+  @@index([sourceId])
+  @@index([gameVersion])
+  @@index([needsReview])
+}
+
+// ============================================
+// DOSSIER GENERATION HISTORY & SHARING
+// ============================================
+
+// Stores generated tactical dossiers with history and sharing capabilities
+model DossierGeneration {
+  id     String @id @default(uuid())
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  // Async processing status
+  status       String    @default("pending") // "pending", "processing", "completed", "failed"
+  inputText    String?   @db.Text            // Raw army list text for background processing
+  errorMessage String?                        // Error details if failed
+  completedAt  DateTime?                      // When processing finished
+
+  // Notification tracking - when user acknowledged the completion
+  notificationDismissedAt DateTime?           // Set when user clicks badge/toast or views dossier
+
+  // Army metadata (nullable until processing completes)
+  faction     String?  // Detected or selected faction
+  detachment  String?  // Detected detachment
+  totalPoints Int?     // Total points of the army
+  unitCount   Int?     // Number of units
+  modelCount  Int?     // Total model count
+  listName    String?  // Optional user-provided name
+
+  // Generated content
+  spiritIconUrl String? // AI-generated spirit icon URL (Supabase Storage)
+
+  // Analysis data (JSONB for complex nested structures, nullable until complete)
+  localAnalysis     Json? // DossierAnalysis object (MathHammer, radar scores, etc.)
+  strategicAnalysis Json? // DossierStrategicAnalysis object (AI insights)
+  listSuggestions   Json? // Array of ListSuggestion objects
+
+  // Sharing & Visibility
+  visibility String  @default("private") // "private", "link", "public"
+  shareToken String? @unique // For link-based sharing
+
+  // View tracking (for popularity sorting in gallery)
+  viewCount Int @default(0)
+
+  // Versioning support
+  currentVersion Int       @default(1)  // Current active version number
+  isEdited       Boolean   @default(false) // Flag if user has made any edits
+  lastEditedAt   DateTime?              // When last user edit was made
+
+  // Metadata
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  versions DossierVersion[]
+
+  @@index([userId])
+  @@index([userId, status])
+  @@index([userId, createdAt])
+  @@index([visibility])
+  @@index([faction])
+  @@index([visibility, createdAt])
+}
+
+// Stores version history for dossier edits
+model DossierVersion {
+  id            String            @id @default(uuid())
+  dossierId     String
+  dossier       DossierGeneration @relation(fields: [dossierId], references: [id], onDelete: Cascade)
+  versionNumber Int               // Sequential version (1, 2, 3...)
+  versionLabel  String?           // Optional label ("Pre-tournament tweaks", "v1.2")
+  snapshotData  String            @db.Text // Full JSON snapshot of strategicAnalysis + listSuggestions
+  changelog     String?           @db.Text // What changed in this version
+  createdAt     DateTime          @default(now())
+  createdById   String?           // User ID who created this version
+  createdBy     User?             @relation("DossierVersionCreator", fields: [createdById], references: [id], onDelete: SetNull)
+
+  @@unique([dossierId, versionNumber])
+  @@index([dossierId])
+  @@index([createdById])
+}

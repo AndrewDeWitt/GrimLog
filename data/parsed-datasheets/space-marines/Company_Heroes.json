@@ -1,0 +1,181 @@
+{
+  "name": "Company Heroes",
+  "faction": "Adeptus Astartes",
+  "subfaction": "Space Wolves",
+  "role": "Other",
+  "keywords": [
+    "INFANTRY",
+    "GRENADES",
+    "IMPERIUM",
+    "TACTICUS",
+    "COMPANY HEROES",
+    "ANCIENT",
+    "ADEPTUS ASTARTES"
+  ],
+  "stats": {
+    "movement": "6\"",
+    "toughness": 4,
+    "save": "3+",
+    "invulnerableSave": "",
+    "wounds": 4,
+    "leadership": 6,
+    "objectiveControl": 1
+  },
+  "composition": "1 Ancient, 1 Company Champion, 2 Company Veterans",
+  "compositionData": [
+    {
+      "name": "Ancient",
+      "role": "leader",
+      "count": 1,
+      "woundsPerModel": 4
+    },
+    {
+      "name": "Company Champion",
+      "role": "leader",
+      "count": 1,
+      "woundsPerModel": 4
+    },
+    {
+      "name": "Company Veteran",
+      "role": "regular",
+      "count": 2,
+      "woundsPerModel": 4
+    }
+  ],
+  "unitSize": "4",
+  "leaderRules": "You must attach one CAPTAIN or CHAPTER MASTER model to this unit. If this is not possible, this unit does not take part in the battle and counts as having been destroyed.",
+  "leaderAbilities": "",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Bolt Pistol",
+      "range": "12\"",
+      "type": "Pistol",
+      "attacks": "1",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "PISTOL"
+      ]
+    },
+    {
+      "name": "Bolt rifle",
+      "range": "24\"",
+      "type": "Ranged",
+      "attacks": "2",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "-1",
+      "damage": "1",
+      "abilities": []
+    },
+    {
+      "name": "Master-crafted bolt rifle",
+      "range": "24\"",
+      "type": "Ranged",
+      "attacks": "2",
+      "ballisticSkill": "2+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "-1",
+      "damage": "2",
+      "abilities": [
+        "DEVASTATING WOUNDS",
+        "RAPID FIRE 1"
+      ]
+    },
+    {
+      "name": "Master-crafted heavy bolter",
+      "range": "36\"",
+      "type": "Ranged",
+      "attacks": "3",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "5",
+      "armorPenetration": "-1",
+      "damage": "2",
+      "abilities": [
+        "HEAVY",
+        "SUSTAINED HITS 2"
+      ]
+    },
+    {
+      "name": "Close combat weapon",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "5",
+      "ballisticSkill": "",
+      "weaponSkill": "3+",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": []
+    },
+    {
+      "name": "Master-crafted power weapon",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "6",
+      "ballisticSkill": "",
+      "weaponSkill": "2+",
+      "strength": "5",
+      "armorPenetration": "-2",
+      "damage": "2",
+      "abilities": [
+        "PRECISION"
+      ]
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Oath of Moment",
+      "type": "faction",
+      "description": "If your Army Faction is Adeptus Astartes, at the start of your Command phase, you can select one unit from your opponent’s army. Until the start of your next Command phase, each time a model from your army with this ability makes an attack that targets that unit, you can re-roll the Hit roll.",
+      "triggerPhase": [
+        "Command"
+      ],
+      "triggerSubphase": "Start of Phase",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Astartes Banner",
+      "type": "unit",
+      "description": "While this unit contains an Ancient, add 1 to the Objective Control characteristic of models in this unit.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Command Squad",
+      "type": "unit",
+      "description": "While a CHARACTER model is leading this unit, each time an attack targets this unit, subtract 1 from the Wound roll.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": true,
+      "requiredKeywords": [
+        "CHARACTER"
+      ],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [],
+  "pointsCost": 105,
+  "pointsTiers": [
+    {
+      "models": 4,
+      "points": 105
+    }
+  ]
+}

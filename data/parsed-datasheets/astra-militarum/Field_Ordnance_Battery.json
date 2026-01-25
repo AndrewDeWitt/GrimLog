@@ -1,0 +1,166 @@
+{
+  "name": "Field Ordnance Battery",
+  "faction": "Astra Militarum",
+  "subfaction": "",
+  "role": "Other",
+  "keywords": [
+    "INFANTRY",
+    "ARTILLERY",
+    "GRENADES",
+    "IMPERIUM",
+    "REGIMENT",
+    "FIELD ORDNANCE BATTERY"
+  ],
+  "stats": {
+    "movement": "3\"",
+    "toughness": 5,
+    "save": "4+",
+    "invulnerableSave": "",
+    "wounds": 6,
+    "leadership": 7,
+    "objectiveControl": 2
+  },
+  "composition": "2 Ordnance Teams",
+  "compositionData": [
+    {
+      "name": "Ordnance Team",
+      "role": "regular",
+      "count": 2,
+      "woundsPerModel": 6
+    }
+  ],
+  "unitSize": "2",
+  "leaderRules": "",
+  "leaderAbilities": "",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Bombast field gun",
+      "range": "48\"",
+      "type": "Ranged",
+      "attacks": "D6",
+      "ballisticSkill": "5+",
+      "weaponSkill": "",
+      "strength": "7",
+      "armorPenetration": "-1",
+      "damage": "2",
+      "abilities": [
+        "BLAST",
+        "HEAVY",
+        "INDIRECT FIRE"
+      ]
+    },
+    {
+      "name": "Heavy lascannon",
+      "range": "48\"",
+      "type": "Ranged",
+      "attacks": "2",
+      "ballisticSkill": "5+",
+      "weaponSkill": "",
+      "strength": "14",
+      "armorPenetration": "-3",
+      "damage": "D6+1",
+      "abilities": [
+        "HEAVY"
+      ]
+    },
+    {
+      "name": "Lasgun",
+      "range": "24\"",
+      "type": "Ranged",
+      "attacks": "1",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "3",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "RAPID FIRE 1"
+      ]
+    },
+    {
+      "name": "Laspistol",
+      "range": "12\"",
+      "type": "Ranged",
+      "attacks": "1",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "3",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "PISTOL"
+      ]
+    },
+    {
+      "name": "Malleus rocket launcher",
+      "range": "48\"",
+      "type": "Ranged",
+      "attacks": "D6+6",
+      "ballisticSkill": "5+",
+      "weaponSkill": "",
+      "strength": "6",
+      "armorPenetration": "-1",
+      "damage": "1",
+      "abilities": [
+        "BLAST",
+        "HEAVY"
+      ]
+    },
+    {
+      "name": "Battery close combat weapons",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "3",
+      "ballisticSkill": "",
+      "weaponSkill": "4+",
+      "strength": "3",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": []
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Rearm, Reload, Fire",
+      "type": "unit",
+      "description": "While this unit is being affected by an Order, provided it Remained Stationary this turn, all Heavy weapons equipped by models in this unit have the [SUSTAINED HITS 1] ability.",
+      "triggerPhase": [
+        "Shooting"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Voice of Command",
+      "type": "faction",
+      "description": "This unit can be affected by Orders.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [
+    {
+      "description": "Any number of models can each have their malleus rocket launcher replaced with 1 bombast field gun.",
+      "pointsCost": 0
+    },
+    {
+      "description": "Any number of models can each have their malleus rocket launcher replaced with 1 heavy lascannon.",
+      "pointsCost": 0
+    }
+  ],
+  "pointsCost": 110,
+  "pointsTiers": [
+    {
+      "models": 2,
+      "points": 110
+    }
+  ]
+}

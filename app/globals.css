@@ -1,0 +1,818 @@
+@import "tailwindcss/theme" layer(theme);
+@import "tailwindcss/preflight" layer(base);
+@import "tailwindcss/utilities" layer(utilities);
+
+@theme {
+  --color-grimlog-black: #0a0a0a;
+  --color-grimlog-darkGray: #1a1a1a;
+  --color-grimlog-gray: #2b2b2b;
+  --color-grimlog-steel: #4a4a4a;
+  --color-grimlog-orange: #ff6b00;
+  --color-grimlog-amber: #d4a04c;
+  --color-grimlog-green: #a8c5a0;
+  --color-grimlog-darkGreen: #6b9e78;
+  --color-grimlog-red: #b84a4a;
+  --color-grimlog-darkRed: #784a4a;
+  --color-grimlog-lightSteel: #b8b8b8;
+
+  /* Aliases (kebab-case) — most of the app uses these class names */
+  --color-grimlog-light-steel: #b8b8b8;
+  --color-grimlog-dark-green: #6b9e78;
+  --color-grimlog-dark-red: #784a4a;
+  
+  /* Light Slate Theme */
+  --color-grimlog-slate: #e8e8e8;
+  --color-grimlog-slate-light: #f0f0f0;
+  --color-grimlog-slate-dark: #d0d0d0;
+  
+  /* Defender (Green) - Solid, readable sage */
+  --color-grimlog-defender-bg: #a8c8a8;
+  --color-grimlog-defender-bg-dark: #98b898;
+  --color-grimlog-defender-border: #3a5a3a;
+  --color-grimlog-defender-accent: #2a4a2a;
+  --color-grimlog-defender-text: #0a1a0a;
+  
+  /* Attacker (Red) - Solid, readable crimson */
+  --color-grimlog-attacker-bg: #c8a8a8;
+  --color-grimlog-attacker-bg-dark: #b89898;
+  --color-grimlog-attacker-border: #5a2a2a;
+  --color-grimlog-attacker-accent: #4a1a1a;
+  --color-grimlog-attacker-text: #1a0a0a;
+}
+
+:root {
+  /* Base colors */
+  --grimlog-black: #0a0a0a;
+  --grimlog-dark-gray: #1a1a1a;
+  --grimlog-gray: #2b2b2b;
+  --grimlog-steel: #4a4a4a;
+  --grimlog-light-steel: #b8b8b8;
+  
+  /* Light Slate Theme */
+  --grimlog-slate: #e8e8e8;
+  --grimlog-slate-light: #f0f0f0;
+  --grimlog-slate-dark: #d0d0d0;
+  
+  /* Accent colors */
+  --grimlog-orange: #ff6b00;
+  --grimlog-amber: #d4a04c;
+  --grimlog-green: #a8c5a0;
+  --grimlog-dark-green: #6b9e78;
+  --grimlog-red: #b84a4a;
+  --grimlog-dark-red: #784a4a;
+  
+  /* Defender (Green) - Solid, readable sage */
+  --grimlog-defender-bg: #a8c8a8;
+  --grimlog-defender-bg-dark: #98b898;
+  --grimlog-defender-border: #3a5a3a;
+  --grimlog-defender-accent: #2a4a2a;
+  --grimlog-defender-text: #0a1a0a;
+  
+  /* Attacker (Red) - Solid, readable crimson */
+  --grimlog-attacker-bg: #c8a8a8;
+  --grimlog-attacker-bg-dark: #b89898;
+  --grimlog-attacker-border: #5a2a2a;
+  --grimlog-attacker-accent: #4a1a1a;
+  --grimlog-attacker-text: #1a0a0a;
+}
+
+body {
+  font-family: 'Courier New', 'Consolas', 'Monaco', monospace;
+  background: var(--grimlog-slate);
+  color: var(--grimlog-black);
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  letter-spacing: 0.025em;
+}
+
+/* Screen reader only - accessible but visually hidden */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.focus\:not-sr-only:focus {
+  position: static;
+  width: auto;
+  height: auto;
+  padding: inherit;
+  margin: inherit;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+}
+
+/* Tactical scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  background: var(--grimlog-black);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--grimlog-orange);
+  border-radius: 0;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--grimlog-amber);
+}
+
+/* Glow effects - subtle version for better readability */
+.glow-orange {
+  text-shadow: 0 0 8px rgba(255, 107, 0, 0.4),
+               0 0 12px rgba(255, 107, 0, 0.2);
+}
+
+.glow-green {
+  text-shadow: 0 0 8px rgba(168, 197, 160, 0.3),
+               0 0 12px rgba(107, 158, 120, 0.2);
+}
+
+.glow-red {
+  text-shadow: 0 0 8px rgba(184, 74, 74, 0.4),
+               0 0 12px rgba(120, 74, 74, 0.3);
+}
+
+/* Warning border effect */
+.warning-border {
+  position: relative;
+  border: 2px solid var(--grimlog-orange);
+}
+
+.warning-border::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(
+    45deg,
+    var(--grimlog-orange),
+    var(--grimlog-amber),
+    var(--grimlog-orange)
+  );
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.warning-border:hover::before {
+  opacity: 0.3;
+}
+
+/* Pulse animation for active indicators */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.pulse-animation {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Scanline effect - more subtle */
+@keyframes scanline {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+.scanline::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--grimlog-green);
+  opacity: 0.1;
+  animation: scanline 6s linear infinite;
+  pointer-events: none;
+}
+
+/* Glitch effect */
+@keyframes glitch {
+  0% {
+    transform: translate(0);
+  }
+  20% {
+    transform: translate(-2px, 2px);
+  }
+  40% {
+    transform: translate(-2px, -2px);
+  }
+  60% {
+    transform: translate(2px, 2px);
+  }
+  80% {
+    transform: translate(2px, -2px);
+  }
+  100% {
+    transform: translate(0);
+  }
+}
+
+.glitch {
+  animation: glitch 0.3s linear infinite;
+}
+
+/* Warning flash - subtle version */
+@keyframes warning-flash {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.85;
+  }
+}
+
+.warning-flash {
+  animation: warning-flash 2s ease-in-out infinite;
+}
+
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .pulse-animation,
+  .warning-flash,
+  .scanline,
+  .glitch,
+  .corrupt,
+  .dataslate-open-anim {
+    animation: none !important;
+  }
+}
+
+/* Slide up animation for toast */
+@keyframes slide-up {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-slide-up {
+  animation: slide-up 0.3s ease-out;
+}
+
+/* Data corruption effect */
+@keyframes corrupt {
+  0%, 100% {
+    text-shadow: 0 0 1px var(--grimlog-green);
+  }
+  25% {
+    text-shadow: -2px 0 1px var(--grimlog-red), 2px 0 1px var(--grimlog-green);
+  }
+  50% {
+    text-shadow: 2px 0 1px var(--grimlog-red), -2px 0 1px var(--grimlog-green);
+  }
+  75% {
+    text-shadow: -2px 0 1px var(--grimlog-green), 2px 0 1px var(--grimlog-red);
+  }
+}
+
+.corrupt {
+  animation: corrupt 0.5s linear infinite;
+}
+
+/* Hazard stripes */
+.hazard-stripes {
+  background: repeating-linear-gradient(
+    45deg,
+    var(--grimlog-orange),
+    var(--grimlog-orange) 10px,
+    var(--grimlog-black) 10px,
+    var(--grimlog-black) 20px
+  );
+}
+
+/* Fade out animation for captions */
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.animate-fade-out {
+  animation: fadeOut 3s ease-out;
+}
+
+/* Grimdark Button Depth - Subtle shadows for tactile feel without glows */
+.btn-depth {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5),
+              inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.btn-depth-sm {
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4),
+              inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.btn-depth-lg {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.6),
+              inset 0 1px 0 rgba(255, 255, 255, 0.12),
+              0 0 0 1px rgba(0, 0, 0, 0.3);
+}
+
+/* Hover depth enhancement - makes buttons "lift" slightly */
+.hover-lift:hover {
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.6),
+              inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  transform: translateY(-1px);
+  transition: all 0.15s ease-out;
+}
+
+/* Card depth - for interactive cards that should pop from background */
+.card-depth {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4),
+              0 1px 0 rgba(255, 255, 255, 0.05) inset;
+}
+
+.card-depth-hover:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6),
+              0 1px 0 rgba(255, 255, 255, 0.08) inset;
+}
+
+/* Border-3 equivalent (Tailwind only goes to border-2 by default) */
+.border-3 {
+  border-width: 3px;
+}
+
+.border-4 {
+  border-width: 4px;
+}
+
+/* Enhanced interactive borders - thicker on hover */
+.interactive-border {
+  border-width: 2px;
+  transition: border-width 0.15s ease-out;
+}
+
+.interactive-border:hover {
+  border-width: 3px;
+}
+
+/* Dropdown shadow - for menus and popovers */
+.dropdown-shadow {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7),
+              0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+/* Active state depth - buttons that are pressed/active */
+.active-depth {
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.6),
+              inset 0 1px 0 rgba(0, 0, 0, 0.4);
+}
+
+/* -------------------------------------------------------------------------- */
+/* Grimdark Dataslate Styles */
+/* -------------------------------------------------------------------------- */
+
+.dataslate-frame {
+  background-color: var(--grimlog-black);
+  border: 2px solid var(--grimlog-steel);
+  box-shadow: 
+    0 4px 12px rgba(0, 0, 0, 0.6);
+  position: relative;
+}
+
+/* Corner brackets - simplified and flatter */
+.dataslate-frame::before,
+.dataslate-frame::after {
+  content: '';
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border: 2px solid var(--grimlog-orange);
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
+.dataslate-frame::before {
+  top: -2px;
+  left: -2px;
+  border-right: none;
+  border-bottom: none;
+}
+
+.dataslate-frame::after {
+  bottom: -2px;
+  right: -2px;
+  border-left: none;
+  border-top: none;
+}
+
+/* Rivets in corners - removed for flatter look */
+.dataslate-rivet {
+  display: none;
+}
+
+/* CRT Screen Overlay - subtler or removed */
+.crt-overlay {
+  background: 
+    linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%);
+  background-size: 100% 2px;
+  pointer-events: none;
+  opacity: 0.3;
+}
+
+/* Power up / Flicker animation - kept but faster */
+@keyframes dataslate-power-up {
+  0% { opacity: 0; transform: translateY(-10px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.dataslate-open-anim {
+  animation: dataslate-power-up 0.2s ease-out forwards;
+}
+
+/* Bottom Sheet Animations */
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(100%);
+  }
+}
+
+/* FAB animations */
+@keyframes fab-in {
+  from {
+    transform: scale(0) rotate(-180deg);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1) rotate(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fab-out {
+  from {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: scale(0.8) translateY(100px);
+    opacity: 0;
+  }
+}
+
+.animate-fab-in {
+  animation: fab-in 0.3s ease-out;
+}
+
+.animate-fab-out {
+  animation: fab-out 0.2s ease-in forwards;
+}
+
+/* Unit card expand animation */
+@keyframes expand {
+  from {
+    opacity: 0;
+    max-height: 0;
+  }
+  to {
+    opacity: 1;
+    max-height: 500px;
+  }
+}
+
+.animate-expand {
+  animation: expand 0.2s ease-out;
+  overflow: hidden;
+}
+
+/* Subtle pulse for critical health FAB indicator */
+@keyframes fab-pulse {
+  0%, 100% {
+    box-shadow: 0 4px 14px rgba(234, 88, 12, 0.4);
+  }
+  50% {
+    box-shadow: 0 4px 20px rgba(239, 68, 68, 0.6), 0 0 30px rgba(239, 68, 68, 0.3);
+  }
+}
+
+.animate-fab-pulse {
+  animation: fab-pulse 2s ease-in-out infinite;
+}
+
+/* ========================================
+   Unit Health Sheet - iPad Optimized
+   ======================================== */
+
+/* Touch-friendly button press feedback */
+@keyframes button-press {
+  0% { transform: scale(1); }
+  50% { transform: scale(0.95); }
+  100% { transform: scale(1); }
+}
+
+.touch-feedback:active {
+  animation: button-press 0.15s ease-out;
+}
+
+/* Smooth card expansion with spring-ish effect (kept subtle for the lighter theme) */
+@keyframes card-expand {
+  0% {
+    opacity: 0;
+    max-height: 0;
+    transform: translateY(-10px);
+  }
+  70% {
+    opacity: 1;
+    transform: translateY(2px);
+  }
+  100% {
+    opacity: 1;
+    max-height: 600px;
+    transform: translateY(0);
+  }
+}
+
+.animate-card-expand {
+  animation: card-expand 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  overflow: hidden;
+}
+
+/* iPad optimized scrollbar */
+@media (min-width: 768px) {
+  .unit-sheet-scroll::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  .unit-sheet-scroll::-webkit-scrollbar-track {
+    background: var(--grimlog-black);
+    border-radius: 4px;
+  }
+  
+  .unit-sheet-scroll::-webkit-scrollbar-thumb {
+    background: var(--grimlog-steel);
+    border-radius: 4px;
+  }
+  
+  .unit-sheet-scroll::-webkit-scrollbar-thumb:hover {
+    background: var(--grimlog-orange);
+  }
+}
+
+/* Touch highlight removal for cleaner iPad experience */
+.no-tap-highlight {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Smooth transitions for interactive elements */
+.unit-card-transition {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ========================================
+   Dossier Landing Page - Mobile Optimized
+   ======================================== */
+
+/* Smooth scroll behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Dynamic viewport height for mobile browsers */
+.min-h-dvh {
+  min-height: 100dvh;
+}
+
+/* Touch-optimized interactive elements */
+@media (hover: none) and (pointer: coarse) {
+  /* Larger touch targets on mobile */
+  button,
+  [role="button"],
+  a,
+  select,
+  input[type="file"] + label {
+    min-height: 44px;
+  }
+
+  /* Override for buttons that need exact sizing (e.g., icon-only square buttons) */
+  .touch-size-override {
+    min-height: unset !important;
+  }
+  
+  /* Disable hover effects on touch devices */
+  .hover-lift:hover {
+    transform: none;
+  }
+  
+  /* Active state instead of hover */
+  .touch-active:active {
+    transform: scale(0.98);
+    opacity: 0.9;
+  }
+}
+
+/* Safe area insets for notched phones */
+@supports (padding: env(safe-area-inset-bottom)) {
+  .safe-area-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  
+  .safe-area-top {
+    padding-top: env(safe-area-inset-top);
+  }
+}
+
+/* Prevent text selection on interactive elements */
+.no-select {
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+/* Smooth section scroll snap (optional, can be enabled) */
+.scroll-snap-container {
+  scroll-snap-type: y proximity;
+}
+
+.scroll-snap-section {
+  scroll-snap-align: start;
+}
+
+/* Landing page hero gradient animation */
+@keyframes gradient-shift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient-shift 15s ease infinite;
+}
+
+/* Fade in up animation for staggered reveals */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.5s ease-out forwards;
+}
+
+.animation-delay-100 { animation-delay: 100ms; }
+.animation-delay-200 { animation-delay: 200ms; }
+.animation-delay-300 { animation-delay: 300ms; }
+.animation-delay-400 { animation-delay: 400ms; }
+
+/* Collapsible section animations */
+@keyframes collapse-open {
+  from {
+    opacity: 0;
+    max-height: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  to {
+    opacity: 1;
+    max-height: 1000px;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+}
+
+.animate-collapse-open {
+  animation: collapse-open 0.3s ease-out forwards;
+  overflow: hidden;
+}
+
+/* Mobile-first form styling */
+@media (max-width: 640px) {
+  /* Full-width inputs on mobile */
+  .mobile-full-width {
+    width: 100%;
+    max-width: none;
+  }
+  
+  /* Larger text in inputs for readability */
+  textarea,
+  input[type="text"],
+  select {
+    font-size: 16px; /* Prevents iOS zoom on focus */
+  }
+  
+  /* Stack form elements vertically */
+  .mobile-stack {
+    flex-direction: column;
+  }
+  
+  .mobile-stack > * {
+    width: 100%;
+  }
+}
+
+/* Shimmer loading effect for sample preview */
+@keyframes shimmer-slide {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
+.shimmer-effect {
+  position: relative;
+  overflow: hidden;
+}
+
+.shimmer-effect::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 107, 0, 0.1),
+    transparent
+  );
+  animation: shimmer-slide 2s infinite;
+}
+
+/* Sticky CTA bar for mobile */
+.sticky-cta-mobile {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 40;
+  background: var(--grimlog-black);
+  border-top: 2px solid var(--grimlog-steel);
+  padding: 12px 16px;
+  padding-bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+}
+
+/* Hide sticky CTA on larger screens */
+@media (min-width: 768px) {
+  .sticky-cta-mobile {
+    display: none;
+  }
+}
+
+/* Backdrop blur fallback */
+@supports not (backdrop-filter: blur(8px)) {
+  .backdrop-blur-fallback {
+    background: rgba(10, 10, 10, 0.98);
+  }
+}

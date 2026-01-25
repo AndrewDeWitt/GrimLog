@@ -1,0 +1,130 @@
+{
+  "name": "Nork Deddog",
+  "faction": "Astra Militarum",
+  "subfaction": "",
+  "role": "Character",
+  "keywords": [
+    "INFANTRY",
+    "CHARACTER",
+    "EPIC HERO",
+    "GRENADES",
+    "IMPERIUM",
+    "LOYAL PROTECTOR",
+    "OGRYN",
+    "NORK DEDDOG"
+  ],
+  "stats": {
+    "movement": "6\"",
+    "toughness": 6,
+    "save": "4+",
+    "invulnerableSave": "",
+    "wounds": 6,
+    "leadership": 7,
+    "objectiveControl": 1
+  },
+  "composition": "1 Nork Deddog – EPIC HERO",
+  "compositionData": [
+    {
+      "name": "Nork Deddog",
+      "role": "leader",
+      "count": 1,
+      "woundsPerModel": 6
+    }
+  ],
+  "unitSize": "1",
+  "leaderRules": "At the start of the Declare Battle Formations step, this model must join one COMMAND SQUAD unit from your army (a COMMAND SQUAD cannot have more than one LOYAL PROTECTOR model joined to it). This model then counts as part of that COMMAND SQUAD for the rest of the battle, and its Starting Strength is increased accordingly. If it is not possible to join this model to a COMMAND SQUAD, it does not take part in the battle and counts as having been destroyed.",
+  "leaderAbilities": "",
+  "transportCapacity": "While this model is joined to a unit, it can embark within any TRANSPORT that unit can embark within, and takes up the space of 3 models.",
+  "weapons": [
+    {
+      "name": "Ripper gun",
+      "range": "18\"",
+      "type": "Rapid Fire 3",
+      "attacks": "3",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "5",
+      "armorPenetration": "-1",
+      "damage": "2",
+      "abilities": [
+        "RAPID FIRE 3"
+      ]
+    },
+    {
+      "name": "Huge knife",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "6",
+      "ballisticSkill": "",
+      "weaponSkill": "2+",
+      "strength": "8",
+      "armorPenetration": "-1",
+      "damage": "2",
+      "abilities": [
+        "DEVASTATING WOUNDS"
+      ]
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Feel No Pain 5+",
+      "type": "core",
+      "description": "The model has the Feel No Pain 5+ ability.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": true,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Loyal Protector",
+      "type": "unit",
+      "description": "At the start of the Declare Battle Formations step, this model must join one COMMAND SQUAD unit from your army (a COMMAND SQUAD cannot have more than one LOYAL PROTECTOR model joined to it). This model then counts as part of that COMMAND SQUAD for the rest of the battle, and its Starting Strength is increased accordingly. If it is not possible to join this model to a COMMAND SQUAD, it does not take part in the battle and counts as having been destroyed. While this model is joined to a unit, it can embark within any TRANSPORT that unit can embark within, and takes up the space of 3 models. This model cannot be selected as your WARLORD.",
+      "triggerPhase": [
+        "Deployment"
+      ],
+      "triggerSubphase": "Start of Phase",
+      "isReactive": false,
+      "requiredKeywords": [
+        "COMMAND SQUAD"
+      ],
+      "effects": null
+    },
+    {
+      "name": "Ogryn Bodyguard",
+      "type": "unit",
+      "description": "While one or more OFFICER models are in the same unit as this model, those OFFICER models have the Feel No Pain 4+ ability.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": true,
+      "requiredKeywords": [
+        "OFFICER"
+      ],
+      "effects": null
+    },
+    {
+      "name": "Thunderous Head-butt",
+      "type": "unit",
+      "description": "Each time this model’s unit is selected to fight, you can select one enemy unit within Engagement Range of this model and roll one D6: on a 2-5, that enemy unit suffers D3 mortal wounds; on a 6, that enemy unit suffers D3+3 mortal wounds.",
+      "triggerPhase": [
+        "Fight"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [],
+  "pointsCost": 60,
+  "pointsTiers": [
+    {
+      "models": 1,
+      "points": 60
+    }
+  ]
+}

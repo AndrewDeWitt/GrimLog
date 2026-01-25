@@ -1,0 +1,158 @@
+{
+  "name": "Iron Priest",
+  "faction": "Space Marines",
+  "subfaction": "Space Wolves",
+  "role": "Character",
+  "keywords": [
+    "INFANTRY",
+    "CHARACTER",
+    "IMPERIUM",
+    "TECHMARINE",
+    "IRON PRIEST"
+  ],
+  "stats": {
+    "movement": "7\"",
+    "toughness": 4,
+    "save": "2+",
+    "invulnerableSave": "",
+    "wounds": 4,
+    "leadership": 6,
+    "objectiveControl": 1
+  },
+  "composition": "1 Iron Priest",
+  "compositionData": [
+    {
+      "name": "Iron Priest",
+      "role": "leader",
+      "count": 1,
+      "woundsPerModel": 4
+    }
+  ],
+  "unitSize": "1",
+  "leaderRules": "This model can be attached to the following units: Blood Claws; Grey Hunters; Wolf Guard Headtakers.",
+  "leaderAbilities": "",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Helfrost pistol — dispersed",
+      "range": "12\"",
+      "type": "Pistol",
+      "attacks": "D6",
+      "ballisticSkill": "",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "-1",
+      "damage": "1",
+      "abilities": [
+        "PISTOL",
+        "TORRENT"
+      ]
+    },
+    {
+      "name": "Helfrost pistol — focused",
+      "range": "12\"",
+      "type": "Pistol",
+      "attacks": "1",
+      "ballisticSkill": "2+",
+      "weaponSkill": "",
+      "strength": "6",
+      "armorPenetration": "-3",
+      "damage": "3",
+      "abilities": [
+        "PISTOL"
+      ]
+    },
+    {
+      "name": "Tempest hammer and servo-arm",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "4",
+      "ballisticSkill": "",
+      "weaponSkill": "4+",
+      "strength": "8",
+      "armorPenetration": "-2",
+      "damage": "3",
+      "abilities": []
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Leader",
+      "type": "core",
+      "description": "Leader",
+      "triggerPhase": [
+        "Keyword"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Oath of Moment",
+      "type": "faction",
+      "description": "Oath of Moment",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Iron Priest",
+      "type": "unit",
+      "description": "While this model is within 3\" of one or more friendly ADEPTUS ASTARTES VEHICLE units, this model has the Lone Operative ability.",
+      "triggerPhase": [
+        "Keyword"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [
+        "ADEPTUS ASTARTES",
+        "VEHICLE"
+      ],
+      "effects": null
+    },
+    {
+      "name": "Gift of the Iron Wolf",
+      "type": "unit",
+      "description": "In your Command phase, you can select one friendly ADEPTUS ASTARTES VEHICLE model within 3\" of this model. That model regains up to D3 lost wounds and, until the start of your next Command phase, select one ranged weapon equipped by that model to have the [RAPID FIRE 1] ability. Each model can only be selected for this ability or the Blessing of the Omnissiah ability once per turn.",
+      "triggerPhase": [
+        "Command"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": [
+        "ADEPTUS ASTARTES",
+        "VEHICLE"
+      ],
+      "effects": null
+    },
+    {
+      "name": "Judgement of the Omnissiah",
+      "type": "unit",
+      "description": "Each time this model makes an attack that targets an enemy unit within Engagement Range of one or more friendly ADEPTUS ASTARTES VEHICLE units, you can re-roll the Wound roll.",
+      "triggerPhase": [
+        "Shooting",
+        "Fight"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": [
+        "ADEPTUS ASTARTES",
+        "VEHICLE"
+      ],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [],
+  "pointsCost": 60,
+  "pointsTiers": [
+    {
+      "models": 1,
+      "points": 60
+    }
+  ]
+}

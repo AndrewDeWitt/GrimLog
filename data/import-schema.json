@@ -1,0 +1,182 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://grimlog.app/schemas/faction-import.json",
+  "title": "Faction Import Schema",
+  "description": "Schema for importing faction data including detachments, stratagems, and enhancements",
+  "type": "object",
+  "required": ["faction", "detachments"],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "Reference to this schema file"
+    },
+    "_comment": {
+      "type": "string",
+      "description": "Optional comment for the file"
+    },
+    "faction": {
+      "type": "object",
+      "description": "The faction definition",
+      "required": ["name", "keywords"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Faction name (e.g., 'Tyranids', 'Space Marines')",
+          "minLength": 1
+        },
+        "keywords": {
+          "type": "array",
+          "description": "Keywords that identify this faction (e.g., ['TYRANIDS'])",
+          "items": { "type": "string" },
+          "minItems": 1
+        },
+        "parentFaction": {
+          "type": ["string", "null"],
+          "description": "Parent faction name for divergent chapters (e.g., 'Space Marines' for 'Space Wolves')"
+        },
+        "isDivergent": {
+          "type": "boolean",
+          "description": "True if this is a divergent chapter (Space Wolves, Blood Angels, etc.)",
+          "default": false
+        },
+        "forbiddenKeywords": {
+          "type": "array",
+          "description": "Keywords this faction cannot use from parent faction",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "detachments": {
+      "type": "array",
+      "description": "List of detachments for this faction",
+      "items": {
+        "type": "object",
+        "required": ["name", "stratagems"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Detachment name (e.g., 'Invasion Fleet', 'Gladius Task Force')",
+            "minLength": 1
+          },
+          "subfaction": {
+            "type": ["string", "null"],
+            "description": "Subfaction this detachment belongs to (for chapter-specific detachments)"
+          },
+          "abilityName": {
+            "type": ["string", "null"],
+            "description": "Name of the detachment ability"
+          },
+          "abilityDescription": {
+            "type": ["string", "null"],
+            "description": "Full text of the detachment ability"
+          },
+          "description": {
+            "type": ["string", "null"],
+            "description": "Flavor text or overview of the detachment"
+          },
+          "stratagems": {
+            "type": "array",
+            "description": "Stratagems available in this detachment",
+            "items": {
+              "type": "object",
+              "required": ["name", "cpCost", "type", "when", "target", "effect"],
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "Stratagem name",
+                  "minLength": 1
+                },
+                "cpCost": {
+                  "type": "integer",
+                  "description": "Command Point cost",
+                  "minimum": 0,
+                  "maximum": 3
+                },
+                "type": {
+                  "type": "string",
+                  "description": "Stratagem type",
+                  "enum": ["Battle Tactic", "Strategic Ploy", "Epic Deed", "Wargear"]
+                },
+                "when": {
+                  "type": "string",
+                  "description": "When the stratagem can be used"
+                },
+                "target": {
+                  "type": "string",
+                  "description": "What the stratagem targets"
+                },
+                "effect": {
+                  "type": "string",
+                  "description": "What the stratagem does"
+                },
+                "restrictions": {
+                  "type": ["string", "null"],
+                  "description": "Usage restrictions"
+                },
+                "keywords": {
+                  "type": ["array", "null"],
+                  "description": "Required keywords for units to use this stratagem",
+                  "items": { "type": "string" }
+                },
+                "triggerPhase": {
+                  "type": ["array", "null"],
+                  "description": "Phases when this stratagem can be used",
+                  "items": {
+                    "type": "string",
+                    "enum": ["Command", "Movement", "Shooting", "Charge", "Fight", "Any"]
+                  }
+                },
+                "isReactive": {
+                  "type": "boolean",
+                  "description": "Can be used during opponent's turn",
+                  "default": false
+                },
+                "usageRestriction": {
+                  "type": ["string", "null"],
+                  "description": "Usage limit",
+                  "enum": [null, "once_per_battle", "once_per_turn", "once_per_phase"]
+                }
+              }
+            }
+          },
+          "enhancements": {
+            "type": "array",
+            "description": "Enhancements available in this detachment",
+            "default": [],
+            "items": {
+              "type": "object",
+              "required": ["name", "pointsCost", "description"],
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "Enhancement name",
+                  "minLength": 1
+                },
+                "pointsCost": {
+                  "type": "integer",
+                  "description": "Points cost to add this enhancement",
+                  "minimum": 0
+                },
+                "description": {
+                  "type": "string",
+                  "description": "Full text of the enhancement ability"
+                },
+                "restrictions": {
+                  "type": ["array", "null"],
+                  "description": "Keywords required to take this enhancement (e.g., ['CHARACTER'])",
+                  "items": { "type": "string" }
+                },
+                "keywords": {
+                  "type": ["array", "null"],
+                  "description": "Additional keywords for filtering",
+                  "items": { "type": "string" }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+

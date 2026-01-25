@@ -1,0 +1,174 @@
+{
+  "name": "Centurion Devastator Squad",
+  "faction": "Space Marines",
+  "subfaction": "Space Wolves",
+  "role": "Other",
+  "keywords": [
+    "INFANTRY",
+    "IMPERIUM",
+    "CENTURION",
+    "CENTURION DEVASTATOR SQUAD",
+    "ADEPTUS ASTARTES"
+  ],
+  "stats": {
+    "movement": "4\"",
+    "toughness": 7,
+    "save": "2+",
+    "invulnerableSave": "",
+    "wounds": 4,
+    "leadership": 6,
+    "objectiveControl": 2
+  },
+  "composition": "1 Devastator Centurion Sergeant, 2-5 Devastator Centurions",
+  "compositionData": [
+    {
+      "name": "Devastator Centurion Sergeant",
+      "role": "leader",
+      "count": 1,
+      "woundsPerModel": 4
+    },
+    {
+      "name": "Devastator Centurion",
+      "role": "regular",
+      "count": 2,
+      "woundsPerModel": 4
+    }
+  ],
+  "unitSize": "3-6",
+  "leaderRules": "",
+  "leaderAbilities": "",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Centurion bolters",
+      "range": "24\"",
+      "type": "Rapid Fire 3",
+      "attacks": "3",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "RAPID FIRE 3",
+        "TWIN-LINKED"
+      ]
+    },
+    {
+      "name": "Centurion missile launcher",
+      "range": "36\"",
+      "type": "Blast",
+      "attacks": "D3",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "9",
+      "armorPenetration": "-2",
+      "damage": "D3",
+      "abilities": [
+        "BLAST"
+      ]
+    },
+    {
+      "name": "Grav-cannon",
+      "range": "24\"",
+      "type": "Anti-Vehicle 2+",
+      "attacks": "3",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "6",
+      "armorPenetration": "-1",
+      "damage": "3",
+      "abilities": [
+        "ANTI-VEHICLE 2+"
+      ]
+    },
+    {
+      "name": "Twin heavy bolter",
+      "range": "36\"",
+      "type": "Sustained Hits 1",
+      "attacks": "3",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "5",
+      "armorPenetration": "-1",
+      "damage": "2",
+      "abilities": [
+        "SUSTAINED HITS 1",
+        "TWIN-LINKED"
+      ]
+    },
+    {
+      "name": "Twin lascannon",
+      "range": "48\"",
+      "type": "Twin-linked",
+      "attacks": "1",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "12",
+      "armorPenetration": "-3",
+      "damage": "D6+1",
+      "abilities": [
+        "TWIN-LINKED"
+      ]
+    },
+    {
+      "name": "Centurion fists",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "3",
+      "ballisticSkill": "",
+      "weaponSkill": "4+",
+      "strength": "5",
+      "armorPenetration": "-1",
+      "damage": "2",
+      "abilities": []
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Oath of Moment",
+      "type": "faction",
+      "description": "If your Army Faction is Adeptus Astartes, at the start of your Command phase, you can select one unit from your opponent’s army. Until the start of your next Command phase, each time a model from your army with this ability makes an attack that targets that enemy unit, you can re-roll the Hit roll.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Decimator Protocols",
+      "type": "unit",
+      "description": "Each time a model in this unit makes a ranged attack, re-roll a Hit roll of 1. If the target of that attack is an enemy unit within range of an objective marker, you can re-roll the Hit roll instead.",
+      "triggerPhase": [
+        "Shooting"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [
+    {
+      "description": "Any number of models can each have their Centurion bolters replaced with 1 Centurion missile launcher.",
+      "pointsCost": 0
+    },
+    {
+      "description": "Any number of models can each have their grav-cannon replaced with one of the following: 1 twin heavy bolter or 1 twin lascannon.",
+      "pointsCost": 0
+    }
+  ],
+  "pointsCost": 175,
+  "pointsTiers": [
+    {
+      "models": 3,
+      "points": 175
+    },
+    {
+      "models": 6,
+      "points": 350
+    }
+  ]
+}

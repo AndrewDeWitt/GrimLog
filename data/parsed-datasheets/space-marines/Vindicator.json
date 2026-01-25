@@ -1,0 +1,169 @@
+{
+  "name": "Vindicator",
+  "faction": "Space Marines",
+  "subfaction": "Space Wolves",
+  "role": "",
+  "keywords": [
+    "VEHICLE",
+    "SMOKE",
+    "IMPERIUM",
+    "VINDICATOR",
+    "ADEPTUS ASTARTES"
+  ],
+  "stats": {
+    "movement": "9\"",
+    "toughness": 11,
+    "save": "2+",
+    "invulnerableSave": "",
+    "wounds": 11,
+    "leadership": 6,
+    "objectiveControl": 3
+  },
+  "composition": "1 Vindicator",
+  "compositionData": [
+    {
+      "name": "Vindicator",
+      "role": "regular",
+      "count": 1,
+      "woundsPerModel": 11
+    }
+  ],
+  "unitSize": "1",
+  "leaderRules": "",
+  "leaderAbilities": "",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Demolisher cannon [blast]",
+      "range": "24\"",
+      "type": "BLAST",
+      "attacks": "D6+3",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "14",
+      "armorPenetration": "-3",
+      "damage": "D6",
+      "abilities": []
+    },
+    {
+      "name": "Hunter-killer missile [one shot]",
+      "range": "48\"",
+      "type": "ONE SHOT",
+      "attacks": "1",
+      "ballisticSkill": "2+",
+      "weaponSkill": "",
+      "strength": "14",
+      "armorPenetration": "-3",
+      "damage": "D6",
+      "abilities": [
+        "ONE SHOT"
+      ]
+    },
+    {
+      "name": "Storm bolter [rapid fire 2]",
+      "range": "24\"",
+      "type": "RAPID FIRE 2",
+      "attacks": "2",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "RAPID FIRE 2"
+      ]
+    },
+    {
+      "name": "Armoured tracks",
+      "range": "Melee",
+      "type": "MELEE",
+      "attacks": "3",
+      "ballisticSkill": "",
+      "weaponSkill": "4+",
+      "strength": "6",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": []
+    }
+  ],
+  "abilities": [
+    {
+      "name": "DEADLY DEMISE D3",
+      "type": "core",
+      "description": "Deadly Demise D3",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": true,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "OATH OF MOMENT",
+      "type": "faction",
+      "description": "Oath of Moment",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "SIEGE SHIELD",
+      "type": "unit",
+      "description": "When making ranged attacks with its demolisher cannon, this model can target enemy units within Engagement Range of it (provided no other friendly units are also within Engagement Range of that enemy unit). In addition, when making ranged attacks, this model does not suffer the penalty to its Hit rolls for being within Engagement Range of one or more enemy units.",
+      "triggerPhase": [
+        "Shooting"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "DAMAGED: 1-4 WOUNDS REMAINING",
+      "type": "unit",
+      "description": "While this model has 1-4 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.",
+      "triggerPhase": [
+        "Shooting",
+        "Fight"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "ONE SHOT",
+      "type": "wargear",
+      "description": "One Shot: The bearer can only shoot with this weapon once per battle.",
+      "triggerPhase": [
+        "Shooting"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [
+    {
+      "description": "This model can be equipped with 1 hunter-killer missile.",
+      "pointsCost": 0
+    },
+    {
+      "description": "This model can be equipped with 1 storm bolter.",
+      "pointsCost": 0
+    }
+  ],
+  "pointsCost": 185,
+  "pointsTiers": [
+    {
+      "models": 1,
+      "points": 185
+    }
+  ]
+}

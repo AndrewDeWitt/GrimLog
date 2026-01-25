@@ -1,0 +1,159 @@
+{
+  "name": "Njal Stormcaller",
+  "faction": "Space Marines",
+  "subfaction": "Space Wolves",
+  "role": "Character",
+  "keywords": [
+    "INFANTRY",
+    "CHARACTER",
+    "EPIC HERO",
+    "PSYKER",
+    "IMPERIUM",
+    "TACTICUS",
+    "NJAL STORMCALLER",
+    "ADEPTUS ASTARTES",
+    "SPACE WOLVES"
+  ],
+  "stats": {
+    "movement": "7\"",
+    "toughness": 4,
+    "save": "3+",
+    "invulnerableSave": "4+",
+    "wounds": 4,
+    "leadership": 6,
+    "objectiveControl": 1
+  },
+  "composition": "1 Njal Stormcaller – EPIC HERO",
+  "compositionData": [
+    {
+      "name": "Njal Stormcaller",
+      "role": "leader",
+      "count": 1,
+      "woundsPerModel": 4
+    }
+  ],
+  "unitSize": "1",
+  "leaderRules": "This model can be attached to the following units: Blood Claws, Grey Hunters, Wolf Guard Headtakers",
+  "leaderAbilities": "Wind Walker (Psychic): While this model is leading a unit, ranged weapons equipped by models in that unit have the [ASSAULT] ability and each time that unit Advances, do not make an Advance roll. Instead, until the end of the phase, add 6\" to the Move characteristic of models in this unit.",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Bolt pistol",
+      "range": "12\"",
+      "type": "Pistol",
+      "attacks": "1",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "PISTOL"
+      ]
+    },
+    {
+      "name": "Living Lightning \u0015 witchfire",
+      "range": "24\"",
+      "type": "D6",
+      "attacks": "D6",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "7",
+      "armorPenetration": "-1",
+      "damage": "1",
+      "abilities": [
+        "PSYCHIC",
+        "SUSTAINED HITS 2"
+      ]
+    },
+    {
+      "name": "Living Lightning \u0015 focused witchfire",
+      "range": "24\"",
+      "type": "2D6",
+      "attacks": "2D6",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "7",
+      "armorPenetration": "-1",
+      "damage": "1",
+      "abilities": [
+        "HAZARDOUS",
+        "PSYCHIC",
+        "SUSTAINED HITS 2"
+      ]
+    },
+    {
+      "name": "Staff of the Stormcaller",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "4",
+      "ballisticSkill": "",
+      "weaponSkill": "3+",
+      "strength": "7",
+      "armorPenetration": "-1",
+      "damage": "D3",
+      "abilities": [
+        "PSYCHIC",
+        "SUSTAINED HITS 2"
+      ]
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Leader",
+      "type": "core",
+      "description": "LEADER",
+      "triggerPhase": [
+        "Keyword"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Oath of Moment",
+      "type": "faction",
+      "description": "Oath of Moment",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Wind Walker (Psychic)",
+      "type": "leader",
+      "description": "While this model is leading a unit, ranged weapons equipped by models in that unit have the [ASSAULT] ability and each time that unit Advances, do not make an Advance roll. Instead, until the end of the phase, add 6\" to the Move characteristic of models in this unit.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Tempest’s Wrath (Psychic)",
+      "type": "unit",
+      "description": "In your Shooting phase, after this model’s unit has shot, select one enemy unit (excluding MONSTERS and VEHICLES) hit by one or more of those attacks made with this model’s Living Lightning weapon. Until the start of your next turn, that enemy unit is stormwracked. While a unit is stormwracked, subtract 6\" from the Range characteristic of ranged weapons equipped by models in that unit (to a minimum of 12\").",
+      "triggerPhase": [
+        "Shooting"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [],
+  "pointsCost": 85,
+  "pointsTiers": [
+    {
+      "models": 1,
+      "points": 85
+    }
+  ]
+}

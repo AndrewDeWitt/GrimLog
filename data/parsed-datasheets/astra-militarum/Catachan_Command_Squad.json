@@ -1,0 +1,432 @@
+{
+  "name": "Catachan Command Squad",
+  "faction": "Astra Militarum",
+  "subfaction": "",
+  "role": "Character",
+  "keywords": [
+    "INFANTRY",
+    "GRENADES",
+    "IMPERIUM",
+    "PLATOON",
+    "CATACHAN",
+    "COMMAND SQUAD"
+  ],
+  "stats": {
+    "movement": "6\"",
+    "toughness": 3,
+    "save": "5+",
+    "invulnerableSave": "",
+    "wounds": 3,
+    "leadership": 7,
+    "objectiveControl": 1
+  },
+  "composition": "1 Catachan Commander, 4 Veteran Guardsmen",
+  "compositionData": [
+    {
+      "name": "Catachan Commander",
+      "role": "leader",
+      "count": 1,
+      "woundsPerModel": 3
+    },
+    {
+      "name": "Veteran Guardsman",
+      "role": "regular",
+      "count": 4,
+      "woundsPerModel": 1
+    }
+  ],
+  "unitSize": "5",
+  "leaderRules": "This model can be attached to the following unit: Catachan Jungle Fighters",
+  "leaderAbilities": "This unit’s OFFICER can issue 1 Order to a REGIMENT unit.",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Bolt pistol",
+      "range": "12\"",
+      "type": "Pistol",
+      "attacks": "1",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "PISTOL"
+      ]
+    },
+    {
+      "name": "Boltgun",
+      "range": "24\"",
+      "type": "Rapid Fire 1",
+      "attacks": "1",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "RAPID FIRE 1"
+      ]
+    },
+    {
+      "name": "Flamer",
+      "range": "12\"",
+      "type": "Torrent",
+      "attacks": "D6",
+      "ballisticSkill": "N/A",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "IGNORES COVER",
+        "TORRENT"
+      ]
+    },
+    {
+      "name": "Grenade launcher – frag",
+      "range": "24\"",
+      "type": "Blast",
+      "attacks": "D3",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "BLAST"
+      ]
+    },
+    {
+      "name": "Grenade launcher – krak",
+      "range": "24\"",
+      "type": "Ranged",
+      "attacks": "1",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "9",
+      "armorPenetration": "-2",
+      "damage": "D3",
+      "abilities": []
+    },
+    {
+      "name": "Heavy flamer",
+      "range": "12\"",
+      "type": "Torrent",
+      "attacks": "D6",
+      "ballisticSkill": "N/A",
+      "weaponSkill": "",
+      "strength": "5",
+      "armorPenetration": "-1",
+      "damage": "1",
+      "abilities": [
+        "IGNORES COVER",
+        "TORRENT"
+      ]
+    },
+    {
+      "name": "Lasgun",
+      "range": "24\"",
+      "type": "Rapid Fire 1",
+      "attacks": "1",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "3",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "RAPID FIRE 1"
+      ]
+    },
+    {
+      "name": "Laspistol",
+      "range": "12\"",
+      "type": "Pistol",
+      "attacks": "1",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "3",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "PISTOL"
+      ]
+    },
+    {
+      "name": "Meltagun",
+      "range": "12\"",
+      "type": "Melta 2",
+      "attacks": "1",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "9",
+      "armorPenetration": "-4",
+      "damage": "D6",
+      "abilities": [
+        "MELTA 2"
+      ]
+    },
+    {
+      "name": "Plasma gun – standard",
+      "range": "24\"",
+      "type": "Rapid Fire 1",
+      "attacks": "1",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "7",
+      "armorPenetration": "-2",
+      "damage": "1",
+      "abilities": [
+        "RAPID FIRE 1"
+      ]
+    },
+    {
+      "name": "Plasma gun – supercharge",
+      "range": "24\"",
+      "type": "Rapid Fire 1",
+      "attacks": "1",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "8",
+      "armorPenetration": "-3",
+      "damage": "2",
+      "abilities": [
+        "HAZARDOUS",
+        "RAPID FIRE 1"
+      ]
+    },
+    {
+      "name": "Plasma pistol – standard",
+      "range": "12\"",
+      "type": "Pistol",
+      "attacks": "1",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "7",
+      "armorPenetration": "-2",
+      "damage": "1",
+      "abilities": [
+        "PISTOL"
+      ]
+    },
+    {
+      "name": "Plasma pistol – supercharge",
+      "range": "12\"",
+      "type": "Pistol",
+      "attacks": "1",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "8",
+      "armorPenetration": "-3",
+      "damage": "2",
+      "abilities": [
+        "HAZARDOUS",
+        "PISTOL"
+      ]
+    },
+    {
+      "name": "Sniper rifle",
+      "range": "36\"",
+      "type": "Heavy",
+      "attacks": "1",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "-2",
+      "damage": "2",
+      "abilities": [
+        "HEAVY",
+        "PRECISION"
+      ]
+    },
+    {
+      "name": "Chainsword",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "4",
+      "ballisticSkill": "",
+      "weaponSkill": "4+",
+      "strength": "3",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": []
+    },
+    {
+      "name": "Close combat weapon",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "2",
+      "ballisticSkill": "",
+      "weaponSkill": "4+",
+      "strength": "3",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": []
+    },
+    {
+      "name": "Power fist",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "3",
+      "ballisticSkill": "",
+      "weaponSkill": "4+",
+      "strength": "6",
+      "armorPenetration": "-2",
+      "damage": "2",
+      "abilities": []
+    },
+    {
+      "name": "Power weapon",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "3",
+      "ballisticSkill": "",
+      "weaponSkill": "4+",
+      "strength": "4",
+      "armorPenetration": "-2",
+      "damage": "1",
+      "abilities": []
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Leader",
+      "type": "core",
+      "description": "This unit can be attached to a Bodyguard unit.",
+      "triggerPhase": [
+        "Keyword"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Scouts 6\"",
+      "type": "core",
+      "description": "This unit can make a normal move of up to 6\" at the start of the first battle round.",
+      "triggerPhase": [
+        "Deployment"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Voice of Command",
+      "type": "faction",
+      "description": "This unit's OFFICER can issue Orders.",
+      "triggerPhase": [
+        "Command"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Gung-ho Command",
+      "type": "unit",
+      "description": "While this unit contains an OFFICER, ranged weapons equipped by models in this unit have the [ASSAULT] ability.",
+      "triggerPhase": [
+        "Shooting"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [
+        "OFFICER"
+      ],
+      "effects": null
+    },
+    {
+      "name": "Master Vox",
+      "type": "wargear",
+      "description": "Each time the OFFICER in the bearer’s unit issues an Order, it can issue it to an eligible unit up to 24\" away.",
+      "triggerPhase": [
+        "Command"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": {
+        "wounds": null,
+        "toughness": null,
+        "save": null,
+        "invulnerableSave": null,
+        "movement": null
+      }
+    },
+    {
+      "name": "Medi-pack",
+      "type": "wargear",
+      "description": "At the start of your Command phase, if the bearer’s unit is below its Starting Strength, you can return up to D3 destroyed PLATOON models (excluding CHARACTERS) to this unit.",
+      "triggerPhase": [
+        "Command"
+      ],
+      "triggerSubphase": "Start of Phase",
+      "isReactive": false,
+      "requiredKeywords": [
+        "PLATOON"
+      ],
+      "effects": {
+        "wounds": null,
+        "toughness": null,
+        "save": null,
+        "invulnerableSave": null,
+        "movement": null
+      }
+    },
+    {
+      "name": "Regimental Standard",
+      "type": "wargear",
+      "description": "Add 1 to the Objective Control characteristic of models in the bearer’s unit.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": {
+        "wounds": null,
+        "toughness": null,
+        "save": null,
+        "invulnerableSave": null,
+        "movement": null
+      }
+    }
+  ],
+  "wargearOptions": [
+    {
+      "description": "Any number of Veteran Guardsmen can each have their lasgun replaced with 1 flamer, 1 grenade launcher, 1 heavy flamer, 1 meltagun, 1 plasma gun, or 1 sniper rifle (cannot select same weapon more than once).",
+      "pointsCost": 0
+    },
+    {
+      "description": "1 Veteran Guardsman equipped with a lasgun can be equipped with 1 master vox.",
+      "pointsCost": 0
+    },
+    {
+      "description": "1 Veteran Guardsman equipped with a lasgun can be equipped with 1 medi-pack.",
+      "pointsCost": 0
+    },
+    {
+      "description": "1 Veteran Guardsman equipped with a lasgun can be equipped with 1 regimental standard.",
+      "pointsCost": 0
+    },
+    {
+      "description": "The Catachan Commander’s laspistol can be replaced with 1 bolt pistol or 1 plasma pistol.",
+      "pointsCost": 0
+    },
+    {
+      "description": "The Catachan Commander can be equipped with 1 boltgun, 1 chainsword, 1 power fist, or 1 power weapon.",
+      "pointsCost": 0
+    }
+  ],
+  "pointsCost": 65,
+  "pointsTiers": [
+    {
+      "models": 5,
+      "points": 65
+    }
+  ]
+}

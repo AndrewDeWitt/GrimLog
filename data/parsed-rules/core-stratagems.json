@@ -1,0 +1,188 @@
+{
+  "source": "Core Rules",
+  "version": "10th Edition",
+  "lastUpdated": "2024-01-01",
+  "stratagems": [
+    {
+      "id": "command-reroll",
+      "name": "Command Re-roll",
+      "cpCost": 1,
+      "category": "Battle Tactic",
+      "when": "Any phase, just after you have made a Hit roll, a Wound roll, a Damage roll, a saving throw, an Advance roll, a Charge roll, a Desperate Escape test, a Hazardous test, or just after you have rolled the dice to determine the number of attacks made with a weapon, for an attack, model or unit from your army.",
+      "target": "That attack, model or unit.",
+      "effect": "You re-roll that roll, test or saving throw.",
+      "restrictions": [],
+      "isCalculatorRelevant": true,
+      "calculatorEffect": {
+        "type": "reroll",
+        "target": "single_die",
+        "options": ["hit", "wound", "damage", "save", "attacks"]
+      }
+    },
+    {
+      "id": "fire-overwatch",
+      "name": "Fire Overwatch",
+      "cpCost": 1,
+      "category": "Strategic Ploy",
+      "when": "Your opponent's Movement or Charge phase, just after an enemy unit is set up or when an enemy unit starts or ends a Normal, Advance, Fall Back or Charge move.",
+      "target": "One unit from your army that is within 24\" of that enemy unit and that would be eligible to shoot if it were your Shooting phase.",
+      "effect": "Your unit can shoot that enemy unit as if it were your Shooting phase, but its models can only target that enemy unit (and only if it is an eligible target). For the purposes of this Stratagem, when making these shooting attacks, all of the shooting attacks' hit rolls worsen by 1 and those attacks can only hit on unmodified Hit rolls of 6.",
+      "restrictions": [
+        {"type": "not_keyword", "value": "TITANIC"},
+        {"type": "phase", "value": ["Movement", "Charge"]}
+      ],
+      "isCalculatorRelevant": true,
+      "calculatorEffect": {
+        "type": "attacker_modifier",
+        "hit_on_6_only": true,
+        "description": "Hits only on unmodified 6s"
+      }
+    },
+    {
+      "id": "go-to-ground",
+      "name": "Go to Ground",
+      "cpCost": 1,
+      "category": "Battle Tactic",
+      "when": "Your opponent's Shooting phase, just after an enemy unit has selected its targets.",
+      "target": "One INFANTRY unit from your army that was selected as the target of one or more of the attacking unit's attacks.",
+      "effect": "Until the end of the phase, all models in your unit have a 6+ invulnerable save and have the Benefit of Cover.",
+      "restrictions": [
+        {"type": "required_keyword", "value": "INFANTRY"}
+      ],
+      "isCalculatorRelevant": true,
+      "calculatorEffect": {
+        "type": "defender_modifier",
+        "invuln": "6+",
+        "cover": true,
+        "description": "6+ invuln and Benefit of Cover"
+      }
+    },
+    {
+      "id": "smokescreen",
+      "name": "Smokescreen",
+      "cpCost": 1,
+      "category": "Wargear",
+      "when": "Your opponent's Shooting phase, just after an enemy unit has selected its targets.",
+      "target": "One SMOKE unit from your army that was selected as the target of one or more of the attacking unit's attacks.",
+      "effect": "Until the end of the phase, all models in your unit have the Benefit of Cover and the Stealth ability.",
+      "restrictions": [
+        {"type": "required_keyword", "value": "SMOKE"}
+      ],
+      "isCalculatorRelevant": true,
+      "calculatorEffect": {
+        "type": "defender_modifier",
+        "cover": true,
+        "stealth": true,
+        "description": "Benefit of Cover + Stealth (-1 to hit)"
+      }
+    },
+    {
+      "id": "epic-challenge",
+      "name": "Epic Challenge",
+      "cpCost": 1,
+      "category": "Epic Deed",
+      "when": "Fight phase, when a CHARACTER unit from your army that is within Engagement Range of one or more Attached units is selected to fight.",
+      "target": "That CHARACTER unit.",
+      "effect": "Until the end of the phase, melee weapons equipped by models in your unit have the [PRECISION] ability.",
+      "restrictions": [
+        {"type": "required_keyword", "value": "CHARACTER"}
+      ],
+      "isCalculatorRelevant": true,
+      "calculatorEffect": {
+        "type": "attacker_modifier",
+        "precision": true,
+        "description": "Melee attacks gain [PRECISION]"
+      }
+    },
+    {
+      "id": "grenade",
+      "name": "Grenade",
+      "cpCost": 1,
+      "category": "Wargear",
+      "when": "Your Shooting phase.",
+      "target": "One GRENADES unit from your army that is not within Engagement Range of any enemy units and has not been selected to shoot this phase.",
+      "effect": "Select one enemy unit that is within 8\" of and visible to your unit and roll six D6: for each 4+, that enemy unit suffers 1 mortal wound.",
+      "restrictions": [
+        {"type": "required_keyword", "value": "GRENADES"}
+      ],
+      "isCalculatorRelevant": true,
+      "calculatorEffect": {
+        "type": "mortal_wounds",
+        "dice": 6,
+        "threshold": 4,
+        "description": "Roll 6D6, each 4+ = 1 mortal wound"
+      }
+    },
+    {
+      "id": "tank-shock",
+      "name": "Tank Shock",
+      "cpCost": 1,
+      "category": "Strategic Ploy",
+      "when": "Your Charge phase.",
+      "target": "One VEHICLE unit from your army.",
+      "effect": "After your unit ends a Charge move this phase, select one enemy unit within Engagement Range of it, then roll a number of D6 equal to the Toughness characteristic of your unit. For each 5+, that enemy unit suffers 1 mortal wound (to a maximum of 6 mortal wounds).",
+      "restrictions": [
+        {"type": "required_keyword", "value": "VEHICLE"}
+      ],
+      "isCalculatorRelevant": true,
+      "calculatorEffect": {
+        "type": "mortal_wounds",
+        "dice_formula": "toughness",
+        "threshold": 5,
+        "max_mortals": 6,
+        "description": "Roll T×D6, each 5+ = 1 MW (max 6)"
+      }
+    },
+    {
+      "id": "counter-offensive",
+      "name": "Counter-Offensive",
+      "cpCost": 2,
+      "category": "Strategic Ploy",
+      "when": "Fight phase, just after an enemy unit has fought.",
+      "target": "One unit from your army that is within Engagement Range of one or more enemy units and that has not already been selected to fight this phase.",
+      "effect": "Your unit fights next.",
+      "restrictions": [],
+      "isCalculatorRelevant": false,
+      "calculatorEffect": null
+    },
+    {
+      "id": "insane-bravery",
+      "name": "Insane Bravery",
+      "cpCost": 1,
+      "category": "Battle Tactic",
+      "when": "Battle-shock step of your Command phase, just after a unit from your army fails a Battle-shock test.",
+      "target": "That unit.",
+      "effect": "Your unit is treated as having passed that test instead.",
+      "restrictions": [],
+      "isCalculatorRelevant": false,
+      "calculatorEffect": null
+    },
+    {
+      "id": "rapid-ingress",
+      "name": "Rapid Ingress",
+      "cpCost": 1,
+      "category": "Strategic Ploy",
+      "when": "End of your opponent's Movement phase.",
+      "target": "One unit from your army that is in Reserves.",
+      "effect": "Set up your unit anywhere on the battlefield that is more than 9\" horizontally away from all enemy models.",
+      "restrictions": [
+        {"type": "in_reserves", "value": true}
+      ],
+      "isCalculatorRelevant": false,
+      "calculatorEffect": null
+    },
+    {
+      "id": "heroic-intervention",
+      "name": "Heroic Intervention",
+      "cpCost": 2,
+      "category": "Strategic Ploy",
+      "when": "Your opponent's Charge phase, just after an enemy unit ends a Charge move.",
+      "target": "One unit from your army that is within 6\" of that enemy unit and that would be eligible to declare a charge if it were your Charge phase.",
+      "effect": "Your unit now declares a charge that targets only that enemy unit, and you resolve that charge as if it were your Charge phase.",
+      "restrictions": [],
+      "isCalculatorRelevant": false,
+      "calculatorEffect": null
+    }
+  ]
+}
+

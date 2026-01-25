@@ -1,0 +1,134 @@
+Forgin Erads (2000 Points)
+
+Space Marines
+Salamanders
+Forgefather’s Seekers
+Strike Force (2,000 Points)
+
+CHARACTERS
+
+Adrax Agatone (85 Points)
+  • 1x Drakkis
+  • 1x Malleus Noctum
+
+Apothecary Biologis (85 Points)
+  • 1x Absolvor bolt pistol
+  • 1x Close combat weapon
+  • Enhancements: Forged in Battle
+
+Captain with Jump Pack (85 Points)
+  • 1x Astartes chainsword
+  • 1x Heavy bolt pistol
+  • Enhancements: Immolator
+
+Lieutenant with Combi-weapon (70 Points)
+  • 1x Combi-weapon
+  • 1x Paired combat blades
+
+Vulkan He’stan (100 Points)
+  • Warlord
+  • 1x Bolt Pistol
+  • 1x Gauntlet of the Forge
+  • 1x Spear of Vulkan
+
+DEDICATED TRANSPORTS
+
+Impulsor (80 Points)
+  • 1x Armoured hull
+  • 2x Storm bolter
+
+OTHER DATASHEETS
+
+Bladeguard Veteran Squad (170 Points)
+  • 1x Bladeguard Veteran Sergeant
+     ◦ 1x Heavy bolt pistol
+     ◦ 1x Master-crafted power weapon
+  • 5x Bladeguard Veteran
+     ◦ 5x Heavy bolt pistol
+     ◦ 5x Master-crafted power weapon
+
+Company Heroes (105 Points)
+  • 1x Ancient
+     ◦ 1x Bolt pistol
+     ◦ 1x Bolt rifle
+     ◦ 1x Close combat weapon
+  • 1x Company Champion
+     ◦ 1x Bolt pistol
+     ◦ 1x Master-crafted power weapon
+  • 2x Company Veteran
+     ◦ 2x Bolt pistol
+     ◦ 2x Close combat weapon
+     ◦ 1x Master-crafted bolt rifle
+     ◦ 1x Master-crafted heavy bolter
+
+Eradicator Squad (180 Points)
+  • 1x Eradicator Sergeant
+     ◦ 1x Bolt pistol
+     ◦ 1x Close combat weapon
+     ◦ 1x Melta rifle
+  • 5x Eradicator
+     ◦ 5x Bolt pistol
+     ◦ 5x Close combat weapon
+     ◦ 5x Melta rifle
+
+Hellblaster Squad (110 Points)
+  • 1x Hellblaster Sergeant
+     ◦ 1x Bolt pistol
+     ◦ 1x Close combat weapon
+     ◦ 1x Plasma incinerator
+  • 4x Hellblaster
+     ◦ 4x Bolt pistol
+     ◦ 4x Close combat weapon
+     ◦ 4x Plasma incinerator
+
+Infernus Squad (90 Points)
+  • 1x Infernus Sergeant
+     ◦ 1x Bolt pistol
+     ◦ 1x Close combat weapon
+     ◦ 1x Pyreblaster
+  • 4x Infernus Marine
+     ◦ 4x Bolt pistol
+     ◦ 4x Close combat weapon
+     ◦ 4x Pyreblaster
+
+Infernus Squad (90 Points)
+  • 1x Infernus Sergeant
+     ◦ 1x Bolt pistol
+     ◦ 1x Close combat weapon
+     ◦ 1x Pyreblaster
+  • 4x Infernus Marine
+     ◦ 4x Bolt pistol
+     ◦ 4x Close combat weapon
+     ◦ 4x Pyreblaster
+
+Infiltrator Squad (100 Points)
+  • 1x Infiltrator Sergeant
+     ◦ 1x Bolt pistol
+     ◦ 1x Close combat weapon
+     ◦ 1x Marksman bolt carbine
+  • 4x Infiltrator
+     ◦ 4x Bolt pistol
+     ◦ 4x Close combat weapon
+     ◦ 4x Marksman bolt carbine
+
+Land Raider Redeemer (270 Points)
+  • 1x Armoured tracks
+  • 2x Flamestorm cannon
+  • 1x Twin assault cannon
+
+Repulsor (180 Points)
+  • 1x Armoured hull
+  • 1x Heavy onslaught gatling cannon
+  • 1x Hunter-slayer missile
+  • 1x Repulsor defensive array
+  • 1x Twin heavy bolter
+
+Vanguard Veteran Squad with Jump Packs (200 Points)
+  • 1x Vanguard Veteran Sergeant with Jump Pack
+     ◦ 1x Bolt pistol
+     ◦ 1x Vanguard Veteran weapon
+  • 9x Vanguard Veteran with Jump Pack
+     ◦ 9x Bolt pistol
+     ◦ 9x Vanguard Veteran weapon
+
+Exported with App Version: v1.45.0 (1), Data Version: v720

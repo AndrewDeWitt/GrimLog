@@ -1,0 +1,188 @@
+{
+  "name": "Harpy",
+  "faction": "Tyranids",
+  "subfaction": "",
+  "role": "Other",
+  "keywords": [
+    "MONSTER",
+    "FLY",
+    "AIRCRAFT",
+    "GREAT DEVOURER",
+    "VANGUARD INVADER",
+    "HARPY"
+  ],
+  "stats": {
+    "movement": "20+\"",
+    "toughness": 9,
+    "save": "3+",
+    "invulnerableSave": "",
+    "wounds": 12,
+    "leadership": 8,
+    "objectiveControl": 0
+  },
+  "composition": "1 Harpy. This model is equipped with: stinger salvoes; twin stranglethorn cannon; scything wings.",
+  "unitSize": "1",
+  "leaderRules": "",
+  "leaderAbilities": "",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Stinger salvoes",
+      "range": "24\"",
+      "type": "Assault 8",
+      "attacks": "8",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "5",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": []
+    },
+    {
+      "name": "Twin heavy venom cannon [blast, twin-linked]",
+      "range": "36\"",
+      "type": "Heavy D3",
+      "attacks": "D3",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "9",
+      "armorPenetration": "-2",
+      "damage": "3",
+      "abilities": [
+        "BLAST",
+        "TWIN-LINKED"
+      ]
+    },
+    {
+      "name": "Twin stranglethorn cannon [blast, twin-linked]",
+      "range": "36\"",
+      "type": "Heavy D6+1",
+      "attacks": "D6+1",
+      "ballisticSkill": "2+",
+      "weaponSkill": "",
+      "strength": "7",
+      "armorPenetration": "-1",
+      "damage": "2",
+      "abilities": [
+        "BLAST",
+        "TWIN-LINKED"
+      ]
+    },
+    {
+      "name": "Scything wings",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "4",
+      "ballisticSkill": "",
+      "weaponSkill": "4+",
+      "strength": "7",
+      "armorPenetration": "-1",
+      "damage": "2",
+      "abilities": []
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Deadly Demise D3",
+      "type": "core",
+      "description": "Deadly Demise D3",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": true,
+      "requiredKeywords": []
+    },
+    {
+      "name": "Hover",
+      "type": "core",
+      "description": "Hover",
+      "triggerPhase": [
+        "General"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": []
+    },
+    {
+      "name": "Synapse",
+      "type": "faction",
+      "description": "Synapse",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": []
+    },
+    {
+      "name": "Spore Mine Cysts",
+      "type": "unit",
+      "description": "Spore Mine Cysts: Each time this model ends a Normal move, you can select one of the following: Select one enemy unit it moved over during that move and roll six D6: for each 3+, that unit suffers 1 mortal wound. Add one new SPORE MINES unit containing D3 models to your army and set it up anywhere on the battlefield that is wholly within 6\" of this model and more than 9\" horizontally away from all enemy units. You cannot select this option for more than one model per turn.",
+      "triggerPhase": [
+        "Movement"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": []
+    },
+    {
+      "name": "DAMAGED: 1-4 WOUNDS REMAINING",
+      "type": "unit",
+      "description": "DAMAGED: 1-4 WOUNDS REMAINING\nWhile this model has 1-4 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.",
+      "triggerPhase": [
+        "Shooting",
+        "Fight"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": []
+    },
+    {
+      "name": "BLAST",
+      "type": "wargear",
+      "description": "BLAST",
+      "triggerPhase": [
+        "Shooting"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": []
+    },
+    {
+      "name": "TWIN-LINKED",
+      "type": "wargear",
+      "description": "TWIN-LINKED",
+      "triggerPhase": [
+        "Shooting"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": []
+    },
+    {
+      "name": "Twin stranglethorn cannon replacement",
+      "type": "wargear",
+      "description": "This model’s twin stranglethorn cannon can be replaced with 1 twin heavy venom cannon.",
+      "triggerPhase": [
+        "General"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": []
+    }
+  ],
+  "wargearOptions": [
+    {
+      "description": "This model’s twin stranglethorn cannon can be replaced with 1 twin heavy venom cannon.",
+      "pointsCost": 0
+    }
+  ],
+  "pointsCost": 215,
+  "pointsTiers": [
+    {
+      "models": 1,
+      "points": 215
+    }
+  ]
+}

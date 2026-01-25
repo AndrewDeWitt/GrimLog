@@ -1,0 +1,233 @@
+{
+  "name": "Hellhound",
+  "faction": "Astra Militarum",
+  "subfaction": "",
+  "role": "Other",
+  "keywords": [
+    "VEHICLE",
+    "SMOKE",
+    "IMPERIUM",
+    "SQUADRON",
+    "HELLHOUND"
+  ],
+  "stats": {
+    "movement": "10\"",
+    "toughness": 10,
+    "save": "2+",
+    "invulnerableSave": "",
+    "wounds": 11,
+    "leadership": 7,
+    "objectiveControl": 3
+  },
+  "composition": "1 Hellhound",
+  "compositionData": [
+    {
+      "name": "Hellhound",
+      "role": "regular",
+      "count": 1,
+      "woundsPerModel": 11
+    }
+  ],
+  "unitSize": "1",
+  "leaderRules": "",
+  "leaderAbilities": "",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Chem cannon",
+      "range": "12\"",
+      "type": "D6+1",
+      "attacks": "D6+1",
+      "ballisticSkill": "N/A",
+      "weaponSkill": "",
+      "strength": "2",
+      "armorPenetration": "-2",
+      "damage": "2",
+      "abilities": [
+        "ANTI-INFANTRY 2+",
+        "TORRENT"
+      ]
+    },
+    {
+      "name": "Heavy bolter",
+      "range": "36\"",
+      "type": "3",
+      "attacks": "3",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "5",
+      "armorPenetration": "-1",
+      "damage": "2",
+      "abilities": [
+        "SUSTAINED HITS 1"
+      ]
+    },
+    {
+      "name": "Heavy flamer",
+      "range": "12\"",
+      "type": "D6",
+      "attacks": "D6",
+      "ballisticSkill": "N/A",
+      "weaponSkill": "",
+      "strength": "5",
+      "armorPenetration": "-1",
+      "damage": "1",
+      "abilities": [
+        "IGNORES COVER",
+        "TORRENT"
+      ]
+    },
+    {
+      "name": "Hunter-killer missile",
+      "range": "48\"",
+      "type": "1",
+      "attacks": "1",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "14",
+      "armorPenetration": "-3",
+      "damage": "D6",
+      "abilities": [
+        "ONE SHOT"
+      ]
+    },
+    {
+      "name": "Inferno cannon",
+      "range": "18\"",
+      "type": "2D6",
+      "attacks": "2D6",
+      "ballisticSkill": "N/A",
+      "weaponSkill": "",
+      "strength": "6",
+      "armorPenetration": "-2",
+      "damage": "1",
+      "abilities": [
+        "IGNORES COVER",
+        "TORRENT"
+      ]
+    },
+    {
+      "name": "Melta cannon",
+      "range": "18\"",
+      "type": "D3",
+      "attacks": "D3",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "9",
+      "armorPenetration": "-4",
+      "damage": "D6",
+      "abilities": [
+        "BLAST",
+        "MELTA 4"
+      ]
+    },
+    {
+      "name": "Multi-melta",
+      "range": "18\"",
+      "type": "2",
+      "attacks": "2",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "9",
+      "armorPenetration": "-4",
+      "damage": "D6",
+      "abilities": [
+        "MELTA 2"
+      ]
+    },
+    {
+      "name": "Armoured tracks",
+      "range": "Melee",
+      "type": "3",
+      "attacks": "3",
+      "ballisticSkill": "",
+      "weaponSkill": "4+",
+      "strength": "6",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": []
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Deadly Demise D6",
+      "type": "core",
+      "description": "When this model is destroyed, roll one D6. On a 6, each unit within 6\" suffers D6 mortal wounds.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": true,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Flush Them Out",
+      "type": "unit",
+      "description": "In your Shooting phase, after this model has shot, select one enemy unit that was hit by one or more of those attacks. Until the start of your next Shooting phase, that unit is scattered. While a unit is scattered, it cannot have the Benefit of Cover.",
+      "triggerPhase": [
+        "Shooting"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Damaged: 1-4 Wounds Remaining",
+      "type": "unit",
+      "description": "While this model has 1-4 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.",
+      "triggerPhase": [
+        "Shooting",
+        "Fight"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": true,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Born Soldiers",
+      "type": "faction",
+      "description": "Each time an Astra Militarum unit from your army is selected to shoot, if that unit Remained Stationary this turn, until the end of the phase, ranged weapons equipped by models in that unit have the [LETHAL HITS] ability.",
+      "triggerPhase": [
+        "Shooting"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": [
+        "ASTRA MILITARUM"
+      ],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [
+    {
+      "description": "This model’s inferno cannon can be replaced with 1 chem cannon.",
+      "pointsCost": 0
+    },
+    {
+      "description": "This model’s inferno cannon can be replaced with 1 melta cannon.",
+      "pointsCost": 0
+    },
+    {
+      "description": "This model’s heavy flamer can be replaced with 1 heavy bolter.",
+      "pointsCost": 0
+    },
+    {
+      "description": "This model’s heavy flamer can be replaced with 1 multi-melta.",
+      "pointsCost": 0
+    },
+    {
+      "description": "This model can be equipped with 1 hunter-killer missile.",
+      "pointsCost": 0
+    }
+  ],
+  "pointsCost": 125,
+  "pointsTiers": [
+    {
+      "models": 1,
+      "points": 125
+    }
+  ]
+}

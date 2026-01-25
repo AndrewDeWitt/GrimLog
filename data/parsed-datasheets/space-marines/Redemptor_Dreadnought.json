@@ -1,0 +1,246 @@
+{
+  "name": "Redemptor Dreadnought",
+  "faction": "SPACE MARINES",
+  "subfaction": "SPACE WOLVES",
+  "role": "Other",
+  "keywords": [
+    "VEHICLE",
+    "WALKER",
+    "IMPERIUM",
+    "DREADNOUGHT",
+    "REDEMPTOR DREADNOUGHT",
+    "DEATHWING",
+    "ADEPTUS ASTARTES"
+  ],
+  "stats": {
+    "movement": "8\"",
+    "toughness": 10,
+    "save": "2+",
+    "invulnerableSave": "",
+    "wounds": 12,
+    "leadership": 6,
+    "objectiveControl": 4
+  },
+  "composition": "1 Redemptor Dreadnought",
+  "compositionData": [
+    {
+      "name": "Redemptor Dreadnought",
+      "role": "regular",
+      "count": 1,
+      "woundsPerModel": 12
+    }
+  ],
+  "unitSize": "1",
+  "leaderRules": "",
+  "leaderAbilities": "",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Heavy flamer",
+      "range": "12\"",
+      "type": "Heavy D6",
+      "attacks": "D6",
+      "ballisticSkill": "N/A",
+      "weaponSkill": "",
+      "strength": "5",
+      "armorPenetration": "-1",
+      "damage": "1",
+      "abilities": [
+        "IGNORES COVER",
+        "TORRENT"
+      ]
+    },
+    {
+      "name": "Heavy onslaught gatling cannon",
+      "range": "24\"",
+      "type": "Heavy",
+      "attacks": "12",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "6",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "DEVASTATING WOUNDS"
+      ]
+    },
+    {
+      "name": "Icarus rocket pod",
+      "range": "24\"",
+      "type": "D3",
+      "attacks": "D3",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "8",
+      "armorPenetration": "-1",
+      "damage": "2",
+      "abilities": [
+        "ANTI-FLY 2+"
+      ]
+    },
+    {
+      "name": "Macro plasma incinerator – standard",
+      "range": "36\"",
+      "type": "Heavy D6+1",
+      "attacks": "D6+1",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "13",
+      "armorPenetration": "-3",
+      "damage": "2",
+      "abilities": [
+        "BLAST"
+      ]
+    },
+    {
+      "name": "Macro plasma incinerator – supercharge",
+      "range": "36\"",
+      "type": "Heavy D6+1",
+      "attacks": "D6+1",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "13",
+      "armorPenetration": "-4",
+      "damage": "3",
+      "abilities": [
+        "BLAST",
+        "HAZARDOUS"
+      ]
+    },
+    {
+      "name": "Onslaught gatling cannon",
+      "range": "24\"",
+      "type": "Heavy",
+      "attacks": "8",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "5",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "DEVASTATING WOUNDS"
+      ]
+    },
+    {
+      "name": "Twin fragstorm grenade launcher",
+      "range": "18\"",
+      "type": "Blast D6",
+      "attacks": "D6",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "BLAST",
+        "TWIN-LINKED"
+      ]
+    },
+    {
+      "name": "Twin storm bolter",
+      "range": "24\"",
+      "type": "Rapid Fire 2",
+      "attacks": "2",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "RAPID FIRE 2",
+        "TWIN-LINKED"
+      ]
+    },
+    {
+      "name": "Redemptor fist",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "5",
+      "ballisticSkill": "",
+      "weaponSkill": "3+",
+      "strength": "12",
+      "armorPenetration": "-2",
+      "damage": "3",
+      "abilities": []
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Deadly Demise D3",
+      "type": "core",
+      "description": "Deadly Demise D3",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": true,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Oath of Moment",
+      "type": "faction",
+      "description": "Oath of Moment",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [
+        "ADEPTUS ASTARTES"
+      ],
+      "effects": null
+    },
+    {
+      "name": "Duty Eternal",
+      "type": "unit",
+      "description": "Duty Eternal: Each time an attack is allocated to this model, subtract 1 from the Damage characteristic of that attack.",
+      "triggerPhase": [
+        "Shooting",
+        "Fight"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": true,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "DAMAGED: 1-4 WOUNDS REMAINING",
+      "type": "unit",
+      "description": "While this model has 1-4 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.",
+      "triggerPhase": [
+        "Shooting",
+        "Fight"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [
+    {
+      "description": "This model can be equipped with 1 Icarus rocket pod.",
+      "pointsCost": 0
+    },
+    {
+      "description": "This model’s heavy flamer can be replaced with 1 onslaught gatling cannon.",
+      "pointsCost": 0
+    },
+    {
+      "description": "This model’s heavy onslaught gatling cannon can be replaced with 1 macro plasma incinerator.",
+      "pointsCost": 0
+    },
+    {
+      "description": "This model’s twin fragstorm grenade launcher can be replaced with 1 twin storm bolter.",
+      "pointsCost": 0
+    }
+  ],
+  "pointsCost": 195,
+  "pointsTiers": [
+    {
+      "models": 1,
+      "points": 195
+    }
+  ]
+}

@@ -1,0 +1,167 @@
+{
+  "name": "Catachan Jungle Fighters",
+  "faction": "Astra Militarum",
+  "subfaction": "",
+  "role": "Battleline",
+  "keywords": [
+    "INFANTRY",
+    "BATTLELINE",
+    "REGIMENT",
+    "GRENADES",
+    "IMPERIUM",
+    "PLATOON",
+    "CATACHAN JUNGLE FIGHTERS"
+  ],
+  "stats": {
+    "movement": "6\"",
+    "toughness": 3,
+    "save": "5+",
+    "invulnerableSave": "",
+    "wounds": 1,
+    "leadership": 7,
+    "objectiveControl": 2
+  },
+  "composition": "1 Jungle Fighter Sergeant and 9 Jungle Fighters",
+  "compositionData": [
+    {
+      "name": "Jungle Fighter Sergeant",
+      "role": "leader",
+      "count": 1,
+      "woundsPerModel": 1
+    },
+    {
+      "name": "Jungle Fighter",
+      "role": "regular",
+      "count": 9,
+      "woundsPerModel": 1
+    }
+  ],
+  "unitSize": "10-20",
+  "leaderRules": "This unit can have up to two Leader units attached to it, provided no more than one of those units is a COMMAND SQUAD unit. If it does, and this Bodyguard unit is destroyed, the Leader units attached to it become separate units, with their original Starting Strengths.",
+  "leaderAbilities": "",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Flamer",
+      "range": "12\"",
+      "type": "Ranged",
+      "attacks": "D6",
+      "ballisticSkill": "N/A",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "IGNORES COVER",
+        "TORRENT"
+      ]
+    },
+    {
+      "name": "Lasgun",
+      "range": "24\"",
+      "type": "Ranged",
+      "attacks": "1",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "3",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "RAPID FIRE 1"
+      ]
+    },
+    {
+      "name": "Laspistol",
+      "range": "12\"",
+      "type": "Ranged",
+      "attacks": "1",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "3",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "PISTOL"
+      ]
+    },
+    {
+      "name": "Close combat weapon",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "1",
+      "ballisticSkill": "",
+      "weaponSkill": "4+",
+      "strength": "3",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": []
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Scouts 6\"",
+      "type": "core",
+      "description": "This unit can make a Normal move of up to 6\" at the start of the first battle round.",
+      "triggerPhase": [
+        "Deployment"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Jungle Fighters",
+      "type": "unit",
+      "description": "Each time a model in this unit makes a melee attack, if this unit made a Charge move or was charged this turn, add 1 to the Wound roll.",
+      "triggerPhase": [
+        "Fight"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": true,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Vox-caster",
+      "type": "wargear",
+      "description": "Each time you target the bearer’s unit with a Stratagem, roll one D6, adding 1 to the result if there are one or more friendly OFFICER models within 6\": on a 5+, you gain 1CP.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": true,
+      "requiredKeywords": [
+        "OFFICER"
+      ],
+      "effects": {
+        "wounds": null,
+        "toughness": null,
+        "save": null,
+        "invulnerableSave": null,
+        "movement": null
+      }
+    }
+  ],
+  "wargearOptions": [
+    {
+      "description": "For every 5 models in this unit, 1 Jungle Fighter’s lasgun can be replaced with 1 flamer.",
+      "pointsCost": 0
+    },
+    {
+      "description": "For every 10 models in this unit, 1 Jungle Fighter equipped with a lasgun can be equipped with 1 vox-caster (that model’s lasgun cannot be replaced).",
+      "pointsCost": 0
+    }
+  ],
+  "pointsCost": 65,
+  "pointsTiers": [
+    {
+      "models": 10,
+      "points": 65
+    },
+    {
+      "models": 20,
+      "points": 120
+    }
+  ]
+}

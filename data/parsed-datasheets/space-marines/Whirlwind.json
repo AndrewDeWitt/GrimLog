@@ -1,0 +1,174 @@
+{
+  "name": "Whirlwind",
+  "faction": "Space Marines",
+  "subfaction": "Space Wolves",
+  "role": "Other",
+  "keywords": [
+    "VEHICLE",
+    "SMOKE",
+    "IMPERIUM",
+    "WHIRLWIND",
+    "ADEPTUS ASTARTES"
+  ],
+  "stats": {
+    "movement": "10\"",
+    "toughness": 10,
+    "save": "3+",
+    "invulnerableSave": "",
+    "wounds": 11,
+    "leadership": 6,
+    "objectiveControl": 3
+  },
+  "composition": "1 Whirlwind",
+  "compositionData": [
+    {
+      "name": "Whirlwind",
+      "role": "regular",
+      "count": 1,
+      "woundsPerModel": 11
+    }
+  ],
+  "unitSize": "1",
+  "leaderRules": "",
+  "leaderAbilities": "",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Hunter-killer missile",
+      "range": "48\"",
+      "type": "One shot",
+      "attacks": "1",
+      "ballisticSkill": "2+",
+      "weaponSkill": "",
+      "strength": "14",
+      "armorPenetration": "-3",
+      "damage": "D6",
+      "abilities": [
+        "ONE SHOT"
+      ]
+    },
+    {
+      "name": "Storm bolter",
+      "range": "24\"",
+      "type": "Rapid Fire 2",
+      "attacks": "2",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "RAPID FIRE 2"
+      ]
+    },
+    {
+      "name": "Whirlwind vengeance launcher",
+      "range": "72\"",
+      "type": "Blast, Indirect Fire",
+      "attacks": "D6+3",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "8",
+      "armorPenetration": "-2",
+      "damage": "2",
+      "abilities": [
+        "BLAST",
+        "INDIRECT FIRE"
+      ]
+    },
+    {
+      "name": "Armoured tracks",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "3",
+      "ballisticSkill": "",
+      "weaponSkill": "4+",
+      "strength": "6",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": []
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Deadly Demise D3",
+      "type": "core",
+      "description": "Deadly Demise D3",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": true,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Oath of Moment",
+      "type": "faction",
+      "description": "Oath of Moment",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Pinning Bombardment",
+      "type": "unit",
+      "description": "In your Shooting phase, after this model has shot, if one or more of those attacks made with its Whirlwind vengeance launcher scored a hit against an enemy INFANTRY unit, that unit must take a Battle-shock test.",
+      "triggerPhase": [
+        "Shooting"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": [
+        "INFANTRY"
+      ],
+      "effects": null
+    },
+    {
+      "name": "Damaged: 1-4 Wounds Remaining",
+      "type": "unit",
+      "description": "While this model has 1-4 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.",
+      "triggerPhase": [
+        "Shooting",
+        "Fight"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "One Shot",
+      "type": "wargear",
+      "description": "The bearer can only shoot with this weapon once per battle.",
+      "triggerPhase": [
+        "Shooting"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [
+    {
+      "description": "This model can be equipped with 1 hunter-killer missile.",
+      "pointsCost": 0
+    },
+    {
+      "description": "This model can be equipped with 1 storm bolter.",
+      "pointsCost": 0
+    }
+  ],
+  "pointsCost": 190,
+  "pointsTiers": [
+    {
+      "models": 1,
+      "points": 190
+    }
+  ]
+}

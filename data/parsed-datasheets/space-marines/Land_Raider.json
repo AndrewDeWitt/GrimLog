@@ -1,0 +1,216 @@
+{
+  "name": "Land Raider",
+  "faction": "Space Marines",
+  "subfaction": "space-wolves",
+  "role": "Vehicle",
+  "keywords": [
+    "VEHICLE",
+    "SMOKE",
+    "TRANSPORT",
+    "IMPERIUM",
+    "LAND RAIDER",
+    "DEATHWING",
+    "ADEPTUS ASTARTES"
+  ],
+  "stats": {
+    "movement": "10\"",
+    "toughness": 12,
+    "save": "2+",
+    "invulnerableSave": "",
+    "wounds": 16,
+    "leadership": 6,
+    "objectiveControl": 5
+  },
+  "composition": "1 Land Raider",
+  "compositionData": [
+    {
+      "name": "Land Raider",
+      "role": "regular",
+      "count": 1,
+      "woundsPerModel": 16
+    }
+  ],
+  "unitSize": "1",
+  "leaderRules": "",
+  "leaderAbilities": "",
+  "transportCapacity": "12 ADEPTUS ASTARTES INFANTRY models (JUMP PACK, WULFEN, GRAVIS or TERMINATOR models take up the space of 2 models; CENTURION models take up the space of 3 models).",
+  "weapons": [
+    {
+      "name": "Godhammer lascannon",
+      "range": "48\"",
+      "type": "Heavy 2",
+      "attacks": "2",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "12",
+      "armorPenetration": "-3",
+      "damage": "D6+1",
+      "abilities": []
+    },
+    {
+      "name": "Hunter-killer missile",
+      "range": "48\"",
+      "type": "One Shot",
+      "attacks": "1",
+      "ballisticSkill": "2+",
+      "weaponSkill": "",
+      "strength": "14",
+      "armorPenetration": "-3",
+      "damage": "D6",
+      "abilities": [
+        "ONE SHOT"
+      ]
+    },
+    {
+      "name": "Multi-melta",
+      "range": "18\"",
+      "type": "MELTA 2",
+      "attacks": "2",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "9",
+      "armorPenetration": "-4",
+      "damage": "D6",
+      "abilities": [
+        "MELTA 2"
+      ]
+    },
+    {
+      "name": "Storm bolter",
+      "range": "24\"",
+      "type": "RAPID FIRE 2",
+      "attacks": "2",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "RAPID FIRE 2"
+      ]
+    },
+    {
+      "name": "Twin heavy bolter",
+      "range": "36\"",
+      "type": "Heavy 3",
+      "attacks": "3",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "5",
+      "armorPenetration": "-1",
+      "damage": "2",
+      "abilities": [
+        "SUSTAINED HITS 1",
+        "TWIN-LINKED"
+      ]
+    },
+    {
+      "name": "Armoured tracks",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "6",
+      "ballisticSkill": "",
+      "weaponSkill": "4+",
+      "strength": "8",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": []
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Deadly Demise D6",
+      "type": "core",
+      "description": "Deadly Demise D6",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": true,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Oath of Moment",
+      "type": "faction",
+      "description": "Oath of Moment",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Assault Ramp",
+      "type": "unit",
+      "description": "Assault Ramp: Each time a unit disembarks from this model after it has made a Normal move, that unit is still eligible to declare a charge this turn.",
+      "triggerPhase": [
+        "Movement"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "DAMAGED: 1-5 WOUNDS REMAINING",
+      "type": "unit",
+      "description": "While this model has 1-5 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.",
+      "triggerPhase": [
+        "Shooting",
+        "Fight"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "TRANSPORT",
+      "type": "unit",
+      "description": "This model has a transport capacity of 12 ADEPTUS ASTARTES INFANTRY models. Each JUMP PACK, WULFEN, GRAVIS or TERMINATOR model takes up the space of 2 models and each CENTURION model takes up the space of 3 models.",
+      "triggerPhase": [
+        "General"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "ONE SHOT",
+      "type": "wargear",
+      "description": "One Shot: The bearer can only shoot with this weapon once per battle.",
+      "triggerPhase": [
+        "Shooting"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [
+    {
+      "description": "This model can be equipped with 1 hunter-killer missile.",
+      "pointsCost": 0
+    },
+    {
+      "description": "This model can be equipped with 1 multi-melta.",
+      "pointsCost": 0
+    },
+    {
+      "description": "This model can be equipped with 1 storm bolter.",
+      "pointsCost": 0
+    }
+  ],
+  "pointsCost": 220,
+  "pointsTiers": [
+    {
+      "models": 1,
+      "points": 220
+    }
+  ]
+}

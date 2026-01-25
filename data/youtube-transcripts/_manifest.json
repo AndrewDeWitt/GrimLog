@@ -1,0 +1,34 @@
+{
+  "transcripts": [
+    {
+      "video_id": "UbAC-BQ63j0",
+      "title": "40k Detachment Focus - Space Marines: Forgefather's Seekers",
+      "channel": "Goonhammer",
+      "url": "https://www.youtube.com/watch?v=UbAC-BQ63j0",
+      "filename": "UbAC-BQ63j0_40k_Detachment_Focus_-_Space_Marines_Forgefather's_Seekers.txt",
+      "source": "whisper",
+      "chars": 8639,
+      "fetched_at": "2025-12-26T01:23:30.079011"
+    },
+    {
+      "video_id": "Yh9NFoHprH0",
+      "title": "Salamanders Forgefather's Seekers 10 Tips & Tricks Warhammer 40K 10th Edition",
+      "channel": "Hubtown Hammer ",
+      "url": "https://youtube.com/watch?v=Yh9NFoHprH0",
+      "filename": "Yh9NFoHprH0_Salamanders_Forgefather's_Seekers_10_Tips_&_Tricks_Warhammer.txt",
+      "source": "captions",
+      "chars": 45896,
+      "fetched_at": "2025-12-27T00:32:45.296828"
+    },
+    {
+      "video_id": "ixLBBZe5X4I",
+      "title": "Salamander Forgefathers Mortal Wound Their Way To A GT Win! | The BEST Armies in 40k 12.1.25 Edition",
+      "channel": "TacticalTortoise 40k",
+      "url": "https://youtube.com/watch?v=ixLBBZe5X4I&t=575s",
+      "filename": "ixLBBZe5X4I_Salamander_Forgefathers_Mortal_Wound_Their_Way_To_A_GT_Win!_.txt",
+      "source": "captions",
+      "chars": 91502,
+      "fetched_at": "2025-12-27T00:44:47.726760"
+    }
+  ]
+}

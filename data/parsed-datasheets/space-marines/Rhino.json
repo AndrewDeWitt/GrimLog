@@ -1,0 +1,144 @@
+{
+  "name": "Rhino",
+  "faction": "Space Marines",
+  "subfaction": "space-wolves",
+  "role": "Dedicated Transports",
+  "keywords": [
+    "VEHICLE",
+    "SMOKE",
+    "TRANSPORT",
+    "DEDICATED TRANSPORT",
+    "IMPERIUM",
+    "RHINO",
+    "ADEPTUS ASTARTES"
+  ],
+  "stats": {
+    "movement": "12\"",
+    "toughness": 9,
+    "save": "3+",
+    "invulnerableSave": "",
+    "wounds": 10,
+    "leadership": 6,
+    "objectiveControl": 2
+  },
+  "composition": "1 Rhino",
+  "compositionData": [
+    {
+      "name": "Rhino",
+      "role": "regular",
+      "count": 1,
+      "woundsPerModel": 10
+    }
+  ],
+  "unitSize": "1",
+  "leaderRules": "",
+  "leaderAbilities": "",
+  "transportCapacity": "This model has a transport capacity of 12 ADEPTUS ASTARTES INFANTRY models. It cannot transport JUMP PACK, WULFEN, PHOBOS, GRAVIS, CENTURION, TERMINATOR or TACTICUS models (excluding TACTICUS CHARACTER models that began the battle attached to a non-TACTICUS unit).",
+  "weapons": [
+    {
+      "name": "Hunter-killer missile [one shot]",
+      "range": "48\"",
+      "type": "One Shot",
+      "attacks": "1",
+      "ballisticSkill": "2+",
+      "weaponSkill": "",
+      "strength": "14",
+      "armorPenetration": "-3",
+      "damage": "D6",
+      "abilities": [
+        "ONE SHOT: THE BEARER CAN ONLY SHOOT WITH THIS WEAPON ONCE PER BATTLE."
+      ]
+    },
+    {
+      "name": "Storm bolter [rapid fire 2]",
+      "range": "24\"",
+      "type": "Rapid fire 2",
+      "attacks": "2",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "RAPID FIRE 2"
+      ]
+    },
+    {
+      "name": "Armoured tracks",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "3",
+      "ballisticSkill": "",
+      "weaponSkill": "4+",
+      "strength": "6",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": []
+    }
+  ],
+  "abilities": [
+    {
+      "name": "DEADLY DEMISE D3",
+      "type": "core",
+      "description": "When this unit is destroyed, roll a D3. Each unit within 3\" of this model suffers that many mortal wounds.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": true,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "FIRING DECK 2",
+      "type": "core",
+      "description": "Firing Deck 2: Up to 2 models embarked within this transport may make shooting attacks while embarked. When they do so, resolve those attacks in the transport's Shooting phase as if the firing models were not embarked.",
+      "triggerPhase": [
+        "Shooting"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "OATH OF MOMENT",
+      "type": "faction",
+      "description": "Oath of Moment (ADEPTUS ASTARTES faction ability). This model has the ADEPTUS ASTARTES faction keyword and is affected by the Oath of Moment faction rule (see your faction rules for full effects).",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [
+        "ADEPTUS ASTARTES"
+      ],
+      "effects": null
+    },
+    {
+      "name": "SELF REPAIR",
+      "type": "unit",
+      "description": "At the end of your Command phase, this model regains 1 lost wound.",
+      "triggerPhase": [
+        "Command"
+      ],
+      "triggerSubphase": "End of Phase",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [
+    {
+      "description": "This model can be equipped with 1 hunter-killer missile.",
+      "pointsCost": 0
+    }
+  ],
+  "pointsCost": 75,
+  "pointsTiers": [
+    {
+      "models": 1,
+      "points": 75
+    }
+  ]
+}

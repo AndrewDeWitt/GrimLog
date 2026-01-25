@@ -1,0 +1,163 @@
+{
+  "name": "Neurolictor",
+  "faction": "Tyranids",
+  "subfaction": "",
+  "role": "Character",
+  "keywords": [
+    "INFANTRY",
+    "GREAT DEVOURER",
+    "VANGUARD INVADER",
+    "SYNAPSE",
+    "NEUROLICTOR"
+  ],
+  "stats": {
+    "movement": "8\"",
+    "toughness": 5,
+    "save": "4+",
+    "invulnerableSave": "4+",
+    "wounds": 7,
+    "leadership": 7,
+    "objectiveControl": 1
+  },
+  "composition": "1 Neurolictor",
+  "compositionData": [
+    {
+      "name": "Neurolictor",
+      "role": "leader",
+      "count": 1,
+      "woundsPerModel": 7
+    }
+  ],
+  "unitSize": "1",
+  "leaderRules": "",
+  "leaderAbilities": "",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Piercing claws and talons [precision]",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "6",
+      "ballisticSkill": "",
+      "weaponSkill": "2+",
+      "strength": "6",
+      "armorPenetration": "-2",
+      "damage": "1",
+      "abilities": [
+        "PRECISION"
+      ]
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Infiltrators",
+      "type": "core",
+      "description": "Infiltrators",
+      "triggerPhase": [
+        "Deployment"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Lone Operative",
+      "type": "core",
+      "description": "Lone Operative",
+      "triggerPhase": [
+        "Keyword"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Stealth",
+      "type": "core",
+      "description": "Stealth",
+      "triggerPhase": [
+        "Keyword"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Shadow in the Warp",
+      "type": "faction",
+      "description": "Shadow in the Warp",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [
+        "TYRANIDS"
+      ],
+      "effects": null
+    },
+    {
+      "name": "Synapse",
+      "type": "faction",
+      "description": "Synapse",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [
+        "TYRANIDS"
+      ],
+      "effects": null
+    },
+    {
+      "name": "Feeder Tendrils",
+      "type": "unit",
+      "description": "Feeder Tendrils: Each time this model destroys an enemy CHARACTER model, you gain 1CP.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [
+        "CHARACTER"
+      ],
+      "effects": null
+    },
+    {
+      "name": "Neural Disruption",
+      "type": "unit",
+      "description": "Neural Disruption: In your Command phase, select one enemy unit within 12\" of this model. That unit must take a Battle-shock test.",
+      "triggerPhase": [
+        "Command"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Psychological Saboteur (Aura)",
+      "type": "unit",
+      "description": "Psychological Saboteur (Aura): While an enemy unit is within 12\" of this model, if that unit is Battle-shocked:\nEach time a model in that unit makes an attack, subtract 1 from the Hit roll.\nEach time a friendly TYRANIDS model makes an attack that targets that unit, add 1 to the Wound roll.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [],
+  "pointsCost": 70,
+  "pointsTiers": [
+    {
+      "models": 1,
+      "points": 70
+    }
+  ]
+}

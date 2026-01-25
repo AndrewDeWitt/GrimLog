@@ -1,0 +1,126 @@
+{
+  "name": "Heavy Intercessor Squad",
+  "faction": "Space Marines",
+  "subfaction": "Space Wolves",
+  "role": "Battleline",
+  "keywords": [
+    "INFANTRY",
+    "BATTLELINE",
+    "GRENADES",
+    "IMPERIUM",
+    "GRAVIS",
+    "HEAVY INTERCESSOR SQUAD",
+    "ADEPTUS ASTARTES"
+  ],
+  "stats": {
+    "movement": "5\"",
+    "toughness": 6,
+    "save": "3+",
+    "invulnerableSave": "",
+    "wounds": 3,
+    "leadership": 6,
+    "objectiveControl": 2
+  },
+  "composition": "1 Heavy Intercessor Sergeant, 4-9 Heavy Intercessors",
+  "compositionData": [
+    {
+      "name": "Heavy Intercessor Sergeant",
+      "role": "leader",
+      "count": 1,
+      "woundsPerModel": 3
+    },
+    {
+      "name": "Heavy Intercessor",
+      "role": "regular",
+      "count": 4,
+      "woundsPerModel": 3
+    }
+  ],
+  "unitSize": "5-10",
+  "leaderRules": "This unit can be led by: Apothecary Biologis, Captain In Gravis Armour, Iron Father Feirros, Marneus Calgar, Tor Garadon, Inquisitor, Inquisitor Coteaz, Inquisitor Draxus, Inquisitor Greyfax, Inquisitor Eisenhorn, Inquisitor In Terminator Armour",
+  "leaderAbilities": "",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Bolt pistol",
+      "range": "12\"",
+      "type": "Pistol",
+      "attacks": "1",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": []
+    },
+    {
+      "name": "Heavy bolt rifle",
+      "range": "30\"",
+      "type": "Assault 2, Heavy",
+      "attacks": "2",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "5",
+      "armorPenetration": "-1",
+      "damage": "2",
+      "abilities": []
+    },
+    {
+      "name": "Heavy bolter",
+      "range": "36\"",
+      "type": "Assault 3, Heavy",
+      "attacks": "3",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "5",
+      "armorPenetration": "-1",
+      "damage": "2",
+      "abilities": [
+        "SUSTAINED HITS 1"
+      ]
+    },
+    {
+      "name": "Close combat weapon",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "3",
+      "ballisticSkill": "",
+      "weaponSkill": "3+",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": []
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Oath of Moment — Unyielding in the Face of the Foe",
+      "type": "faction",
+      "description": "While this unit is within range of an objective marker you control, each time an attack with a Damage characteristic of 1 is allocated to a model in this unit, add 1 to any armour saving throw made against that attack.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": true,
+      "requiredKeywords": [],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [
+    {
+      "description": "For every 5 models in this unit, 1 Heavy Intercessor’s heavy bolt rifle can be replaced with 1 heavy bolter.",
+      "pointsCost": 0
+    }
+  ],
+  "pointsCost": 100,
+  "pointsTiers": [
+    {
+      "models": 5,
+      "points": 100
+    },
+    {
+      "models": 10,
+      "points": 200
+    }
+  ]
+}

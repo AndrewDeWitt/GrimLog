@@ -1,0 +1,162 @@
+{
+  "name": "Inceptor Squad",
+  "faction": "Space Marines",
+  "subfaction": "Space Wolves",
+  "role": "Elites",
+  "keywords": [
+    "INFANTRY",
+    "JUMP PACK",
+    "FLY",
+    "IMPERIUM",
+    "GRAVIS",
+    "INCEPTOR SQUAD",
+    "ADEPTUS ASTARTES"
+  ],
+  "stats": {
+    "movement": "10\"",
+    "toughness": 6,
+    "save": "3+",
+    "invulnerableSave": "",
+    "wounds": 3,
+    "leadership": 6,
+    "objectiveControl": 1
+  },
+  "composition": "1 Inceptor Sergeant, 2-5 Inceptors",
+  "compositionData": [
+    {
+      "name": "Inceptor Sergeant",
+      "role": "leader",
+      "count": 1,
+      "woundsPerModel": 3
+    },
+    {
+      "name": "Inceptor",
+      "role": "regular",
+      "count": 2,
+      "woundsPerModel": 3
+    }
+  ],
+  "unitSize": "3-6",
+  "leaderRules": "",
+  "leaderAbilities": "",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Assault bolters",
+      "range": "18\"",
+      "type": "ASSAULT 3, PISTOL",
+      "attacks": "3",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "5",
+      "armorPenetration": "-1",
+      "damage": "2",
+      "abilities": [
+        "ASSAULT 3",
+        "PISTOL",
+        "SUSTAINED HITS 2",
+        "TWIN-LINKED"
+      ]
+    },
+    {
+      "name": "Plasma exterminators – standard",
+      "range": "18\"",
+      "type": "ASSAULT 2, PISTOL",
+      "attacks": "2",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "7",
+      "armorPenetration": "-2",
+      "damage": "2",
+      "abilities": [
+        "ASSAULT 2",
+        "PISTOL",
+        "TWIN-LINKED"
+      ]
+    },
+    {
+      "name": "Plasma exterminators – supercharge",
+      "range": "18\"",
+      "type": "ASSAULT 2, PISTOL",
+      "attacks": "2",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "8",
+      "armorPenetration": "-3",
+      "damage": "3",
+      "abilities": [
+        "ASSAULT 2",
+        "PISTOL",
+        "HAZARDOUS",
+        "TWIN-LINKED"
+      ]
+    },
+    {
+      "name": "Close combat weapon",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "3",
+      "ballisticSkill": "",
+      "weaponSkill": "3+",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": []
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Deep Strike",
+      "type": "core",
+      "description": "",
+      "triggerPhase": [
+        "Deployment"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Oath of Moment",
+      "type": "faction",
+      "description": "",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Meteoric Descent",
+      "type": "unit",
+      "description": "In your Movement phase, when this unit is set up on the battlefield using the Deep Strike ability, it can perform a meteoric descent. If it does, this unit can be set up anywhere on the battlefield that is more than 6\" horizontally away from all enemy units, but until the end of the turn, it is not eligible to declare a charge.",
+      "triggerPhase": [
+        "Movement"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [
+    {
+      "description": "All models in this unit can each have their assault bolters replaced with 1 plasma exterminators.",
+      "pointsCost": 0
+    }
+  ],
+  "pointsCost": 120,
+  "pointsTiers": [
+    {
+      "models": 3,
+      "points": 120
+    },
+    {
+      "models": 6,
+      "points": 240
+    }
+  ]
+}

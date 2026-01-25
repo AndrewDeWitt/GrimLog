@@ -1,0 +1,86 @@
+---
+description: Code standards and patterns for TacLog. Applied when working with TypeScript, React, API routes, and database code.
+tags: [code, standards, typescript, react, api]
+type: auto
+globs: ["**/*.ts", "**/*.tsx", "app/**/*", "lib/**/*", "components/**/*"]
+---
+
+# TacLog Code Standards
+
+## TypeScript
+- Strict mode enabled
+- Use proper types, no `any` without justification
+- Prefer interfaces over types for object shapes
+- Use `const` by default, `let` only when reassignment needed
+
+## React/Next.js
+- Use App Router (not Pages Router)
+- Server Components by default, Client Components when needed
+- Use `"use client"` directive only when necessary
+- Prefer composition over complex props drilling
+
+## API Routes
+- Validate inputs before processing
+- Return consistent response format: `{ success: boolean, data?: any, error?: string }`
+- Handle errors gracefully with try-catch
+- Log errors with context
+
+## Database (Prisma)
+- Use transactions for multi-step operations
+- Handle unique constraint violations
+- Always close connections (use Prisma client properly)
+- Index frequently queried fields
+
+## File Organization
+- Keep related code together
+- `lib/` for shared utilities and logic
+- `components/` for React components
+- `app/api/` for API routes
+- No circular dependencies
+
+## Common Patterns
+
+### Error Handling
+```typescript
+try {
+  // Operation
+  return { success: true, data: result };
+} catch (error) {
+  console.error('Context:', error);
+  return { success: false, error: error.message };
+}
+```
+
+### Validation Pattern
+```typescript
+// Validate early, fail fast
+if (!input) {
+  return { success: false, error: 'Missing required input' };
+}
+
+// Validate with helper
+const validation = validateSomething(input);
+if (!validation.isValid) {
+  return { success: false, error: validation.reason };
+}
+```
+
+### API Response Pattern
+```typescript
+return NextResponse.json({
+  success: true,
+  data: { /* result */ },
+  // Optional:
+  validation: { /* validation info */ }
+}, { status: 200 });
+```
+
+## Testing Strategy
+
+Before claiming a feature is complete:
+1. ✅ Linter passes (`npm run lint`)
+2. ✅ TypeScript compiles (`npx tsc --noEmit`)
+3. ✅ Manual testing in browser
+4. ✅ Check console for errors
+5. ✅ Verify Langfuse traces (if AI feature)
+6. ✅ Test edge cases (empty input, errors, etc.)

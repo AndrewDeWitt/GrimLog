@@ -1,0 +1,343 @@
+{
+    "strategicAnalysis": {
+        "executiveSummary": "This Space Wolves list is a formidable 'HeroHammer' composition that sacrifices board width for an overwhelming concentration of durability and melee lethality. Built around a massive Terminator 'Death Star' led by Logan Grimnar and Arjac, and supported by fast-moving Thunderwolf Cavalry, the army functions as a crushing avalanche that seeks to table the opponent rather than winning on technical scoring. Success relies on precise timing of the 'Master of Wolves' Sagas to deliver a knockout blow on Turn 2 or 3 while the Vindicator and Inceptors strip enemy armor.",
+        "armyArchetype": {
+            "primary": "elite",
+            "secondary": "melee_focused",
+            "description": "With only 50 models at 2000 points and a heavy investment in Terminators and Cavalry, every unit is a high-value asset designed to absorb punishment and trade up in combat."
+        },
+        "statisticalBreakdown": {
+            "totalUnits": 12,
+            "totalModels": 50,
+            "totalWounds": 199,
+            "averageToughness": 5.8,
+            "toughnessDistribution": {
+                "t3OrLess": 0,
+                "t4to5": 78,
+                "t6to8": 30,
+                "t9to11": 2,
+                "t12Plus": 0
+            },
+            "damageProfile": {
+                "totalRangedDamage": 18.5,
+                "totalMeleeDamage": 42,
+                "antiTankCapability": "moderate",
+                "antiInfantryCapability": "strong",
+                "rangedVsMeleeRatio": "30% ranged / 70% melee"
+            },
+            "mobilityProfile": {
+                "averageMovement": 7.8,
+                "hasDeepStrike": true,
+                "hasScouts": false,
+                "hasInfiltrate": true,
+                "hasFly": true,
+                "fastUnitsCount": 3
+            }
+        },
+        "strategicStrengths": [
+            {
+                "title": "Layered Durability",
+                "description": "Between Storm Shields (4++ Invulnerable saves) on Terminators/TWC and the 'The Foe Foreseen' stratagem to worsen enemy AP, this army is incredibly resistant to high-AP fire.",
+                "relevantUnits": [
+                    "Wolf Guard Terminators",
+                    "Thunderwolf Cavalry",
+                    "Arjac Rockfist"
+                ]
+            },
+            {
+                "title": "Flexible Lethality via Sagas",
+                "description": "The ability to switch the entire army between 'Encircling Jaws' (mobility) and 'Ferocious Strike' (damage) allows you to adapt to the game state instantly.",
+                "relevantUnits": [
+                    "Logan Grimnar",
+                    "Wolf Guard Headtakers",
+                    "Thunderwolf Cavalry"
+                ]
+            },
+            {
+                "title": "Deep Strike Pressure",
+                "description": "Nearly half the army's points (Terminators + Inceptors) can start off the board, forcing opponents to screen their backline and reducing the fire the TWC take on Turn 1.",
+                "relevantUnits": [
+                    "Inceptor Squad",
+                    "Wolf Guard Terminators",
+                    "Arjac Rockfist"
+                ]
+            }
+        ],
+        "strategicWeaknesses": [
+            {
+                "title": "Severe Board Control Deficit",
+                "description": "With only 12 units and 50 models, you cannot screen your own deployment zone effectively against 3-inch deep strikes or hyper-mobile armies.",
+                "severity": "critical",
+                "counterplayRisk": "Opponents will drop scoring units behind your lines or move-block your Terminators.",
+                "specificCounterArmies": [
+                    "Genestealer Cults",
+                    "Grey Knights",
+                    "Aeldari"
+                ],
+                "mitigationStrategy": "Use the 'Chariots of the Storm' enhancement to redeploy units into Strategic Reserves to counter enemy deployment, and use the Lieutenant with Combi-weapon to screen your backfield objectives."
+            },
+            {
+                "title": "Reliance on Charge Rolls",
+                "description": "The Terminators are slow (M5/6). Failing a 9-inch charge out of Deep Strike leaves almost 500 points useless for a turn.",
+                "severity": "major",
+                "counterplayRisk": "Kiting and screening with cheap chaff.",
+                "specificCounterArmies": [
+                    "T'au Empire",
+                    "Drukhari"
+                ],
+                "mitigationStrategy": "Save the 'Encircling Jaws' Saga for the turn your reserves arrive to get Charge re-rolls, or use 'Grimnar's Mark' for a free Rapid Ingress on the Terminator Captain's unit to move closer before charging."
+            }
+        ],
+        "matchupConsiderations": [
+            {
+                "opponentArchetype": "vehicle_spam",
+                "matchupRating": "unfavorable",
+                "reasoning": "You lack high-volume ranged anti-tank. The Vindicator is your only dedicated long-range gun. You must get into melee to win.",
+                "keyTips": [
+                    "Use 'Ferocious Strike' for Lethal Hits to bypass high Toughness.",
+                    "Deep Strike Arjac and Terminators to charge vehicles directly.",
+                    "Protect the Vindicator at all costs."
+                ]
+            },
+            {
+                "opponentArchetype": "melee_rush",
+                "matchupRating": "favorable",
+                "reasoning": "Your units are tougher and hit harder in melee than almost any other faction. You also have 'Fight on Death' mechanics via Arjac.",
+                "keyTips": [
+                    "Let them charge you, then use 'Howlmaw' to force Battle-shock.",
+                    "Use 'Unrelenting Hunters' to Fall Back and Charge again for bonuses.",
+                    "Pop 'The Foe Foreseen' in the Fight phase."
+                ]
+            },
+            {
+                "opponentArchetype": "horde_armies",
+                "matchupRating": "even",
+                "reasoning": "You can kill models easily, but they can out-OC you on objectives. You simply don't have enough bodies to hold 4+ objectives.",
+                "keyTips": [
+                    "Use the Inceptors and Vindicator Blast weapons to clear chaff.",
+                    "Focus on killing their scoring units, not their damage dealers.",
+                    "Consolidate onto objectives to flip them with OC."
+                ]
+            }
+        ],
+        "secondaryRecommendations": {
+            "strongSecondaries": [
+                {
+                    "name": "Assassination",
+                    "reasoning": "This list is designed to hunt characters with 'Epic Challenge' opportunities and deep striking terminators.",
+                    "expectedScore": "12-15 VP"
+                },
+                {
+                    "name": "Storm Hostile Objective",
+                    "reasoning": "You want to charge onto objectives anyway. Thunderwolf Cavalry are excellent at flipping points.",
+                    "expectedScore": "10-15 VP"
+                }
+            ],
+            "avoidSecondaries": [
+                {
+                    "name": "Cleanse",
+                    "reasoning": "You cannot afford to have your expensive elite units doing actions instead of fighting."
+                },
+                {
+                    "name": "Investigate Signals",
+                    "reasoning": "Requires being in corners/center without shooting/charging. A waste of your 300+ point units."
+                }
+            ],
+            "overallScoringPotential": "below_average"
+        },
+        "collectionRecommendations": [
+            {
+                "unitName": "Fenrisian Wolves / Cyberwolves",
+                "reason": "Cheap screening units and action monkeys are desperately needed to hold home objectives.",
+                "priority": "high",
+                "alternativeOptions": [
+                    "Scout Squad",
+                    "Infiltrators"
+                ]
+            },
+            {
+                "unitName": "Land Raider Redeemer",
+                "reason": "Provides an assault ramp for the Terminators or Headtakers to charge after moving, fixing the mobility issue.",
+                "priority": "high",
+                "alternativeOptions": [
+                    "Repulsor Executioner",
+                    "Stormraven Gunship"
+                ]
+            }
+        ],
+        "threatAssessment": {
+            "overallThreatLevel": "high",
+            "peakThreatPhase": "mid_game",
+            "keyThreats": [
+                "Logan Grimnar + Arjac + 10 Terminators (The Death Star)",
+                "Thunderwolf Cavalry (Fast Melee)",
+                "Vindicator (Demolisher Cannon)"
+            ],
+            "counterStrategies": [
+                "Screen out deep strikes to force the Terminators to walk.",
+                "Focus fire on the Thunderwolf Cavalry first to remove the army's speed.",
+                "Move-block the Vindicator to deny it firing angles."
+            ]
+        },
+        "viralInsights": {
+            "tagline": "The Frost-Clad Avalanche",
+            "spiritDescription": "An unstoppable wall of terminator armor and snarling beasts that crashes into the enemy line with the inevitability of a glacier.",
+            "playstyleBlend": {
+                "primary": {
+                    "style": "counterpunch",
+                    "percentage": 70,
+                    "description": "Absorb the enemy's opening volley with 2+ saves and Storm Shields, then trigger the 'Ferocious Strike' Saga to wipe them out in melee."
+                },
+                "secondary": {
+                    "style": "alpha_strike",
+                    "percentage": 30,
+                    "description": "Using Thunderwolf Cavalry speed and Deep Striking Inceptors to pressure the enemy deployment zone on Turn 2."
+                }
+            },
+            "combatSpectrum": 15,
+            "funStats": [
+                {
+                    "name": "Invuln Wall",
+                    "emoji": "🛡️",
+                    "value": "4/5 Units",
+                    "description": "80% of units carry Storm Shields (4++). High-AP weapons are mathematically wasted against this list.",
+                    "iconPrompt": "A battered storm shield deflecting a high-energy lascannon beam, sparks flying, dark battlefield background"
+                },
+                {
+                    "name": "Deep Strike Payload",
+                    "emoji": "⚡",
+                    "value": "510pts",
+                    "description": "Over 500 points arriving Turn 2 via Deep Strike - massive backline threat that opponents must screen against.",
+                    "iconPrompt": "A massive terminator materializing from teleportation energy, lightning crackling, dark void background"
+                }
+            ],
+            "armySpiritIconPrompt": "A massive Space Wolf Terminator stepping on a tyranid skull, blizzard swirling around, glowing blue eyes, wolf pelt on shoulders, comic book style with heavy black ink lines and cold blue tones"
+        },
+        "unitTacticalSummaries": {
+            "Bjorn the Fell-Handed": "Your durable CP generator. Keep him central to discourage deep strikes and provide fire support, but don't throw him away early.",
+            "Inceptor Squad": "Your problem solvers. Deep strike them 3 inches away (Meteoric Descent) to steal backfield objectives or assassinate lone characters.",
+            "Vindicator": "A distraction Carnifex with a gun. Push it aggressively up a flank to draw fire; if ignored, its S14 cannon deletes tanks.",
+            "Wolf Guard Headtakers": "Glass cannons. Attach the Wolf Guard Battle Leader here for [LANCE] and [SUSTAINED HITS]. Deliver them carefully; if they get shot, they die.",
+            "Wolf Guard Terminators (340pts)": "The main event. Attach Logan and Arjac here. Deep strike them into the center or use Rapid Ingress to ensure a charge.",
+            "Thunderwolf Cavalry": "The missile. Use 'Encircling Jaws' to advance and charge early. They must tie up enemy shooting units to protect the foot sloggers.",
+            "Wolf Guard Terminators (170pts)": "The secondary anvil. Use them to hold a flank objective or reinforce the main push. Don't expect them to kill a Knight alone.",
+            "Lieutenant with Combi-weapon": "Your primary scorer. Use his Lone Operative ability to sit on open objectives or perform actions while being untargetable >12 inches.",
+            "Wolf Guard Battle Leader": "The damage amplifier. Attach to the Headtakers to give them [LANCE]. This turns S5 attacks into vehicle killers on the charge.",
+            "Intercessor Squad": "Home objective sitters. Use their 'Sticky Objectives' rule to tag your home point, then move up to screen or perform secondaries.",
+            "Arjac Rockfist": "The monster hunter. Attach to the big Terminator brick. Use his 'Epic Challenge' stratagem (Core Rules) to snipe enemy characters in melee.",
+            "Logan Grimnar": "The buff commander. Use his 'High King of Fenris' ability once per game to reactivate a powerful Saga (usually Ferocious Strike) for a second turn of carnage."
+        },
+        "unitRoleAssignments": {
+            "Bjorn the Fell-Handed": {
+                "role": "support",
+                "reasoning": "Primary value is increasing stratagem cost for opponents (if applicable) or generating CP/tanking, rather than pure damage output."
+            },
+            "Inceptor Squad": {
+                "role": "skirmisher",
+                "reasoning": "Meteoric Descent allows them to drop anywhere to steal points or snipe weak units."
+            },
+            "Vindicator": {
+                "role": "specialist",
+                "reasoning": "Dedicated heavy armor cracker in a list that mostly relies on melee for anti-tank."
+            },
+            "Wolf Guard Headtakers": {
+                "role": "hammer",
+                "reasoning": "With the attached Battle Leader giving Lance, they are a pure damage missile aimed at elites or light vehicles."
+            },
+            "Wolf Guard Terminators (340pts)": {
+                "role": "anvil",
+                "reasoning": "With Arjac and Logan, they are the hardest unit to shift in the army and occupy the center board."
+            },
+            "Thunderwolf Cavalry": {
+                "role": "hammer",
+                "reasoning": "Fast, hard-hitting, and designed to crash into enemy lines on Turn 1 or 2."
+            },
+            "Wolf Guard Terminators (170pts)": {
+                "role": "anvil",
+                "reasoning": "A smaller durable unit to hold a flank objective."
+            },
+            "Lieutenant with Combi-weapon": {
+                "role": "utility",
+                "reasoning": "Lone Operative makes him the only safe unit to hold objectives in the open."
+            },
+            "Wolf Guard Battle Leader": {
+                "role": "support",
+                "reasoning": "Existing solely to buff the Headtakers with Lance and Sustained Hits."
+            },
+            "Intercessor Squad": {
+                "role": "scoring",
+                "reasoning": "Sticky objectives ability allows them to secure points and move on."
+            },
+            "Arjac Rockfist": {
+                "role": "support",
+                "reasoning": "Provides significant buffs (Anti-Monster/Vehicle) to his unit and fights on death."
+            },
+            "Logan Grimnar": {
+                "role": "support",
+                "reasoning": "While he hits hard, his primary role is unlocking the 'Howling Onslaught' detachment ability re-roll."
+            }
+        }
+    },
+    "listSuggestions": [
+        {
+            "type": "swap",
+            "priority": "high",
+            "removeUnits": [
+                {
+                    "name": "Wolf Guard Terminators (170pts)",
+                    "points": 170,
+                    "reason": "This secondary Terminator unit is slow (M5) and expensive for holding flank objectives, exacerbating the army's critical board control deficit."
+                }
+            ],
+            "addUnits": [
+                {
+                    "name": "Infiltrator Squad",
+                    "points": 100,
+                    "reason": "Provides a 12-inch deep strike denial bubble to protect your home objective and heavy hitters (Bjorn/Vindicator) from enemy reserves.",
+                    "keyCapability": "Deep Strike Denial"
+                },
+                {
+                    "name": "Scout Squad",
+                    "points": 70,
+                    "reason": "Cheap utility unit with 'Guerilla Tactics' (uppy-downy) to score secondary objectives like Investigate Signals or Cleanse without wasting elite combat units.",
+                    "keyCapability": "Secondary Scoring"
+                }
+            ],
+            "pointsDelta": 0,
+            "addressesGap": "Severe Board Control Deficit (Critical Weakness)",
+            "tradeoffs": "Reduces total army durability and melee punch on one flank, as 5 Terminators are replaced by T4 power armor bodies.",
+            "synergiesEnabled": [
+                "Infiltrators ensure the backfield is safe, allowing the main 'Death Star' to push forward aggressively using 'Encircling Jaws'."
+            ]
+        },
+        {
+            "type": "swap",
+            "priority": "medium",
+            "removeUnits": [
+                {
+                    "name": "Wolf Guard Terminators (170pts)",
+                    "points": 170,
+                    "reason": "This unit struggles to contribute against the 'Vehicle Spam' archetype identified as an unfavorable matchup due to lack of range."
+                }
+            ],
+            "addUnits": [
+                {
+                    "name": "Gladiator Lancer",
+                    "points": 160,
+                    "reason": "Adds a dedicated long-range (72\") anti-tank platform with high reliability (built-in re-rolls) to threaten enemy armor from Turn 1.",
+                    "keyCapability": "Long-Range Anti-Tank"
+                }
+            ],
+            "pointsDelta": -10,
+            "addressesGap": "Lack of Ranged Anti-Tank (Matchup Weakness)",
+            "tradeoffs": "Lowers model count and infantry presence; the Lancer cannot move through ruins like the Terminators.",
+            "synergiesEnabled": [
+                "Benefits from 'Hunter's Eye' Saga (+1 to Hit) to hit on 2s, freeing up the Vindicator to push aggressively while the Lancer holds angles."
+            ]
+        }
+    ],
+    "spiritIconUrl": "https://lelfaceyultzvztdndzs.supabase.co/storage/v1/object/public/army-spirit-icons/spirits/space_wolves/f2e144823f80f5f7_the_frost_clad_avalanche.png?v=1767758042601",
+    "generatedAt": "2026-01-07T03:54:02.603Z",
+    "faction": "Space Wolves",
+    "detachment": "Saga of the Great Wolf"
+}

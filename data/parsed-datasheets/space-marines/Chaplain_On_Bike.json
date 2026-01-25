@@ -1,0 +1,137 @@
+{
+  "name": "Chaplain On Bike",
+  "faction": "Adeptus Astartes",
+  "subfaction": "Space Wolves",
+  "role": "Character",
+  "keywords": [
+    "MOUNTED",
+    "CHARACTER",
+    "GRENADES",
+    "IMPERIUM",
+    "CHAPLAIN",
+    "RAVENWING",
+    "ADEPTUS ASTARTES"
+  ],
+  "stats": {
+    "movement": "12\"",
+    "toughness": 5,
+    "save": "3+",
+    "invulnerableSave": "4+",
+    "wounds": 5,
+    "leadership": 5,
+    "objectiveControl": 1
+  },
+  "composition": "1 Chaplain on Bike",
+  "compositionData": [
+    {
+      "name": "Chaplain on Bike",
+      "role": "leader",
+      "count": 1,
+      "woundsPerModel": 5
+    }
+  ],
+  "unitSize": "1",
+  "leaderRules": "This model can be attached to the following units: Outrider Squad, Ravenwing Black Knights, Bike Squad, Company Veterans On Bikes",
+  "leaderAbilities": "Litany of Hate: While this model is leading a unit, each time a model in that unit makes a melee attack, add 1 to the Wound roll.",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Absolvor bolt pistol",
+      "range": "18\"",
+      "type": "Pistol",
+      "attacks": "1",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "5",
+      "armorPenetration": "-1",
+      "damage": "2",
+      "abilities": [
+        "PISTOL"
+      ]
+    },
+    {
+      "name": "Twin bolt rifle",
+      "range": "24\"",
+      "type": "Twin-linked",
+      "attacks": "2",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "-1",
+      "damage": "1",
+      "abilities": [
+        "TWIN-LINKED"
+      ]
+    },
+    {
+      "name": "Crozius arcanum",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "5",
+      "ballisticSkill": "",
+      "weaponSkill": "2+",
+      "strength": "6",
+      "armorPenetration": "-1",
+      "damage": "2",
+      "abilities": []
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Leader",
+      "type": "core",
+      "description": "This model can be attached to a unit to lead it.",
+      "triggerPhase": [
+        "Keyword"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Oath of Moment",
+      "type": "faction",
+      "description": "If your Army Faction is Adeptus Astartes, at the start of your Command phase, you can select one unit from your opponent’s army. Until the start of your next Command phase, each time a model from your army with this ability makes an attack that targets that enemy unit, you can re-roll the Hit roll.",
+      "triggerPhase": [
+        "Command"
+      ],
+      "triggerSubphase": "Start of Phase",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Litany of Hate",
+      "type": "leader",
+      "description": "While this model is leading a unit, each time a model in that unit makes a melee attack, add 1 to the Wound roll.",
+      "triggerPhase": [
+        "Fight"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Catechism of Fire",
+      "type": "unit",
+      "description": "Each time this model’s unit is selected to shoot, you can select one enemy unit within 12\" of and visible to this model. Until the end of the phase, ranged weapons equipped by models in this model’s unit have the [DEVASTATING WOUNDS] ability when targeting that enemy unit.",
+      "triggerPhase": [
+        "Shooting"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [],
+  "pointsCost": 75,
+  "pointsTiers": [
+    {
+      "models": 1,
+      "points": 75
+    }
+  ]
+}

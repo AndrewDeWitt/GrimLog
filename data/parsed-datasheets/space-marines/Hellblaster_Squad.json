@@ -1,0 +1,162 @@
+{
+  "name": "Hellblaster Squad",
+  "faction": "Space Marines",
+  "subfaction": "space-wolves",
+  "role": "Elites",
+  "keywords": [
+    "INFANTRY",
+    "GRENADES",
+    "IMPERIUM",
+    "TACTICUS",
+    "HELLBLASTER SQUAD"
+  ],
+  "stats": {
+    "movement": "6\"",
+    "toughness": 4,
+    "save": "3+",
+    "invulnerableSave": "",
+    "wounds": 2,
+    "leadership": 6,
+    "objectiveControl": 1
+  },
+  "composition": "1 Hellblaster Sergeant, 4-9 Hellblasters",
+  "compositionData": [
+    {
+      "name": "Hellblaster Sergeant",
+      "role": "leader",
+      "count": 1,
+      "woundsPerModel": 2
+    },
+    {
+      "name": "Hellblaster",
+      "role": "regular",
+      "count": 4,
+      "woundsPerModel": 2
+    }
+  ],
+  "unitSize": "5-10",
+  "leaderRules": "This unit can be led by the following units: Ancient, Apothecary, Captain, Chaplain, Librarian, Lieutenant, Lieutenant Titus, Sanguinary Priest, Asmodai, Azrael, Ezekiel, Brother Corbulo, Captain Tycho, Gabriel Seth",
+  "leaderAbilities": "",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Bolt pistol",
+      "range": "12\"",
+      "type": "Pistol",
+      "attacks": "1",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "PISTOL"
+      ]
+    },
+    {
+      "name": "Plasma incinerator — standard",
+      "range": "24\"",
+      "type": "Assault 2, Heavy",
+      "attacks": "2",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "7",
+      "armorPenetration": "-2",
+      "damage": "1",
+      "abilities": [
+        "ASSAULT",
+        "HEAVY"
+      ]
+    },
+    {
+      "name": "Plasma incinerator — supercharge",
+      "range": "24\"",
+      "type": "Assault 2, Heavy",
+      "attacks": "2",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "8",
+      "armorPenetration": "-3",
+      "damage": "2",
+      "abilities": [
+        "ASSAULT",
+        "HEAVY",
+        "HAZARDOUS",
+        "SUPERCHARGE"
+      ]
+    },
+    {
+      "name": "Plasma pistol — standard",
+      "range": "12\"",
+      "type": "Pistol",
+      "attacks": "1",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "7",
+      "armorPenetration": "-2",
+      "damage": "1",
+      "abilities": [
+        "PISTOL"
+      ]
+    },
+    {
+      "name": "Plasma pistol — supercharge",
+      "range": "12\"",
+      "type": "Pistol",
+      "attacks": "1",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "8",
+      "armorPenetration": "-3",
+      "damage": "2",
+      "abilities": [
+        "PISTOL",
+        "HAZARDOUS",
+        "SUPERCHARGE"
+      ]
+    },
+    {
+      "name": "Close combat weapon",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "3",
+      "ballisticSkill": "",
+      "weaponSkill": "3+",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": []
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Oath of Moment — For the Chapter!",
+      "type": "faction",
+      "description": "For the Chapter!: Each time a model in this unit is destroyed, roll one D6: on a 3+, do not remove it from play. The destroyed model can shoot after the attacking model’s unit has finished making its attacks, and is then removed from play. When resolving these attacks, any Hazardous tests taken for that attack are automatically passed. Designer’s Note: This ability is triggered even when a model in this unit is destroyed as the result of failing a Hazardous test, meaning such a model may be able to shoot twice in the same phase",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": true,
+      "requiredKeywords": [],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [
+    {
+      "description": "The Hellblaster Sergeant’s bolt pistol can be replaced with 1 plasma pistol.",
+      "pointsCost": 0
+    }
+  ],
+  "pointsCost": 110,
+  "pointsTiers": [
+    {
+      "models": 5,
+      "points": 110
+    },
+    {
+      "models": 10,
+      "points": 220
+    }
+  ]
+}

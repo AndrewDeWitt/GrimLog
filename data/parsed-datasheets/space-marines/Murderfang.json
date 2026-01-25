@@ -1,0 +1,183 @@
+{
+  "name": "Murderfang",
+  "faction": "Space Marines",
+  "subfaction": "Space Wolves",
+  "role": "Character",
+  "keywords": [
+    "VEHICLE",
+    "WALKER",
+    "CHARACTER",
+    "EPIC HERO",
+    "IMPERIUM",
+    "DREADNOUGHT",
+    "WULFEN",
+    "MURDERFANG",
+    "ADEPTUS ASTARTES",
+    "SPACE WOLVES"
+  ],
+  "stats": {
+    "movement": "9\"",
+    "toughness": 9,
+    "save": "2+",
+    "invulnerableSave": "",
+    "wounds": 8,
+    "leadership": 6,
+    "objectiveControl": 0
+  },
+  "composition": "1 Murderfang – EPIC HERO",
+  "compositionData": [
+    {
+      "name": "Murderfang",
+      "role": "leader",
+      "count": 1,
+      "woundsPerModel": 8
+    }
+  ],
+  "unitSize": "1",
+  "leaderRules": "",
+  "leaderAbilities": "",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Heavy flamer",
+      "range": "12\"",
+      "type": "Ranged",
+      "attacks": "D6",
+      "ballisticSkill": "N/A",
+      "weaponSkill": "",
+      "strength": "5",
+      "armorPenetration": "-1",
+      "damage": "1",
+      "abilities": [
+        "IGNORES COVER",
+        "TORRENT"
+      ]
+    },
+    {
+      "name": "Storm bolter",
+      "range": "24\"",
+      "type": "Ranged",
+      "attacks": "2",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "RAPID FIRE 2"
+      ]
+    },
+    {
+      "name": "Murderclaws",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "8",
+      "ballisticSkill": "",
+      "weaponSkill": "3+",
+      "strength": "14",
+      "armorPenetration": "-2",
+      "damage": "3",
+      "abilities": [
+        "SUSTAINED HITS 1",
+        "TWIN-LINKED"
+      ]
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Deadly Demise 1",
+      "type": "core",
+      "description": "When this model is destroyed, roll one D6. On a 6, each unit within 6\" suffers 1 mortal wound.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": true,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Feel No Pain 6+",
+      "type": "core",
+      "description": "Each time this model would lose a wound, roll one D6: on a 6, that wound is not lost.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": true,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Curse of the Wulfen",
+      "type": "faction",
+      "description": "Faction specific rules for Space Wolves units.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Oath of Moment",
+      "type": "faction",
+      "description": "In your Command phase, select one unit from your opponent's army. Until the start of your next Command phase, each time a model from your army with this ability makes an attack that targets that unit, you can re-roll the Hit roll.",
+      "triggerPhase": [
+        "Command"
+      ],
+      "triggerSubphase": "Start of Phase",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Murder-maker (Aura)",
+      "type": "unit",
+      "description": "In the Fight phase, each time an attack targets a friendly WULFEN unit within 6\" of this model, if a model in that unit is destroyed as a result of that attack, if that model has not fought this phase, roll one D6: on a 4+, do not remove the destroyed model from play; it can fight after the attacking unit has finished making its attacks, and is then removed from play.",
+      "triggerPhase": [
+        "Fight"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": true,
+      "requiredKeywords": [
+        "WULFEN"
+      ],
+      "effects": null
+    },
+    {
+      "name": "Bestial Fury",
+      "type": "unit",
+      "description": "You can re-roll Advance and Charge rolls made for this model.",
+      "triggerPhase": [
+        "Movement",
+        "Charge"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Force of Untamed Destruction",
+      "type": "unit",
+      "description": "This model cannot be your WARLORD.",
+      "triggerPhase": [
+        "General"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [],
+  "pointsCost": 150,
+  "pointsTiers": [
+    {
+      "models": 1,
+      "points": 150
+    }
+  ]
+}

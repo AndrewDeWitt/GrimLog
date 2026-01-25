@@ -1,0 +1,288 @@
+{
+  "name": "Leman Russ Vanquisher",
+  "faction": "Astra Militarum",
+  "subfaction": "",
+  "role": "Other",
+  "keywords": [
+    "VEHICLE",
+    "SMOKE",
+    "IMPERIUM",
+    "SQUADRON",
+    "LEMAN RUSS VANQUISHER"
+  ],
+  "stats": {
+    "movement": "10\"",
+    "toughness": 11,
+    "save": "2+",
+    "invulnerableSave": "",
+    "wounds": 13,
+    "leadership": 7,
+    "objectiveControl": 3
+  },
+  "composition": "1 Leman Russ Vanquisher",
+  "compositionData": [
+    {
+      "name": "Leman Russ Vanquisher",
+      "role": "regular",
+      "count": 1,
+      "woundsPerModel": 13
+    }
+  ],
+  "unitSize": "1",
+  "leaderRules": "",
+  "leaderAbilities": "",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Heavy bolter",
+      "range": "36\"",
+      "type": "Sustained Hits 1",
+      "attacks": "3",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "5",
+      "armorPenetration": "-1",
+      "damage": "1",
+      "abilities": [
+        "SUSTAINED HITS 1"
+      ]
+    },
+    {
+      "name": "Heavy flamer",
+      "range": "12\"",
+      "type": "Ignores Cover, Torrent",
+      "attacks": "D6",
+      "ballisticSkill": "N/A",
+      "weaponSkill": "",
+      "strength": "5",
+      "armorPenetration": "-1",
+      "damage": "1",
+      "abilities": [
+        "IGNORES COVER",
+        "TORRENT"
+      ]
+    },
+    {
+      "name": "Heavy stubber",
+      "range": "36\"",
+      "type": "Rapid Fire 3",
+      "attacks": "3",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "RAPID FIRE 3"
+      ]
+    },
+    {
+      "name": "Hunter-killer missile",
+      "range": "48\"",
+      "type": "One Shot",
+      "attacks": "1",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "14",
+      "armorPenetration": "-3",
+      "damage": "D6",
+      "abilities": [
+        "ONE SHOT"
+      ]
+    },
+    {
+      "name": "Lascannon",
+      "range": "48\"",
+      "type": "Ranged",
+      "attacks": "1",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "12",
+      "armorPenetration": "-3",
+      "damage": "D6+1",
+      "abilities": []
+    },
+    {
+      "name": "Multi-melta",
+      "range": "18\"",
+      "type": "Melta 2",
+      "attacks": "2",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "9",
+      "armorPenetration": "-4",
+      "damage": "D6",
+      "abilities": [
+        "MELTA 2"
+      ]
+    },
+    {
+      "name": "Plasma cannon – standard",
+      "range": "36\"",
+      "type": "Blast",
+      "attacks": "D3",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "7",
+      "armorPenetration": "-2",
+      "damage": "1",
+      "abilities": [
+        "BLAST"
+      ]
+    },
+    {
+      "name": "Plasma cannon – supercharge",
+      "range": "36\"",
+      "type": "Blast, Hazardous",
+      "attacks": "D3",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "8",
+      "armorPenetration": "-3",
+      "damage": "2",
+      "abilities": [
+        "BLAST",
+        "HAZARDOUS"
+      ]
+    },
+    {
+      "name": "Storm bolter",
+      "range": "24\"",
+      "type": "Rapid Fire 2",
+      "attacks": "2",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "RAPID FIRE 2"
+      ]
+    },
+    {
+      "name": "Vanquisher battle cannon",
+      "range": "72\"",
+      "type": "Heavy",
+      "attacks": "1",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "18",
+      "armorPenetration": "-4",
+      "damage": "D6+6",
+      "abilities": [
+        "HEAVY"
+      ]
+    },
+    {
+      "name": "Armoured tracks",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "6",
+      "ballisticSkill": "",
+      "weaponSkill": "4+",
+      "strength": "7",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": []
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Deadly Demise D3",
+      "type": "core",
+      "description": "When this model is destroyed, roll one D6. On a 6, each unit within 6\" suffers D3 mortal wounds.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": true,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Tank-killer",
+      "type": "unit",
+      "description": "Each time this model makes a ranged attack with its vanquisher battle cannon that targets a MONSTER or VEHICLE unit, you can re-roll the Wound roll.",
+      "triggerPhase": [
+        "Shooting"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": [
+        "MONSTER",
+        "VEHICLE"
+      ],
+      "effects": null
+    },
+    {
+      "name": "Damaged: 1-4 Wounds Remaining",
+      "type": "unit",
+      "description": "While this model has 1-4 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.",
+      "triggerPhase": [
+        "Shooting",
+        "Fight"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": true,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Born Soldiers",
+      "type": "faction",
+      "description": "Astra Militarum Detachment Ability.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [
+    {
+      "description": "This model’s lascannon can be replaced with 1 heavy bolter",
+      "pointsCost": 0
+    },
+    {
+      "description": "This model’s lascannon can be replaced with 1 heavy flamer",
+      "pointsCost": 0
+    },
+    {
+      "description": "This model can be equipped with 2 heavy bolters",
+      "pointsCost": 0
+    },
+    {
+      "description": "This model can be equipped with 2 heavy flamers",
+      "pointsCost": 0
+    },
+    {
+      "description": "This model can be equipped with 2 multi-meltas",
+      "pointsCost": 0
+    },
+    {
+      "description": "This model can be equipped with 2 plasma cannons",
+      "pointsCost": 0
+    },
+    {
+      "description": "This model can be equipped with 1 heavy stubber",
+      "pointsCost": 0
+    },
+    {
+      "description": "This model can be equipped with 1 storm bolter",
+      "pointsCost": 0
+    },
+    {
+      "description": "This model can be equipped with 1 hunter-killer missile",
+      "pointsCost": 0
+    }
+  ],
+  "pointsCost": 145,
+  "pointsTiers": [
+    {
+      "models": 1,
+      "points": 145
+    }
+  ]
+}

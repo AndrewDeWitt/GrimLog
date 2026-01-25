@@ -1,0 +1,130 @@
+{
+  "name": "Infernus Squad",
+  "faction": "Space Marines",
+  "subfaction": "Space Wolves",
+  "role": "Battleline",
+  "keywords": [
+    "INFANTRY",
+    "GRENADES",
+    "IMPERIUM",
+    "TACTICUS",
+    "INFERNUS SQUAD",
+    "ADEPTUS ASTARTES"
+  ],
+  "stats": {
+    "movement": "6\"",
+    "toughness": 4,
+    "save": "3+",
+    "invulnerableSave": "",
+    "wounds": 2,
+    "leadership": 6,
+    "objectiveControl": 1
+  },
+  "composition": "1 Infernus Sergeant, 4-9 Infernus Marines",
+  "compositionData": [
+    {
+      "name": "Infernus Sergeant",
+      "role": "leader",
+      "count": 1,
+      "woundsPerModel": 2
+    },
+    {
+      "name": "Infernus Marine",
+      "role": "regular",
+      "count": 4,
+      "woundsPerModel": 2
+    }
+  ],
+  "unitSize": "5-10",
+  "leaderRules": "This unit can be led by the following units: Adrax Agatone, Ancient, Apothecary, Captain, Chaplain, Judiciar, Librarian, Lieutenant, Lieutenant Titus, Marneus Calgar, Vulkan He’stan, Castellan, Chaplain Grimaldus, Marshal, Blood Angels Captain, Sanguinary Priest, Asmodai, Azrael, Ezekiel, Lazarus, Brother Corbulo, Captain Tycho, Gabriel Seth, Primaris Company Champion",
+  "leaderAbilities": "",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Bolt pistol",
+      "range": "12\"",
+      "type": "Pistol 1",
+      "attacks": "1",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "PISTOL"
+      ]
+    },
+    {
+      "name": "Pyreblaster",
+      "range": "12\"",
+      "type": "Assault D6",
+      "attacks": "D6",
+      "ballisticSkill": "",
+      "weaponSkill": "",
+      "strength": "5",
+      "armorPenetration": "-1",
+      "damage": "1",
+      "abilities": [
+        "IGNORES COVER",
+        "TORRENT"
+      ]
+    },
+    {
+      "name": "Close combat weapon",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "3",
+      "ballisticSkill": "",
+      "weaponSkill": "3+",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": []
+    }
+  ],
+  "abilities": [
+    {
+      "name": "OATH OF MOMENT",
+      "type": "faction",
+      "description": "",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "INCENDIARY TERROR",
+      "type": "unit",
+      "description": "In your Shooting phase, after this unit has shot, you can select one enemy INFANTRY unit hit by one or more of those attacks made with a pyreblaster. That enemy unit must take a Battle-shock test, subtracting 1 from that test.",
+      "triggerPhase": [
+        "Shooting"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": [
+        "INFANTRY"
+      ],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [
+    {
+      "description": "Calibanite Armaments",
+      "pointsCost": 15
+    }
+  ],
+  "pointsCost": 90,
+  "pointsTiers": [
+    {
+      "models": 5,
+      "points": 90
+    },
+    {
+      "models": 10,
+      "points": 180
+    }
+  ]
+}

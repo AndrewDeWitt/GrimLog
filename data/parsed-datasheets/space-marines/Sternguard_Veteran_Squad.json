@@ -1,0 +1,264 @@
+{
+  "name": "Sternguard Veteran Squad",
+  "faction": "Space Marines",
+  "subfaction": "Space Wolves",
+  "role": "Elites",
+  "keywords": [
+    "INFANTRY",
+    "GRENADES",
+    "IMPERIUM",
+    "TACTICUS",
+    "STERNGUARD VETERAN SQUAD",
+    "DEATHWING",
+    "ADEPTUS ASTARTES"
+  ],
+  "stats": {
+    "movement": "6\"",
+    "toughness": 4,
+    "save": "3+",
+    "invulnerableSave": "",
+    "wounds": 2,
+    "leadership": 6,
+    "objectiveControl": 1
+  },
+  "composition": "1 Sternguard Veteran Sergeant; 4-9 Sternguard Veterans. Every model is equipped with: Sternguard bolt pistol; Sternguard bolt rifle; close combat weapon.",
+  "compositionData": [
+    {
+      "name": "Sternguard Veteran Sergeant",
+      "role": "leader",
+      "count": 1,
+      "woundsPerModel": 2
+    },
+    {
+      "name": "Sternguard Veteran",
+      "role": "regular",
+      "count": 4,
+      "woundsPerModel": 2
+    }
+  ],
+  "unitSize": "5-10",
+  "leaderRules": "Adrax Agatone, Ancient, Apothecary, Captain, Captain Sicarius, Chaplain, Chief Librarian Tigurius, Judiciar, Kor’sarro Khan, Librarian, Lieutenant, Lieutenant Titus, Marneus Calgar, Pedro Kantor, Uriel Ventris, Castellan, Emperor’s Champion, Marshal, Blood Angels Captain, Sanguinary Priest, Asmodai, Azrael, Ezekiel, Lazarus, Brother Corbulo, Captain Tycho, Chaplain Cassius, Gabriel Seth, Primaris Company Champion",
+  "leaderAbilities": "",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Combi-weapon",
+      "range": "24\"",
+      "type": "Assault 1",
+      "attacks": "1",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "ANTI-INFANTRY 4+",
+        "DEVASTATING WOUNDS",
+        "RAPID FIRE 1"
+      ]
+    },
+    {
+      "name": "Pyrecannon",
+      "range": "12\"",
+      "type": "Torrent",
+      "attacks": "D6+1",
+      "ballisticSkill": "N/A",
+      "weaponSkill": "",
+      "strength": "6",
+      "armorPenetration": "-1",
+      "damage": "1",
+      "abilities": [
+        "IGNORES COVER",
+        "TORRENT"
+      ]
+    },
+    {
+      "name": "Sternguard bolt pistol",
+      "range": "12\"",
+      "type": "Pistol",
+      "attacks": "1",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "DEVASTATING WOUNDS",
+        "PISTOL"
+      ]
+    },
+    {
+      "name": "Sternguard bolt rifle",
+      "range": "24\"",
+      "type": "Assault 2",
+      "attacks": "2",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "-1",
+      "damage": "1",
+      "abilities": [
+        "ASSAULT",
+        "DEVASTATING WOUNDS",
+        "HEAVY",
+        "RAPID FIRE 1"
+      ]
+    },
+    {
+      "name": "Sternguard heavy bolter",
+      "range": "36\"",
+      "type": "Heavy 3",
+      "attacks": "3",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "5",
+      "armorPenetration": "-1",
+      "damage": "2",
+      "abilities": [
+        "DEVASTATING WOUNDS",
+        "HEAVY",
+        "SUSTAINED HITS 1"
+      ]
+    },
+    {
+      "name": "Astartes chainsword",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "6",
+      "ballisticSkill": "",
+      "weaponSkill": "3+",
+      "strength": "4",
+      "armorPenetration": "-1",
+      "damage": "1",
+      "abilities": []
+    },
+    {
+      "name": "Close combat weapon",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "4",
+      "ballisticSkill": "",
+      "weaponSkill": "3+",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": []
+    },
+    {
+      "name": "Power weapon",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "5",
+      "ballisticSkill": "",
+      "weaponSkill": "3+",
+      "strength": "5",
+      "armorPenetration": "-2",
+      "damage": "1",
+      "abilities": []
+    },
+    {
+      "name": "Power fist",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "4",
+      "ballisticSkill": "",
+      "weaponSkill": "3+",
+      "strength": "8",
+      "armorPenetration": "-2",
+      "damage": "2",
+      "abilities": []
+    }
+  ],
+  "abilities": [
+    {
+      "name": "OATH OF MOMENT",
+      "type": "faction",
+      "description": "",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "STERNGUARD FOCUS",
+      "type": "unit",
+      "description": "Each time a model in this unit makes an attack that targets your Oath of Moment target, you can re-roll the Wound roll.",
+      "triggerPhase": [
+        "Shooting",
+        "Fight"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [
+    {
+      "description": "Sternguard Veteran Sergeant’s Sternguard bolt rifle can be replaced with: 1 Astartes chainsword",
+      "pointsCost": 0
+    },
+    {
+      "description": "Sternguard Veteran Sergeant’s Sternguard bolt rifle can be replaced with: 1 combi-weapon",
+      "pointsCost": 0
+    },
+    {
+      "description": "Sternguard Veteran Sergeant’s Sternguard bolt rifle can be replaced with: 1 power weapon",
+      "pointsCost": 0
+    },
+    {
+      "description": "Sternguard Veteran Sergeant’s Sternguard bolt rifle can be replaced with: 1 power fist",
+      "pointsCost": 0
+    },
+    {
+      "description": "Sternguard Veteran Sergeant’s Sternguard bolt rifle can be replaced with: 1 Astartes chainsword and 1 Sternguard bolt rifle*",
+      "pointsCost": 0
+    },
+    {
+      "description": "Sternguard Veteran Sergeant’s Sternguard bolt rifle can be replaced with: 1 power weapon and 1 Sternguard bolt rifle*",
+      "pointsCost": 0
+    },
+    {
+      "description": "Sternguard Veteran Sergeant’s Sternguard bolt rifle can be replaced with: 1 power fist and 1 Sternguard bolt rifle*",
+      "pointsCost": 0
+    },
+    {
+      "description": "Any number of Sternguard Veterans can each have their Sternguard bolt rifle replaced with 1 combi-weapon",
+      "pointsCost": 0
+    },
+    {
+      "description": "For every 5 models in this unit, 1 Sternguard Veteran’s Sternguard bolt rifle can be replaced with: 1 pyrecannon",
+      "pointsCost": 0
+    },
+    {
+      "description": "For every 5 models in this unit, 1 Sternguard Veteran’s Sternguard bolt rifle can be replaced with: 1 Sternguard heavy bolter*",
+      "pointsCost": 0
+    },
+    {
+      "description": "This model's Sternguard bolt rifle cannot be replaced",
+      "pointsCost": 0
+    },
+    {
+      "description": "Calibanite Armaments",
+      "pointsCost": 15
+    },
+    {
+      "description": "Fulgus Magna",
+      "pointsCost": 20
+    }
+  ],
+  "pointsCost": 100,
+  "pointsTiers": [
+    {
+      "models": 5,
+      "points": 100
+    },
+    {
+      "models": 10,
+      "points": 200
+    }
+  ]
+}

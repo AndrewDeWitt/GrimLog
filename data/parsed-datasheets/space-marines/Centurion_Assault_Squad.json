@@ -1,0 +1,172 @@
+{
+  "name": "Centurion Assault Squad",
+  "faction": "Adeptus Astartes",
+  "subfaction": "Space Wolves",
+  "role": "Other",
+  "keywords": [
+    "INFANTRY",
+    "IMPERIUM",
+    "CENTURION",
+    "CENTURION ASSAULT SQUAD",
+    "ADEPTUS ASTARTES"
+  ],
+  "stats": {
+    "movement": "4\"",
+    "toughness": 7,
+    "save": "2+",
+    "invulnerableSave": "",
+    "wounds": 4,
+    "leadership": 6,
+    "objectiveControl": 2
+  },
+  "composition": "1 Assault Centurion Sergeant, 2-5 Assault Centurions",
+  "compositionData": [
+    {
+      "name": "Assault Centurion Sergeant",
+      "role": "leader",
+      "count": 1,
+      "woundsPerModel": 4
+    },
+    {
+      "name": "Assault Centurion",
+      "role": "regular",
+      "count": 2,
+      "woundsPerModel": 4
+    }
+  ],
+  "unitSize": "3-6",
+  "leaderRules": "",
+  "leaderAbilities": "",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Centurion bolters",
+      "range": "24\"",
+      "type": "Ranged",
+      "attacks": "3",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "RAPID FIRE 3",
+        "TWIN-LINKED"
+      ]
+    },
+    {
+      "name": "Twin flamer",
+      "range": "12\"",
+      "type": "Ranged",
+      "attacks": "D6",
+      "ballisticSkill": "N/A",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "IGNORES COVER",
+        "TORRENT",
+        "TWIN-LINKED"
+      ]
+    },
+    {
+      "name": "Twin meltagun",
+      "range": "12\"",
+      "type": "Ranged",
+      "attacks": "1",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "9",
+      "armorPenetration": "-4",
+      "damage": "D6",
+      "abilities": [
+        "MELTA 2",
+        "TWIN-LINKED"
+      ]
+    },
+    {
+      "name": "Siege drills",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "3",
+      "ballisticSkill": "",
+      "weaponSkill": "3+",
+      "strength": "10",
+      "armorPenetration": "-2",
+      "damage": "3",
+      "abilities": [
+        "TWIN-LINKED"
+      ]
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Oath of Moment",
+      "type": "faction",
+      "description": "Oath of Moment",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Annihilator Protocols",
+      "type": "unit",
+      "description": "Melee weapons equipped by models in this unit have the [SUSTAINED HITS 2] ability when targeting MONSTER, VEHICLE or FORTIFICATION units.",
+      "triggerPhase": [
+        "Fight"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": [
+        "MONSTER",
+        "VEHICLE",
+        "FORTIFICATION"
+      ],
+      "effects": null
+    },
+    {
+      "name": "Centurion Assault Launcher",
+      "type": "wargear",
+      "description": "The bearer has the Grenades keyword.",
+      "triggerPhase": [
+        "Keyword"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": {
+        "wounds": null,
+        "toughness": null,
+        "save": null,
+        "invulnerableSave": null,
+        "movement": null
+      }
+    }
+  ],
+  "wargearOptions": [
+    {
+      "description": "Any number of models can each have their twin flamer replaced with 1 twin meltagun.",
+      "pointsCost": 0
+    },
+    {
+      "description": "Any number of models can each have their Centurion bolters replaced with 1 Centurion assault launcher.",
+      "pointsCost": 0
+    }
+  ],
+  "pointsCost": 150,
+  "pointsTiers": [
+    {
+      "models": 3,
+      "points": 150
+    },
+    {
+      "models": 6,
+      "points": 300
+    }
+  ]
+}

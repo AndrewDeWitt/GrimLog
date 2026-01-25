@@ -1,0 +1,118 @@
+{
+  "name": "Sporocyst",
+  "faction": "Tyranids",
+  "subfaction": "",
+  "role": "Monster",
+  "keywords": [
+    "MONSTER",
+    "GREAT DEVOURER",
+    "SPOROCYST",
+    "TYRANIDS"
+  ],
+  "stats": {
+    "movement": "-",
+    "toughness": 10,
+    "save": "3+",
+    "invulnerableSave": "",
+    "wounds": 10,
+    "leadership": 8,
+    "objectiveControl": 0
+  },
+  "composition": "1 Sporocyst",
+  "compositionData": [
+    {
+      "name": "Sporocyst",
+      "role": "regular",
+      "count": 1,
+      "woundsPerModel": 10
+    }
+  ],
+  "unitSize": "1",
+  "leaderRules": "",
+  "leaderAbilities": "",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Sporocyst bio-weapons",
+      "range": "24\"",
+      "type": "Assault 10",
+      "attacks": "10",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "5",
+      "armorPenetration": "-1",
+      "damage": "2",
+      "abilities": []
+    },
+    {
+      "name": "Flensing whips",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "6",
+      "ballisticSkill": "",
+      "weaponSkill": "4+",
+      "strength": "7",
+      "armorPenetration": "-1",
+      "damage": "2",
+      "abilities": []
+    }
+  ],
+  "abilities": [
+    {
+      "name": "DEADLY DEMISE D3",
+      "type": "core",
+      "description": "Deadly Demise D3",
+      "triggerPhase": [
+        "General"
+      ],
+      "triggerSubphase": "",
+      "isReactive": true,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "SYNAPSE",
+      "type": "faction",
+      "description": "Synapse",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "SEED MUCOLIDS",
+      "type": "unit",
+      "description": "Seed Mucolids: Once per turn, in your Shooting phase, when selected to shoot, one unit with this ability can use it instead of making any attacks with its ranged weapons. If it does, you can add one new MUCOLID SPORES unit containing 1 model to your army and set it up anywhere on the battlefield that is wholly within 18\" of this model and more than 9\" horizontally away from all enemy units.",
+      "triggerPhase": [
+        "Shooting"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "HIVE DEFENCES",
+      "type": "unit",
+      "description": "Hive Defences: You can target this model with the Fire Overwatch Stratagem for 0CP, and can do so even if you have already targeted a different unit with that Stratagem this turn. This model can only be targeted with that Stratagem once per turn.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [],
+  "pointsCost": 145,
+  "pointsTiers": [
+    {
+      "models": 1,
+      "points": 145
+    }
+  ]
+}

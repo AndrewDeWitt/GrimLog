@@ -1,0 +1,39 @@
+{
+  "$schema": "../import-schema.json",
+  "_comment": "Template for manual faction data entry. Copy this file and fill in the data.",
+  "faction": {
+    "name": "Faction Name",
+    "keywords": ["FACTION_KEYWORD"],
+    "parentFaction": null,
+    "isDivergent": false
+  },
+  "detachments": [
+    {
+      "name": "Detachment Name",
+      "abilityName": "Detachment Ability Name",
+      "abilityDescription": "Full text of the detachment ability rule.",
+      "stratagems": [
+        {
+          "name": "Stratagem Name",
+          "cpCost": 1,
+          "type": "Battle Tactic",
+          "when": "Your Shooting phase or the Fight phase.",
+          "target": "One FACTION unit from your army.",
+          "effect": "Until the end of the phase, improve the AP of weapons by 1.",
+          "restrictions": null,
+          "keywords": ["FACTION"]
+        }
+      ],
+      "enhancements": [
+        {
+          "name": "Enhancement Name",
+          "pointsCost": 25,
+          "description": "Full text of the enhancement ability.",
+          "restrictions": ["CHARACTER"],
+          "keywords": null
+        }
+      ]
+    }
+  ]
+}
+

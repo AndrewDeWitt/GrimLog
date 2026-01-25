@@ -1,0 +1,207 @@
+{
+  "name": "Wulfen Dreadnought",
+  "faction": "Space Marines",
+  "subfaction": "Space Wolves",
+  "role": "Other",
+  "keywords": [
+    "VEHICLE",
+    "WALKER",
+    "IMPERIUM",
+    "WULFEN",
+    "DREADNOUGHT"
+  ],
+  "stats": {
+    "movement": "9\"",
+    "toughness": 9,
+    "save": "2+",
+    "invulnerableSave": "",
+    "wounds": 8,
+    "leadership": 6,
+    "objectiveControl": 0
+  },
+  "composition": "1 Wulfen Dreadnought",
+  "compositionData": [
+    {
+      "name": "Wulfen Dreadnought",
+      "role": "regular",
+      "count": 1,
+      "woundsPerModel": 8
+    }
+  ],
+  "unitSize": "1",
+  "leaderRules": "",
+  "leaderAbilities": "",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Heavy flamer",
+      "range": "12\"",
+      "type": "Heavy D6",
+      "attacks": "D6",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "5",
+      "armorPenetration": "-1",
+      "damage": "1",
+      "abilities": [
+        "IGNORES COVER",
+        "TORRENT"
+      ]
+    },
+    {
+      "name": "Storm bolter",
+      "range": "24\"",
+      "type": "Rapid Fire 2",
+      "attacks": "2",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "RAPID FIRE 2"
+      ]
+    },
+    {
+      "name": "Fenrisian greataxe \u000e2\b0\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0013strike",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "6",
+      "ballisticSkill": "",
+      "weaponSkill": "3+",
+      "strength": "10",
+      "armorPenetration": "-2",
+      "damage": "D6+1",
+      "abilities": []
+    },
+    {
+      "name": "Fenrisian greataxe \u000e2\b0\u0000\u0000\u0000\u0000\u0000\u0000\u0000\u0013sweep",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "12",
+      "ballisticSkill": "",
+      "weaponSkill": "3+",
+      "strength": "6",
+      "armorPenetration": "-2",
+      "damage": "1",
+      "abilities": []
+    },
+    {
+      "name": "Great wolf claw",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "6",
+      "ballisticSkill": "",
+      "weaponSkill": "3+",
+      "strength": "10",
+      "armorPenetration": "-3",
+      "damage": "3",
+      "abilities": []
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Deadly Demise 1",
+      "type": "core",
+      "description": "Deadly Demise 1",
+      "triggerPhase": [
+        "General"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Feel No Pain 6+",
+      "type": "core",
+      "description": "Feel No Pain 6+: Each time this model loses a wound, roll one D6. On a 6 that wound is not lost.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": true,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Curse of the Wulfen",
+      "type": "faction",
+      "description": "Curse of the Wulfen",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Oath of Moment",
+      "type": "faction",
+      "description": "Oath of Moment",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Bestial Rage",
+      "type": "unit",
+      "description": "Each time an enemy unit is selected to shoot, after that unit has shot, if this model lost one or more wounds as a result of those attacks, this model can make a Bestial Rage move. To do so, roll one D6, adding 2 to the result: this model can be moved a number of inches up to the result, but must finish that move as close as possible to the closest enemy unit (excluding AIRCRAFT). When doing so, this model can be moved within Engagement Range of that enemy unit. Each model can only make one Bestial Rage move per phase.",
+      "triggerPhase": [
+        "Shooting"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": true,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Violent Fury",
+      "type": "unit",
+      "description": "If this model is equipped with two melee weapons, those weapon profiles have the [TWIN-LINKED] ability.",
+      "triggerPhase": [
+        "Fight"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Blizzard Shield",
+      "type": "wargear",
+      "description": "The bearer has a 4+ invulnerable save.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": {
+        "wounds": null,
+        "toughness": null,
+        "save": null,
+        "invulnerableSave": "4+",
+        "movement": null
+      }
+    }
+  ],
+  "wargearOptions": [
+    {
+      "description": "This model’s Fenrisian greataxe or great wolf claw and storm bolter can be replaced with 1 blizzard shield and 1 heavy flamer. If this model is not equipped with a storm bolter, its heavy flamer can be replaced with 1 storm bolter.",
+      "pointsCost": 0
+    }
+  ],
+  "pointsCost": 145,
+  "pointsTiers": [
+    {
+      "models": 1,
+      "points": 145
+    }
+  ]
+}

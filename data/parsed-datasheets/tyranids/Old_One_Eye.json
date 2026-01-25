@@ -1,0 +1,133 @@
+{
+  "name": "Old One Eye",
+  "faction": "Tyranids",
+  "subfaction": "",
+  "role": "Character",
+  "keywords": [
+    "MONSTER",
+    "CHARACTER",
+    "EPIC HERO",
+    "GREAT DEVOURER",
+    "OLD ONE EYE",
+    "TYRANIDS"
+  ],
+  "stats": {
+    "movement": "8\"",
+    "toughness": 9,
+    "save": "2+",
+    "invulnerableSave": "",
+    "wounds": 9,
+    "leadership": 8,
+    "objectiveControl": 3
+  },
+  "composition": "1 Old One Eye – EPIC HERO",
+  "compositionData": [
+    {
+      "name": "Old One Eye",
+      "role": "leader",
+      "count": 1,
+      "woundsPerModel": 9
+    }
+  ],
+  "unitSize": "1",
+  "leaderRules": "Can be attached to Carnifexes",
+  "leaderAbilities": "Alpha Leader: While this model is leading a unit, each time a model in that unit makes an attack, you can re-roll the Hit roll.",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Old One Eye’s claws and talons – strike",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "6",
+      "ballisticSkill": "",
+      "weaponSkill": "3+",
+      "strength": "14",
+      "armorPenetration": "-3",
+      "damage": "D6+1",
+      "abilities": []
+    },
+    {
+      "name": "Old One Eye’s claws and talons – sweep",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "12",
+      "ballisticSkill": "",
+      "weaponSkill": "3+",
+      "strength": "6",
+      "armorPenetration": "-1",
+      "damage": "1",
+      "abilities": []
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Feel No Pain 5+",
+      "type": "core",
+      "description": "Feel No Pain 5+",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": true,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Leader",
+      "type": "core",
+      "description": "Leader",
+      "triggerPhase": [
+        "Keyword"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Synapse",
+      "type": "faction",
+      "description": "Synapse",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Alpha Leader",
+      "type": "leader",
+      "description": "While this model is leading a unit, each time a model in that unit makes an attack, you can re-roll the Hit roll.",
+      "triggerPhase": [
+        "Shooting",
+        "Fight"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Unstoppable Monster",
+      "type": "unit",
+      "description": "At the start of each player’s Command phase, this model regains up to D3 lost wounds.",
+      "triggerPhase": [
+        "Command"
+      ],
+      "triggerSubphase": "Start of Phase",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [],
+  "pointsCost": 150,
+  "pointsTiers": [
+    {
+      "models": 1,
+      "points": 150
+    }
+  ]
+}

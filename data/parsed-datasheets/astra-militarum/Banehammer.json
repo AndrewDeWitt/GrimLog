@@ -1,0 +1,180 @@
+{
+  "name": "Banehammer",
+  "faction": "Astra Militarum",
+  "subfaction": "",
+  "role": "Other",
+  "keywords": [
+    "VEHICLE",
+    "TITANIC",
+    "SMOKE",
+    "IMPERIUM",
+    "TRANSPORT",
+    "BANEHAMMER"
+  ],
+  "stats": {
+    "movement": "12\"",
+    "toughness": 13,
+    "save": "2+",
+    "invulnerableSave": "",
+    "wounds": 24,
+    "leadership": 7,
+    "objectiveControl": 8
+  },
+  "composition": "1 Banehammer",
+  "compositionData": [
+    {
+      "name": "Banehammer",
+      "role": "regular",
+      "count": 1,
+      "woundsPerModel": 24
+    }
+  ],
+  "unitSize": "1",
+  "leaderRules": "",
+  "leaderAbilities": "",
+  "transportCapacity": "This model has a transport capacity of 26 ASTRA MILITARUM INFANTRY models. Each OGRYN model takes up the space of 3 models. It cannot transport ARTILLERY models.",
+  "weapons": [
+    {
+      "name": "Lascannon",
+      "range": "48\"",
+      "type": "Heavy 1",
+      "attacks": "1",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "12",
+      "armorPenetration": "-3",
+      "damage": "D6+1",
+      "abilities": []
+    },
+    {
+      "name": "Tremor cannon",
+      "range": "36\"",
+      "type": "Heavy 2D6+3",
+      "attacks": "2D6+3",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "12",
+      "armorPenetration": "-2",
+      "damage": "3",
+      "abilities": [
+        "BLAST"
+      ]
+    },
+    {
+      "name": "Twin heavy bolter",
+      "range": "36\"",
+      "type": "Heavy 3",
+      "attacks": "3",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "5",
+      "armorPenetration": "-1",
+      "damage": "2",
+      "abilities": [
+        "SUSTAINED HITS 1",
+        "TWIN-LINKED"
+      ]
+    },
+    {
+      "name": "Twin heavy flamer",
+      "range": "12\"",
+      "type": "Heavy D6",
+      "attacks": "D6",
+      "ballisticSkill": "N/A",
+      "weaponSkill": "",
+      "strength": "5",
+      "armorPenetration": "-1",
+      "damage": "1",
+      "abilities": [
+        "IGNORES COVER",
+        "TORRENT",
+        "TWIN-LINKED"
+      ]
+    },
+    {
+      "name": "Armoured tracks",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "6",
+      "ballisticSkill": "",
+      "weaponSkill": "4+",
+      "strength": "8",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": []
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Deadly Demise D6+2",
+      "type": "core",
+      "description": "When this model is destroyed, roll one D6. On a 6, each unit within 6\" suffers D6+2 mortal wounds.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": true,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Firing Deck 6",
+      "type": "core",
+      "description": "Each time this model shoots, up to 6 models embarked within it can also shoot.",
+      "triggerPhase": [
+        "Shooting"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Tremor Quake",
+      "type": "unit",
+      "description": "In your Shooting phase, just after selecting a target for this model’s tremor cannon, the target unit and every other enemy INFANTRY unit within 3\" of that unit must take a Battle-shock test.",
+      "triggerPhase": [
+        "Shooting"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": [
+        "INFANTRY"
+      ],
+      "effects": null
+    },
+    {
+      "name": "Damaged: 1-8 Wounds Remaining",
+      "type": "unit",
+      "description": "While this model has 1-8 wounds remaining, subtract 4 from its Objective Control characteristic and each time this model makes an attack, subtract 1 from the Hit roll.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": true,
+      "requiredKeywords": [],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [
+    {
+      "description": "This model’s 2 twin heavy flamers can be replaced with 2 twin heavy bolters.",
+      "pointsCost": 0
+    },
+    {
+      "description": "This model can be equipped with 2 lascannons and 2 twin heavy bolters",
+      "pointsCost": 0
+    },
+    {
+      "description": "This model can be equipped with 2 lascannons and 2 twin heavy flamers",
+      "pointsCost": 0
+    }
+  ],
+  "pointsCost": 420,
+  "pointsTiers": [
+    {
+      "models": 1,
+      "points": 420
+    }
+  ]
+}

@@ -1,0 +1,209 @@
+{
+  "name": "Wolf Guard Battle Leader",
+  "faction": "Space Marines",
+  "subfaction": "Space Wolves",
+  "role": "Character",
+  "keywords": [
+    "INFANTRY",
+    "CHARACTER",
+    "IMPERIUM",
+    "TACTICUS",
+    "WOLF GUARD",
+    "BATTLE LEADER",
+    "ADEPTUS ASTARTES",
+    "SPACE WOLVES"
+  ],
+  "stats": {
+    "movement": "7\"",
+    "toughness": 4,
+    "save": "3+",
+    "invulnerableSave": "4+",
+    "wounds": 5,
+    "leadership": 6,
+    "objectiveControl": 1
+  },
+  "composition": "1 Wolf Guard Battle Leader",
+  "compositionData": [
+    {
+      "name": "Wolf Guard Battle Leader",
+      "role": "leader",
+      "count": 1,
+      "woundsPerModel": 5
+    }
+  ],
+  "unitSize": "1",
+  "leaderRules": "This model can be attached to the following units: Blood Claws; Grey Hunters; Wolf Guard Headtakers",
+  "leaderAbilities": "Tempered Ferocity: While this model is leading a unit, weapons equipped by models in that unit have the [SUSTAINED HITS 1] ability and, each time a model in that unit makes an attack that targets an enemy unit within 6\", re-roll a Hit roll of 1.",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Master-crafted bolt carbine",
+      "range": "24\"",
+      "type": "Assault 2",
+      "attacks": "2",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "2",
+      "abilities": []
+    },
+    {
+      "name": "Master-crafted heavy bolt pistol",
+      "range": "18\"",
+      "type": "Pistol 1",
+      "attacks": "1",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "-1",
+      "damage": "2",
+      "abilities": []
+    },
+    {
+      "name": "Plasma pistol – standard",
+      "range": "12\"",
+      "type": "Pistol 1",
+      "attacks": "1",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "7",
+      "armorPenetration": "-2",
+      "damage": "1",
+      "abilities": []
+    },
+    {
+      "name": "Plasma pistol – supercharge",
+      "range": "12\"",
+      "type": "Pistol 1",
+      "attacks": "1",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "8",
+      "armorPenetration": "-3",
+      "damage": "2",
+      "abilities": [
+        "HAZARDOUS"
+      ]
+    },
+    {
+      "name": "Master-crafted power weapon",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "2",
+      "ballisticSkill": "",
+      "weaponSkill": "2+",
+      "strength": "5",
+      "armorPenetration": "-2",
+      "damage": "2",
+      "abilities": []
+    },
+    {
+      "name": "Thunder hammer",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "3",
+      "ballisticSkill": "",
+      "weaponSkill": "3+",
+      "strength": "8",
+      "armorPenetration": "-2",
+      "damage": "2",
+      "abilities": [
+        "DEVASTATING WOUNDS"
+      ]
+    }
+  ],
+  "abilities": [
+    {
+      "name": "LEADER",
+      "type": "core",
+      "description": "LEADER (core keyword).",
+      "triggerPhase": [
+        "Keyword"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "OATH OF MOMENT",
+      "type": "faction",
+      "description": "",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Tempered Ferocity",
+      "type": "leader",
+      "description": "While this model is leading a unit, weapons equipped by models in that unit have the [SUSTAINED HITS 1] ability and, each time a model in that unit makes an attack that targets an enemy unit within 6\", re-roll a Hit roll of 1.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Heroic Last Stand",
+      "type": "unit",
+      "description": "If this model is destroyed by a melee attack, if it has not fought this phase, roll one D6: on a 2+, do not remove it from play. The destroyed model can fight after the attacking unit has finished making its attacks, and is then removed from play.",
+      "triggerPhase": [
+        "Fight"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": true,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Storm Shield",
+      "type": "wargear",
+      "description": "The bearer has a Wounds characteristic of 6.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": {
+        "wounds": 6,
+        "toughness": null,
+        "save": null,
+        "invulnerableSave": null,
+        "movement": null
+      }
+    }
+  ],
+  "wargearOptions": [
+    {
+      "description": "Replace master-crafted power weapon with 1 thunder hammer.",
+      "pointsCost": 0
+    },
+    {
+      "description": "Replace storm shield with 1 master-crafted bolt carbine.",
+      "pointsCost": 0
+    },
+    {
+      "description": "Replace storm shield with 1 master-crafted heavy bolt pistol.",
+      "pointsCost": 0
+    },
+    {
+      "description": "Replace storm shield with 1 plasma pistol.",
+      "pointsCost": 0
+    }
+  ],
+  "pointsCost": 65,
+  "pointsTiers": [
+    {
+      "models": 1,
+      "points": 65
+    }
+  ]
+}

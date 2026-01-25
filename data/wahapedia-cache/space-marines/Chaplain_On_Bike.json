@@ -1,0 +1,17 @@
+{
+  "name": "Chaplain On Bike",
+  "url": "https://wahapedia.ru/wh40k10ed/factions/space-marines/Chaplain-On-Bike",
+  "category": "Characters",
+  "faction": "space-marines",
+  "subfaction": "space-wolves",
+  "classification": {
+    "isLegends": false,
+    "isForgeWorld": false,
+    "confidence": "low",
+    "signals": [
+      "hardcoded_fallback"
+    ],
+    "score": 2
+  },
+  "scrapedAt": "2026-01-10T05:17:17.848Z"
+}

@@ -1,0 +1,176 @@
+{
+  "name": "Gladiator Reaper",
+  "faction": "Space Marines",
+  "subfaction": "Space Wolves",
+  "role": "Vehicle",
+  "keywords": [
+    "VEHICLE",
+    "SMOKE",
+    "IMPERIUM",
+    "GLADIATOR REAPER"
+  ],
+  "stats": {
+    "movement": "10\"",
+    "toughness": 10,
+    "save": "3+",
+    "invulnerableSave": "",
+    "wounds": 12,
+    "leadership": 6,
+    "objectiveControl": 3
+  },
+  "composition": "1 Gladiator Reaper",
+  "compositionData": [
+    {
+      "name": "Gladiator Reaper",
+      "role": "regular",
+      "count": 1,
+      "woundsPerModel": 12
+    }
+  ],
+  "unitSize": "1",
+  "leaderRules": "",
+  "leaderAbilities": "",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Icarus rocket pod",
+      "range": "24\"",
+      "type": "D3",
+      "attacks": "D3",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "8",
+      "armorPenetration": "-1",
+      "damage": "2",
+      "abilities": [
+        "ANTI-FLY 2+"
+      ]
+    },
+    {
+      "name": "Ironhail heavy stubber",
+      "range": "36\"",
+      "type": "RAPID FIRE 3",
+      "attacks": "4",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "RAPID FIRE 3"
+      ]
+    },
+    {
+      "name": "Tempest bolter",
+      "range": "24\"",
+      "type": "RAPID FIRE 4",
+      "attacks": "4",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "-1",
+      "damage": "1",
+      "abilities": [
+        "RAPID FIRE 4"
+      ]
+    },
+    {
+      "name": "Twin heavy onslaught gatling cannon",
+      "range": "24\"",
+      "type": "12",
+      "attacks": "12",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "6",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "DEVASTATING WOUNDS",
+        "TWIN-LINKED",
+        "SUSTAINED HITS 2 (when targeting INFANTRY)"
+      ]
+    },
+    {
+      "name": "Armoured hull",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "3",
+      "ballisticSkill": "",
+      "weaponSkill": "4+",
+      "strength": "6",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": []
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Deadly Demise D3",
+      "type": "core",
+      "description": "Deadly Demise D3.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": true,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Oath of Moment",
+      "type": "faction",
+      "description": "Oath of Moment.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Rotating Death",
+      "type": "unit",
+      "description": "This model’s twin heavy onslaught gatling cannon has the [SUSTAINED HITS 2] ability when targeting INFANTRY units.",
+      "triggerPhase": [
+        "Shooting"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": [
+        "INFANTRY"
+      ],
+      "effects": null
+    },
+    {
+      "name": "Damaged",
+      "type": "unit",
+      "description": "While this model has 1-4 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll.",
+      "triggerPhase": [
+        "Shooting",
+        "Fight"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [
+    {
+      "description": "This model can be equipped with 1 ironhail heavy stubber.",
+      "pointsCost": 0
+    },
+    {
+      "description": "This model can be equipped with 1 Icarus rocket pod.",
+      "pointsCost": 0
+    }
+  ],
+  "pointsCost": 160,
+  "pointsTiers": [
+    {
+      "models": 1,
+      "points": 160
+    }
+  ]
+}

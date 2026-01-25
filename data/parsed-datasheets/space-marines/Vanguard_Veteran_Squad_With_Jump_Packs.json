@@ -1,0 +1,229 @@
+{
+  "name": "Vanguard Veteran Squad With Jump Packs",
+  "faction": "Space Marines",
+  "subfaction": "Space Wolves",
+  "role": "Elites",
+  "keywords": [
+    "INFANTRY",
+    "GRENADES",
+    "JUMP PACK",
+    "FLY",
+    "IMPERIUM",
+    "VANGUARD VETERAN SQUAD",
+    "VANGUARD VETERAN SQUAD WITH JUMP PACKS",
+    "DEATHWING",
+    "ADEPTUS ASTARTES"
+  ],
+  "stats": {
+    "movement": "12\"",
+    "toughness": 4,
+    "save": "3+",
+    "invulnerableSave": "",
+    "wounds": 2,
+    "leadership": 6,
+    "objectiveControl": 1
+  },
+  "composition": "1 Vanguard Veteran Sergeant with Jump Pack; 4-9 Vanguard Veterans with Jump Packs",
+  "compositionData": [
+    {
+      "name": "Vanguard Veteran Sergeant with Jump Pack",
+      "role": "leader",
+      "count": 1,
+      "woundsPerModel": 2
+    },
+    {
+      "name": "Vanguard Veteran with Jump Pack",
+      "role": "regular",
+      "count": 4,
+      "woundsPerModel": 2
+    }
+  ],
+  "unitSize": "5-10",
+  "leaderRules": "Can be led by: Captain With Jump Pack; Chaplain With Jump Pack; Kayvaan Shrike; Commander Dante; Brother Corbulo; Captain Tycho; Chaplain Cassius; Gabriel Seth; Imperial Space Marine; Librarian with Jump Pack; Sanguinary Priest With Jump Pack",
+  "leaderAbilities": "",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Bolt pistol",
+      "range": "12\"",
+      "type": "Pistol",
+      "attacks": "1",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": []
+    },
+    {
+      "name": "Grav-pistol",
+      "range": "12\"",
+      "type": "Pistol",
+      "attacks": "1",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "-1",
+      "damage": "1",
+      "abilities": [
+        "ANTI-VEHICLE 2+"
+      ]
+    },
+    {
+      "name": "Hand flamer",
+      "range": "12\"",
+      "type": "Pistol, TORRENT",
+      "attacks": "D6",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "3",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "IGNORES COVER",
+        "TORRENT"
+      ]
+    },
+    {
+      "name": "Inferno pistol",
+      "range": "6\"",
+      "type": "Pistol",
+      "attacks": "1",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "8",
+      "armorPenetration": "-4",
+      "damage": "D3",
+      "abilities": [
+        "MELTA 2"
+      ]
+    },
+    {
+      "name": "Plasma pistol – standard",
+      "range": "12\"",
+      "type": "Pistol",
+      "attacks": "1",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "7",
+      "armorPenetration": "-2",
+      "damage": "1",
+      "abilities": []
+    },
+    {
+      "name": "Plasma pistol – supercharge",
+      "range": "12\"",
+      "type": "Pistol",
+      "attacks": "1",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "8",
+      "armorPenetration": "-3",
+      "damage": "2",
+      "abilities": [
+        "HAZARDOUS"
+      ]
+    },
+    {
+      "name": "Vanguard Veteran weapon",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "4",
+      "ballisticSkill": "",
+      "weaponSkill": "3+",
+      "strength": "5",
+      "armorPenetration": "-1",
+      "damage": "1",
+      "abilities": []
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Deep Strike",
+      "type": "core",
+      "description": "Deep Strike",
+      "triggerPhase": [
+        "Deployment"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Oath of Moment",
+      "type": "faction",
+      "description": "Oath of Moment",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Vanguard Assault",
+      "type": "unit",
+      "description": "Each time this unit ends a Charge move, until the end of the turn, melee weapons equipped by models in this unit have the [LETHAL HITS] ability.",
+      "triggerPhase": [
+        "Charge"
+      ],
+      "triggerSubphase": "End of Phase",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Storm Shield",
+      "type": "wargear",
+      "description": "The bearer has a 4+ invulnerable save.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": {
+        "wounds": null,
+        "toughness": null,
+        "save": null,
+        "invulnerableSave": "4+",
+        "movement": null
+      }
+    }
+  ],
+  "wargearOptions": [
+    {
+      "description": "Any number of models can each have their bolt pistol replaced with 1 storm shield",
+      "pointsCost": 0
+    },
+    {
+      "description": "Any number of models can each have their bolt pistol replaced with 1 grav-pistol",
+      "pointsCost": 0
+    },
+    {
+      "description": "Any number of models can each have their bolt pistol replaced with 1 hand flamer",
+      "pointsCost": 0
+    },
+    {
+      "description": "Any number of models can each have their bolt pistol replaced with 1 inferno pistol",
+      "pointsCost": 0
+    },
+    {
+      "description": "Any number of models can each have their bolt pistol replaced with 1 plasma pistol",
+      "pointsCost": 0
+    }
+  ],
+  "pointsCost": 95,
+  "pointsTiers": [
+    {
+      "models": 5,
+      "points": 95
+    },
+    {
+      "models": 10,
+      "points": 190
+    }
+  ]
+}

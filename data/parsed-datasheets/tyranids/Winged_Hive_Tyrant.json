@@ -1,0 +1,207 @@
+{
+  "name": "Winged Hive Tyrant",
+  "faction": "Tyranids",
+  "subfaction": "",
+  "role": "Character",
+  "keywords": [
+    "MONSTER",
+    "CHARACTER",
+    "PSYKER",
+    "FLY",
+    "GREAT DEVOURER",
+    "SYNAPSE",
+    "VANGUARD INVADER",
+    "HIVE TYRANT",
+    "WINGED HIVE TYRANT",
+    "TYRANIDS"
+  ],
+  "stats": {
+    "movement": "12\"",
+    "toughness": 9,
+    "save": "2+",
+    "invulnerableSave": "4+",
+    "wounds": 10,
+    "leadership": 7,
+    "objectiveControl": 3
+  },
+  "composition": "1 Winged Hive Tyrant",
+  "compositionData": [
+    {
+      "name": "Winged Hive Tyrant",
+      "role": "leader",
+      "count": 1,
+      "woundsPerModel": 10
+    }
+  ],
+  "unitSize": "1",
+  "leaderRules": "",
+  "leaderAbilities": "",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Heavy venom cannon [blast]",
+      "range": "36\"",
+      "type": "Heavy D3",
+      "attacks": "D3",
+      "ballisticSkill": "2+",
+      "weaponSkill": "",
+      "strength": "9",
+      "armorPenetration": "-2",
+      "damage": "3",
+      "abilities": [
+        "BLAST"
+      ]
+    },
+    {
+      "name": "Stranglethorn cannon [blast]",
+      "range": "36\"",
+      "type": "Heavy D6",
+      "attacks": "D6",
+      "ballisticSkill": "2+",
+      "weaponSkill": "",
+      "strength": "12",
+      "armorPenetration": "-1",
+      "damage": "2",
+      "abilities": [
+        "BLAST"
+      ]
+    },
+    {
+      "name": "Monstrous bonesword and lash whip [twin-linked]",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "6",
+      "ballisticSkill": "",
+      "weaponSkill": "2+",
+      "strength": "9",
+      "armorPenetration": "-2",
+      "damage": "3",
+      "abilities": [
+        "TWIN-LINKED"
+      ]
+    },
+    {
+      "name": "Monstrous scything talons [extra attacks]",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "4",
+      "ballisticSkill": "",
+      "weaponSkill": "2+",
+      "strength": "7",
+      "armorPenetration": "-2",
+      "damage": "2",
+      "abilities": [
+        "EXTRA ATTACKS"
+      ]
+    },
+    {
+      "name": "Tyrant talons",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "5",
+      "ballisticSkill": "",
+      "weaponSkill": "2+",
+      "strength": "7",
+      "armorPenetration": "-2",
+      "damage": "2",
+      "abilities": []
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Deadly Demise D3",
+      "type": "core",
+      "description": "Deadly Demise D3",
+      "triggerPhase": [
+        "General"
+      ],
+      "triggerSubphase": "",
+      "isReactive": true,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Deep Strike",
+      "type": "core",
+      "description": "Deep Strike",
+      "triggerPhase": [
+        "Deployment"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Shadow in the Warp",
+      "type": "faction",
+      "description": "Shadow in the Warp",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Synapse",
+      "type": "faction",
+      "description": "Synapse",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Will of the Hive Mind",
+      "type": "unit",
+      "description": "Once per battle round, one model from your army with this ability can use it when a friendly TYRANIDS unit within 12\" of that model is targeted with a Stratagem. If it does, reduce the CP cost of that usage of that Stratagem by 1CP.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": [
+        "TYRANIDS"
+      ],
+      "effects": null
+    },
+    {
+      "name": "Paroxysm (Psychic)",
+      "type": "unit",
+      "description": "At the start of the Fight phase, you can select one enemy unit within 12\" of and visible to this model and roll one D6: on a 1, this PSYKER suffers D3 mortal wounds; on a 2+, until the end of the phase, subtract 1 from the Attacks characteristic of weapons equipped by models in that unit.",
+      "triggerPhase": [
+        "Fight"
+      ],
+      "triggerSubphase": "Start of Phase",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [
+    {
+      "description": "This model’s monstrous bonesword and lash whip can be replaced with one heavy venom cannon",
+      "pointsCost": 0
+    },
+    {
+      "description": "This model’s monstrous bonesword and lash whip can be replaced with one stranglethorn cannon",
+      "pointsCost": 0
+    },
+    {
+      "description": "This model’s monstrous bonesword and lash whip can be replaced with one monstrous scything talons",
+      "pointsCost": 0
+    }
+  ],
+  "pointsCost": 170,
+  "pointsTiers": [
+    {
+      "models": 1,
+      "points": 170
+    }
+  ]
+}

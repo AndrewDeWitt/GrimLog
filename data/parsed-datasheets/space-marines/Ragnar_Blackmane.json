@@ -1,0 +1,130 @@
+{
+  "name": "Ragnar Blackmane",
+  "faction": "Space Marines",
+  "subfaction": "Space Wolves",
+  "role": "Character",
+  "keywords": [
+    "INFANTRY",
+    "CHARACTER",
+    "EPIC HERO",
+    "IMPERIUM",
+    "GRENADES",
+    "TACTICUS",
+    "CAPTAIN",
+    "RAGNAR BLACKMANE",
+    "ADEPTUS ASTARTES",
+    "SPACE WOLVES"
+  ],
+  "stats": {
+    "movement": "7\"",
+    "toughness": 4,
+    "save": "3+",
+    "invulnerableSave": "4+",
+    "wounds": 5,
+    "leadership": 6,
+    "objectiveControl": 1
+  },
+  "composition": "1 Ragnar Blackmane \t6 EPIC HERO",
+  "compositionData": [
+    {
+      "name": "Ragnar Blackmane",
+      "role": "leader",
+      "count": 1,
+      "woundsPerModel": 5
+    }
+  ],
+  "unitSize": "1",
+  "leaderRules": "This model can be attached to Blood Claws and Wolf Guard Headtakers.",
+  "leaderAbilities": "While this model is leading a BLOOD CLAWS unit, each time a model in that unit makes a melee attack, you can re-roll the Wound roll. While this model is leading a WOLF GUARD HEADTAKERS unit, that unit is eligible to declare a charge in a turn in which it Advanced.",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Bolt pistol",
+      "range": "12\"",
+      "type": "Pistol 1",
+      "attacks": "1",
+      "ballisticSkill": "2+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": []
+    },
+    {
+      "name": "Frostfang",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "8",
+      "ballisticSkill": "",
+      "weaponSkill": "2+",
+      "strength": "6",
+      "armorPenetration": "-3",
+      "damage": "2",
+      "abilities": [
+        "SUSTAINED HITS 1"
+      ]
+    }
+  ],
+  "abilities": [
+    {
+      "name": "LEADER",
+      "type": "core",
+      "description": "This model is a Leader.",
+      "triggerPhase": [
+        "Keyword"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "OATH OF MOMENT",
+      "type": "faction",
+      "description": "",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "WAR HOWL",
+      "type": "leader",
+      "description": "While this model is leading a BLOOD CLAWS unit, each time a model in that unit makes a melee attack, you can re-roll the Wound roll. While this model is leading a WOLF GUARD HEADTAKERS unit, that unit is eligible to declare a charge in a turn in which it Advanced.",
+      "triggerPhase": [
+        "Fight",
+        "Charge"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [
+        "BLOOD CLAWS",
+        "WOLF GUARD HEADTAKERS"
+      ],
+      "effects": null
+    },
+    {
+      "name": "BATTLE-LUST",
+      "type": "unit",
+      "description": "Each time this model ends a Charge move, until the end of the turn, add 2 to the Attacks characteristic of this model\u0002s Frostfang weapon.",
+      "triggerPhase": [
+        "Charge"
+      ],
+      "triggerSubphase": "End of Phase",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [],
+  "pointsCost": 100,
+  "pointsTiers": [
+    {
+      "models": 1,
+      "points": 100
+    }
+  ]
+}

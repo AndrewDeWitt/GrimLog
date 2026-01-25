@@ -1,0 +1,258 @@
+{
+  "name": "Intercessor Squad",
+  "faction": "Space Marines",
+  "subfaction": "Space Wolves",
+  "role": "Battleline",
+  "keywords": [
+    "INFANTRY",
+    "BATTLELINE",
+    "GRENADES",
+    "IMPERIUM",
+    "TACTICUS",
+    "INTERCESSOR SQUAD",
+    "ADEPTUS ASTARTES"
+  ],
+  "stats": {
+    "movement": "6\"",
+    "toughness": 4,
+    "save": "3+",
+    "invulnerableSave": "",
+    "wounds": 2,
+    "leadership": 6,
+    "objectiveControl": 2
+  },
+  "composition": "1 Intercessor Sergeant; 4-9 Intercessors",
+  "compositionData": [
+    {
+      "name": "Intercessor Sergeant",
+      "role": "leader",
+      "count": 1,
+      "woundsPerModel": 2
+    },
+    {
+      "name": "Intercessor",
+      "role": "regular",
+      "count": 4,
+      "woundsPerModel": 2
+    }
+  ],
+  "unitSize": "1 Intercessor Sergeant, 4-9 Intercessors",
+  "leaderRules": "This unit can be led by the following units: Adrax Agatone; Ancient; Apothecary; Captain; Chaplain; Chief Librarian Tigurius; Judiciar; Kor’sarro Khan; Librarian; Lieutenant; Lieutenant Titus; Marneus Calgar; Techmarine; Uriel Ventris; Inquisitor; Inquisitor Coteaz; Inquisitor Draxus; Inquisitor Greyfax; Castellan; Chaplain Grimaldus; Emperor’s Champion; High Marshal Helbrecht; Marshal; Blood Angels Captain; Sanguinary Priest; Asmodai; Azrael; Ezekiel; Lazarus; Brother Corbulo; Captain Tycho; Gabriel Seth; Inquisitor Eisenhorn; Inquisitor In Terminator Armour; Primaris Company Champion.",
+  "leaderAbilities": "",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Astartes grenade launcher – frag",
+      "range": "24\"",
+      "type": "Blast D3",
+      "attacks": "D3",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "BLAST"
+      ]
+    },
+    {
+      "name": "Astartes grenade launcher – krak",
+      "range": "24\"",
+      "type": "1",
+      "attacks": "1",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "9",
+      "armorPenetration": "-2",
+      "damage": "D3",
+      "abilities": []
+    },
+    {
+      "name": "Bolt pistol",
+      "range": "12\"",
+      "type": "Pistol 1",
+      "attacks": "1",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "PISTOL"
+      ]
+    },
+    {
+      "name": "Bolt rifle",
+      "range": "24\"",
+      "type": "Assault 2, Heavy",
+      "attacks": "2",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "-1",
+      "damage": "1",
+      "abilities": [
+        "ASSAULT",
+        "HEAVY"
+      ]
+    },
+    {
+      "name": "Hand flamer",
+      "range": "12\"",
+      "type": "Pistol D6, Torrent",
+      "attacks": "D6",
+      "ballisticSkill": "N/A",
+      "weaponSkill": "",
+      "strength": "3",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "IGNORES COVER",
+        "PISTOL",
+        "TORRENT"
+      ]
+    },
+    {
+      "name": "Plasma pistol – standard",
+      "range": "12\"",
+      "type": "Pistol 1",
+      "attacks": "1",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "7",
+      "armorPenetration": "-2",
+      "damage": "1",
+      "abilities": [
+        "PISTOL"
+      ]
+    },
+    {
+      "name": "Plasma pistol – supercharge",
+      "range": "12\"",
+      "type": "Pistol 1",
+      "attacks": "1",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "8",
+      "armorPenetration": "-3",
+      "damage": "2",
+      "abilities": [
+        "HAZARDOUS",
+        "PISTOL"
+      ]
+    },
+    {
+      "name": "Astartes chainsword",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "5",
+      "ballisticSkill": "",
+      "weaponSkill": "3+",
+      "strength": "4",
+      "armorPenetration": "-1",
+      "damage": "1",
+      "abilities": []
+    },
+    {
+      "name": "Close combat weapon",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "3",
+      "ballisticSkill": "",
+      "weaponSkill": "3+",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": []
+    },
+    {
+      "name": "Power fist",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "3",
+      "ballisticSkill": "",
+      "weaponSkill": "3+",
+      "strength": "8",
+      "armorPenetration": "-2",
+      "damage": "2",
+      "abilities": []
+    },
+    {
+      "name": "Power weapon",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "4",
+      "ballisticSkill": "",
+      "weaponSkill": "3+",
+      "strength": "5",
+      "armorPenetration": "-2",
+      "damage": "1",
+      "abilities": []
+    },
+    {
+      "name": "Thunder hammer",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "3",
+      "ballisticSkill": "",
+      "weaponSkill": "4+",
+      "strength": "8",
+      "armorPenetration": "-2",
+      "damage": "2",
+      "abilities": [
+        "DEVASTATING WOUNDS"
+      ]
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Oath of Moment — Objective Secured",
+      "type": "faction",
+      "description": "Objective Secured: If you control an objective marker at the end of your Command phase and this unit is within range of that objective marker, that objective marker remains under your control, even if you have no models within range of it, until your opponent controls it at the start or end of any turn.",
+      "triggerPhase": [
+        "Command"
+      ],
+      "triggerSubphase": "End of Phase",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Oath of Moment — Target Elimination",
+      "type": "faction",
+      "description": "Target Elimination: Each time this unit is selected to shoot, it can use this ability. If it does, until the end of the phase, add 2 to the Attacks characteristic of bolt rifles equipped by models in this unit and you can only select one enemy unit as the target of all of this unit’s attacks.",
+      "triggerPhase": [
+        "Shooting"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [
+    {
+      "description": "The Intercessor Sergeant’s bolt rifle can be replaced with one of the following: 1 Astartes chainsword; 1 hand flamer; 1 plasma pistol; 1 power weapon.",
+      "pointsCost": 0
+    },
+    {
+      "description": "The Intercessor Sergeant’s close combat weapon can be replaced with one of the following: 1 Astartes chainsword; 1 power fist; 1 power weapon; 1 thunder hammer.",
+      "pointsCost": 0
+    },
+    {
+      "description": "For every 5 models in this unit, 1 model equipped with a bolt rifle can be equipped with 1 Astartes grenade launcher.",
+      "pointsCost": 0
+    }
+  ],
+  "pointsCost": 80,
+  "pointsTiers": [
+    {
+      "models": 5,
+      "points": 80
+    },
+    {
+      "models": 10,
+      "points": 160
+    }
+  ]
+}

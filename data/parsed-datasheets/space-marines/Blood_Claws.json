@@ -1,0 +1,160 @@
+{
+  "name": "Blood Claws",
+  "faction": "Space Marines",
+  "subfaction": "Space Wolves",
+  "role": "Battleline",
+  "keywords": [
+    "INFANTRY",
+    "BATTLELINE",
+    "GRENADES",
+    "IMPERIUM",
+    "TACTICUS",
+    "BLOOD CLAWS",
+    "ADEPTUS ASTARTES",
+    "SPACE WOLVES"
+  ],
+  "stats": {
+    "movement": "7\"",
+    "toughness": 4,
+    "save": "3+",
+    "invulnerableSave": "",
+    "wounds": 2,
+    "leadership": 6,
+    "objectiveControl": 2
+  },
+  "composition": "1 Blood Claw Pack Leader, 9-19 Blood Claws",
+  "compositionData": [
+    {
+      "name": "Blood Claw Pack Leader",
+      "role": "leader",
+      "count": 1,
+      "woundsPerModel": 2
+    },
+    {
+      "name": "Blood Claw",
+      "role": "regular",
+      "count": 9,
+      "woundsPerModel": 2
+    }
+  ],
+  "unitSize": "10-20",
+  "leaderRules": "This unit can be led by the following units: Inquisitor, Inquisitor Coteaz, Inquisitor Draxus, Inquisitor Greyfax, Iron Priest, Njal Stormcaller, Ragnar Blackmane, Ulrik The Slayer, Wolf Guard Battle Leader, Wolf Priest, Inquisitor Eisenhorn, Inquisitor In Terminator Armour, Inquisitor Ostromandeus, Krom Dragongaze, Lukas The Trickster, Wolf Guard Pack Leader, Wolf Guard Pack Leader In Terminator Armour.",
+  "leaderAbilities": "",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Bolt pistol",
+      "range": "12\"",
+      "type": "Pistol",
+      "attacks": "1",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "PISTOL"
+      ]
+    },
+    {
+      "name": "Plasma pistol – standard",
+      "range": "12\"",
+      "type": "Pistol",
+      "attacks": "1",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "7",
+      "armorPenetration": "-2",
+      "damage": "1",
+      "abilities": [
+        "PISTOL"
+      ]
+    },
+    {
+      "name": "Plasma pistol – supercharge",
+      "range": "12\"",
+      "type": "Pistol",
+      "attacks": "1",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "8",
+      "armorPenetration": "-3",
+      "damage": "2",
+      "abilities": [
+        "PISTOL",
+        "HAZARDOUS"
+      ]
+    },
+    {
+      "name": "Astartes chainsword",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "4",
+      "ballisticSkill": "",
+      "weaponSkill": "3+",
+      "strength": "4",
+      "armorPenetration": "-1",
+      "damage": "1",
+      "abilities": []
+    },
+    {
+      "name": "Power weapon",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "4",
+      "ballisticSkill": "",
+      "weaponSkill": "3+",
+      "strength": "5",
+      "armorPenetration": "-2",
+      "damage": "1",
+      "abilities": []
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Oath of Moment",
+      "type": "faction",
+      "description": "If your Army Faction is Adeptus Astartes, at the start of your Command phase, you can select one unit from your opponent’s army. Until the start of your next Command phase, each time a model from your army with this ability makes an attack that targets that unit, you can re-roll the Hit roll.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Berserk Charge",
+      "type": "unit",
+      "description": "This unit is eligible to declare a charge in a turn in which it Advanced.",
+      "triggerPhase": [
+        "Charge"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [
+    {
+      "description": "The Blood Claw Pack Leader’s bolt pistol can be replaced with 1 plasma pistol.",
+      "pointsCost": 0
+    },
+    {
+      "description": "The Blood Claw Pack Leader’s Astartes chainsword can be replaced with 1 power weapon.",
+      "pointsCost": 0
+    }
+  ],
+  "pointsCost": 135,
+  "pointsTiers": [
+    {
+      "models": 10,
+      "points": 135
+    },
+    {
+      "models": 20,
+      "points": 285
+    }
+  ]
+}

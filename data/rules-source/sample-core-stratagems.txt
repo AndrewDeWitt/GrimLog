@@ -1,0 +1,83 @@
+# Sample Core Stratagems for Testing
+# This file contains a few example stratagems to test the Strategic Assistant
+
+FIRE OVERWATCH (2 CP)
+Category: Battle Tactic
+When: Opponent's Movement or Charge phase - After enemy unit declares charge
+Target: One unit from your army that has been declared as a target of that charge
+Effect: That unit can fire Overwatch. Each time a model in that unit makes a ranged attack, an unmodified Hit roll of 6 scores a Critical Hit.
+Keywords: Any unit
+Restriction: once_per_turn
+
+COUNTER-OFFENSIVE (2 CP)
+Category: Battle Tactic
+When: Fight phase - After an enemy unit has fought
+Target: One unit from your army that is within Engagement Range of one or more enemy units and has not yet been selected to fight this phase
+Effect: That unit can fight next, before any other units that have not yet fought this phase.
+Keywords: Any unit
+Restriction: once_per_turn
+
+HEROIC INTERVENTION (1 CP)
+Category: Battle Tactic
+When: Charge phase - After an enemy unit ends a Charge move
+Target: One CHARACTER unit from your army that is within 6" of that enemy unit and not already within Engagement Range
+Effect: That CHARACTER unit can make a Heroic Intervention move of up to 6" towards that enemy unit.
+Keywords: CHARACTER
+Restriction: none
+
+INSANE BRAVERY (1 CP)
+Category: Epic Deed
+When: Command phase - Start of phase
+Target: One BATTLE-SHOCKED unit from your army
+Effect: That unit is no longer BATTLE-SHOCKED.
+Keywords: Any unit
+Restriction: none
+
+COMMAND RE-ROLL (1 CP)
+Category: Strategic Ploy
+When: Any phase - Before or after making a single dice roll
+Target: One unit from your army
+Effect: You can re-roll one Hit roll, one Wound roll, one Damage roll, one saving throw, one Advance roll or one Charge roll.
+Keywords: Any unit
+Restriction: none
+
+EMERGENCY DISEMBARKATION (1 CP)
+Category: Strategic Ploy
+When: Any phase - When a TRANSPORT from your army is destroyed
+Target: Units embarked within that TRANSPORT
+Effect: Set up each unit wholly within 6" of the destroyed TRANSPORT and not within Engagement Range of enemy units. Each model in those units must take a Dangerous Terrain test (roll one D6: on a 1, that model is destroyed).
+Keywords: TRANSPORT
+Restriction: none
+
+GO TO GROUND (1 CP)
+Category: Battle Tactic
+When: Opponent's Shooting phase - Start of phase
+Target: One INFANTRY unit from your army
+Effect: Until the end of the phase, models in that unit have the Benefit of Cover against ranged attacks. In addition, that unit is Battle-shocked until the end of your next Command phase.
+Keywords: INFANTRY
+Restriction: once_per_turn
+
+RAPID INGRESS (1 CP)
+Category: Strategic Ploy
+When: Your Movement phase or Opponent's Movement phase - End of phase
+Target: One INFANTRY unit from your army that is in Reserves
+Effect: Set up that unit anywhere on the battlefield that is more than 9" from all enemy models.
+Keywords: INFANTRY
+Restriction: once_per_turn
+
+SMOKESCREEN (1 CP)
+Category: Battle Tactic
+When: Opponent's Shooting phase - After an enemy unit has selected targets
+Target: One VEHICLE unit from your army that was selected as a target
+Effect: Until the end of the phase, models in that unit have the Benefit of Cover against ranged attacks.
+Keywords: VEHICLE
+Restriction: once_per_turn
+
+TANK SHOCK (1 CP)
+Category: Strategic Ploy
+When: Your Charge phase - Start of phase
+Target: One VEHICLE unit from your army
+Effect: Until the end of the phase, after that unit ends a Charge move, select one enemy unit within Engagement Range and roll one D6 for each model in that enemy unit. For each 5+, that enemy unit suffers 1 mortal wound.
+Keywords: VEHICLE
+Restriction: none
+

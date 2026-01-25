@@ -1,0 +1,236 @@
+{
+  "faction": {
+    "name": "Deathwatch",
+    "keywords": [
+      "DEATHWATCH",
+      "ADEPTUS ASTARTES"
+    ],
+    "parentFaction": "Space Marines"
+  },
+  "armyRules": [
+    {
+      "name": "Oath of Moment",
+      "description": "If your Army Faction is ADEPTUS ASTARTES, at the start of your Command phase, select one unit from your opponent’s army. Until the start of your next Command phase, that enemy unit is your Oath of Moment target. Each time a model with this ability makes an attack that targets your Oath of Moment target:\n• You can re-roll the Hit roll.\n• If you are using a Codex: Space Marines Detachment and your army does not include one or more units with the BLACK TEMPLARS, BLOOD ANGELS, DARK ANGELS, DEATHWATCH or SPACE WOLVES keywords, add 1 to the Wound roll as well.",
+      "flavorText": "In battle, Space Marines swear mighty oaths to destroy the enemies of the Emperor and uphold the honour of their Chapter, and such vows are sacrosanct. When the Angels of Death strike, they do so with the precision of a surgeon and the force of a thunderbolt. Experience and strategic expertise help them to read the shifting shape of the battle with post-human speed and clarity, directing their wrath towards one priority target after another. Command assets are annihilated, leaving the enemy reeling leaderless. Heavy armour, potent artillery and the vaunted elites of the foe’s forces are laid waste with horrifying speed, until the Emperor’s Angels of Death stand victorious over a field of smouldering wreckage and bolt-riddled corpses, and honour is finally satisfied."
+    },
+    {
+      "name": "Deathwatch",
+      "description": "• Your army can include ADEPTUS ASTARTES DEATHWATCH units, but it cannot include any ADEPTUS ASTARTES units drawn from any other Chapter.\n• With the exception of KILL TEAM CASSIUS (see Legends: Agents of the Imperium), your army cannot include any AGENTS OF THE IMPERIUM DEATHWATCH units.\n• Your army cannot include any of the following units: ASSAULT SQUAD; ASSAULT SQUAD WITH JUMP PACKS; ATTACK BIKE SQUAD; DEVASTATOR SQUAD; LAND SPEEDER STORM; RELIC TERMINATOR SQUAD; SCOUT BIKE SQUAD; SCOUT SQUAD; SCOUT SNIPER SQUAD; TACTICAL SQUAD; TERMINATOR ASSAULT SQUAD; TERMINATOR SQUAD."
+    }
+  ],
+  "detachments": [
+    {
+      "name": "Black Spear Task Force",
+      "abilityName": "Mission Tactics",
+      "abilityDescription": "At the start of your Command phase, you can select one of the Mission Tactics listed below. Until the start of your next Command phase, that Mission Tactic is active and its effects apply to all units from your army with this ability. Each Mission Tactic can only be selected once per battle.FUROR TACTICS\nWhile this Mission Tactic is active, weapons equipped by ADEPTUS ASTARTES units from your army have the [SUSTAINED HITS 1] ability.\nMALLEUS TACTICS\nWhile this Mission Tactic is active, weapons equipped by ADEPTUS ASTARTES units from your army have the [LETHAL HITS] ability.\nPURGATUS TACTICS\nWhile this Mission Tactic is active, each time an ADEPTUS ASTARTES unit from your army makes an attack, if a Critical Hit is scored, that attack has the [PRECISION] ability.",
+      "abilityFlavorText": "Thousands of years of collated strategic data and hard-won combat experience have provided the Deathwatch with the ultimate battlefield tactics to combat almost any foe.",
+      "stratagems": [
+        {
+          "name": "ARMOUR OF CONTEMPT",
+          "cpCost": 1,
+          "type": "Battle Tactic",
+          "when": "Your opponent’s Shooting phase or the Fight phase, just after an enemy unit has selected its targets.",
+          "target": "s.TARGET: One ADEPTUS ASTARTES unit from your army that was selected as the target of one or more of the attacking unit’s attacks.",
+          "effect": "Until the attacking unit has finished making its attacks, each time an attack targets your unit, worsen the Armour Penetration characteristic of that attack by 1.",
+          "restrictions": null,
+          "triggerPhase": [
+            "Shooting",
+            "Fight"
+          ],
+          "isReactive": true
+        },
+        {
+          "name": "ADAPTIVE TACTICS",
+          "cpCost": 1,
+          "type": "Strategic Ploy",
+          "when": "Your Command phase.",
+          "target": "Up to two KILL TEAM units from your army, or one other ADEPTUS ASTARTES unit from your army.",
+          "effect": "For each unit targeted, select Furor Tactics, Malleus Tactics or Purgatus Tactics. Until the start of your next Command phase, that Mission Tactic is active for that unit instead of any Mission Tactic that is active for your army.",
+          "restrictions": null,
+          "triggerPhase": [
+            "Command"
+          ],
+          "isReactive": false
+        },
+        {
+          "name": "HELLFIRE ROUNDS",
+          "cpCost": 1,
+          "type": "Wargear",
+          "when": "Your Shooting phase.",
+          "target": "One KILL TEAM unit from your army that has not been selected to shoot this phase.",
+          "effect": "Until the end of the phase, ranged weapons (excluding Devastating Wounds weapons) equipped by models in your unit have the [ANTI-INFANTRY 2+] and [ANTI-MONSTER 5+] abilities.",
+          "restrictions": "You cannot select any units that have already been targeted with either the Kraken Rounds or Dragonfire Rounds Stratagems this phase.",
+          "triggerPhase": [
+            "Shooting"
+          ],
+          "isReactive": false
+        },
+        {
+          "name": "KRAKEN ROUNDS",
+          "cpCost": 1,
+          "type": "Wargear",
+          "when": "Your Shooting phase.",
+          "target": "One KILL TEAM unit from your army that has not been selected to shoot this phase.",
+          "effect": "Until the end of the phase, improve the Armour Penetration characteristic of ranged weapons equipped by models in your unit by 1 and improve the Range characteristic of those weapons by 6\".",
+          "restrictions": "You cannot select any units that have already been targeted with either the Dragonfire Rounds or Hellfire Rounds Stratagems this phase.",
+          "triggerPhase": [
+            "Shooting"
+          ],
+          "isReactive": false
+        },
+        {
+          "name": "DRAGONFIRE ROUNDS",
+          "cpCost": 1,
+          "type": "Wargear",
+          "when": "Your Shooting phase.",
+          "target": "One KILL TEAM unit from your army that has not been selected to shoot this phase.",
+          "effect": "Until the end of the phase, ranged weapons equipped by models in your unit have the [ASSAULT] and [IGNORES COVER] abilities.",
+          "restrictions": "You cannot select any units that have already been targeted with either the Kraken Rounds or Hellfire Rounds Stratagems this phase.",
+          "triggerPhase": [
+            "Shooting"
+          ],
+          "isReactive": false
+        },
+        {
+          "name": "SITE-TO-SITE TELEPORTATION",
+          "cpCost": 1,
+          "type": "Strategic Ploy",
+          "when": "End of your opponent’s Fight phase.",
+          "target": "Up to two KILL TEAM units from your army, or one other ADEPTUS ASTARTES INFANTRY unit from your army, if those units are not within Engagement Range of one or more enemy units.",
+          "effect": "Remove those units from the battlefield and place them into Strategic Reserves. Until the end of your next Movement phase, models in those units that do not have the Deep Strike ability have the Deep Strike ability.",
+          "restrictions": null,
+          "triggerPhase": [
+            "Fight"
+          ],
+          "isReactive": true
+        }
+      ],
+      "enhancements": []
+    },
+    {
+      "name": "Shadowmark Talon",
+      "abilityName": "Masters of Shadow",
+      "abilityDescription": "Each time a ranged attack targets an ADEPTUS ASTARTES unit from your army, unless the attacking model is within 12\", subtract 1 from the Hit roll and the target has the Benefit of Cover against that attack.",
+      "abilityFlavorText": "The Raven Guard are renowned for their uncanny ability to move unseen, cloaking themselves in darkness as they close in upon their prey.",
+      "stratagems": [
+        {
+          "name": "ARMOUR OF CONTEMPT",
+          "cpCost": 1,
+          "type": "Battle Tactic",
+          "when": "Your opponent’s Shooting phase or the Fight phase, just after an enemy unit has selected its targets.",
+          "target": "s.TARGET: One ADEPTUS ASTARTES unit from your army that was selected as the target of one or more of the attacking unit’s attacks.",
+          "effect": "Until the attacking unit has finished making its attacks, each time an attack targets your unit, worsen the Armour Penetration characteristic of that attack by 1.",
+          "restrictions": null,
+          "triggerPhase": [
+            "Shooting",
+            "Fight"
+          ],
+          "isReactive": true
+        },
+        {
+          "name": "LAY LOW THE TYRANTS",
+          "cpCost": 1,
+          "type": "Battle Tactic",
+          "when": "Fight phase.",
+          "target": "One ADEPTUS ASTARTES INFANTRY unit from your army that has not been selected to fight this phase.",
+          "effect": "Until the end of the phase, melee weapons equipped by models in your unit have the [PRECISION] ability.",
+          "restrictions": null,
+          "triggerPhase": [
+            "Fight"
+          ],
+          "isReactive": false
+        },
+        {
+          "name": "FEINT AND THRUST",
+          "cpCost": 1,
+          "type": "Strategic Ploy",
+          "when": "Your Movement phase.",
+          "target": "One ADEPTUS ASTARTES unit from your army.",
+          "effect": "Until the end of the turn, your unit is eligible to shoot and declare a charge in a turn in which it Fell Back. If it is a PHOBOS or SCOUT SQUAD unit, it is also eligible to shoot and declare a charge in a turn in which it Advanced.",
+          "restrictions": null,
+          "triggerPhase": [
+            "Movement"
+          ],
+          "isReactive": false
+        },
+        {
+          "name": "STUNNING FUSILLADE",
+          "cpCost": 1,
+          "type": "Battle Tactic",
+          "when": "Your Shooting phase.",
+          "target": "One ADEPTUS ASTARTES INFANTRY unit from your army that has not been selected to shoot this phase.",
+          "effect": "Until the end of the phase, each time a model in your unit makes a ranged attack that targets an enemy unit that is more than 12\" away, improve the Ballistic Skill and Armour Penetration characteristics of that attack by 1. If one or more enemy models are destroyed as a result of those attacks, select one of those destroyed models; that destroyed model’s unit must take a Battle-shock test.",
+          "restrictions": null,
+          "triggerPhase": [
+            "Shooting"
+          ],
+          "isReactive": false
+        },
+        {
+          "name": "RAPTORIAL VIGILANCE",
+          "cpCost": 1,
+          "type": "Battle Tactic",
+          "when": "Your opponent’s Movement phase, just after an enemy unit ends a Normal, Advance or Fall Back move.",
+          "target": "One ADEPTUS ASTARTES INFANTRY or ADEPTUS ASTARTES MOUNTED unit from your army that is within 9\" of the enemy unit that just ended that move. You cannot target a unit that is within Engagement Range of one or more enemy units.",
+          "effect": "Your unit can make a Normal move of up to D6\", or up to 6\" instead if it is a PHOBOS or SCOUT SQUAD unit.",
+          "restrictions": null,
+          "triggerPhase": [
+            "Movement"
+          ],
+          "isReactive": true
+        },
+        {
+          "name": "INTO DARKNESS",
+          "cpCost": 1,
+          "type": "Strategic Ploy",
+          "when": "End of your opponent’s Fight phase.",
+          "target": "Up to two PHOBOS and/or SCOUT SQUAD units from your army, or one other ADEPTUS ASTARTES INFANTRY unit from your army. You cannot target a unit that is within Engagement Range of one or more enemy units.",
+          "effect": "Remove those units from the battlefield and place them into Strategic Reserves.",
+          "restrictions": null,
+          "triggerPhase": [
+            "Fight"
+          ],
+          "isReactive": true
+        }
+      ],
+      "enhancements": [
+        {
+          "name": "Blackwing Shroud",
+          "pointsCost": 25,
+          "description": "ADEPTUS ASTARTES INFANTRY model only. While the bearer is leading a unit, models in that unit have the Infiltrators ability.",
+          "flavorText": "This mechanical device contains miniaturised refraction fields and electromagnetic interference projectors that distort sensory apparatus, enabling the bearer and their unit to evade detection and infiltrate key positions.",
+          "restrictions": [
+            "ADEPTUS ASTARTES INFANTRY"
+          ]
+        },
+        {
+          "name": "Coronal Susurrant",
+          "pointsCost": 30,
+          "description": "PHOBOS model only. The bearer has the following ability:Lord of Deceit (Aura): Each time your opponent targets a unit from their army with a Stratagem, if that unit is within 12\" of this model, increase the cost of that usage of that Stratagem by 1CP.",
+          "flavorText": "This wreath of circuitry from the Dark Age of Technology forces a whispering white noise into enemy minds and broadcasts.",
+          "restrictions": [
+            "PHOBOS"
+          ]
+        },
+        {
+          "name": "Umbral Raptor",
+          "pointsCost": 15,
+          "description": "ADEPTUS ASTARTES model only. The bearer has the Stealth and Lone Operative abilities.",
+          "flavorText": "This warrior is a solitary predator whose footsteps are all but silent and whose form is one with the shadows.",
+          "restrictions": [
+            "ADEPTUS ASTARTES"
+          ]
+        },
+        {
+          "name": "Hunter’s Instincts",
+          "pointsCost": 25,
+          "description": "ADEPTUS ASTARTES model only. If the bearer’s unit is in Strategic Reserves, for the purposes of setting up that unit on the battlefield, treat the current battle round number as being one higher than it actually is.",
+          "flavorText": "Those who master the Path of Ambush guide their forces to launch surprise assaults on the enemy with the precise timing of true hunters.",
+          "restrictions": [
+            "ADEPTUS ASTARTES"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,264 @@
+{
+  "name": "Gaunt’s Ghosts",
+  "faction": "Astra Militarum",
+  "subfaction": "",
+  "role": "Character",
+  "keywords": [
+    "INFANTRY",
+    "GRENADES",
+    "IMPERIUM",
+    "GAUNT’S GHOSTS",
+    "CHARACTER",
+    "EPIC HERO",
+    "OFFICER"
+  ],
+  "stats": {
+    "movement": "6\"",
+    "toughness": 3,
+    "save": "4+",
+    "invulnerableSave": "5+",
+    "wounds": 3,
+    "leadership": 6,
+    "objectiveControl": 1
+  },
+  "composition": "1 Ibram Gaunt, 5 Tanith Ghosts",
+  "compositionData": [
+    {
+      "name": "Ibram Gaunt",
+      "role": "leader",
+      "count": 1,
+      "woundsPerModel": 3
+    },
+    {
+      "name": "Tanith Ghost",
+      "role": "regular",
+      "count": 5,
+      "woundsPerModel": 2
+    }
+  ],
+  "unitSize": "6",
+  "leaderRules": "",
+  "leaderAbilities": "This unit’s OFFICER can issue up to 2 Orders to REGIMENT or GAUNT’S GHOSTS units.",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Bragg’s autocannon",
+      "range": "48\"",
+      "type": "Heavy",
+      "attacks": "4",
+      "ballisticSkill": "5+",
+      "weaponSkill": "",
+      "strength": "9",
+      "armorPenetration": "-1",
+      "damage": "3",
+      "abilities": [
+        "HEAVY"
+      ]
+    },
+    {
+      "name": "Bolt pistol",
+      "range": "12\"",
+      "type": "Pistol",
+      "attacks": "1",
+      "ballisticSkill": "2+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "PISTOL"
+      ]
+    },
+    {
+      "name": "Corbec’s hot-shot lascarbine",
+      "range": "24\"",
+      "type": "Assault",
+      "attacks": "3",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "3",
+      "armorPenetration": "-1",
+      "damage": "1",
+      "abilities": [
+        "ASSAULT"
+      ]
+    },
+    {
+      "name": "Larkin’s long-las",
+      "range": "36\"",
+      "type": "Heavy",
+      "attacks": "1",
+      "ballisticSkill": "2+",
+      "weaponSkill": "",
+      "strength": "5",
+      "armorPenetration": "-2",
+      "damage": "4",
+      "abilities": [
+        "HEAVY",
+        "PRECISION"
+      ]
+    },
+    {
+      "name": "Lascarbine",
+      "range": "24\"",
+      "type": "Assault",
+      "attacks": "3",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "3",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "ASSAULT"
+      ]
+    },
+    {
+      "name": "Rawne’s lascarbine",
+      "range": "24\"",
+      "type": "Assault",
+      "attacks": "3",
+      "ballisticSkill": "3+",
+      "weaponSkill": "",
+      "strength": "3",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "ASSAULT",
+        "SUSTAINED HITS 1"
+      ]
+    },
+    {
+      "name": "Gaunt’s chainsword",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "5",
+      "ballisticSkill": "",
+      "weaponSkill": "2+",
+      "strength": "3",
+      "armorPenetration": "-1",
+      "damage": "1",
+      "abilities": []
+    },
+    {
+      "name": "Straight silver knife",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "3",
+      "ballisticSkill": "",
+      "weaponSkill": "3+",
+      "strength": "3",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": []
+    },
+    {
+      "name": "Mkoll’s straight silver knife",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "5",
+      "ballisticSkill": "",
+      "weaponSkill": "2+",
+      "strength": "3",
+      "armorPenetration": "-1",
+      "damage": "1",
+      "abilities": [
+        "DEVASTATING WOUNDS",
+        "PRECISION"
+      ]
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Fights First",
+      "type": "core",
+      "description": "Units with this ability fight first in the Fight phase.",
+      "triggerPhase": [
+        "Fight"
+      ],
+      "triggerSubphase": "",
+      "isReactive": true,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Infiltrators",
+      "type": "core",
+      "description": "During deployment, if every model in a unit has this ability, then when you set it up, it can be set up anywhere on the battlefield that is more than 9\" horizontally away from the enemy deployment zone and all enemy models.",
+      "triggerPhase": [
+        "Deployment"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Lone Operative",
+      "type": "core",
+      "description": "Unless part of an Attached unit, this unit can only be selected as the target of a ranged attack if the attacking model is within 12\".",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": true,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Stealth",
+      "type": "core",
+      "description": "If every model in a unit has this ability, each time a ranged attack is made against it, subtract 1 from the Hit roll.",
+      "triggerPhase": [
+        "Keyword"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Voice of Command",
+      "type": "faction",
+      "description": "This unit’s OFFICER can issue up to 2 Orders to REGIMENT or GAUNT’S GHOSTS units.",
+      "triggerPhase": [
+        "Command"
+      ],
+      "triggerSubphase": "Start of Phase",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Tanith Camo-cloaks",
+      "type": "unit",
+      "description": "Models in this unit have the Benefit of Cover.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": true,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Covert Stealth Team",
+      "type": "unit",
+      "description": "At the end of your opponent’s turn, if this unit is not within Engagement Range of one or more enemy units, you can remove this unit from the battlefield. In the Reinforcements step of your next Movement phase, set it up anywhere on the battlefield that is more than 9\" horizontally away from all enemy models.",
+      "triggerPhase": [
+        "Movement"
+      ],
+      "triggerSubphase": "End of Phase",
+      "isReactive": true,
+      "requiredKeywords": [],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [],
+  "pointsCost": 100,
+  "pointsTiers": [
+    {
+      "models": 6,
+      "points": 100
+    }
+  ]
+}

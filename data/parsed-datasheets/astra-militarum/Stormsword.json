@@ -1,0 +1,162 @@
+{
+  "name": "Stormsword",
+  "faction": "Astra Militarum",
+  "subfaction": "",
+  "role": "Other",
+  "keywords": [
+    "VEHICLE",
+    "SMOKE",
+    "TITANIC",
+    "IMPERIUM",
+    "STORMSWORD"
+  ],
+  "stats": {
+    "movement": "12\"",
+    "toughness": 13,
+    "save": "2+",
+    "invulnerableSave": "",
+    "wounds": 24,
+    "leadership": 7,
+    "objectiveControl": 8
+  },
+  "composition": "1 Stormsword",
+  "compositionData": [
+    {
+      "name": "Stormsword",
+      "role": "regular",
+      "count": 1,
+      "woundsPerModel": 24
+    }
+  ],
+  "unitSize": "1",
+  "leaderRules": "",
+  "leaderAbilities": "",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Lascannon",
+      "range": "48\"",
+      "type": "Ranged",
+      "attacks": "1",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "12",
+      "armorPenetration": "-3",
+      "damage": "D6+1",
+      "abilities": []
+    },
+    {
+      "name": "Stormsword siege cannon",
+      "range": "48\"",
+      "type": "Ranged",
+      "attacks": "D6+6",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "16",
+      "armorPenetration": "-4",
+      "damage": "D6+2",
+      "abilities": [
+        "BLAST",
+        "IGNORES COVER"
+      ]
+    },
+    {
+      "name": "Twin heavy bolter",
+      "range": "36\"",
+      "type": "Ranged",
+      "attacks": "3",
+      "ballisticSkill": "4+",
+      "weaponSkill": "",
+      "strength": "5",
+      "armorPenetration": "-1",
+      "damage": "2",
+      "abilities": [
+        "SUSTAINED HITS 1",
+        "TWIN-LINKED"
+      ]
+    },
+    {
+      "name": "Twin heavy flamer",
+      "range": "12\"",
+      "type": "Ranged",
+      "attacks": "D6",
+      "ballisticSkill": "N/A",
+      "weaponSkill": "",
+      "strength": "6",
+      "armorPenetration": "-1",
+      "damage": "1",
+      "abilities": [
+        "IGNORES COVER",
+        "TORRENT",
+        "TWIN-LINKED"
+      ]
+    },
+    {
+      "name": "Armoured tracks",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "6",
+      "ballisticSkill": "",
+      "weaponSkill": "4+",
+      "strength": "8",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": []
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Deadly Demise D6+2",
+      "type": "core",
+      "description": "When this model is destroyed, roll one D6. On a 6, each unit within 6\" suffers D6+2 mortal wounds.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": true,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Concussive Wave",
+      "type": "unit",
+      "description": "In your Shooting phase, just after selecting a target for this model’s Stormsword siege cannon, roll one D6 for the target unit and every other unit within 3\" of that unit: on a 5+, the unit being rolled for is struck by a concussive wave. After this model has finished making its attacks against that target unit this phase, each unit struck by a concussive wave suffers D3 mortal wounds.",
+      "triggerPhase": [
+        "Shooting"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Damaged: 1-8 Wounds Remaining",
+      "type": "unit",
+      "description": "While this model has 1-8 wounds remaining, subtract 4 from its Objective Control characteristic and each time this model makes an attack, subtract 1 from the Hit roll.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": true,
+      "requiredKeywords": [],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [
+    {
+      "description": "This model’s 2 twin heavy flamers can be replaced with 2 twin heavy bolters.",
+      "pointsCost": 0
+    },
+    {
+      "description": "This model can be equipped with one of the following: 2 lascannons and 2 twin heavy bolters; 2 lascannons and 2 twin heavy flamers",
+      "pointsCost": 0
+    }
+  ],
+  "pointsCost": 465,
+  "pointsTiers": [
+    {
+      "models": 1,
+      "points": 465
+    }
+  ]
+}

@@ -1,0 +1,99 @@
+{
+  "sources": [
+    {
+      "id": "chapter-approved-2024",
+      "name": "Chapter Approved Tournament Companion",
+      "file": "eng_17-09_warhammer40000_core_rules_chapter_approved_tournament_companion.pdf",
+      "version": "1.2",
+      "date": "2024-09",
+      "categories": ["primary-missions", "secondary-objectives", "tournament-rules"],
+      "priority": 1
+    },
+    {
+      "id": "core-rules-updates-2024",
+      "name": "Core Rules Updates",
+      "file": "eng_22-10_warhammer40000_core_rules_updates.pdf",
+      "version": "2024.10",
+      "date": "2024-10",
+      "categories": ["core-mechanics", "cp-rules", "phase-rules"],
+      "priority": 1
+    },
+    {
+      "id": "core-rules-2024",
+      "name": "Core Rules & Key Rules",
+      "file": "warhammer40000_core&key_corerules_eng_24.09-5xfayxjekm.pdf",
+      "version": "2024.09",
+      "date": "2024-09",
+      "categories": ["core-mechanics", "terrain-rules", "mission-rules"],
+      "priority": 2
+    }
+  ],
+  "categories": {
+    "primary-missions": {
+      "description": "Primary mission scoring rules from Chapter Approved tournament pool",
+      "contextTiers": ["secondaries", "full"],
+      "enabled": true,
+      "extractionRules": {
+        "searchFor": "mission names, scoring phase, scoring formula, deployment types",
+        "outputFormat": "structured mission objects with VP calculations"
+      }
+    },
+    "secondary-objectives": {
+      "description": "Secondary objective scoring rules with auto-calculation formulas",
+      "contextTiers": ["secondaries", "full"],
+      "enabled": true,
+      "extractionRules": {
+        "searchFor": "secondary objective names, VP thresholds, max VP per turn, max VP total, scoring triggers",
+        "outputFormat": "structured secondary objects with VP calculation logic"
+      }
+    },
+    "cp-rules": {
+      "description": "Command point validation rules (gain/spend limits)",
+      "contextTiers": ["minimal", "full"],
+      "enabled": true,
+      "extractionRules": {
+        "searchFor": "CP gain limits, CP per turn, secondary discard rules",
+        "outputFormat": "validation rules with conditions"
+      }
+    },
+    "phase-rules": {
+      "description": "Phase transition validation and battle-shock mechanics",
+      "contextTiers": ["full"],
+      "enabled": true,
+      "extractionRules": {
+        "searchFor": "phase sequence, battle-shock tests, turn structure, persisting effects",
+        "outputFormat": "phase validation rules"
+      }
+    },
+    "core-mechanics": {
+      "description": "Movement, shooting, combat core rules",
+      "contextTiers": ["full"],
+      "enabled": false,
+      "extractionRules": {
+        "searchFor": "movement rules, shooting rules, combat rules, normal moves, advance moves",
+        "outputFormat": "core mechanic rules"
+      }
+    },
+    "terrain-rules": {
+      "description": "Terrain effects and interaction rules",
+      "contextTiers": ["full"],
+      "enabled": false,
+      "extractionRules": {
+        "searchFor": "terrain types, cover rules, terrain effects",
+        "outputFormat": "terrain rule objects"
+      }
+    },
+    "tournament-rules": {
+      "description": "Tournament-specific rules and guidelines",
+      "contextTiers": ["full"],
+      "enabled": false,
+      "extractionRules": {
+        "searchFor": "tournament mission sequence, terrain layouts, pairings",
+        "outputFormat": "tournament guidelines"
+      }
+    }
+  }
+}
+
+
+

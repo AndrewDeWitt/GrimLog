@@ -1,0 +1,9 @@
+# This directory contains JSON files generated from Wahapedia scraping
+# or manually created for import into the database.
+#
+# Files in this directory follow the schema defined in ../import-schema.json
+#
+# Usage:
+#   npx tsx scripts/importFaction.ts data/wahapedia-import/tyranids.json
+#   npx tsx scripts/importFromWahapedia.ts tyranids
+

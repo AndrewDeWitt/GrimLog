@@ -1,0 +1,119 @@
+---
+description: TacLog project architecture and context. Includes system design, key files, and architectural decisions. Request this when you need to understand how the system works.
+tags: [architecture, context, system-design]
+type: agent
+---
+
+# TacLog Project Context
+
+## Core Principles
+
+1. **Always execute, never block** - The user has final authority
+2. **Complete work fully** - No "TODO" or "you should" - do it yourself
+3. **Document after implementation** - Code first, then documentation
+4. **Follow established patterns** - Match existing code style and structure
+
+## Project Architecture
+
+### Dual-Endpoint Design
+- **`/api/transcribe`** - Frequent, fast transcription-only (every 5s)
+- **`/api/analyze`** - Smart, context-aware analysis with AI tools (triggered)
+
+### Context-Aware Triggers (5 triggers)
+1. Priority keywords (immediate)
+2. Completion phrases (immediate)
+3. Long silence (10s)
+4. Min transcripts (3+ transcripts + 8s)
+5. Max time safety (30s)
+
+### Multi-Layer Validation
+1. Client audio analysis (RMS, dB, peak amplitude)
+2. Server file check (size validation)
+3. Transcription validation (quality, hallucinations)
+
+### Always Execute Philosophy
+- Validation is advisory, never blocking
+- User can always override
+- Actions execute first, warnings shown after
+
+## Key Files
+
+### Frontend
+- `app/page.tsx` - Main game interface with VAD
+- `components/AudioIndicator.tsx` - Microphone status
+- `components/ValidationToast.tsx` - Validation warnings
+
+### API Routes
+- `app/api/analyze/route.ts` - AI analysis with tool calling
+- `app/api/transcribe/route.ts` - Fast transcription only
+- `app/api/sessions/[id]/route.ts` - Session CRUD
+- `app/api/armies/route.ts` - Army management
+
+### Core Libraries
+- `lib/aiTools.ts` - 11 AI tool definitions
+- `lib/toolHandlers.ts` - Tool execution logic
+- `lib/audioCapture.ts` - VAD and recording
+- `lib/audioValidation.ts` - Multi-layer validation
+- `lib/validationHelpers.ts` - Game state validation
+- `lib/analysisTriggers.ts` - Smart trigger detection
+- `lib/langfuse.ts` - LLM observability
+
+### Database
+- `prisma/schema.prisma` - Database schema
+
+**Key models:**
+- `GameSession` - Game sessions
+- `TranscriptHistory` - All transcriptions
+- `TimelineEvent` - Game events
+- `Army` - Player armies
+- `Stratagem` - Stratagems
+
+## AI-Specific Features
+
+### OpenAI Integration
+- Use `lib/langfuse.ts` for observability
+- Wrap all OpenAI calls in Langfuse traces
+- Include context in traces (session ID, game state, etc.)
+- Handle rate limits with exponential backoff
+
+### Tool Calling
+- Tool definitions in `lib/aiTools.ts`
+- Tool handlers in `lib/toolHandlers.ts`
+- Always validate tool arguments
+- Return consistent `ToolExecutionResult` format
+- Include validation results when applicable
+
+### Context Management
+- Use `lib/validationHelpers.ts` for game context
+- Fetch last 10-15 transcripts for analysis
+- Include conversation history in AI prompts
+- Use smart triggers from `lib/analysisTriggers.ts`
+
+## When User Asks for Help
+
+1. **Search existing docs first** - Check `docs/` folder
+2. **Reference by type** - Link to appropriate guide/API doc/feature doc
+3. **Provide examples** - Show code from the project
+4. **Explain context** - Why it's designed this way
+
+## When Uncertain
+
+- ASK before making breaking changes
+- CONFIRM before deleting files
+- VERIFY before archiving documentation
+- EXPLAIN trade-offs when suggesting alternatives
+
+## What Makes You Successful
+
+✅ Following documentation standards religiously
+✅ Completing features end-to-end (code + docs)
+✅ Maintaining consistency with existing patterns
+✅ Providing clear explanations and examples
+✅ Thinking about edge cases and error handling
+✅ Updating CHANGELOG and docs/README.md
+
+❌ Leaving "TODO" comments for users
+❌ Creating temporary documentation files
+❌ Duplicating code or documentation
+❌ Breaking changes without discussion
+❌ Incomplete implementations

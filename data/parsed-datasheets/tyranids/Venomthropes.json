@@ -1,0 +1,109 @@
+{
+  "name": "Venomthropes",
+  "faction": "Tyranids",
+  "subfaction": "",
+  "role": "Other",
+  "keywords": [
+    "INFANTRY",
+    "FLY",
+    "GREAT DEVOURER",
+    "VENOMTHROPES"
+  ],
+  "stats": {
+    "movement": "6\"",
+    "toughness": 5,
+    "save": "4+",
+    "invulnerableSave": "",
+    "wounds": 3,
+    "leadership": 8,
+    "objectiveControl": 1
+  },
+  "composition": "3-6 Venomthropes",
+  "compositionData": [
+    {
+      "name": "Venomthrope",
+      "role": "regular",
+      "count": 3,
+      "woundsPerModel": 3
+    }
+  ],
+  "unitSize": "3-6",
+  "leaderRules": "This unit can be led by the following unit: Malanthrope",
+  "leaderAbilities": "",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Toxic lashes",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "5",
+      "ballisticSkill": "",
+      "weaponSkill": "3+",
+      "strength": "3",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "ANTI-INFANTRY 2+"
+      ]
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Stealth",
+      "type": "core",
+      "description": "Stealth.",
+      "triggerPhase": [
+        "Keyword"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Synapse",
+      "type": "faction",
+      "description": "Synapse.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [
+        "TYRANIDS"
+      ],
+      "effects": null
+    },
+    {
+      "name": "Foul Spores (Aura)",
+      "type": "unit",
+      "description": "While a friendly TYRANIDS unit is within 6\" of this unit, each time a ranged attack targets that unit, models in that unit have the Benefit of Cover against that attack. In addition, while a friendly TYRANIDS unit (excluding MONSTERS) is within 6\" of this unit, models in that unit have the Stealth ability.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [
+        "TYRANIDS"
+      ],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [
+    {
+      "description": "Every model is equipped with: toxic lashes.",
+      "pointsCost": 0
+    }
+  ],
+  "pointsCost": 70,
+  "pointsTiers": [
+    {
+      "models": 3,
+      "points": 70
+    },
+    {
+      "models": 6,
+      "points": 140
+    }
+  ]
+}

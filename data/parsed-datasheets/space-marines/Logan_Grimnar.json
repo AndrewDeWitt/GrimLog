@@ -1,0 +1,181 @@
+{
+  "name": "Logan Grimnar",
+  "faction": "Adeptus Astartes",
+  "subfaction": "Space Wolves",
+  "role": "Character",
+  "keywords": [
+    "INFANTRY",
+    "CHARACTER",
+    "EPIC HERO",
+    "IMPERIUM",
+    "TERMINATOR",
+    "CHAPTER MASTER",
+    "LOGAN GRIMNAR",
+    "ADEPTUS ASTARTES",
+    "SPACE WOLVES"
+  ],
+  "stats": {
+    "movement": "6\"",
+    "toughness": 5,
+    "save": "2+",
+    "invulnerableSave": "4+",
+    "wounds": 8,
+    "leadership": 6,
+    "objectiveControl": 1
+  },
+  "composition": "1 Logan Grimnar – EPIC HERO",
+  "compositionData": [
+    {
+      "name": "Logan Grimnar",
+      "role": "leader",
+      "count": 1,
+      "woundsPerModel": 8
+    }
+  ],
+  "unitSize": "1",
+  "leaderRules": "Wolf Guard Terminators",
+  "leaderAbilities": "",
+  "transportCapacity": "",
+  "weapons": [
+    {
+      "name": "Storm bolter",
+      "range": "24\"",
+      "type": "Ranged",
+      "attacks": "2",
+      "ballisticSkill": "2+",
+      "weaponSkill": "",
+      "strength": "4",
+      "armorPenetration": "0",
+      "damage": "1",
+      "abilities": [
+        "RAPID FIRE 2"
+      ]
+    },
+    {
+      "name": "Axe Morkai – strike",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "6",
+      "ballisticSkill": "",
+      "weaponSkill": "2+",
+      "strength": "8",
+      "armorPenetration": "-2",
+      "damage": "3",
+      "abilities": []
+    },
+    {
+      "name": "Axe Morkai – sweep",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "10",
+      "ballisticSkill": "",
+      "weaponSkill": "2+",
+      "strength": "6",
+      "armorPenetration": "-2",
+      "damage": "1",
+      "abilities": []
+    },
+    {
+      "name": "Tyrnak and Fenrir",
+      "range": "Melee",
+      "type": "Melee",
+      "attacks": "6",
+      "ballisticSkill": "",
+      "weaponSkill": "2+",
+      "strength": "5",
+      "armorPenetration": "-1",
+      "damage": "1",
+      "abilities": [
+        "EXTRA ATTACKS"
+      ]
+    }
+  ],
+  "abilities": [
+    {
+      "name": "Deep Strike",
+      "type": "core",
+      "description": "During the Declare Formations step of the Deployment phase, if every model in a unit has this ability, you can set it up in Reserves instead of setting it up on the battlefield. If you do, in the Reinforcements step of one of your Movement phases you can set up this unit anywhere on the battlefield that is more than 9\" away from all enemy models.",
+      "triggerPhase": [
+        "Deployment"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Leader",
+      "type": "core",
+      "description": "This model can be attached to the following unit: Wolf Guard Terminators",
+      "triggerPhase": [
+        "Keyword"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "Oath of Moment",
+      "type": "faction",
+      "description": "If your Army Faction is Adeptus Astartes, at the start of your Command phase, you can select one unit from your opponent’s army. Until the start of your next Command phase, each time a model from your army with this ability makes an attack that targets that enemy unit, you can re-roll the Hit roll.",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "High King of Fenris",
+      "type": "unit",
+      "description": "Once per battle round, in your Movement phase, you can select one friendly SPACE WOLVES unit that is in Reserves. If you do, until the end of the phase, for the purpose of setting up that unit on the battlefield, treat the current battle round number as being one higher than it actually is.",
+      "triggerPhase": [
+        "Movement"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": false,
+      "requiredKeywords": [
+        "SPACE WOLVES"
+      ],
+      "effects": null
+    },
+    {
+      "name": "Guile of the Wolf (Aura)",
+      "type": "unit",
+      "description": "Each time your opponent targets a unit from their army with a Stratagem, if that unit is within 12\" of this model, increase the cost of that usage of that Stratagem by 1CP (this is not cumulative with any other rules that increase the CP cost of that Stratagem).",
+      "triggerPhase": [
+        "Any"
+      ],
+      "triggerSubphase": "During Action",
+      "isReactive": true,
+      "requiredKeywords": [],
+      "effects": null
+    },
+    {
+      "name": "EMBARKING WITHIN TRANSPORTS",
+      "type": "unit",
+      "description": "This model can embark within friendly ADEPTUS ASTARTES TRANSPORT models that can transport TERMINATOR models. When doing so, it takes up the space of 4 INFANTRY models.",
+      "triggerPhase": [
+        "General"
+      ],
+      "triggerSubphase": "",
+      "isReactive": false,
+      "requiredKeywords": [
+        "ADEPTUS ASTARTES",
+        "TRANSPORT",
+        "TERMINATOR"
+      ],
+      "effects": null
+    }
+  ],
+  "wargearOptions": [],
+  "pointsCost": 110,
+  "pointsTiers": [
+    {
+      "models": 1,
+      "points": 110
+    }
+  ]
+}

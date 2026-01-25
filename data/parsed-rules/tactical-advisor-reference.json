@@ -1,0 +1,538 @@
+{
+  "version": "1.0",
+  "generatedAt": "2025-12-20T04:36:50.402Z",
+  "gameOverview": {
+    "edition": "10th Edition",
+    "turnStructure": "Each battle round: Player 1 turn (Command→Movement→Shooting→Charge→Fight), then Player 2 turn (same phases)",
+    "winConditions": "Most VP at end of 5 battle rounds wins. Max 100VP (50 primary + 40 secondary + 10 painted army)",
+    "battleRounds": 5,
+    "maxVP": 100
+  },
+  "phases": {
+    "Command": {
+      "order": 1,
+      "name": "Command Phase",
+      "sequence": [
+        "Step 1: Command Step (gain 1CP, resolve 'Start of Phase' and 'Command Step' abilities)",
+        "Step 2: Battle-shock Step (test units Below Half-strength or those forced by rules)",
+        "Step 3: Scoring (resolve Primary/Secondary mission scoring as per mission pack)"
+      ],
+      "keyRules": [
+        "CP Gain: Players gain 1CP at the start of every Command phase.",
+        "CP Cap: Players can only gain a total of 1 extra CP per battle round from any source.",
+        "Battle-shock: Roll 2D6; if result is less than Leadership, unit is Battle-shocked (OC 0, cannot use Stratagems, must Desperate Escape if Falling Back).",
+        "Below Half-strength: Units with less than half their starting models (or wounds for single models) must take a Battle-shock test."
+      ],
+      "legalActions": [
+        "Use Detachment-specific Command phase abilities.",
+        "Use 'Insane Bravery' Stratagem to auto-pass a Battle-shock test.",
+        "Discard Tactical Secondary missions for 1CP (at the end of the phase)."
+      ],
+      "restrictions": [
+        "Units cannot be made to take more than one Battle-shock test in the Battle-shock step.",
+        "Destroyed units do not take Battle-shock tests.",
+        "Rules that do not specify 'Battle-shock step' or 'End of phase' must be resolved in the Command Step."
+      ],
+      "tacticalPriorities": [
+        "Ensure key objective-holding units pass Battle-shock to maintain OC.",
+        "Manage CP resources, accounting for the 1CP per round gain limit.",
+        "Position characters to provide leadership buffs before tests occur."
+      ],
+      "commonStratagems": [
+        "Insane Bravery (1CP): Auto-pass a Battle-shock test (once per battle).",
+        "Command Re-roll (1CP): Re-roll a failed Battle-shock test."
+      ],
+      "scoringOpportunities": [
+        "Primary Missions: Most missions score at the end of the Command phase starting from Battle Round 2.",
+        "Secondary Missions: Some 'Fixed' or 'Tactical' secondaries check for completion at the start or end of this phase."
+      ]
+    },
+    "Movement": {
+      "order": 2,
+      "name": "Movement Phase",
+      "sequence": [
+        "Step 1: Move Units (Normal Move, Advance, or Fall Back)",
+        "Step 2: Reinforcements Step (Set up units from Reserves or Strategic Reserves)"
+      ],
+      "keyRules": [
+        "Pivot Values: Models on non-round bases subtract their pivot value (1\" or 2\") from their total move the first time they rotate.",
+        "Unit Coherency: Models must end moves within 2\" horizontally and 5\" vertically of another model in the unit.",
+        "Engagement Range: Models cannot move within 1\" of enemy models during Normal or Advance moves.",
+        "Strategic Reserves: Units arriving from edges must be wholly within 6\" of the edge and more than 9\" from enemies."
+      ],
+      "legalActions": [
+        "Normal Move: Move up to Move characteristic.",
+        "Advance: Move up to M + D6\".",
+        "Fall Back: Move out of Engagement Range (cannot shoot or charge later).",
+        "Remain Stationary: Do not move (required for some weapon buffs like Heavy)."
+      ],
+      "restrictions": [
+        "A unit cannot make more than one Normal move per phase.",
+        "Monster/Vehicle models cannot move through other friendly Monsters/Vehicles.",
+        "Units arriving from Reserves count as having made a Normal move and cannot move further that phase."
+      ],
+      "tacticalPriorities": [
+        "Screening: Position units to prevent enemy Deep Strikes.",
+        "Objective Grabbing: Move high-OC units onto markers.",
+        "Pivoting: Calculate pivot costs for large vehicles to ensure they reach their destination."
+      ],
+      "commonStratagems": [
+        "Fire Overwatch (1CP): Shoot at an enemy unit that starts or ends a move within 24\".",
+        "Rapid Ingress (1CP): Arrive from Reserves at the end of the opponent's Movement phase."
+      ],
+      "scoringOpportunities": [
+        "Secondary Missions: Many 'Action' style secondaries (e.g., Deploy Teleport Homers) begin at the end of this phase."
+      ]
+    },
+    "Shooting": {
+      "order": 3,
+      "name": "Shooting Phase",
+      "sequence": [
+        "Step 1: Select Unit to Shoot",
+        "Step 2: Select Targets (Check Range and Line of Sight)",
+        "Step 3: Resolve Attacks (Hit, Wound, Allocate, Save, Damage)"
+      ],
+      "keyRules": [
+        "Big Guns Never Tire: Vehicles and Monsters can shoot while in Engagement Range (-1 to Hit) and can be shot at while in Engagement Range.",
+        "Indirect Fire: Can target non-visible units; -1 to Hit and target gets Benefit of Cover if not visible.",
+        "Hazardous: After shooting, roll 1D6 per Hazardous weapon; on a 1, the unit suffers 3 Mortal Wounds.",
+        "Devastating Wounds: Critical Wounds (unmodified 6) ignore all saving throws and inflict Mortal Wounds instead of normal damage."
+      ],
+      "legalActions": [
+        "Firing Deck: Transports can shoot using weapons from embarked models.",
+        "Grenade Stratagem: Use a GRENADES unit to inflict Mortal Wounds on a 4+."
+      ],
+      "restrictions": [
+        "Cannot shoot if the unit Advanced or Fell Back (unless weapons have Assault or Pistol keywords).",
+        "A unit cannot be selected to shoot unless at least one model has an eligible target.",
+        "Out-of-phase shooting (like Overwatch) does not trigger 'In your Shooting phase' abilities."
+      ],
+      "tacticalPriorities": [
+        "Target Priority: Focus fire to completely destroy units to prevent them from being healed or returned.",
+        "Line of Sight: Use terrain (Ruins) to hide units from enemy return fire.",
+        "Mortal Wound Sequencing: Resolve normal damage before applying Mortal Wounds from the same unit's attacks."
+      ],
+      "commonStratagems": [
+        "Grenade (1CP): Inflict Mortal Wounds on a nearby enemy.",
+        "Command Re-roll (1CP): Re-roll a critical Hit, Wound, or Damage roll."
+      ],
+      "scoringOpportunities": [
+        "Secondary Missions: Destroying specific units (e.g., Bring It Down, Assassination) often occurs here."
+      ]
+    },
+    "Charge": {
+      "order": 4,
+      "name": "Charge Phase",
+      "sequence": [
+        "Step 1: Select Unit to Charge",
+        "Step 2: Select Targets (within 12\")",
+        "Step 3: Charge Roll (2D6)",
+        "Step 4: Charge Move (Must end in base-to-base if possible)"
+      ],
+      "keyRules": [
+        "Successful Charge: The move must result in the unit being within Engagement Range of all targets and maintain coherency.",
+        "Tank Shock: Vehicles ending a charge can roll dice equal to Toughness to inflict Mortal Wounds (5+).",
+        "Heroic Intervention: Allows a unit to charge in the opponent's turn if an enemy ends a charge within 6\"."
+      ],
+      "legalActions": [
+        "Declare Charge: Target units within 12\".",
+        "Heroic Intervention: Counter-charge in the opponent's phase (1CP)."
+      ],
+      "restrictions": [
+        "Cannot charge if the unit Advanced or Fell Back this turn (unless specific rules allow).",
+        "Units that fail a charge do not move at all.",
+        "Heroic Intervention does not grant a 'Charge Bonus' (Fights First)."
+      ],
+      "tacticalPriorities": [
+        "Base-to-Base Contact: Maximize models in contact to prevent enemy Pile-ins or to lock down specific models.",
+        "Screening: Use charges to tie up enemy ranged units (locking them in combat)."
+      ],
+      "commonStratagems": [
+        "Tank Shock (1CP): Inflict Mortal Wounds based on Vehicle Toughness.",
+        "Heroic Intervention (1CP): Charge in the opponent's turn.",
+        "Fire Overwatch (1CP): Shoot at a unit declaring a charge."
+      ],
+      "scoringOpportunities": [
+        "Objective Control: Charging onto an objective to out-OC an opponent for the following turn's scoring."
+      ]
+    },
+    "Fight": {
+      "order": 5,
+      "name": "Fight Phase",
+      "sequence": [
+        "Step 1: Fights First Step (Units with Fights First, alternating starting with the non-active player)",
+        "Step 2: Remaining Combatants Step (All other units, alternating starting with the non-active player)",
+        "Sub-steps for each unit: Pile-in (3\"), Make Attacks, Consolidate (3\")"
+      ],
+      "keyRules": [
+        "Pile-in: Models move 3\" but must end closer to the closest enemy and in base-to-base if possible.",
+        "Consolidate: Models move 3\" toward the closest enemy or objective; must end in Engagement Range or on an objective.",
+        "Extra Attacks: Weapons with this keyword grant additional attacks that cannot be modified.",
+        "Base-to-Base: Models in base-to-base contact must stay there during Pile-in/Consolidation."
+      ],
+      "legalActions": [
+        "Select Melee Weapon: Choose one melee weapon to attack with (plus any 'Extra Attacks' weapons).",
+        "Consolidate to Objective: Move toward an objective if no enemies are reachable."
+      ],
+      "restrictions": [
+        "A unit cannot fight unless it is within Engagement Range or made a Charge move this turn.",
+        "Models can only fight if they are in Engagement Range or in contact with a friendly model that is in base-to-base contact with an enemy."
+      ],
+      "tacticalPriorities": [
+        "Fight Sequencing: Carefully choose the order of combats in the 'Remaining Combatants' step to minimize return damage.",
+        "Consolidation: Use the 3\" move to wrap enemy models (preventing Fall Back) or to touch objectives."
+      ],
+      "commonStratagems": [
+        "Counter-offensive (2CP): Interrupt the combat sequence to fight next.",
+        "Command Re-roll (1CP): Re-roll a Hit, Wound, or Save."
+      ],
+      "scoringOpportunities": [
+        "Primary/Secondary: Wiping a unit off an objective to flip control for the next Command phase."
+      ]
+    }
+  },
+  "secondaryObjectives": {
+    "fixed": [
+      {
+        "name": "Assassination",
+        "category": "Fixed",
+        "scoringMethod": "Score 4VP each time an enemy CHARACTER model is destroyed. If the enemy WARLORD is destroyed, score 5VP instead for that model.",
+        "maxVP": "15 total",
+        "requiredKeywords": [
+          "CHARACTER"
+        ],
+        "tips": [
+          "Scoring: Use units with the [PRECISION] ability to pick off characters attached to bodyguard units. Note that if a character is returned to the battlefield (e.g., Celestine), they score VP again if destroyed a second time.",
+          "Denying: Keep characters embarked in TRANSPORTS or deep within the footprint of RUINS to block line of sight. Use the 'Insane Bravery' stratagem to ensure units don't fail Battle-shock, keeping the character protected by the unit's OC."
+        ]
+      },
+      {
+        "name": "Bring It Down",
+        "category": "Fixed",
+        "scoringMethod": "Score 2VP for each enemy MONSTER or VEHICLE model destroyed with 9 or fewer wounds. Score 3VP if it has 10-14 wounds. Score 4VP if it has 15 or more wounds.",
+        "maxVP": "15 total",
+        "requiredKeywords": [
+          "MONSTER",
+          "VEHICLE"
+        ],
+        "tips": [
+          "Scoring: Focus fire on one vehicle at a time to ensure the kill. Use 'Tank Shock' or 'Grenade' stratagems to finish off models with 1-3 wounds remaining.",
+          "Denying: Use 'Smoke' or 'Armour of Contempt' style abilities to reduce incoming damage. Keep high-wound models in Strategic Reserves to delay the opponent's scoring until later turns."
+        ]
+      },
+      {
+        "name": "Behind Enemy Lines",
+        "category": "Fixed",
+        "scoringMethod": "Score 3VP at the end of your turn if one unit from your army is wholly within your opponent's deployment zone. Score 5VP if two or more units are wholly within.",
+        "maxVP": "5 per turn / 15 total",
+        "requiredKeywords": [
+          "None"
+        ],
+        "tips": [
+          "Scoring: Use units with 'Deep Strike', 'Infiltrators', or 'Scouts' to reach the zone early. 'Rapid Ingress' is excellent for positioning a unit at the end of the opponent's movement phase to score on your following turn.",
+          "Denying: Screen your deployment zone by spacing units 18 inches apart to prevent Deep Strike arrivals. Use units with large footprints to 'zone out' the backfield."
+        ]
+      },
+      {
+        "name": "Deploy Teleport Homers",
+        "category": "Fixed",
+        "scoringMethod": "Requires an Action (eligible to shoot). Score 2VP at the end of your turn if completed in No Man's Land, or 4VP if completed in the enemy deployment zone.",
+        "maxVP": "4 per turn / 15 total",
+        "requiredKeywords": [
+          "None"
+        ],
+        "tips": [
+          "Scoring: Use cheap, fast INFANTRY or units that can be set up from Reserves. Since the unit must be 'eligible to shoot', do not Advance or Fall Back unless the unit has [ASSAULT] weapons or special rules.",
+          "Denying: Engage units in melee to make them ineligible to shoot/perform actions. Use 'Fire Overwatch' to destroy small units attempting to land in your zone."
+        ]
+      }
+    ],
+    "tactical": [
+      {
+        "name": "Area Denial",
+        "category": "Tactical",
+        "scoringMethod": "Score 3VP at the end of your turn if one or more of your units are within 6 inches of the center of the battlefield and no enemy units are within 6 inches of the center. Score 5VP if you also control the center.",
+        "maxVP": "5 total",
+        "requiredKeywords": [
+          "None"
+        ],
+        "tips": [
+          "Scoring: Move a high-toughness unit or a large-base VEHICLE to the center. Use 'Heroic Intervention' to push enemy units out of the 6-inch bubble.",
+          "Denying: Simply having one model within 6 inches of the center prevents the opponent from scoring the primary 3VP. Toe-in a fast unit to the center to deny."
+        ]
+      },
+      {
+        "name": "Cleanse",
+        "category": "Tactical",
+        "scoringMethod": "Select one or more objective markers you control. One or more units (eligible to shoot) can start an action. Score 2VP for each objective 'cleansed' (max 4VP).",
+        "maxVP": "4 total",
+        "requiredKeywords": [
+          "None"
+        ],
+        "tips": [
+          "Scoring: Use BATTLELINE units to hold the objective while a secondary utility unit performs the action. Remember that being Battle-shocked makes your OC 0, potentially losing control of the objective and failing the secondary.",
+          "Denying: Focus fire on the unit performing the action. If the unit is destroyed or becomes Battle-shocked before the end of the turn, they fail to cleanse."
+        ]
+      },
+      {
+        "name": "Investigate Signals",
+        "category": "Tactical",
+        "scoringMethod": "Score 2VP at the end of your turn for each corner of the battlefield that has one of your units (eligible to shoot) within 9 inches of it and no enemy units within 9 inches.",
+        "maxVP": "8 total",
+        "requiredKeywords": [
+          "None"
+        ],
+        "tips": [
+          "Scoring: Small, fast units like Nurglings or Scouts are ideal. Use 'pivots' effectively to maximize movement distance into the corners.",
+          "Denying: Place a single model in your own back corners to prevent the opponent from scoring those locations. Even a model with 0 OC prevents this scoring if it is within 9 inches."
+        ]
+      },
+      {
+        "name": "Secure No Man's Land",
+        "category": "Tactical",
+        "scoringMethod": "Score 2VP if you control one objective marker in No Man's Land. Score 5VP if you control two or more.",
+        "maxVP": "5 total",
+        "requiredKeywords": [
+          "None"
+        ],
+        "tips": [
+          "Scoring: Use units with high OC values. If an objective is contested, use 'Tank Shock' to try and destroy enemy models to tip the OC balance in your favor.",
+          "Denying: Use 'Fire Overwatch' when the enemy moves onto an objective. If you can force a Battle-shock test and they fail, their OC becomes 0 and they cannot 'Secure' it."
+        ]
+      }
+    ],
+    "generalRules": [
+      "Secondary objectives are capped at a maximum of 40 VP for the entire game.",
+      "Players must choose between 'Fixed' or 'Tactical' missions during the Select Secondary Objectives step; this cannot be changed during the game.",
+      "Tactical missions are drawn (usually 2) at the start of the player's Command Phase.",
+      "At the end of your discard step, you can discard one or more active Tactical secondary mission cards. If you do, you gain 1CP (once per turn).",
+      "Units that are Battle-shocked have an OC of 0 and cannot be 'eligible to shoot' for the purposes of actions unless specified otherwise.",
+      "Rules that trigger 'at the start of the phase' must be resolved before checking mission scoring conditions.",
+      "If a model is destroyed and returned to the battlefield, it counts as a new instance of that model for destruction-based scoring (e.g., Assassination)."
+    ]
+  },
+  "coreStratagems": [
+    {
+      "name": "Command Re-roll",
+      "cpCost": 1,
+      "type": "Battle Tactic",
+      "when": "Any phase, just after you make an Advance roll, a Charge roll, a Desperate Escape test, a Hazardous test, a Hit roll, a Wound roll, a Damage roll, a saving throw, or a roll for number of attacks.",
+      "phase": "Any",
+      "effect": "You re-roll that roll, test, or saving throw.",
+      "restrictions": [
+        "If using fast dice rolling, you can only re-roll one of the dice from that set."
+      ],
+      "tacticalUse": "Crucial for ensuring successful charges, passing key saving throws on expensive models, or securing high damage rolls against priority targets."
+    },
+    {
+      "name": "Insane Bravery",
+      "cpCost": 1,
+      "type": "Epic Deed",
+      "when": "Battle-shock step of your Command phase, just before you take a Battle-shock test for a unit from your army.",
+      "phase": "Command",
+      "effect": "The unit automatically passes the Battle-shock test.",
+      "restrictions": [
+        "Can only be used once per battle."
+      ],
+      "tacticalUse": "Use on a unit holding a vital objective that is below half-strength to ensure they maintain Objective Control (OC) for the scoring window."
+    },
+    {
+      "name": "Fire Overwatch",
+      "cpCost": 1,
+      "type": "Strategic Ploy",
+      "when": "Opponent's Movement or Charge phase, just after an enemy unit is set up, starts or ends a move (Normal, Advance, Fall Back), or declares a charge.",
+      "phase": "Opponent's Movement/Charge",
+      "effect": "Your unit shoots at the enemy unit as if it were your Shooting phase.",
+      "restrictions": [
+        "Cannot target TITANIC units.",
+        "Requires unmodified Hit rolls of 6 to hit (unless using Torrent weapons which auto-hit).",
+        "Can only be used once per turn."
+      ],
+      "tacticalUse": "Best used with units equipped with Torrent (auto-hitting) weapons or high-volume fire to thin out charging units or punish units moving into line of sight."
+    },
+    {
+      "name": "Heroic Intervention",
+      "cpCost": 1,
+      "type": "Strategic Ploy",
+      "when": "Opponent's Charge phase, just after an enemy unit ends a Charge move.",
+      "phase": "Opponent's Charge",
+      "target": "One unit within 6\" of that enemy unit that would be eligible to declare a charge.",
+      "effect": "Your unit declares a charge against that enemy unit.",
+      "restrictions": [
+        "VEHICLES must be WALKERS to use this.",
+        "The unit does not receive any Charge bonuses (e.g., Fights First) this turn.",
+        "Must be a successful charge to move."
+      ],
+      "tacticalUse": "Allows a melee threat to protect a nearby friendly unit that was charged, or to tie up an enemy unit before it can consolidate into other targets."
+    },
+    {
+      "name": "Rapid Ingress",
+      "cpCost": 1,
+      "type": "Strategic Ploy",
+      "when": "End of your opponent's Movement phase.",
+      "phase": "Opponent's Movement",
+      "target": "One unit from your army that is in Reserves.",
+      "effect": "The unit arrives on the battlefield as if it were your Reinforcements step. Deep Strike can be used if the unit has the ability.",
+      "restrictions": [
+        "Cannot be used to arrive on a battle round the unit is not normally allowed to arrive in (e.g., Round 1)."
+      ],
+      "tacticalUse": "Extremely powerful for setting up a guaranteed charge on your following turn, as the unit arrives after the opponent has moved but before your own Movement phase."
+    },
+    {
+      "name": "Tank Shock",
+      "cpCost": 1,
+      "type": "Strategic Ploy",
+      "when": "Your Charge phase, just after a VEHICLE unit from your army ends a Charge move.",
+      "phase": "Charge",
+      "effect": "Select one enemy unit in Engagement Range. Roll D6s equal to the VEHICLE's Toughness. Each 5+ inflicts 1 mortal wound (max 6).",
+      "restrictions": [
+        "Must be within Engagement Range of the target."
+      ],
+      "tacticalUse": "Provides guaranteed chip damage or finishing blows. High-Toughness vehicles (T10+) are most efficient, often reaching the 6 mortal wound cap."
+    },
+    {
+      "name": "Grenade",
+      "cpCost": 1,
+      "type": "Wargear",
+      "when": "Your Shooting phase.",
+      "phase": "Shooting",
+      "target": "One GRENADES unit that has not Advanced, Fallen Back, or shot, and is not in Engagement Range.",
+      "effect": "Select an enemy unit within 8\" and visible. Roll six D6; each 4+ inflicts 1 mortal wound.",
+      "restrictions": [
+        "Target cannot be in Engagement Range of any of your units."
+      ],
+      "tacticalUse": "Useful for dealing mortal wounds to high-toughness targets or units with high invulnerable saves that are difficult to shift with standard shooting."
+    },
+    {
+      "name": "Counter-Offensive",
+      "cpCost": 2,
+      "type": "Strategic Ploy",
+      "when": "Fight phase, just after an enemy unit has fought.",
+      "phase": "Fight",
+      "target": "One unit from your army that is eligible to fight.",
+      "effect": "That unit fights next.",
+      "restrictions": [
+        "Costs 2 CP, making it expensive to use frequently."
+      ],
+      "tacticalUse": "Interrupts the opponent's combat sequence. Use this when multiple combats are occurring to ensure your high-damage unit fights before the opponent can destroy it with their next selection."
+    },
+    {
+      "name": "Go to Ground",
+      "cpCost": 1,
+      "type": "Battle Tactic",
+      "when": "Opponent's Shooting phase, just after an enemy unit has selected its targets.",
+      "phase": "Opponent's Shooting",
+      "target": "One INFANTRY unit from your army selected as a target.",
+      "effect": "Unit gains a 6+ invulnerable save and the Benefit of Cover until the end of the phase.",
+      "restrictions": [
+        "Only targets INFANTRY units."
+      ],
+      "tacticalUse": "Increases the survivability of basic infantry caught in the open, especially against high-AP fire where the 6++ might be their only save."
+    },
+    {
+      "name": "Smokescreen",
+      "cpCost": 1,
+      "type": "Battle Tactic",
+      "when": "Opponent's Shooting phase, just after an enemy unit has selected its targets.",
+      "phase": "Opponent's Shooting",
+      "target": "One SMOKE unit from your army selected as a target.",
+      "effect": "Unit gains the Stealth ability and the Benefit of Cover until the end of the phase.",
+      "restrictions": [
+        "Only targets units with the SMOKE keyword."
+      ],
+      "tacticalUse": "Essential for protecting key vehicles. Stealth imposes a -1 to hit, which combined with Cover, significantly reduces the efficiency of enemy anti-tank fire."
+    }
+  ],
+  "keyRules": [
+    {
+      "name": "CP Per-Round Limit",
+      "category": "Resources",
+      "rule": "Outside of the 1CP gained at the start of the Command phase, players can only gain a total of 1CP per battle round from any other source.",
+      "tacticalImplication": "Abilities that generate CP or discarding tactical secondaries are capped. You cannot stack multiple CP generation sources to fuel expensive stratagems in a single round."
+    },
+    {
+      "name": "Battle-shock and Surge Moves",
+      "category": "Battle-shock",
+      "rule": "A unit cannot make a 'surge' move (out-of-phase moves triggered by events like taking damage) while it is Battle-shocked.",
+      "tacticalImplication": "Battle-shocking a unit with reactive movement abilities (like Khorne Berzerkers) effectively pins them in place, preventing them from closing the gap during your shooting phase."
+    },
+    {
+      "name": "Devastating Wounds Damage Loss",
+      "category": "Weapon Abilities",
+      "rule": "Mortal wounds inflicted by Devastating Wounds do not spill over to other models in the unit. If a model is destroyed, any remaining mortal wounds from that specific attack are lost.",
+      "tacticalImplication": "High-damage Devastating Wounds weapons (like Railguns) are no longer efficient at clearing hordes; they are now specialized for bypassing invulnerable saves on single high-toughness targets."
+    },
+    {
+      "name": "Indirect Fire Penalties",
+      "category": "Line of Sight and Targeting",
+      "rule": "Attacking a target that is not visible with Indirect Fire weapons results in -1 to Hit, unmodified Hit rolls of 1-3 always fail, and the target gains the Benefit of Cover.",
+      "tacticalImplication": "Indirect fire is significantly less reliable. Even with buffs, you have a hard cap on accuracy (50% fail rate), making it harder to wipe units hiding on backfield objectives."
+    },
+    {
+      "name": "Pivot Values",
+      "category": "Movement",
+      "rule": "Models not on round bases (Monsters/Vehicles) must subtract their Pivot Value (usually 2\") from their movement the first time they rotate during a move.",
+      "tacticalImplication": "Large vehicles and monsters on oval bases have a 'movement tax' when turning. This must be factored into charge ranges and navigating tight terrain gaps."
+    },
+    {
+      "name": "Objective Control Timing",
+      "category": "Objective Control",
+      "rule": "A player controls an objective marker at the end of any phase or turn if their Level of Control is higher than their opponent's.",
+      "tacticalImplication": "Objectives can be flipped in the Movement or Shooting phases, not just the Command phase. This allows for mid-turn scoring or denying opponent's 'at the end of turn' secondary missions."
+    },
+    {
+      "name": "Out-of-Phase Rule Restrictions",
+      "category": "Stratagems",
+      "rule": "When using a rule to act 'as if it were' a specific phase (e.g., Fire Overwatch), you cannot trigger any other rules that normally trigger in that phase.",
+      "tacticalImplication": "You cannot use 'In your Shooting Phase' abilities or other stratagems during Overwatch. This prevents stacking buffs on out-of-turn attacks."
+    },
+    {
+      "name": "Rapid Ingress Transport Restriction",
+      "category": "Transport rules",
+      "rule": "Units embarked within a Transport that arrives via Rapid Ingress cannot disembark during that same phase.",
+      "tacticalImplication": "You cannot use Rapid Ingress to drop a transport in the opponent's turn and immediately deploy the unit inside to screen or threaten. The unit is locked inside until your next movement phase."
+    },
+    {
+      "name": "Tank Shock Mortal Wound Cap",
+      "category": "Charging and Fighting",
+      "rule": "Tank Shock deals mortal wounds based on a D6 roll equal to the Vehicle's Toughness (5+), capped at a maximum of 6 mortal wounds.",
+      "tacticalImplication": "High-toughness vehicles (T12+) are the most efficient users of this stratagem, but the cap prevents them from being guaranteed 'unit-killers' against elite infantry."
+    },
+    {
+      "name": "Heroic Intervention CP Cost",
+      "category": "Charging and Fighting",
+      "rule": "Heroic Intervention now costs 1CP (previously 2CP) but the unit does not receive a Charge bonus.",
+      "tacticalImplication": "It is much more affordable to protect objectives or characters, but since you lose the Charge bonus (like Fights First or extra attacks), it is a defensive tool rather than an offensive one."
+    }
+  ],
+  "tacticalWisdom": {
+    "generalPrinciples": [
+      "Manage your CP budget strictly: You can only gain a maximum of 1 extra CP per battle round regardless of the source, so prioritize high-impact stratagems like Rapid Ingress or Heroic Intervention.",
+      "Account for Pivot Costs: Non-round base Monsters and Vehicles now pay a 2\" movement penalty to pivot. Measure your movement paths carefully to ensure you don't fall short of objectives or charge ranges.",
+      "Understand Out-of-Phase limitations: Rules triggered 'in your shooting phase' (like a Whirlwind's Pinning Bombardment) do not function during Fire Overwatch. Don't build a strategy around stacking phase-specific buffs on out-of-phase actions.",
+      "Screen for Rapid Ingress: Your opponent can bring units in at the end of your movement phase. Ensure your backline and objective holders are screened to prevent them from landing in optimal charging positions.",
+      "Leverage Redeployments: Use abilities like Huron Blackheart's to react to your opponent's deployment. These occur after all units are set up but before the first turn roll, allowing you to hide overexposed assets or commit to a weak flank."
+    ],
+    "commonMistakes": [
+      "Forgetting the Indirect Fire nerf: Remember that Indirect Fire now fails on unmodified hit rolls of 1-3 and always grants the target the Benefit of Cover. Don't rely on it to clear heavy infantry efficiently.",
+      "Mortal Wound spillover errors: Damage from Devastating Wounds and Hazardous tests no longer spills over to other models in the unit. Do not waste high-damage Devastating Wounds attacks on 1-wound models.",
+      "Miscalculating Unit Coherency: If a unit cannot end a move in coherency, it cannot make that move. This is especially punishing when trying to wrap models around terrain or during large charges.",
+      "Using Insane Bravery too early: You can only use this stratagem once per battle. Save it for a critical objective-holding unit in the late game rather than a minor battle-shock test in turn 2.",
+      "Ignoring Tank Shock Toughness: Tank Shock damage is now based on the Toughness of your vehicle, not its Strength. High-Toughness units like Land Raiders are now your primary ramming tools."
+    ],
+    "advancedTips": [
+      "Master the Rapid Ingress: Use this at the end of your opponent's movement phase to set up a unit for a move and a guaranteed charge on your own turn, bypassing the risk of a long charge roll.",
+      "Precision Mortal Wounds: If an attack with the Precision ability also inflicts Mortal Wounds, you can allocate those specific wounds to a Character. Use this to snipe Leaders out of Bodyguard units.",
+      "Heroic Intervention as a deterrent: At 1CP, Heroic Intervention is a powerful tool to protect your objective holders. Position a Walker or melee threat within 6\" of your scoring units to force the opponent to reconsider charging.",
+      "Scout Move Transports: Dedicated Transports can use the Scout 'x' ability of the units embarked within them. Use this to aggressively take mid-board staging points before the first turn begins.",
+      "Big Guns Never Tire positioning: Vehicles and Monsters suffer -1 to hit while in engagement range. If you must shoot while tied up, prioritize weapons with the Twin-linked or Torrent keywords to mitigate the penalty."
+    ],
+    "missionFocus": [
+      "OC is everything: Battle-shocked units have an OC of 0. If you can't kill a unit, forcing a Battle-shock test is often the only way to flip an objective in the Command Phase.",
+      "Primary Scoring timing: Most missions score Primaries at the start of your Command Phase. This means your movement in the previous turn is what wins the game, not your actions in the current turn.",
+      "Grenade Stratagem for chip damage: Use the Grenade stratagem (1CP) to soften up a unit holding an objective before you charge. 8\" range and mortal wounds on 4+ can often kill the last model needed to flip OC.",
+      "Endgame Math: In the final rounds, focus entirely on denial. If you are ahead on points, move your units to physically block the opponent's movement paths (Move-blocking) rather than seeking optimal shooting lanes.",
+      "Prioritize 'Action' units: Keep cheap, fast units (like Scouts or Beasts) alive specifically to perform secondary mission actions so your heavy hitters can focus on clearing the board."
+    ]
+  }
+}
