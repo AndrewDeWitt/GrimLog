@@ -13,7 +13,7 @@
 
 import { createVertex, type GoogleVertexProvider } from '@ai-sdk/google-vertex';
 import { createGoogleGenerativeAI, type GoogleGenerativeAIProvider } from '@ai-sdk/google';
-import { ExternalAccountClient, GoogleAuth } from 'google-auth-library';
+import { ExternalAccountClient } from 'google-auth-library';
 import { getVercelOidcToken } from '@vercel/functions/oidc';
 
 // Environment configuration
@@ -77,20 +77,10 @@ function createWIFAuthClient(): ExternalAccountClient {
   return authClient;
 }
 
-/**
- * Create an ADC auth client for local development
- */
-function createADCAuthClient(): GoogleAuth {
-  console.log('🔐 Creating ADC auth client for Vertex AI...');
-  
-  const auth = new GoogleAuth({
-    scopes: ['https://www.googleapis.com/auth/cloud-platform'],
-    projectId: GCP_PROJECT_ID,
-  });
-
-  console.log('✅ ADC auth client created');
-  return auth;
-}
+// Local development uses ADC with service account impersonation
+// Setup:
+// 1. Grant yourself Token Creator: gcloud iam service-accounts add-iam-policy-binding SA@project.iam.gserviceaccount.com --member='user:YOU@gmail.com' --role='roles/iam.serviceAccountTokenCreator'
+// 2. Login with impersonation: gcloud auth application-default login --impersonate-service-account=SA@project.iam.gserviceaccount.com
 
 /**
  * Get a Vertex AI provider instance with appropriate authentication
@@ -121,20 +111,31 @@ export function getVertexProvider(): GoogleVertexProvider {
     throw new Error('Missing GCP_PROJECT_ID environment variable');
   }
 
-  // Create appropriate auth client based on environment
-  const authClient = isVercelEnvironment()
-    ? createWIFAuthClient()
-    : createADCAuthClient();
+  if (isVercelEnvironment()) {
+    // Production: Use WIF auth
+    console.log('🔐 Using WIF authentication for Vertex AI (Vercel)');
+    const authClient = createWIFAuthClient();
 
-  // Create the Vertex provider with auth
-  cachedVertexProvider = createVertex({
-    project: GCP_PROJECT_ID,
-    location: GCP_LOCATION,
-    googleAuthOptions: {
-      authClient: authClient as any,
-      projectId: GCP_PROJECT_ID,
-    },
-  });
+    cachedVertexProvider = createVertex({
+      project: GCP_PROJECT_ID,
+      location: GCP_LOCATION,
+      googleAuthOptions: {
+        authClient: authClient as any,
+        projectId: GCP_PROJECT_ID,
+      },
+    });
+  } else {
+    // Local development: Use ADC with service account impersonation
+    // Requires: gcloud auth application-default login --impersonate-service-account=SA@project.iam.gserviceaccount.com
+    console.log('🔐 Using ADC with impersonation for local Vertex AI');
+    console.log(`   Project: ${GCP_PROJECT_ID}, Location: ${GCP_LOCATION}`);
+    
+    cachedVertexProvider = createVertex({
+      project: GCP_PROJECT_ID,
+      location: GCP_LOCATION,
+      // Don't pass authClient - let SDK use ADC automatically
+    });
+  }
 
   return cachedVertexProvider;
 }
@@ -236,7 +237,7 @@ export function getVertexImageClient(): GoogleGenAI {
   const imageLocation = GCP_LOCATION;
 
   if (isVercelEnvironment()) {
-    // Use WIF for Vercel
+    // Production: Use Vertex AI with WIF
     console.log('🔐 Creating WIF-authenticated Vertex AI image client...');
     const authClient = createWIFAuthClient();
     
@@ -249,12 +250,14 @@ export function getVertexImageClient(): GoogleGenAI {
       },
     });
   } else {
-    // Use ADC for local development
-    console.log('🔐 Creating ADC-authenticated Vertex AI image client...');
+    // Local: Use Vertex AI with ADC (impersonation)
+    console.log('🔐 Creating ADC-authenticated Vertex AI image client (impersonation)...');
+    
     cachedVertexImageClient = new GoogleGenAI({
       vertexai: true,
       project: GCP_PROJECT_ID,
       location: imageLocation,
+      // Don't pass googleAuthOptions - let SDK use ADC automatically
     });
   }
 

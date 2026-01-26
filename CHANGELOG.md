@@ -4,6 +4,60 @@ This file contains the **last 30 versions**. For older entries, see [CHANGELOG_A
 
 ---
 
+## [4.90.6] - 2026-01-26 - AI SDK Migration & Local Dev Impersonation
+
+### Changed
+
+- **Migrated to Vercel AI SDK (`@ai-sdk/google-vertex`):**
+  - Replaced `@google/genai` SDK with `@ai-sdk/google-vertex` for native WIF support
+  - Uses `generateObject`, `streamObject`, `generateText` for all AI calls
+  - Proper structured output with JSON schema validation
+  - Better streaming support with partial object recovery
+
+- **Local Development: Service Account Impersonation:**
+  - Local dev now uses `gcloud auth application-default login --impersonate-service-account=...`
+  - Mirrors production auth flow exactly (same service account identity)
+  - No more API key fallback - true parity with production
+  - Requires one-time Token Creator role grant
+
+- **Global Endpoint for Gemini 3 Models:**
+  - Changed `GCP_LOCATION` default from `us-east1` to `global`
+  - Required for `gemini-3-flash-preview` and `gemini-3-pro-image-preview` models
+  - See [Vertex AI locations](https://cloud.google.com/vertex-ai/generative-ai/docs/learn/locations)
+
+### Added
+
+- **JSON Sanitization for Control Characters:**
+  - Gemini occasionally includes control characters (`\x13`, etc.) in responses
+  - Added `sanitizeJsonString()` function to all structured output calls
+  - Automatic recovery when `AI_NoObjectGeneratedError` occurs
+  - Applied to: `armyListParser.ts`, `briefGenerator.ts`, `intentOrchestrator.ts`, `tactical-advisor/route.ts`
+
+- **Streaming Error Recovery:**
+  - `streamObject` calls now track `lastPartialObject` during iteration
+  - If final JSON parsing fails, falls back to partial object with minimum required fields
+  - Prevents total failures on long-running brief generations
+
+### Technical
+
+- **Files Modified:**
+  - `lib/vertexAI.ts` - Complete rewrite for AI SDK + impersonation support
+  - `lib/armyListParser.ts` - AI SDK migration + sanitization
+  - `lib/briefGenerator.ts` - AI SDK migration + streaming recovery + sanitization
+  - `lib/intentOrchestrator.ts` - AI SDK migration + sanitization
+  - `app/api/tactical-advisor/route.ts` - AI SDK migration + sanitization
+  - `lib/spiritIconGenerator.ts` - Uses `@google/genai` for image generation (AI SDK doesn't support images)
+
+### Documentation
+
+- Updated [Vertex AI Migration Guide](docs/features/VERTEX_AI_MIGRATION.md) with:
+  - Service account impersonation setup instructions
+  - JSON sanitization patterns
+  - Streaming error recovery patterns
+  - Global endpoint configuration
+
+---
+
 ## [4.90.5] - 2026-01-26 - Vertex AI Migration with Workload Identity Federation
 
 ### Added
