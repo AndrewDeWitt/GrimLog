@@ -23,6 +23,9 @@ import { langfuse } from '@/lib/langfuse';
 
 // Route segment config
 export const dynamic = 'force-dynamic';
+// Max duration for Vercel Pro plan with Fluid Compute (13+ minutes max)
+// Background processing via after() inherits this timeout
+export const maxDuration = 800;
 
 interface SubmitRequest {
   text: string;

@@ -34,7 +34,8 @@ import { generateSpiritIconInternal } from '@/lib/spiritIconGenerator';
 import { getProvider, isGeminiProvider } from '@/lib/aiProvider';
 import { getGeminiProvider } from '@/lib/vertexAI';
 
-const BRIEF_MODEL = 'gemini-3-pro-preview';
+// Use Flash for speed - Pro is too slow and causes timeouts
+const BRIEF_MODEL = 'gemini-3-flash-preview';
 
 // JSON Schema for structured output (same as analyze route)
 const BRIEF_RESPONSE_SCHEMA = {
