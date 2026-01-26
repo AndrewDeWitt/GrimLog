@@ -539,26 +539,49 @@ export async function generateBrief(options: GenerateBriefOptions): Promise<Gene
     });
 
     // Log streaming progress by consuming partialObjectStream
+    // Wrapped in try-catch to detect silent errors
     let chunkCount = 0;
     let lastLogTime = Date.now();
-    for await (const partialObject of streamResult.partialObjectStream) {
-      chunkCount++;
-      const now = Date.now();
-      // Log every 10 seconds to show progress
-      if (now - lastLogTime > 10000) {
-        const elapsed = Math.round((now - streamStartTime) / 1000);
-        console.log(`📡 [Brief] Stream progress: ${chunkCount} chunks, ${elapsed}s elapsed, keys: ${Object.keys(partialObject || {}).join(', ')}`);
-        lastLogTime = now;
+    let lastPartialObject: any = null;
+    
+    try {
+      for await (const partialObject of streamResult.partialObjectStream) {
+        chunkCount++;
+        lastPartialObject = partialObject;
+        const now = Date.now();
+        // Log every 10 seconds to show progress
+        if (now - lastLogTime > 10000) {
+          const elapsed = Math.round((now - streamStartTime) / 1000);
+          console.log(`📡 [Brief] Stream progress: ${chunkCount} chunks, ${elapsed}s elapsed, keys: ${Object.keys(partialObject || {}).join(', ')}`);
+          lastLogTime = now;
+        }
       }
+    } catch (streamError: any) {
+      console.error(`❌ [Brief] Stream iteration error after ${chunkCount} chunks:`, streamError.message || streamError);
+      console.error(`❌ [Brief] Last partial object keys:`, Object.keys(lastPartialObject || {}));
+      throw streamError;
     }
     
     const streamEndTime = Date.now();
     console.log(`✅ [Brief] Stream complete: ${chunkCount} chunks in ${Math.round((streamEndTime - streamStartTime) / 1000)}s`);
 
     // Get the final object and metadata
-    const rawAnalysis = await streamResult.object;
-    const usage = await streamResult.usage;
-    const finishReason = await streamResult.finishReason;
+    let rawAnalysis: any;
+    let usage: any;
+    let finishReason: string | undefined;
+    
+    try {
+      console.log(`🔄 [Brief] Awaiting final object...`);
+      rawAnalysis = await streamResult.object;
+      console.log(`✅ [Brief] Got final object`);
+      usage = await streamResult.usage;
+      console.log(`✅ [Brief] Got usage`);
+      finishReason = await streamResult.finishReason;
+      console.log(`✅ [Brief] Got finishReason: ${finishReason}`);
+    } catch (objectError: any) {
+      console.error(`❌ [Brief] Error getting final object/usage/finishReason:`, objectError.message || objectError);
+      throw objectError;
+    }
 
     // Extract token usage for Langfuse cost tracking
     let mainAnalysisUsage = { input: 0, output: 0, total: 0 };
