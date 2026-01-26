@@ -63,6 +63,20 @@ const INTENT_CLASSIFICATION_SCHEMA = {
 // The AI SDK's jsonSchema() helper handles the conversion automatically
 
 /**
+ * Sanitize JSON string by removing/replacing control characters that break JSON parsing.
+ * Gemini sometimes includes invalid control characters like \x13 (device control) in responses.
+ */
+function sanitizeJsonString(text: string): string {
+  return text
+    // Replace specific control chars that appear in game text (e.g., em-dash alternatives)
+    .replace(/[\x13\x14\x15\x16\x17]/g, '–')
+    // Remove other non-printable control chars (except \n, \r, \t which are valid in JSON)
+    .replace(/[\x00-\x08\x0B\x0C\x0E-\x1F]/g, ' ')
+    // Clean up multiple spaces
+    .replace(/  +/g, ' ');
+}
+
+/**
  * Combined gatekeeper + intent classification using OpenAI Responses API with structured outputs
  */
 async function classifyIntentWithOpenAI(
@@ -470,13 +484,38 @@ If TRUE, map the speech to the appropriate tool category and determine the conte
     const gemini = getGeminiProvider(provider);
 
     // Use AI SDK generateObject for structured output
-    const { object: classification, usage, finishReason } = await generateObject({
-      model: gemini(modelName),
-      schema: jsonSchema(INTENT_CLASSIFICATION_SCHEMA as any),
-      system: systemPrompt,
-      prompt: `Analyze this game speech:\n\n"${transcription}"`,
-      abortSignal,
-    });
+    let classification: any;
+    let usage: any;
+    let finishReason: string | undefined;
+    
+    try {
+      const result = await generateObject({
+        model: gemini(modelName),
+        schema: jsonSchema(INTENT_CLASSIFICATION_SCHEMA as any),
+        system: systemPrompt,
+        prompt: `Analyze this game speech:\n\n"${transcription}"`,
+        abortSignal,
+      });
+      
+      classification = result.object;
+      usage = result.usage;
+      finishReason = result.finishReason;
+    } catch (parseError: any) {
+      // Check if this is a JSON parsing error (control characters in response)
+      if (parseError.name === 'AI_NoObjectGeneratedError' && parseError.text) {
+        console.warn('⚠️ generateObject failed due to JSON parse error, attempting to sanitize and parse manually...');
+        try {
+          const sanitized = sanitizeJsonString(parseError.text);
+          classification = JSON.parse(sanitized);
+          console.log('✅ Successfully parsed sanitized JSON');
+        } catch (sanitizeError) {
+          console.error('❌ Failed to parse even after sanitization:', sanitizeError);
+          throw parseError; // Re-throw original error
+        }
+      } else {
+        throw parseError; // Re-throw non-parsing errors
+      }
+    }
 
     console.timeEnd(`  └─ ${modelName} API call`);
     console.time('  └─ Parsing response');

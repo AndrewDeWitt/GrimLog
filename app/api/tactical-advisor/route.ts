@@ -28,6 +28,20 @@ import { getGeminiProvider } from '@/lib/vertexAI';
 // Model to use for tactical analysis
 const TACTICAL_MODEL = 'gemini-3-flash-preview';
 
+/**
+ * Sanitize JSON string by removing/replacing control characters that break JSON parsing.
+ * Gemini sometimes includes invalid control characters like \x13 (device control) in responses.
+ */
+function sanitizeJsonString(text: string): string {
+  return text
+    // Replace specific control chars that appear in game text (e.g., em-dash alternatives)
+    .replace(/[\x13\x14\x15\x16\x17]/g, '–')
+    // Remove other non-printable control chars (except \n, \r, \t which are valid in JSON)
+    .replace(/[\x00-\x08\x0B\x0C\x0E-\x1F]/g, ' ')
+    // Clean up multiple spaces
+    .replace(/  +/g, ' ');
+}
+
 // JSON Schema for structured output - ensures consistent response format
 const TACTICAL_RESPONSE_SCHEMA = {
   type: "object",
@@ -251,29 +265,47 @@ export async function POST(request: NextRequest) {
       const gemini = getGeminiProvider(geminiProvider);
       
       // Use AI SDK generateObject for structured output
-      const result = await generateObject({
-        model: gemini(TACTICAL_MODEL),
-        schema: jsonSchema(TACTICAL_RESPONSE_SCHEMA as any),
-        system: systemPrompt,
-        prompt: userPrompt,
-        maxOutputTokens: 20000,
-        temperature: 0.7,
-        providerOptions: {
-          google: {
-            // Disable thinking to ensure all tokens go to the actual response
-            thinkingConfig: { thinkingBudget: 0 },
+      try {
+        const result = await generateObject({
+          model: gemini(TACTICAL_MODEL),
+          schema: jsonSchema(TACTICAL_RESPONSE_SCHEMA as any),
+          system: systemPrompt,
+          prompt: userPrompt,
+          maxOutputTokens: 20000,
+          temperature: 0.7,
+          providerOptions: {
+            google: {
+              // Disable thinking to ensure all tokens go to the actual response
+              thinkingConfig: { thinkingBudget: 0 },
+            },
           },
-        },
-      });
+        });
+        
+        responseObject = result.object;
+        
+        // Extract token usage for Langfuse cost tracking
+        usage = {
+          input: result.usage?.inputTokens || 0,
+          output: result.usage?.outputTokens || 0,
+          total: (result.usage?.inputTokens || 0) + (result.usage?.outputTokens || 0)
+        };
+      } catch (parseError: any) {
+        // Check if this is a JSON parsing error (control characters in response)
+        if (parseError.name === 'AI_NoObjectGeneratedError' && parseError.text) {
+          console.warn('⚠️ generateObject failed due to JSON parse error, attempting to sanitize and parse manually...');
+          try {
+            const sanitized = sanitizeJsonString(parseError.text);
+            responseObject = JSON.parse(sanitized);
+            console.log('✅ Successfully parsed sanitized JSON');
+          } catch (sanitizeError) {
+            console.error('❌ Failed to parse even after sanitization:', sanitizeError);
+            throw parseError; // Re-throw original error
+          }
+        } else {
+          throw parseError; // Re-throw non-parsing errors
+        }
+      }
       
-      responseObject = result.object;
-      
-      // Extract token usage for Langfuse cost tracking
-      usage = {
-        input: result.usage?.inputTokens || 0,
-        output: result.usage?.outputTokens || 0,
-        total: (result.usage?.inputTokens || 0) + (result.usage?.outputTokens || 0)
-      };
       console.log(`📊 Tactical advisor token usage: ${usage.input} input, ${usage.output} output, ${usage.total} total`);
       
     } catch (aiError: any) {

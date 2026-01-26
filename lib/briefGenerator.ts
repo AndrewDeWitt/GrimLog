@@ -37,6 +37,20 @@ import { getGeminiProvider } from '@/lib/vertexAI';
 // Use Flash for speed - Pro is too slow and causes timeouts
 const BRIEF_MODEL = 'gemini-3-flash-preview';
 
+/**
+ * Sanitize JSON string by removing/replacing control characters that break JSON parsing.
+ * Gemini sometimes includes invalid control characters like \x13 (device control) in responses.
+ */
+function sanitizeJsonString(text: string): string {
+  return text
+    // Replace specific control chars that appear in game text (e.g., em-dash alternatives)
+    .replace(/[\x13\x14\x15\x16\x17]/g, '–')
+    // Remove other non-printable control chars (except \n, \r, \t which are valid in JSON)
+    .replace(/[\x00-\x08\x0B\x0C\x0E-\x1F]/g, ' ')
+    // Clean up multiple spaces
+    .replace(/  +/g, ' ');
+}
+
 // JSON Schema for structured output (same as analyze route)
 const BRIEF_RESPONSE_SCHEMA = {
   type: "object",
@@ -574,13 +588,51 @@ export async function generateBrief(options: GenerateBriefOptions): Promise<Gene
       console.log(`🔄 [Brief] Awaiting final object...`);
       rawAnalysis = await streamResult.object;
       console.log(`✅ [Brief] Got final object`);
+    } catch (objectError: any) {
+      console.error(`❌ [Brief] Error getting final object:`, objectError.message || objectError);
+      
+      // Try to use the last partial object if it has enough data
+      // This happens when JSON parsing fails due to control characters
+      if (lastPartialObject && Object.keys(lastPartialObject).length > 0) {
+        console.log(`⚠️ [Brief] Attempting to use last partial object with keys: ${Object.keys(lastPartialObject).join(', ')}`);
+        
+        // Check if we have the critical fields
+        const hasMinimumFields = lastPartialObject.executiveSummary && 
+                                  lastPartialObject.armyArchetype && 
+                                  lastPartialObject.strategicStrengths;
+        
+        if (hasMinimumFields) {
+          console.log(`✅ [Brief] Using last partial object as fallback (has minimum required fields)`);
+          rawAnalysis = lastPartialObject;
+        } else {
+          // Try to extract raw text from error and sanitize
+          if (objectError.text) {
+            console.log(`⚠️ [Brief] Attempting to sanitize raw response text...`);
+            try {
+              const sanitized = sanitizeJsonString(objectError.text);
+              rawAnalysis = JSON.parse(sanitized);
+              console.log(`✅ [Brief] Successfully parsed sanitized JSON`);
+            } catch (parseError) {
+              console.error(`❌ [Brief] Failed to parse sanitized JSON:`, parseError);
+              throw objectError;
+            }
+          } else {
+            throw objectError;
+          }
+        }
+      } else {
+        throw objectError;
+      }
+    }
+    
+    try {
       usage = await streamResult.usage;
       console.log(`✅ [Brief] Got usage`);
       finishReason = await streamResult.finishReason;
       console.log(`✅ [Brief] Got finishReason: ${finishReason}`);
-    } catch (objectError: any) {
-      console.error(`❌ [Brief] Error getting final object/usage/finishReason:`, objectError.message || objectError);
-      throw objectError;
+    } catch (metaError: any) {
+      console.warn(`⚠️ [Brief] Could not get usage/finishReason:`, metaError.message);
+      // Non-fatal - we can continue without these
     }
 
     // Extract token usage for Langfuse cost tracking
