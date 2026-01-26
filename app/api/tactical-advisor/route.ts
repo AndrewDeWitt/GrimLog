@@ -10,7 +10,6 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
-import { GoogleGenAI } from '@google/genai';
 import { requireAuth } from '@/lib/auth/apiAuth';
 import { checkRateLimit, getRateLimitIdentifier, getClientIp, RATE_LIMITS } from '@/lib/rateLimit';
 import { langfuse } from '@/lib/langfuse';
@@ -21,11 +20,8 @@ import {
   parseAIResponse
 } from '@/lib/tacticalAdvisor';
 import { TacticalAdviceRequest, TacticalAdviceResponse } from '@/lib/types';
-
-// Initialize Gemini client
-const gemini = new GoogleGenAI({
-  apiKey: process.env.GOOGLE_API_KEY,
-});
+import { getProvider, isGeminiProvider } from '@/lib/aiProvider';
+import { getGeminiClient } from '@/lib/vertexAI';
 
 // Model to use for tactical analysis
 const TACTICAL_MODEL = 'gemini-3-flash-preview';
@@ -240,11 +236,14 @@ export async function POST(request: NextRequest) {
       }
     });
     
-    // Call Gemini for analysis
+    // Call Gemini for analysis (supports both AI Studio and Vertex AI)
     console.time('⏱️ Gemini Analysis');
-    
+    const provider = getProvider();
+    const geminiProvider = isGeminiProvider(provider) ? (provider as 'google' | 'vertex') : 'google';
+
     let response;
     try {
+      const gemini = await getGeminiClient(geminiProvider);
       response = await gemini.models.generateContent({
         model: TACTICAL_MODEL,
         contents: userPrompt,

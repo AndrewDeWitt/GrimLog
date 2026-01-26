@@ -4,6 +4,87 @@ This file contains the **last 30 versions**. For older entries, see [CHANGELOG_A
 
 ---
 
+## [4.90.5] - 2026-01-26 - Vertex AI Migration with Workload Identity Federation
+
+### Added
+
+- **Vertex AI Support with Workload Identity Federation (WIF):**
+  - Production-grade zero-secret authentication for Google Cloud Vertex AI
+  - WIF eliminates static API keys - uses short-lived OIDC tokens from Vercel
+  - Automatic token refresh with 55-minute cache expiry
+  - Supports both Vertex AI (production) and Google AI Studio (development)
+
+- **New Provider Architecture (`lib/vertexAI.ts`):**
+  - `getGeminiClient()` - Dynamic client factory supporting both providers
+  - `getGeminiClientWithOptions()` - Variant with custom timeout/config
+  - `getVertexClient()` - WIF-authenticated Vertex AI client
+  - `getGoogleAIClient()` - API key-based Google AI Studio client
+  - ADC (Application Default Credentials) support for local development via `gcloud` CLI
+
+- **Provider Type Enhancement:**
+  - Added `'vertex'` to `AIProvider` type (`'openai' | 'google' | 'vertex'`)
+  - New `isGeminiProvider()` helper for checking Google-based providers
+  - Backward compatible - existing `'google'` provider still works
+
+### Changed
+
+- **All Gemini API Calls Now Use Dynamic Client:**
+  - `app/api/analyze/route.ts` - Voice analysis
+  - `app/api/tactical-advisor/route.ts` - Tactical suggestions
+  - `lib/intentOrchestrator.ts` - Intent classification
+  - `lib/briefGenerator.ts` - Brief strategic analysis
+  - `lib/competitiveContextParser.ts` - Competitive context extraction
+  - `lib/spiritIconGenerator.ts` - Spirit icon generation
+  - `lib/armyListParser.ts` - Army list parsing
+
+- **Provider Detection:**
+  - Provider checks updated from `provider === 'google'` to `isGeminiProvider(provider)`
+  - Ensures both `'google'` and `'vertex'` providers route to Gemini SDK
+
+### Technical
+
+- **Files Created:**
+  - `lib/vertexAI.ts` - Vertex AI client factory with WIF/ADC support
+
+- **Files Modified:**
+  - `lib/aiProvider.ts` - Extended AIProvider type and added helper functions
+  - `app/api/analyze/route.ts` - Dynamic Gemini client
+  - `app/api/tactical-advisor/route.ts` - Dynamic Gemini client
+  - `lib/intentOrchestrator.ts` - Provider parameter and dynamic client
+  - `lib/briefGenerator.ts` - Dynamic client with timeout options
+  - `lib/competitiveContextParser.ts` - Dynamic Gemini client
+  - `lib/spiritIconGenerator.ts` - Dynamic Gemini client
+  - `lib/armyListParser.ts` - Provider check and dynamic client
+
+- **New Dependencies:**
+  - `google-auth-library` - GCP authentication library for WIF
+
+### Environment Variables (Vertex AI)
+
+```bash
+# Required for Vertex AI provider
+AI_PROVIDER=vertex
+GCP_PROJECT_ID=your-project-id
+GCP_PROJECT_NUMBER=your-project-number
+GCP_LOCATION=us-east1
+GCP_SERVICE_ACCOUNT_EMAIL=your-sa@project.iam.gserviceaccount.com
+GCP_WORKLOAD_IDENTITY_POOL_ID=vercel
+GCP_WORKLOAD_IDENTITY_POOL_PROVIDER_ID=vercel
+```
+
+### Documentation
+
+- Added [Vertex AI Migration Guide](docs/features/VERTEX_AI_MIGRATION.md) - Complete setup and architecture reference
+
+### Verification
+
+- ✅ `npm run lint` passes (only pre-existing warnings)
+- ✅ `npx tsc --noEmit` compiles successfully
+- ✅ Local ADC authentication tested and working
+- ✅ Brief generation verified with Vertex AI
+
+---
+
 ## [4.90.4] - 2026-01-19 - Brief Faction Selector
 
 ### Added

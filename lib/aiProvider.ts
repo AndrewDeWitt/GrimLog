@@ -1,28 +1,47 @@
 // AI Provider Abstraction
-// Handles provider selection and common interfaces for OpenAI and Google Gemini
+// Handles provider selection and common interfaces for OpenAI, Google Gemini, and Vertex AI
 
-export type AIProvider = 'openai' | 'google';
+export type AIProvider = 'openai' | 'google' | 'vertex';
 
 /**
  * Get the configured AI provider from environment variables
  * Defaults to OpenAI if not specified or invalid
+ *
+ * Supported values:
+ * - 'openai' - OpenAI API (requires OPENAI_API_KEY)
+ * - 'google' - Google AI Studio (requires GOOGLE_API_KEY)
+ * - 'vertex' - Google Vertex AI (requires GCP_PROJECT_ID + WIF or ADC)
  */
 export function getProvider(): AIProvider {
   const provider = process.env.AI_PROVIDER?.toLowerCase();
   if (provider === 'google') {
     return 'google';
   }
+  if (provider === 'vertex') {
+    return 'vertex';
+  }
   return 'openai'; // Default to OpenAI
 }
 
 /**
- * Validate that the required API key is present for the selected provider
- * Throws an error if the key is missing
+ * Validate that the required configuration is present for the selected provider
+ * Throws an error if required config is missing
  */
 export function validateProviderConfig(provider: AIProvider): void {
   if (provider === 'google') {
     if (!process.env.GOOGLE_API_KEY) {
       throw new Error('GOOGLE_API_KEY environment variable is required when AI_PROVIDER=google');
+    }
+  } else if (provider === 'vertex') {
+    if (!process.env.GCP_PROJECT_ID) {
+      throw new Error('GCP_PROJECT_ID environment variable is required when AI_PROVIDER=vertex');
+    }
+    // WIF-specific vars are only needed in Vercel, ADC works locally without them
+    if (process.env.VERCEL_ENV && !process.env.GCP_PROJECT_NUMBER) {
+      throw new Error('GCP_PROJECT_NUMBER environment variable is required for Vertex AI on Vercel');
+    }
+    if (process.env.VERCEL_ENV && !process.env.GCP_SERVICE_ACCOUNT_EMAIL) {
+      throw new Error('GCP_SERVICE_ACCOUNT_EMAIL environment variable is required for Vertex AI on Vercel');
     }
   } else {
     if (!process.env.OPENAI_API_KEY) {
@@ -35,7 +54,8 @@ export function validateProviderConfig(provider: AIProvider): void {
  * Get a human-readable model name for the current provider
  */
 export function getModelName(provider: AIProvider, type: 'main' | 'intent'): string {
-  if (provider === 'google') {
+  if (provider === 'google' || provider === 'vertex') {
+    // Both Google AI Studio and Vertex AI use the same model names
     return 'gemini-2.5-flash';
   } else {
     // OpenAI
@@ -129,16 +149,19 @@ export function getArmyParseProvider(): AIProvider {
   if (provider === 'google') {
     return 'google';
   }
+  if (provider === 'vertex') {
+    return 'vertex';
+  }
   return 'openai'; // Default to OpenAI
 }
 
 /**
  * Get the model name for army list parsing based on provider
- * - Google: gemini-3-flash-preview (fast, good structured output)
+ * - Google/Vertex: gemini-3-flash-preview (fast, good structured output)
  * - OpenAI: gpt-5-mini (default)
  */
 export function getArmyParseModel(provider: AIProvider): string {
-  return provider === 'google' ? 'gemini-3-flash-preview' : 'gpt-5-mini';
+  return (provider === 'google' || provider === 'vertex') ? 'gemini-3-flash-preview' : 'gpt-5-mini';
 }
 
 /**
@@ -150,18 +173,28 @@ export function getAnalyzeProvider(): AIProvider {
   if (provider === 'google') {
     return 'google';
   }
+  if (provider === 'vertex') {
+    return 'vertex';
+  }
   return 'openai'; // Default to OpenAI
 }
 
 /**
  * Get the model name for game analysis based on provider
- * - Google: gemini-3-flash-preview (fast, good function calling)
+ * - Google/Vertex: gemini-3-flash-preview (fast, good function calling)
  * - OpenAI: gpt-5-mini (main), gpt-5-nano (intent)
  */
 export function getAnalyzeModel(provider: AIProvider, type: 'main' | 'intent'): string {
-  if (provider === 'google') {
+  if (provider === 'google' || provider === 'vertex') {
     return 'gemini-3-flash-preview';
   }
   return type === 'main' ? 'gpt-5-mini' : 'gpt-5-nano';
+}
+
+/**
+ * Check if the provider uses Google's Gemini API (either AI Studio or Vertex AI)
+ */
+export function isGeminiProvider(provider: AIProvider): boolean {
+  return provider === 'google' || provider === 'vertex';
 }
 

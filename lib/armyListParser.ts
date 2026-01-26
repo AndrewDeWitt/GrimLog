@@ -6,13 +6,13 @@
  */
 
 import OpenAI from 'openai';
-import { GoogleGenAI } from '@google/genai';
 import { prisma } from '@/lib/prisma';
 import { ParsedArmyList } from '@/lib/types';
 import { langfuse } from '@/lib/langfuse';
 import { observeOpenAI } from 'langfuse';
-import { getArmyParseProvider, getArmyParseModel, validateProviderConfig } from '@/lib/aiProvider';
+import { getArmyParseProvider, getArmyParseModel, validateProviderConfig, isGeminiProvider } from '@/lib/aiProvider';
 import { normalizeFactionName } from '@/lib/factionNormalization';
+import { getGeminiClient } from '@/lib/vertexAI';
 import * as fs from 'fs-extra';
 import * as path from 'path';
 
@@ -20,10 +20,7 @@ const openai = observeOpenAI(new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 }));
 
-// Initialize Gemini client (lazy - only used if provider is google)
-const gemini = new GoogleGenAI({
-  apiKey: process.env.GOOGLE_API_KEY,
-});
+// Note: Gemini client is fetched dynamically based on provider (AI Studio or Vertex AI)
 
 // Load known detachments from cached files
 async function loadKnownDetachments(): Promise<string> {
@@ -605,7 +602,9 @@ Return structured data matching the exact schema provided.`;
 
   let parsed: any;
 
-  if (provider === 'google') {
+  if (isGeminiProvider(provider)) {
+    // Get the Gemini client (AI Studio or Vertex AI)
+    const gemini = await getGeminiClient(provider as 'google' | 'vertex');
     let geminiContent: any;
 
     if (contentType === 'image') {
@@ -634,7 +633,7 @@ Return structured data matching the exact schema provided.`;
         { role: 'user', content: contentType === 'text' ? content : '[image content - base64 data]' }
       ],
       metadata: {
-        provider: 'google',
+        provider: provider,
         contentType,
         datasheetCount: sortedDatasheets.length,
         thinkingLevel: 'low',

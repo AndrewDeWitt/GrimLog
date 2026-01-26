@@ -2,18 +2,15 @@
 // Classifies speech intent and determines required context tier
 
 import OpenAI from 'openai';
-import { GoogleGenAI, Type } from '@google/genai';
+import { Type } from '@google/genai';
 import type { ContextTier } from './contextBuilder';
-import { getAnalyzeProvider, validateProviderConfig, getAnalyzeModel, type IntentClassification as IIntentClassification } from './aiProvider';
+import { getAnalyzeProvider, validateProviderConfig, getAnalyzeModel, isGeminiProvider, type IntentClassification as IIntentClassification } from './aiProvider';
+import { getGeminiClient } from './vertexAI';
 
 // Use plain OpenAI client (observeOpenAI adds massive overhead - 10-15s per call!)
+// Gemini client is fetched dynamically based on provider (AI Studio or Vertex AI)
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
-});
-
-// Initialize Gemini client
-const gemini = new GoogleGenAI({
-  apiKey: process.env.GOOGLE_API_KEY,
 });
 
 export interface IntentClassification extends IIntentClassification {
@@ -352,6 +349,7 @@ If TRUE, map the speech to the appropriate tool category and determine the conte
 
 /**
  * Combined gatekeeper + intent classification using Google Gemini with structured outputs
+ * Works with both Google AI Studio (google) and Vertex AI (vertex) providers
  */
 async function classifyIntentWithGemini(
   transcription: string,
@@ -360,7 +358,8 @@ async function classifyIntentWithGemini(
   recentTranscripts: string[],
   langfuseGeneration?: any,
   modelName: string = 'gemini-3-flash-preview',
-  abortSignal?: AbortSignal
+  abortSignal?: AbortSignal,
+  provider: 'google' | 'vertex' = 'google'
 ): Promise<IntentClassification> {
   const systemPrompt = `You are a combined gatekeeper and intent classifier for a Warhammer 40K game tracking system.
 
@@ -484,9 +483,12 @@ First determine if this is game-related (isGameRelated). If FALSE, set intent to
 If TRUE, map the speech to the appropriate tool category and determine the context tier based on what data the tool needs.`;
 
   try {
-    console.log(`🔄 Starting ${modelName} call for gatekeeper + intent...`);
+    console.log(`🔄 Starting ${modelName} call for gatekeeper + intent (${provider})...`);
     console.time(`  └─ ${modelName} API call`);
-    
+
+    // Get the appropriate Gemini client (AI Studio or Vertex AI)
+    const gemini = await getGeminiClient(provider);
+
     const response = await gemini.models.generateContent({
       model: modelName,
       contents: `Analyze this game speech:\n\n"${transcription}"`,
@@ -606,8 +608,8 @@ export async function orchestrateIntent(
   console.log(`📊 Model: ${modelName}`);
   
   // Single AI call for both gatekeeper and intent classification
-  if (provider === 'google') {
-    return await classifyIntentWithGemini(transcription, currentPhase, currentRound, recentTranscripts, langfuseGeneration, modelName, abortSignal);
+  if (isGeminiProvider(provider)) {
+    return await classifyIntentWithGemini(transcription, currentPhase, currentRound, recentTranscripts, langfuseGeneration, modelName, abortSignal, provider as 'google' | 'vertex');
   } else {
     return await classifyIntentWithOpenAI(transcription, currentPhase, currentRound, recentTranscripts, langfuseGeneration, modelName, abortSignal);
   }

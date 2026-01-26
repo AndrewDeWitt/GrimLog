@@ -2,6 +2,58 @@
 # yarn lockfile v1
 
 
+"@ai-sdk/anthropic@3.0.23":
+  version "3.0.23"
+  resolved "https://registry.yarnpkg.com/@ai-sdk/anthropic/-/anthropic-3.0.23.tgz#751fca2decb9441a6e65587586d7c7e97d0ac119"
+  integrity sha512-mu9djDW2kiJS/ihH5BwGy2c/zwSlcTjx1NWPvY/Ug12SWToqzozSyd1EIXRlfXyfwzL2CWrqMNyybqi9OVDXgg==
+  dependencies:
+    "@ai-sdk/provider" "3.0.5"
+    "@ai-sdk/provider-utils" "4.0.9"
+
+"@ai-sdk/gateway@3.0.22":
+  version "3.0.22"
+  resolved "https://registry.yarnpkg.com/@ai-sdk/gateway/-/gateway-3.0.22.tgz#96836072096ead43f046192c29be188109a5bec6"
+  integrity sha512-NgnlY73JNuooACHqUIz5uMOEWvqR1MMVbb2soGLMozLY1fgwEIF5iJFDAGa5/YArlzw2ATVU7zQu7HkR/FUjgA==
+  dependencies:
+    "@ai-sdk/provider" "3.0.5"
+    "@ai-sdk/provider-utils" "4.0.9"
+    "@vercel/oidc" "3.1.0"
+
+"@ai-sdk/google-vertex@^4.0.28":
+  version "4.0.28"
+  resolved "https://registry.yarnpkg.com/@ai-sdk/google-vertex/-/google-vertex-4.0.28.tgz#8bce4c646fe910fdea9705413f5889993d53118d"
+  integrity sha512-QHf16QlxlQJQBto8r4u4hkCKwlNGnGSTyihp2SPJ98Xj4mLtQZw26Gp2tIHqZZHWbKF5K2AFSILSmgLfFapwEw==
+  dependencies:
+    "@ai-sdk/anthropic" "3.0.23"
+    "@ai-sdk/google" "3.0.13"
+    "@ai-sdk/provider" "3.0.5"
+    "@ai-sdk/provider-utils" "4.0.9"
+    google-auth-library "^10.5.0"
+
+"@ai-sdk/google@3.0.13":
+  version "3.0.13"
+  resolved "https://registry.yarnpkg.com/@ai-sdk/google/-/google-3.0.13.tgz#7f1d1f745a0be230725bccbec84bea169b3d4f08"
+  integrity sha512-HYCh8miS4FLxOIpjo/BmoFVMO5BuxNpHVVDQkoJotoH8ZSFftkJJGGayIxQT/Lwx9GGvVVCOQ+lCdBBAnkl1sA==
+  dependencies:
+    "@ai-sdk/provider" "3.0.5"
+    "@ai-sdk/provider-utils" "4.0.9"
+
+"@ai-sdk/provider-utils@4.0.9":
+  version "4.0.9"
+  resolved "https://registry.yarnpkg.com/@ai-sdk/provider-utils/-/provider-utils-4.0.9.tgz#f15d6ed31fca8aeca402fa56278659a20581057e"
+  integrity sha512-bB4r6nfhBOpmoS9mePxjRoCy+LnzP3AfhyMGCkGL4Mn9clVNlqEeKj26zEKEtB6yoSVcT1IQ0Zh9fytwMCDnow==
+  dependencies:
+    "@ai-sdk/provider" "3.0.5"
+    "@standard-schema/spec" "^1.1.0"
+    eventsource-parser "^3.0.6"
+
+"@ai-sdk/provider@3.0.5":
+  version "3.0.5"
+  resolved "https://registry.yarnpkg.com/@ai-sdk/provider/-/provider-3.0.5.tgz#730c5acdc4f074c877a547c1492fafc81bdc4f53"
+  integrity sha512-2Xmoq6DBJqmSl80U6V9z5jJSJP7ehaJJQMy2iFUqTay06wdCqTnPVBBQbtEL8RCChenL+q5DC5H5WzU3vV3v8w==
+  dependencies:
+    json-schema "^0.4.0"
+
 "@alloc/quick-lru@^5.2.0":
   version "5.2.0"
   resolved "https://registry.npmjs.org/@alloc/quick-lru/-/quick-lru-5.2.0.tgz"
@@ -653,6 +705,11 @@
   resolved "https://registry.npmjs.org/@nolyfill/is-core-module/-/is-core-module-1.0.39.tgz"
   integrity sha512-nn5ozdjYQpUCZlWGuxcJY/KpxkWQs4DcbMCmKojjyrYDEAGy4Ce19NN4v5MduafTwJlbKc99UA8YhSVqq9yPZA==
 
+"@opentelemetry/api@1.9.0":
+  version "1.9.0"
+  resolved "https://registry.yarnpkg.com/@opentelemetry/api/-/api-1.9.0.tgz#d03eba68273dc0f7509e2a3d5cba21eae10379fe"
+  integrity sha512-3giAOQvZiH5F9bMlMiv8+GSPMeqg0dbaeo58/0SlA9sxSqZhnUtxzX9/2FzyhS9sWQf5S0GJE0AKBrFqjpeYcg==
+
 "@pkgjs/parseargs@^0.11.0":
   version "0.11.0"
   resolved "https://registry.npmjs.org/@pkgjs/parseargs/-/parseargs-0.11.0.tgz"
@@ -723,6 +780,11 @@
   version "1.0.0"
   resolved "https://registry.npmjs.org/@standard-schema/spec/-/spec-1.0.0.tgz"
   integrity sha512-m2bOd0f2RT9k8QJx1JN85cZYyH1RqFBdlwtkSlf4tBDYLCiiZnv1fIIwacK6cqwXavOydf0NPToMQgpKq+dVlA==
+
+"@standard-schema/spec@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@standard-schema/spec/-/spec-1.1.0.tgz#a79b55dbaf8604812f52d140b2c9ab41bc150bb8"
+  integrity sha512-l2aFy5jALhniG5HgqrD6jXLi/rUWrKvqN/qJx6yoJsgKhblVd+iqqU4RCXavm/jPityDo5TCvKMnpjKnOriy0w==
 
 "@supabase/auth-js@2.75.0":
   version "2.75.0"
@@ -1209,12 +1271,24 @@
     throttleit "^2.1.0"
     undici "^5.28.4"
 
+"@vercel/functions@^3.3.6":
+  version "3.3.6"
+  resolved "https://registry.yarnpkg.com/@vercel/functions/-/functions-3.3.6.tgz#84df2bde1ab941193e9e974093e517752545b735"
+  integrity sha512-mLKK3H+v1XjzTiksYN7XV4sl/n8tqb0DeavoUzjFKRQMmx5x+vy1jIl24GY4C8D2dinQPV1ZuCSPhJptBeeE/A==
+  dependencies:
+    "@vercel/oidc" "3.1.0"
+
 "@vercel/kv@^3.0.0":
   version "3.0.0"
   resolved "https://registry.npmjs.org/@vercel/kv/-/kv-3.0.0.tgz"
   integrity sha512-pKT8fRnfyYk2MgvyB6fn6ipJPCdfZwiKDdw7vB+HL50rjboEBHDVBEcnwfkEpVSp2AjNtoaOUH7zG+bVC/rvSg==
   dependencies:
     "@upstash/redis" "^1.34.0"
+
+"@vercel/oidc@3.1.0":
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/@vercel/oidc/-/oidc-3.1.0.tgz#066caee449b84079f33c7445fc862464fe10ec32"
+  integrity sha512-Fw28YZpRnA3cAHHDlkt7xQHiJ0fcL+NRcIqsocZQUSmbzeIKRpwttJjik5ZGanXP+vlA4SbTg+AbA3bP363l+w==
 
 acorn-jsx@^5.3.2:
   version "5.3.2"
@@ -1230,6 +1304,16 @@ agent-base@^7.1.2:
   version "7.1.4"
   resolved "https://registry.npmjs.org/agent-base/-/agent-base-7.1.4.tgz"
   integrity sha512-MnA+YT8fwfJPgBx3m60MNqakm30XOkyIoH1y6huTQvC0PwZG7ki8NacLBcrPbNoo8vEZy7Jpuk7+jMO+CUovTQ==
+
+ai@^6.0.49:
+  version "6.0.49"
+  resolved "https://registry.yarnpkg.com/ai/-/ai-6.0.49.tgz#7db4d174af9ab8b51062ff1a935fbc32b127b30e"
+  integrity sha512-LABniBX/0R6Tv+iUK5keUZhZLaZUe4YjP5M2rZ4wAdZ8iKV3EfTAoJxuL1aaWTSJKIilKa9QUEkCgnp89/32bw==
+  dependencies:
+    "@ai-sdk/gateway" "3.0.22"
+    "@ai-sdk/provider" "3.0.5"
+    "@ai-sdk/provider-utils" "4.0.9"
+    "@opentelemetry/api" "1.9.0"
 
 ajv@^6.12.4:
   version "6.12.6"
@@ -2377,6 +2461,11 @@ eventemitter3@^5.0.1:
   resolved "https://registry.npmjs.org/eventemitter3/-/eventemitter3-5.0.1.tgz"
   integrity sha512-GWkBvjiSZK87ELrYOSESUYeVIc9mvLLf/nXalMOS5dYrgZq9o5OVkbZAVM06CVxYsCwH9BDZFPlQTlPA1j4ahA==
 
+eventsource-parser@^3.0.6:
+  version "3.0.6"
+  resolved "https://registry.yarnpkg.com/eventsource-parser/-/eventsource-parser-3.0.6.tgz#292e165e34cacbc936c3c92719ef326d4aeb4e90"
+  integrity sha512-Vo1ab+QXPzZ4tCa8SwIHJFaSzy4R6SHf7BY79rFBDf0idraZWAkYrDjDj8uWaSm3S2TK+hJ7/t1CEmZ7jXw+pg==
+
 execa@^8.0.1:
   version "8.0.1"
   resolved "https://registry.npmjs.org/execa/-/execa-8.0.1.tgz"
@@ -2717,6 +2806,19 @@ gm@^1.25.1:
 google-auth-library@^10.1.0, google-auth-library@^10.2.0, google-auth-library@^10.3.0:
   version "10.5.0"
   resolved "https://registry.npmjs.org/google-auth-library/-/google-auth-library-10.5.0.tgz"
+  integrity sha512-7ABviyMOlX5hIVD60YOfHw4/CxOfBhyduaYB+wbFWCWoni4N7SLcV46hrVRktuBbZjFC9ONyqamZITN7q3n32w==
+  dependencies:
+    base64-js "^1.3.0"
+    ecdsa-sig-formatter "^1.0.11"
+    gaxios "^7.0.0"
+    gcp-metadata "^8.0.0"
+    google-logging-utils "^1.0.0"
+    gtoken "^8.0.0"
+    jws "^4.0.0"
+
+google-auth-library@^10.5.0:
+  version "10.5.0"
+  resolved "https://registry.yarnpkg.com/google-auth-library/-/google-auth-library-10.5.0.tgz#3f0ebd47173496b91d2868f572bb8a8180c4b561"
   integrity sha512-7ABviyMOlX5hIVD60YOfHw4/CxOfBhyduaYB+wbFWCWoni4N7SLcV46hrVRktuBbZjFC9ONyqamZITN7q3n32w==
   dependencies:
     base64-js "^1.3.0"
@@ -3185,6 +3287,11 @@ json-schema-traverse@^0.4.1:
   version "0.4.1"
   resolved "https://registry.npmjs.org/json-schema-traverse/-/json-schema-traverse-0.4.1.tgz"
   integrity sha512-xbbCH5dCYU5T8LcEhhuh7HJ88HXuW3qsI3Y0zOZFKfZEHcpWiHU/Jxzk629Brsab/mMiHQti9wMP+845RPe3Vg==
+
+json-schema@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/json-schema/-/json-schema-0.4.0.tgz#f7de4cf6efab838ebaeb3236474cbba5a1930ab5"
+  integrity sha512-es94M3nTIfsEPisRafak+HDLfHXnKBhV3vU5eqPcS3flIWqcxJWgXHXiey3YrpaNsanY5ei1VoYEbOzijuq9BA==
 
 json-stable-stringify-without-jsonify@^1.0.1:
   version "1.0.1"

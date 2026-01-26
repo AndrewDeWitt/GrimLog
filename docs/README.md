@@ -1,7 +1,7 @@
 # Grimlog Documentation
 
-**Version:** 4.90.4
-**Last Updated:** 2026-01-19
+**Version:** 4.90.5
+**Last Updated:** 2026-01-26
 **Status:** Production Ready
 
 ## 📚 Complete Documentation Index
@@ -808,6 +808,13 @@ This is the central hub for all Grimlog documentation. Everything you need to kn
   - **NEW:** Unified dossier trace (army parse → analysis → suggestions)
   - Setup script for model pricing configuration (`scripts/setup-langfuse-models.ts`)
   - Trace structure and debugging
+
+- **[Vertex AI Migration](features/VERTEX_AI_MIGRATION.md)** ⭐ NEW v4.90.5 - Production-grade Vertex AI with Workload Identity Federation
+  - Zero-secret authentication using WIF (no API keys in production)
+  - Supports both Vertex AI (WIF) and Google AI Studio (API key) providers
+  - ADC support for local development via `gcloud` CLI
+  - Dynamic client selection based on `AI_PROVIDER` environment variable
+  - Complete setup guide with GCP Console instructions
 
 - **[Session Management](features/SESSION_MANAGEMENT.md)** - Complete game session lifecycle
   - Creating and resuming sessions

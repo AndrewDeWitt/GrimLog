@@ -1,16 +1,15 @@
 /**
  * Spirit Icon Generator Utility
- * 
+ *
  * Generates grimdark comic book style icons for armies using Gemini.
  * This module is shared between the API route and brief analysis.
  */
 
-import { GoogleGenAI } from '@google/genai';
 import { langfuse } from '@/lib/langfuse';
 import { createServiceClient } from '@/lib/supabase/service';
 import { randomUUID, createHash } from 'crypto';
-
-const genai = new GoogleGenAI({ apiKey: process.env.GOOGLE_API_KEY });
+import { getProvider, isGeminiProvider } from '@/lib/aiProvider';
+import { getGeminiClient } from '@/lib/vertexAI';
 
 // Model for image generation
 const IMAGE_MODEL = 'gemini-3-pro-image-preview';
@@ -66,8 +65,13 @@ export async function generateSpiritIconInternal(
   });
   
   console.log(`🎨 Generating Army Spirit Icon: "${tagline}" for ${faction}`);
-  
+
   try {
+    // Get the Gemini client (supports both AI Studio and Vertex AI)
+    const provider = getProvider();
+    const geminiProvider = isGeminiProvider(provider) ? (provider as 'google' | 'vertex') : 'google';
+    const genai = await getGeminiClient(geminiProvider);
+
     // Build the full prompt with grimdark comic book style guidance
     const fullPrompt = `Create a grimdark Warhammer 40K style icon/emblem based on this description:
 
@@ -89,9 +93,9 @@ STYLE REQUIREMENTS:
       name: "gemini-spirit-icon-generation",
       model: IMAGE_MODEL,
       input: { prompt: fullPrompt, originalPrompt: imagePrompt },
-      metadata: { provider: 'google', faction, tagline }
+      metadata: { provider: geminiProvider, faction, tagline }
     });
-    
+
     // Call Gemini for image generation
     const response = await genai.models.generateContent({
       model: IMAGE_MODEL,

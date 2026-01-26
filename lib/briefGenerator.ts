@@ -5,7 +5,6 @@
  * so it can be called directly for background processing.
  */
 
-import { GoogleGenAI } from '@google/genai';
 import { langfuse } from '@/lib/langfuse';
 import { prisma } from '@/lib/prisma';
 import { checkAndDeductCredit } from '@/lib/briefCredits';
@@ -29,12 +28,8 @@ import {
   SuggestionResponse,
 } from '@/lib/briefSuggestions';
 import { generateSpiritIconInternal } from '@/lib/spiritIconGenerator';
-
-// Initialize Gemini client with 10 minute timeout
-const gemini = new GoogleGenAI({
-  apiKey: process.env.GOOGLE_API_KEY,
-  httpOptions: { timeout: 600000 },
-});
+import { getProvider, isGeminiProvider } from '@/lib/aiProvider';
+import { getGeminiClientWithOptions } from '@/lib/vertexAI';
 
 const BRIEF_MODEL = 'gemini-3-pro-preview';
 
@@ -504,6 +499,11 @@ export async function generateBrief(options: GenerateBriefOptions): Promise<Gene
     // Call Gemini for strategic analysis
     console.log(`🤖 Starting AI analysis for brief: ${briefId}`);
 
+    // Get the Gemini client with 10 minute timeout for long-running brief generation
+    const provider = getProvider();
+    const geminiProvider = isGeminiProvider(provider) ? (provider as 'google' | 'vertex') : 'google';
+    const gemini = await getGeminiClientWithOptions(geminiProvider, { timeout: 600000 });
+
     const analysisGeneration = trace.generation({
       name: "gemini-brief-analysis",
       model: BRIEF_MODEL,
@@ -511,7 +511,7 @@ export async function generateBrief(options: GenerateBriefOptions): Promise<Gene
         { role: 'system', content: systemPrompt },
         { role: 'user', content: userPrompt }
       ],
-      metadata: { provider: 'google', thinkingLevel: 'high', promptLength: userPrompt.length }
+      metadata: { provider: geminiProvider, thinkingLevel: 'high', promptLength: userPrompt.length }
     });
 
     let responseText = '';

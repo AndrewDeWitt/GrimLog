@@ -20,7 +20,9 @@
       "Bash(git add:*)",
       "Bash(git mv:*)",
       "WebSearch",
-      "WebFetch(domain:docs.cloud.google.com)"
+      "WebFetch(domain:docs.cloud.google.com)",
+      "Bash(find:*)",
+      "Bash(yarn add:*)"
     ]
   },
   "enableAllProjectMcpServers": true,

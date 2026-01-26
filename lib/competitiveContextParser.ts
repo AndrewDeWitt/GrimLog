@@ -1,17 +1,13 @@
 /**
  * Competitive Context Parser
- * 
+ *
  * Uses LLM (Gemini) to extract structured competitive insights
  * from YouTube transcripts about Warhammer 40K units and factions.
  */
 
-import { GoogleGenAI } from '@google/genai';
 import { langfuse } from '@/lib/langfuse';
-
-// Initialize Gemini client
-const gemini = new GoogleGenAI({
-  apiKey: process.env.GOOGLE_API_KEY,
-});
+import { getProvider, isGeminiProvider } from '@/lib/aiProvider';
+import { getGeminiClient } from '@/lib/vertexAI';
 
 // Model to use for context parsing
 const PARSER_MODEL = 'gemini-3-flash-preview';
@@ -451,6 +447,11 @@ export async function parseCompetitiveContext(
     const systemPrompt = buildSystemPrompt();
     const userPrompt = buildUserPrompt(transcript, contentTitle, authorName, gameVersion);
 
+    // Get the Gemini client (supports both AI Studio and Vertex AI)
+    const provider = getProvider();
+    const geminiProvider = isGeminiProvider(provider) ? (provider as 'google' | 'vertex') : 'google';
+    const gemini = await getGeminiClient(geminiProvider);
+
     // Create generation span for Langfuse
     const generation = trace.generation({
       name: "gemini-context-extraction",
@@ -460,7 +461,7 @@ export async function parseCompetitiveContext(
         { role: 'user', content: userPrompt },
       ],
       metadata: {
-        provider: 'google',
+        provider: geminiProvider,
         temperature: 0.3,
         responseMimeType: 'application/json',
         structuredOutput: true,

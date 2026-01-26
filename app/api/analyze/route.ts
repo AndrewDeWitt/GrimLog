@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
 import OpenAI from 'openai';
-import { GoogleGenAI } from '@google/genai';
 import { AudioAnalysisResult } from '@/lib/types';
 import { prisma } from '@/lib/prisma';
 import { AI_TOOLS } from '@/lib/aiTools';
@@ -15,23 +14,14 @@ import { requireAuth } from '@/lib/auth/apiAuth';
 import { startAnalysisRequest, completeAnalysisRequest } from '@/lib/requestDeduplication';
 import { orchestrateIntent } from '@/lib/intentOrchestrator';
 import { buildContext, formatContextForPrompt } from '@/lib/contextBuilder';
-import { getAnalyzeProvider, validateProviderConfig, getAnalyzeModel, extractOpenAIFunctionCalls, extractGeminiFunctionCalls, type NormalizedFunctionCall } from '@/lib/aiProvider';
+import { getAnalyzeProvider, validateProviderConfig, getAnalyzeModel, extractOpenAIFunctionCalls, extractGeminiFunctionCalls, isGeminiProvider, type NormalizedFunctionCall } from '@/lib/aiProvider';
 import { checkRateLimit, getRateLimitIdentifier, getClientIp, RATE_LIMITS } from '@/lib/rateLimit';
+import { getGeminiClient } from '@/lib/vertexAI';
 
 // Use plain OpenAI client (observeOpenAI adds massive overhead - 5-15 seconds per call!)
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
-
-// Initialize Gemini client
-const gemini = new GoogleGenAI({
-  apiKey: process.env.GOOGLE_API_KEY,
-});
-
-// Keep for reference if needed for debugging
-// const openai = observeOpenAI(new OpenAI({
-//   apiKey: process.env.OPENAI_API_KEY,
-// }));
 
 // This function has been replaced by the contextBuilder module
 // See lib/contextBuilder.ts for context building logic
@@ -443,7 +433,7 @@ export async function POST(request: NextRequest) {
         ],
         metadata: {
           provider,
-          tools: provider === 'google' ? GEMINI_TOOLS.map(t => t.name) : AI_TOOLS.map(t => t.name),
+          tools: isGeminiProvider(provider) ? GEMINI_TOOLS.map(t => t.name) : AI_TOOLS.map(t => t.name),
           contextTier: context.tier,
           intentClassification: intentClassification.intent,
           intentConfidence: intentClassification.confidence,
@@ -465,9 +455,10 @@ export async function POST(request: NextRequest) {
             throw new DOMException('Request aborted by client', 'AbortError');
           }
           
-          if (provider === 'google') {
-            // Google Gemini API call with function calling
+          if (isGeminiProvider(provider)) {
+            // Google Gemini API call with function calling (AI Studio or Vertex AI)
             // Pass abort signal to cancel if client disconnects
+            const gemini = await getGeminiClient(provider as 'google' | 'vertex');
             response = await gemini.models.generateContent({
               model: modelName,
               contents: transcribedText,
@@ -548,7 +539,7 @@ export async function POST(request: NextRequest) {
 
       // Extract token usage from response for Langfuse cost tracking
       let usage = { input: 0, output: 0, total: 0 };
-      if (provider === 'google' && response) {
+      if (isGeminiProvider(provider) && response) {
         const geminiResponse = response as any;
         usage = {
           input: geminiResponse.usageMetadata?.promptTokenCount || 0,
@@ -561,7 +552,7 @@ export async function POST(request: NextRequest) {
       // Extract function calls from response output
       // Normalize function calls from both providers
       let functionCallItems: NormalizedFunctionCall[] = [];
-      if (provider === 'google') {
+      if (isGeminiProvider(provider)) {
         console.log('🔍 Extracting function calls from Gemini response...');
         functionCallItems = extractGeminiFunctionCalls(response);
         console.log(`📊 Extracted ${functionCallItems.length} function call(s) from Gemini`);
@@ -577,13 +568,13 @@ export async function POST(request: NextRequest) {
           { role: 'system', content: systemPrompt },
           { role: 'user', content: transcribedText }
         ],
-        output: provider === 'google' ? (response as any).text || JSON.stringify(response) : (response as any).output,
+        output: isGeminiProvider(provider) ? (response as any).text || JSON.stringify(response) : (response as any).output,
         metadata: {
           provider,
           toolCallsDetected: functionCallItems.length,
           toolCallNames: functionCallItems.map((fc: NormalizedFunctionCall) => fc.name),
           contextTier: context.tier,
-          responseId: provider === 'google' ? 'gemini-response' : (response as any).id || 'unknown'
+          responseId: isGeminiProvider(provider) ? 'gemini-response' : (response as any).id || 'unknown'
         }
       });
       // End generation with token usage for Langfuse cost calculation
