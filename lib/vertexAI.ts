@@ -18,7 +18,9 @@ import { getVercelOidcToken } from '@vercel/functions/oidc';
 
 // Environment configuration
 const GCP_PROJECT_ID = process.env.GCP_PROJECT_ID;
-const GCP_LOCATION = process.env.GCP_LOCATION || 'us-east1';
+// Use 'global' by default for Vertex AI - required for Gemini 3 models which are only
+// available on the global endpoint. See: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/locations
+const GCP_LOCATION = process.env.GCP_LOCATION || 'global';
 const GCP_PROJECT_NUMBER = process.env.GCP_PROJECT_NUMBER;
 const GCP_SERVICE_ACCOUNT_EMAIL = process.env.GCP_SERVICE_ACCOUNT_EMAIL;
 const GCP_WORKLOAD_IDENTITY_POOL_ID = process.env.GCP_WORKLOAD_IDENTITY_POOL_ID || 'vercel';

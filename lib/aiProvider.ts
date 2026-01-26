@@ -54,9 +54,10 @@ export function validateProviderConfig(provider: AIProvider): void {
  * Get a human-readable model name for the current provider
  */
 export function getModelName(provider: AIProvider, type: 'main' | 'intent'): string {
-  if (provider === 'google' || provider === 'vertex') {
-    // Both Google AI Studio and Vertex AI use the same model names
-    return 'gemini-2.5-flash';
+  if (provider === 'vertex' || provider === 'google') {
+    // Gemini 3 Flash for both Vertex AI and Google AI Studio
+    // Note: On Vertex AI, this requires the global endpoint (location='global')
+    return 'gemini-3-flash-preview';
   } else {
     // OpenAI
     return type === 'main' ? 'gpt-5-mini' : 'gpt-5-nano';
@@ -157,11 +158,17 @@ export function getArmyParseProvider(): AIProvider {
 
 /**
  * Get the model name for army list parsing based on provider
- * - Google/Vertex: gemini-3-flash-preview (fast, good structured output)
+ * - Vertex AI: gemini-3-flash-preview (requires global endpoint)
+ * - Google AI Studio: gemini-3-flash-preview
  * - OpenAI: gpt-5-mini (default)
  */
 export function getArmyParseModel(provider: AIProvider): string {
-  return (provider === 'google' || provider === 'vertex') ? 'gemini-3-flash-preview' : 'gpt-5-mini';
+  if (provider === 'vertex' || provider === 'google') {
+    // Gemini 3 Flash - best for structured output
+    // Note: On Vertex AI, this requires the global endpoint (location='global')
+    return 'gemini-3-flash-preview';
+  }
+  return 'gpt-5-mini';
 }
 
 /**
@@ -181,11 +188,14 @@ export function getAnalyzeProvider(): AIProvider {
 
 /**
  * Get the model name for game analysis based on provider
- * - Google/Vertex: gemini-3-flash-preview (fast, good function calling)
+ * - Vertex AI: gemini-3-flash-preview (requires global endpoint)
+ * - Google AI Studio: gemini-3-flash-preview
  * - OpenAI: gpt-5-mini (main), gpt-5-nano (intent)
  */
 export function getAnalyzeModel(provider: AIProvider, type: 'main' | 'intent'): string {
-  if (provider === 'google' || provider === 'vertex') {
+  if (provider === 'vertex' || provider === 'google') {
+    // Gemini 3 Flash - best for function calling and analysis
+    // Note: On Vertex AI, this requires the global endpoint (location='global')
     return 'gemini-3-flash-preview';
   }
   return type === 'main' ? 'gpt-5-mini' : 'gpt-5-nano';
