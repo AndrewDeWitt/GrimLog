@@ -8,7 +8,7 @@
  */
 
 import OpenAI from 'openai';
-import { generateObject } from 'ai';
+import { generateObject, generateText } from 'ai';
 import { jsonSchema } from 'ai';
 import { prisma } from '@/lib/prisma';
 import { ParsedArmyList } from '@/lib/types';
@@ -19,6 +19,22 @@ import { normalizeFactionName } from '@/lib/factionNormalization';
 import { getGeminiProvider } from '@/lib/vertexAI';
 import * as fs from 'fs-extra';
 import * as path from 'path';
+
+/**
+ * Sanitize JSON string by removing/replacing control characters
+ * that can cause JSON.parse() to fail.
+ * Control characters 0x00-0x1F (except allowed ones) are invalid in JSON strings.
+ */
+function sanitizeJsonString(text: string): string {
+  // Replace common control characters with appropriate substitutes
+  return text
+    // Replace various dash-like control characters with proper em-dash
+    .replace(/[\x13\x14\x15\x16\x17]/g, '–')
+    // Replace other control characters (except tab, newline, carriage return) with space
+    .replace(/[\x00-\x08\x0B\x0C\x0E-\x1F]/g, ' ')
+    // Clean up any double spaces created
+    .replace(/  +/g, ' ');
+}
 
 const openai = observeOpenAI(new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
@@ -656,18 +672,50 @@ Return structured data matching the exact schema provided.`;
     });
 
     // Use AI SDK generateObject for structured output
-    const { object: parsedObject, usage, finishReason } = await generateObject({
-      model: gemini(modelName),
-      schema: jsonSchema(ARMY_LIST_SCHEMA as any),
-      system: systemPrompt,
-      messages,
-      maxOutputTokens: 32768,
-      providerOptions: {
-        google: {
-          thinkingConfig: { thinkingLevel: 'low' },
+    // Wrap in try-catch to handle JSON parse errors from control characters in model output
+    let parsedObject: any;
+    let usage: any;
+    let finishReason: string | undefined;
+
+    try {
+      const result = await generateObject({
+        model: gemini(modelName),
+        schema: jsonSchema(ARMY_LIST_SCHEMA as any),
+        system: systemPrompt,
+        messages,
+        maxOutputTokens: 32768,
+        providerOptions: {
+          google: {
+            thinkingConfig: { thinkingLevel: 'low' },
+          },
         },
-      },
-    });
+      });
+      parsedObject = result.object;
+      usage = result.usage;
+      finishReason = result.finishReason;
+    } catch (genObjError: any) {
+      // Check if this is a JSON parse error with valid text that just has control characters
+      if (genObjError.name === 'AI_NoObjectGeneratedError' && genObjError.text) {
+        console.warn('⚠️ generateObject failed due to JSON parse error, attempting to sanitize and parse manually...');
+        
+        // Sanitize the text to remove control characters
+        const sanitizedText = sanitizeJsonString(genObjError.text);
+        
+        try {
+          parsedObject = JSON.parse(sanitizedText);
+          console.log('✅ Successfully parsed sanitized JSON');
+          
+          // Extract usage from the error if available
+          usage = genObjError.usage || { inputTokens: 0, outputTokens: 0 };
+          finishReason = genObjError.finishReason || 'stop';
+        } catch (parseError) {
+          console.error('❌ Failed to parse even after sanitization:', parseError);
+          throw genObjError; // Re-throw original error
+        }
+      } else {
+        throw genObjError;
+      }
+    }
 
     // Log token usage
     const geminiUsage = {
