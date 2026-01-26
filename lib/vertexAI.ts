@@ -12,7 +12,7 @@
  */
 
 import { GoogleGenAI } from '@google/genai';
-import { GoogleAuth, ExternalAccountClient } from 'google-auth-library';
+import { GoogleAuth } from 'google-auth-library';
 import { getVercelOidcToken } from '@vercel/functions/oidc';
 
 // Cache the vertex client to avoid repeated auth setup
@@ -46,6 +46,11 @@ export function isVertexAIConfigured(): boolean {
  *
  * This exchanges a Vercel OIDC token for a GCP access token using WIF.
  * No secrets are stored - authentication happens via short-lived tokens.
+ *
+ * Flow:
+ * 1. Get OIDC token from Vercel
+ * 2. Exchange OIDC token for federated STS token via Google STS endpoint
+ * 3. Use STS token to impersonate service account and get access token
  */
 async function getAccessTokenWithWIF(): Promise<string> {
   if (!GCP_PROJECT_ID || !GCP_PROJECT_NUMBER || !GCP_SERVICE_ACCOUNT_EMAIL) {
@@ -54,44 +59,64 @@ async function getAccessTokenWithWIF(): Promise<string> {
 
   console.log('🔐 Authenticating with Vertex AI via Workload Identity Federation...');
 
-  // Get OIDC token from Vercel
+  // Step 1: Get OIDC token from Vercel
   const vercelToken = await getVercelOidcToken();
   if (!vercelToken) {
     throw new Error('Failed to get Vercel OIDC token');
   }
 
-  // Build the WIF credentials configuration
-  // This tells google-auth-library how to exchange the OIDC token
-  const credentialConfig = {
-    type: 'external_account',
-    audience: `//iam.googleapis.com/projects/${GCP_PROJECT_NUMBER}/locations/global/workloadIdentityPools/${GCP_WORKLOAD_IDENTITY_POOL_ID}/providers/${GCP_WORKLOAD_IDENTITY_POOL_PROVIDER_ID}`,
-    subject_token_type: 'urn:ietf:params:oauth:token-type:jwt',
-    token_url: 'https://sts.googleapis.com/v1/token',
-    service_account_impersonation_url: `https://iamcredentials.googleapis.com/v1/projects/-/serviceAccounts/${GCP_SERVICE_ACCOUNT_EMAIL}:generateAccessToken`,
-    credential_source: {
-      // Use the Vercel OIDC token directly
-      file: '', // Will be overridden by subject_token_supplier
-    },
-  };
+  const audience = `//iam.googleapis.com/projects/${GCP_PROJECT_NUMBER}/locations/global/workloadIdentityPools/${GCP_WORKLOAD_IDENTITY_POOL_ID}/providers/${GCP_WORKLOAD_IDENTITY_POOL_PROVIDER_ID}`;
 
-  // Create the external account client with our OIDC token
-  const authClient = ExternalAccountClient.fromJSON(credentialConfig);
-  if (!authClient) {
-    throw new Error('Failed to create external account client');
+  // Step 2: Exchange OIDC token for federated STS token
+  const stsResponse = await fetch('https://sts.googleapis.com/v1/token', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      grant_type: 'urn:ietf:params:oauth:grant-type:token-exchange',
+      audience,
+      scope: 'https://www.googleapis.com/auth/cloud-platform',
+      requested_token_type: 'urn:ietf:params:oauth:token-type:access_token',
+      subject_token_type: 'urn:ietf:params:oauth:token-type:jwt',
+      subject_token: vercelToken,
+    }),
+  });
+
+  if (!stsResponse.ok) {
+    const errorText = await stsResponse.text();
+    throw new Error(`STS token exchange failed: ${stsResponse.status} ${errorText}`);
   }
 
-  // Override the subject token supplier to provide our OIDC token
-  // @ts-expect-error - Private property access for token injection
-  authClient.subjectTokenSupplier = {
-    getSubjectToken: async () => vercelToken,
-  };
+  const stsData = await stsResponse.json();
+  const federatedToken = stsData.access_token;
 
-  // Get access token for Vertex AI
-  const tokenResponse = await authClient.getAccessToken();
-  const accessToken = tokenResponse.token;
+  if (!federatedToken) {
+    throw new Error('No access_token in STS response');
+  }
+
+  // Step 3: Impersonate service account to get final access token
+  const impersonateUrl = `https://iamcredentials.googleapis.com/v1/projects/-/serviceAccounts/${GCP_SERVICE_ACCOUNT_EMAIL}:generateAccessToken`;
+
+  const impersonateResponse = await fetch(impersonateUrl, {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${federatedToken}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      scope: ['https://www.googleapis.com/auth/cloud-platform'],
+    }),
+  });
+
+  if (!impersonateResponse.ok) {
+    const errorText = await impersonateResponse.text();
+    throw new Error(`Service account impersonation failed: ${impersonateResponse.status} ${errorText}`);
+  }
+
+  const impersonateData = await impersonateResponse.json();
+  const accessToken = impersonateData.accessToken;
 
   if (!accessToken) {
-    throw new Error('Failed to get GCP access token via WIF');
+    throw new Error('No accessToken in impersonation response');
   }
 
   console.log('✅ WIF authentication successful');
