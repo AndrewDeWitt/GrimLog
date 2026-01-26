@@ -1,6 +1,9 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "functions": {
+    "app/api/brief/submit/route.ts": {
+      "maxDuration": 800
+    },
     "app/api/armies/parse/route.ts": {
       "maxDuration": 60
     },
