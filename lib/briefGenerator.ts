@@ -521,6 +521,9 @@ export async function generateBrief(options: GenerateBriefOptions): Promise<Gene
     const maxOutputTokens = 12000;
 
     // Use AI SDK streamObject for streaming structured output
+    console.log(`🔄 [Brief] Starting streamObject call to ${BRIEF_MODEL}...`);
+    const streamStartTime = Date.now();
+    
     const streamResult = streamObject({
       model: gemini(BRIEF_MODEL),
       schema: jsonSchema(BRIEF_RESPONSE_SCHEMA as any),
@@ -534,7 +537,24 @@ export async function generateBrief(options: GenerateBriefOptions): Promise<Gene
       },
     });
 
-    // Wait for the object to be fully streamed
+    // Log streaming progress by consuming partialObjectStream
+    let chunkCount = 0;
+    let lastLogTime = Date.now();
+    for await (const partialObject of streamResult.partialObjectStream) {
+      chunkCount++;
+      const now = Date.now();
+      // Log every 10 seconds to show progress
+      if (now - lastLogTime > 10000) {
+        const elapsed = Math.round((now - streamStartTime) / 1000);
+        console.log(`📡 [Brief] Stream progress: ${chunkCount} chunks, ${elapsed}s elapsed, keys: ${Object.keys(partialObject || {}).join(', ')}`);
+        lastLogTime = now;
+      }
+    }
+    
+    const streamEndTime = Date.now();
+    console.log(`✅ [Brief] Stream complete: ${chunkCount} chunks in ${Math.round((streamEndTime - streamStartTime) / 1000)}s`);
+
+    // Get the final object and metadata
     const rawAnalysis = await streamResult.object;
     const usage = await streamResult.usage;
     const finishReason = await streamResult.finishReason;
@@ -606,6 +626,9 @@ export async function generateBrief(options: GenerateBriefOptions): Promise<Gene
       });
 
       // Use AI SDK streamObject for streaming structured output
+      console.log(`🔄 [Suggestions] Starting streamObject call to ${BRIEF_MODEL}...`);
+      const suggestionsStartTime = Date.now();
+      
       const suggestionsStreamResult = streamObject({
         model: gemini(BRIEF_MODEL),
         schema: jsonSchema(SUGGESTION_RESPONSE_SCHEMA as any),
@@ -619,7 +642,24 @@ export async function generateBrief(options: GenerateBriefOptions): Promise<Gene
         },
       });
 
-      // Wait for the object to be fully streamed
+      // Log streaming progress by consuming partialObjectStream
+      let suggestionsChunkCount = 0;
+      let suggestionsLastLogTime = Date.now();
+      for await (const partialObject of suggestionsStreamResult.partialObjectStream) {
+        suggestionsChunkCount++;
+        const now = Date.now();
+        // Log every 10 seconds to show progress
+        if (now - suggestionsLastLogTime > 10000) {
+          const elapsed = Math.round((now - suggestionsStartTime) / 1000);
+          console.log(`📡 [Suggestions] Stream progress: ${suggestionsChunkCount} chunks, ${elapsed}s elapsed`);
+          suggestionsLastLogTime = now;
+        }
+      }
+      
+      const suggestionsEndTime = Date.now();
+      console.log(`✅ [Suggestions] Stream complete: ${suggestionsChunkCount} chunks in ${Math.round((suggestionsEndTime - suggestionsStartTime) / 1000)}s`);
+
+      // Get the final object and metadata
       const suggestionsData = await suggestionsStreamResult.object;
       const suggestionsUsageData = await suggestionsStreamResult.usage;
       const suggestionsFinishReason = await suggestionsStreamResult.finishReason;
