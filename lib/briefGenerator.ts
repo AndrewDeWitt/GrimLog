@@ -518,7 +518,8 @@ export async function generateBrief(options: GenerateBriefOptions): Promise<Gene
       metadata: { provider: geminiProvider, thinkingLevel: 'high', promptLength: userPrompt.length }
     });
 
-    const maxOutputTokens = 12000;
+    // Increased from 12000 - model generates very detailed analysis that was hitting token limit
+    const maxOutputTokens = 32000;
 
     // Use AI SDK streamObject for streaming structured output
     console.log(`🔄 [Brief] Starting streamObject call to ${BRIEF_MODEL}...`);
