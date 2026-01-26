@@ -164,20 +164,21 @@ async function createVertexClientWithWIF(): Promise<GoogleGenAI> {
   cachedCredentialsExpiry = Date.now() + (55 * 60 * 1000); // 55 minutes
 
   // Create GoogleGenAI client in Vertex AI mode
-  // Use httpOptions with custom headers instead of googleAuthOptions
-  // This bypasses the SDK's auth system entirely
+  // Use a custom fetch wrapper to inject our auth header
+  const originalFetch = globalThis.fetch;
+  const authFetch = async (input: RequestInfo | URL, init?: RequestInit) => {
+    const headers = new Headers(init?.headers);
+    headers.set('Authorization', `Bearer ${accessToken}`);
+    return originalFetch(input, { ...init, headers });
+  };
+
   return new GoogleGenAI({
     vertexai: true,
     project: GCP_PROJECT_ID!,
     location: GCP_LOCATION,
-    googleAuthOptions: {
-      // Provide a pre-authenticated access token
-      // The SDK will use this instead of trying to get its own credentials
-      credentials: {
-        access_token: accessToken,
-        token_type: 'Bearer',
-      } as any,
-    },
+    httpOptions: {
+      fetch: authFetch,
+    } as any,
   });
 }
 
@@ -195,16 +196,21 @@ async function createVertexClientWithADC(): Promise<GoogleGenAI> {
   cachedCredentialsExpiry = Date.now() + (55 * 60 * 1000); // 55 minutes
 
   // Create GoogleGenAI client in Vertex AI mode
+  // Use a custom fetch wrapper to inject our auth header
+  const originalFetch = globalThis.fetch;
+  const authFetch = async (input: RequestInfo | URL, init?: RequestInit) => {
+    const headers = new Headers(init?.headers);
+    headers.set('Authorization', `Bearer ${accessToken}`);
+    return originalFetch(input, { ...init, headers });
+  };
+
   return new GoogleGenAI({
     vertexai: true,
     project: GCP_PROJECT_ID,
     location: GCP_LOCATION,
-    googleAuthOptions: {
-      credentials: {
-        access_token: accessToken,
-        token_type: 'Bearer',
-      } as any,
-    },
+    httpOptions: {
+      fetch: authFetch,
+    } as any,
   });
 }
 
@@ -325,16 +331,22 @@ export async function getGeminiClientWithOptions(
       accessToken = await getAccessTokenWithADC();
     }
 
+    // Use a custom fetch wrapper to inject our auth header
+    const originalFetch = globalThis.fetch;
+    const authFetch = async (input: RequestInfo | URL, init?: RequestInit) => {
+      const headers = new Headers(init?.headers);
+      headers.set('Authorization', `Bearer ${accessToken}`);
+      return originalFetch(input, { ...init, headers });
+    };
+
     return new GoogleGenAI({
       vertexai: true,
       project: GCP_PROJECT_ID,
       location: GCP_LOCATION,
       httpOptions: {
         ...httpOptions,
-        headers: {
-          'Authorization': `Bearer ${accessToken}`,
-        },
-      },
+        fetch: authFetch,
+      } as any,
     });
   }
 
