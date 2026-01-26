@@ -65,6 +65,7 @@ async function getAccessTokenWithWIF(): Promise<string> {
     throw new Error('Failed to get Vercel OIDC token');
   }
 
+  // The audience for the STS exchange - must match the WIF provider configuration
   const audience = `//iam.googleapis.com/projects/${GCP_PROJECT_NUMBER}/locations/global/workloadIdentityPools/${GCP_WORKLOAD_IDENTITY_POOL_ID}/providers/${GCP_WORKLOAD_IDENTITY_POOL_PROVIDER_ID}`;
 
   // Step 2: Exchange OIDC token for federated STS token
@@ -162,15 +163,20 @@ async function createVertexClientWithWIF(): Promise<GoogleGenAI> {
   // Cache expiry - tokens are typically valid for 1 hour
   cachedCredentialsExpiry = Date.now() + (55 * 60 * 1000); // 55 minutes
 
-  // Create GoogleGenAI client in Vertex AI mode with the access token
+  // Create a custom auth client that returns our WIF token
+  // This prevents the SDK from trying to use ADC
+  const customAuthClient = {
+    getAccessToken: async () => ({ token: accessToken }),
+    getRequestHeaders: async () => ({ Authorization: `Bearer ${accessToken}` }),
+  };
+
+  // Create GoogleGenAI client in Vertex AI mode with custom auth
   return new GoogleGenAI({
     vertexai: true,
     project: GCP_PROJECT_ID!,
     location: GCP_LOCATION,
-    httpOptions: {
-      headers: {
-        'Authorization': `Bearer ${accessToken}`,
-      },
+    googleAuthOptions: {
+      authClient: customAuthClient as any,
     },
   });
 }
@@ -188,15 +194,19 @@ async function createVertexClientWithADC(): Promise<GoogleGenAI> {
   // Cache expiry - ADC tokens are typically valid for 1 hour
   cachedCredentialsExpiry = Date.now() + (55 * 60 * 1000); // 55 minutes
 
-  // Create GoogleGenAI client in Vertex AI mode with the access token
+  // Create a custom auth client that returns our ADC token
+  const customAuthClient = {
+    getAccessToken: async () => ({ token: accessToken }),
+    getRequestHeaders: async () => ({ Authorization: `Bearer ${accessToken}` }),
+  };
+
+  // Create GoogleGenAI client in Vertex AI mode with custom auth
   return new GoogleGenAI({
     vertexai: true,
     project: GCP_PROJECT_ID,
     location: GCP_LOCATION,
-    httpOptions: {
-      headers: {
-        'Authorization': `Bearer ${accessToken}`,
-      },
+    googleAuthOptions: {
+      authClient: customAuthClient as any,
     },
   });
 }
