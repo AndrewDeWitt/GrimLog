@@ -210,6 +210,58 @@ export function getGCPLocation(): string {
   return GCP_LOCATION;
 }
 
+// Cache for Vertex AI image client
+let cachedVertexImageClient: GoogleGenAI | null = null;
+
+/**
+ * Get a @google/genai client configured for Vertex AI image generation with WIF
+ * 
+ * This uses the same WIF auth pattern as the AI SDK provider, but for the
+ * @google/genai SDK which supports image generation.
+ * 
+ * - In Vercel: Uses WIF (zero secrets, short-lived tokens)
+ * - Locally: Uses ADC (gcloud CLI cached credentials)
+ */
+export function getVertexImageClient(): GoogleGenAI {
+  if (cachedVertexImageClient) {
+    return cachedVertexImageClient;
+  }
+
+  if (!GCP_PROJECT_ID) {
+    throw new Error('GCP_PROJECT_ID is required for Vertex AI image generation');
+  }
+
+  // Use global endpoint - Gemini 3 Pro Image is available there
+  // See: https://cloud.google.com/vertex-ai/generative-ai/docs/learn/locations
+  const imageLocation = GCP_LOCATION;
+
+  if (isVercelEnvironment()) {
+    // Use WIF for Vercel
+    console.log('🔐 Creating WIF-authenticated Vertex AI image client...');
+    const authClient = createWIFAuthClient();
+    
+    cachedVertexImageClient = new GoogleGenAI({
+      vertexai: true,
+      project: GCP_PROJECT_ID,
+      location: imageLocation,
+      googleAuthOptions: {
+        authClient: authClient as any,
+      },
+    });
+  } else {
+    // Use ADC for local development
+    console.log('🔐 Creating ADC-authenticated Vertex AI image client...');
+    cachedVertexImageClient = new GoogleGenAI({
+      vertexai: true,
+      project: GCP_PROJECT_ID,
+      location: imageLocation,
+    });
+  }
+
+  console.log(`✅ Vertex AI image client created (location: ${imageLocation})`);
+  return cachedVertexImageClient;
+}
+
 // ============================================================================
 // DEPRECATED: Legacy exports for backward compatibility during migration
 // These will be removed after all consumers are updated to use AI SDK pattern

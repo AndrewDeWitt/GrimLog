@@ -8,8 +8,8 @@
 import { langfuse } from '@/lib/langfuse';
 import { createServiceClient } from '@/lib/supabase/service';
 import { randomUUID, createHash } from 'crypto';
-import { getProvider, isGeminiProvider } from '@/lib/aiProvider';
-import { getGeminiClient } from '@/lib/vertexAI';
+import { getVertexImageClient, isVertexAIConfigured } from '@/lib/vertexAI';
+import { GoogleGenAI } from '@google/genai';
 
 // Model for image generation
 const IMAGE_MODEL = 'gemini-3-pro-image-preview';
@@ -67,10 +67,24 @@ export async function generateSpiritIconInternal(
   console.log(`🎨 Generating Army Spirit Icon: "${tagline}" for ${faction}`);
 
   try {
-    // Get the Gemini client (supports both AI Studio and Vertex AI)
-    const provider = getProvider();
-    const geminiProvider = isGeminiProvider(provider) ? (provider as 'google' | 'vertex') : 'google';
-    const genai = await getGeminiClient(geminiProvider);
+    // Use Vertex AI with WIF if configured, otherwise fall back to Google AI Studio
+    // Image generation requires @google/genai SDK, not the AI SDK
+    let genai: GoogleGenAI;
+    let provider: 'vertex' | 'google';
+    
+    if (isVertexAIConfigured()) {
+      // Use Vertex AI with WIF (no API keys needed)
+      genai = getVertexImageClient();
+      provider = 'vertex';
+    } else {
+      // Fall back to Google AI Studio (requires API key)
+      const apiKey = process.env.GOOGLE_API_KEY;
+      if (!apiKey) {
+        throw new Error('Either GCP_PROJECT_ID (for Vertex AI) or GOOGLE_API_KEY (for AI Studio) is required for image generation');
+      }
+      genai = new GoogleGenAI({ apiKey });
+      provider = 'google';
+    }
 
     // Build the full prompt with grimdark comic book style guidance
     const fullPrompt = `Create a grimdark Warhammer 40K style icon/emblem based on this description:
@@ -93,7 +107,7 @@ STYLE REQUIREMENTS:
       name: "gemini-spirit-icon-generation",
       model: IMAGE_MODEL,
       input: { prompt: fullPrompt, originalPrompt: imagePrompt },
-      metadata: { provider: geminiProvider, faction, tagline }
+      metadata: { provider, faction, tagline }
     });
 
     // Call Gemini for image generation
