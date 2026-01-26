@@ -7,9 +7,11 @@
  * using Gemini 3 Flash for analysis.
  * 
  * Full Langfuse observability for LLM tracing.
+ * Uses AI SDK for Gemini/Vertex AI calls with proper WIF authentication.
  */
 
 import { NextRequest, NextResponse } from 'next/server';
+import { generateObject, jsonSchema } from 'ai';
 import { requireAuth } from '@/lib/auth/apiAuth';
 import { checkRateLimit, getRateLimitIdentifier, getClientIp, RATE_LIMITS } from '@/lib/rateLimit';
 import { langfuse } from '@/lib/langfuse';
@@ -21,7 +23,7 @@ import {
 } from '@/lib/tacticalAdvisor';
 import { TacticalAdviceRequest, TacticalAdviceResponse } from '@/lib/types';
 import { getProvider, isGeminiProvider } from '@/lib/aiProvider';
-import { getGeminiClient } from '@/lib/vertexAI';
+import { getGeminiProvider } from '@/lib/vertexAI';
 
 // Model to use for tactical analysis
 const TACTICAL_MODEL = 'gemini-3-flash-preview';
@@ -236,29 +238,44 @@ export async function POST(request: NextRequest) {
       }
     });
     
-    // Call Gemini for analysis (supports both AI Studio and Vertex AI)
+    // Call Gemini for analysis (supports both AI Studio and Vertex AI with WIF)
     console.time('⏱️ Gemini Analysis');
     const provider = getProvider();
     const geminiProvider = isGeminiProvider(provider) ? (provider as 'google' | 'vertex') : 'google';
 
-    let response;
+    let responseObject: any;
+    let usage = { input: 0, output: 0, total: 0 };
+    
     try {
-      const gemini = await getGeminiClient(geminiProvider);
-      response = await gemini.models.generateContent({
-        model: TACTICAL_MODEL,
-        contents: userPrompt,
-        config: {
-          systemInstruction: systemPrompt,
-          temperature: 0.7,
-          maxOutputTokens: 20000,
-          responseMimeType: 'application/json',
-          responseJsonSchema: TACTICAL_RESPONSE_SCHEMA,
-          // Disable thinking to ensure all tokens go to the actual response
-          thinkingConfig: {
-            thinkingBudget: 0
-          }
-        }
+      // Get the Gemini provider (AI Studio or Vertex AI with WIF)
+      const gemini = getGeminiProvider(geminiProvider);
+      
+      // Use AI SDK generateObject for structured output
+      const result = await generateObject({
+        model: gemini(TACTICAL_MODEL),
+        schema: jsonSchema(TACTICAL_RESPONSE_SCHEMA as any),
+        system: systemPrompt,
+        prompt: userPrompt,
+        maxOutputTokens: 20000,
+        temperature: 0.7,
+        providerOptions: {
+          google: {
+            // Disable thinking to ensure all tokens go to the actual response
+            thinkingConfig: { thinkingBudget: 0 },
+          },
+        },
       });
+      
+      responseObject = result.object;
+      
+      // Extract token usage for Langfuse cost tracking
+      usage = {
+        input: result.usage?.inputTokens || 0,
+        output: result.usage?.outputTokens || 0,
+        total: (result.usage?.inputTokens || 0) + (result.usage?.outputTokens || 0)
+      };
+      console.log(`📊 Tactical advisor token usage: ${usage.input} input, ${usage.output} output, ${usage.total} total`);
+      
     } catch (aiError: any) {
       console.error('Gemini API error:', aiError);
       
@@ -288,19 +305,7 @@ export async function POST(request: NextRequest) {
     
     console.timeEnd('⏱️ Gemini Analysis');
 
-    // Extract token usage from response for Langfuse cost tracking
-    const geminiResponse = response as any;
-    const usage = {
-      input: geminiResponse.usageMetadata?.promptTokenCount || 0,
-      output: geminiResponse.usageMetadata?.candidatesTokenCount || 0,
-      total: geminiResponse.usageMetadata?.totalTokenCount || 0
-    };
-    console.log(`📊 Tactical advisor token usage: ${usage.input} input, ${usage.output} output, ${usage.total} total`);
-
-    // Extract text from response
-    const responseText = response.text || '';
-
-    if (!responseText) {
+    if (!responseObject) {
       console.error('Empty response from Gemini');
       
       // End generation with error
@@ -320,11 +325,12 @@ export async function POST(request: NextRequest) {
     
     // Update generation with successful output
     console.time('  └─ Langfuse generation update');
+    const responseText = JSON.stringify(responseObject);
     generation.update({
       output: responseText,
       metadata: {
         responseLength: responseText.length,
-        provider: 'google',
+        provider: geminiProvider,
       }
     });
     // End generation with token usage for Langfuse cost calculation

@@ -1,23 +1,20 @@
 /**
- * Vertex AI Client Factory
+ * Vertex AI Provider Factory
  *
- * Creates GoogleGenAI clients configured for Vertex AI with authentication using:
+ * Creates AI SDK providers configured for Vertex AI with authentication using:
  * - Production (Vercel): Workload Identity Federation (WIF) via OIDC tokens
  * - Local Development: Application Default Credentials (ADC) via gcloud CLI
  *
  * This is the most secure approach - no API keys or service account JSON files needed.
  *
- * The key insight is that @google/genai SDK supports Vertex AI natively with
- * `vertexai: true`, so we keep all existing tool definitions and code patterns.
+ * Uses @ai-sdk/google-vertex which properly integrates with WIF through
+ * ExternalAccountClient from google-auth-library.
  */
 
-import { GoogleGenAI } from '@google/genai';
-import { GoogleAuth } from 'google-auth-library';
+import { createVertex, type GoogleVertexProvider } from '@ai-sdk/google-vertex';
+import { createGoogleGenerativeAI, type GoogleGenerativeAIProvider } from '@ai-sdk/google';
+import { ExternalAccountClient, GoogleAuth } from 'google-auth-library';
 import { getVercelOidcToken } from '@vercel/functions/oidc';
-
-// Cache the vertex client to avoid repeated auth setup
-let cachedVertexClient: GoogleGenAI | null = null;
-let cachedCredentialsExpiry: number | null = null;
 
 // Environment configuration
 const GCP_PROJECT_ID = process.env.GCP_PROJECT_ID;
@@ -27,10 +24,14 @@ const GCP_SERVICE_ACCOUNT_EMAIL = process.env.GCP_SERVICE_ACCOUNT_EMAIL;
 const GCP_WORKLOAD_IDENTITY_POOL_ID = process.env.GCP_WORKLOAD_IDENTITY_POOL_ID || 'vercel';
 const GCP_WORKLOAD_IDENTITY_POOL_PROVIDER_ID = process.env.GCP_WORKLOAD_IDENTITY_POOL_PROVIDER_ID || 'vercel';
 
+// Cache the vertex provider to avoid repeated auth setup
+let cachedVertexProvider: GoogleVertexProvider | null = null;
+let cachedGoogleProvider: GoogleGenerativeAIProvider | null = null;
+
 /**
  * Check if running in Vercel production/preview environment
  */
-function isVercelEnvironment(): boolean {
+export function isVercelEnvironment(): boolean {
   return !!process.env.VERCEL_ENV;
 }
 
@@ -42,211 +43,155 @@ export function isVertexAIConfigured(): boolean {
 }
 
 /**
- * Get an access token using Workload Identity Federation (for Vercel)
- *
- * This exchanges a Vercel OIDC token for a GCP access token using WIF.
- * No secrets are stored - authentication happens via short-lived tokens.
- *
- * Flow:
- * 1. Get OIDC token from Vercel
- * 2. Exchange OIDC token for federated STS token via Google STS endpoint
- * 3. Use STS token to impersonate service account and get access token
+ * Create a WIF auth client for Vercel using ExternalAccountClient
+ * 
+ * This uses the official Google approach for Workload Identity Federation,
+ * where ExternalAccountClient handles the OIDC token exchange automatically.
  */
-async function getAccessTokenWithWIF(): Promise<string> {
-  if (!GCP_PROJECT_ID || !GCP_PROJECT_NUMBER || !GCP_SERVICE_ACCOUNT_EMAIL) {
-    throw new Error('Missing required GCP environment variables for WIF: GCP_PROJECT_ID, GCP_PROJECT_NUMBER, GCP_SERVICE_ACCOUNT_EMAIL');
+function createWIFAuthClient(): ExternalAccountClient {
+  if (!GCP_PROJECT_NUMBER || !GCP_SERVICE_ACCOUNT_EMAIL) {
+    throw new Error('Missing required GCP environment variables for WIF: GCP_PROJECT_NUMBER, GCP_SERVICE_ACCOUNT_EMAIL');
   }
 
-  console.log('🔐 Authenticating with Vertex AI via Workload Identity Federation...');
+  console.log('🔐 Creating WIF auth client for Vertex AI...');
 
-  // Step 1: Get OIDC token from Vercel
-  const vercelToken = await getVercelOidcToken();
-  if (!vercelToken) {
-    throw new Error('Failed to get Vercel OIDC token');
-  }
-
-  // The audience for the STS exchange - must match the WIF provider configuration
-  const audience = `//iam.googleapis.com/projects/${GCP_PROJECT_NUMBER}/locations/global/workloadIdentityPools/${GCP_WORKLOAD_IDENTITY_POOL_ID}/providers/${GCP_WORKLOAD_IDENTITY_POOL_PROVIDER_ID}`;
-
-  // Step 2: Exchange OIDC token for federated STS token
-  const stsResponse = await fetch('https://sts.googleapis.com/v1/token', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      grant_type: 'urn:ietf:params:oauth:grant-type:token-exchange',
-      audience,
-      scope: 'https://www.googleapis.com/auth/cloud-platform',
-      requested_token_type: 'urn:ietf:params:oauth:token-type:access_token',
-      subject_token_type: 'urn:ietf:params:oauth:token-type:jwt',
-      subject_token: vercelToken,
-    }),
-  });
-
-  if (!stsResponse.ok) {
-    const errorText = await stsResponse.text();
-    throw new Error(`STS token exchange failed: ${stsResponse.status} ${errorText}`);
-  }
-
-  const stsData = await stsResponse.json();
-  const federatedToken = stsData.access_token;
-
-  if (!federatedToken) {
-    throw new Error('No access_token in STS response');
-  }
-
-  // Step 3: Impersonate service account to get final access token
-  const impersonateUrl = `https://iamcredentials.googleapis.com/v1/projects/-/serviceAccounts/${GCP_SERVICE_ACCOUNT_EMAIL}:generateAccessToken`;
-
-  const impersonateResponse = await fetch(impersonateUrl, {
-    method: 'POST',
-    headers: {
-      'Authorization': `Bearer ${federatedToken}`,
-      'Content-Type': 'application/json',
+  const authClient = ExternalAccountClient.fromJSON({
+    type: 'external_account',
+    audience: `//iam.googleapis.com/projects/${GCP_PROJECT_NUMBER}/locations/global/workloadIdentityPools/${GCP_WORKLOAD_IDENTITY_POOL_ID}/providers/${GCP_WORKLOAD_IDENTITY_POOL_PROVIDER_ID}`,
+    subject_token_type: 'urn:ietf:params:oauth:token-type:jwt',
+    token_url: 'https://sts.googleapis.com/v1/token',
+    service_account_impersonation_url: `https://iamcredentials.googleapis.com/v1/projects/-/serviceAccounts/${GCP_SERVICE_ACCOUNT_EMAIL}:generateAccessToken`,
+    subject_token_supplier: {
+      // Use the Vercel OIDC token as the subject token
+      getSubjectToken: getVercelOidcToken,
     },
-    body: JSON.stringify({
-      scope: ['https://www.googleapis.com/auth/cloud-platform'],
-    }),
   });
 
-  if (!impersonateResponse.ok) {
-    const errorText = await impersonateResponse.text();
-    throw new Error(`Service account impersonation failed: ${impersonateResponse.status} ${errorText}`);
+  if (!authClient) {
+    throw new Error('Failed to create ExternalAccountClient for WIF');
   }
 
-  const impersonateData = await impersonateResponse.json();
-  const accessToken = impersonateData.accessToken;
-
-  if (!accessToken) {
-    throw new Error('No accessToken in impersonation response');
-  }
-
-  console.log('✅ WIF authentication successful');
-  return accessToken;
+  console.log('✅ WIF auth client created');
+  return authClient;
 }
 
 /**
- * Get an access token using Application Default Credentials (for local dev)
- *
- * This uses credentials cached by `gcloud auth application-default login`.
- * No JSON key files needed.
+ * Create an ADC auth client for local development
  */
-async function getAccessTokenWithADC(): Promise<string> {
-  console.log('🔐 Authenticating with Vertex AI via Application Default Credentials...');
-
-  // Verify ADC is available
+function createADCAuthClient(): GoogleAuth {
+  console.log('🔐 Creating ADC auth client for Vertex AI...');
+  
   const auth = new GoogleAuth({
     scopes: ['https://www.googleapis.com/auth/cloud-platform'],
+    projectId: GCP_PROJECT_ID,
   });
 
-  try {
-    const client = await auth.getClient();
-    const tokenResponse = await client.getAccessToken();
-
-    if (!tokenResponse.token) {
-      throw new Error('No access token from ADC. Run: gcloud auth application-default login');
-    }
-
-    console.log('✅ ADC authentication successful');
-    return tokenResponse.token;
-  } catch (error) {
-    console.error('❌ ADC authentication failed. Run: gcloud auth application-default login');
-    throw error;
-  }
+  console.log('✅ ADC auth client created');
+  return auth;
 }
 
 /**
- * Create a Vertex AI client using Workload Identity Federation (for Vercel)
- */
-async function createVertexClientWithWIF(): Promise<GoogleGenAI> {
-  const accessToken = await getAccessTokenWithWIF();
-
-  // Cache expiry - tokens are typically valid for 1 hour
-  cachedCredentialsExpiry = Date.now() + (55 * 60 * 1000); // 55 minutes
-
-  // Create GoogleGenAI client in Vertex AI mode
-  // Use a custom fetch wrapper to inject our auth header
-  const originalFetch = globalThis.fetch;
-  const authFetch = async (input: RequestInfo | URL, init?: RequestInit) => {
-    const headers = new Headers(init?.headers);
-    headers.set('Authorization', `Bearer ${accessToken}`);
-    return originalFetch(input, { ...init, headers });
-  };
-
-  return new GoogleGenAI({
-    vertexai: true,
-    project: GCP_PROJECT_ID!,
-    location: GCP_LOCATION,
-    httpOptions: {
-      fetch: authFetch,
-    } as any,
-  });
-}
-
-/**
- * Create a Vertex AI client using Application Default Credentials (for local dev)
- */
-async function createVertexClientWithADC(): Promise<GoogleGenAI> {
-  if (!GCP_PROJECT_ID) {
-    throw new Error('Missing GCP_PROJECT_ID environment variable');
-  }
-
-  const accessToken = await getAccessTokenWithADC();
-
-  // Cache expiry - ADC tokens are typically valid for 1 hour
-  cachedCredentialsExpiry = Date.now() + (55 * 60 * 1000); // 55 minutes
-
-  // Create GoogleGenAI client in Vertex AI mode
-  // Use a custom fetch wrapper to inject our auth header
-  const originalFetch = globalThis.fetch;
-  const authFetch = async (input: RequestInfo | URL, init?: RequestInit) => {
-    const headers = new Headers(init?.headers);
-    headers.set('Authorization', `Bearer ${accessToken}`);
-    return originalFetch(input, { ...init, headers });
-  };
-
-  return new GoogleGenAI({
-    vertexai: true,
-    project: GCP_PROJECT_ID,
-    location: GCP_LOCATION,
-    httpOptions: {
-      fetch: authFetch,
-    } as any,
-  });
-}
-
-/**
- * Get a Vertex AI client with appropriate authentication
+ * Get a Vertex AI provider instance with appropriate authentication
  *
  * - In Vercel: Uses WIF (zero secrets, short-lived tokens)
  * - Locally: Uses ADC (gcloud CLI cached credentials)
  *
- * The client is cached for performance, with automatic refresh before expiry.
+ * The provider is cached for performance.
  *
- * IMPORTANT: This returns a GoogleGenAI client configured for Vertex AI,
- * so all existing code patterns and tool definitions work unchanged.
+ * Usage:
+ * ```typescript
+ * import { getVertexProvider } from '@/lib/vertexAI';
+ * import { generateText } from 'ai';
+ *
+ * const vertex = getVertexProvider();
+ * const { text } = await generateText({
+ *   model: vertex('gemini-2.5-flash'),
+ *   prompt: 'Hello!',
+ * });
+ * ```
  */
-export async function getVertexClient(): Promise<GoogleGenAI> {
-  // Check if we have a valid cached client
-  if (cachedVertexClient && cachedCredentialsExpiry && Date.now() < cachedCredentialsExpiry) {
-    return cachedVertexClient;
+export function getVertexProvider(): GoogleVertexProvider {
+  if (cachedVertexProvider) {
+    return cachedVertexProvider;
   }
 
-  // Create new client based on environment
-  if (isVercelEnvironment()) {
-    cachedVertexClient = await createVertexClientWithWIF();
-  } else {
-    cachedVertexClient = await createVertexClientWithADC();
+  if (!GCP_PROJECT_ID) {
+    throw new Error('Missing GCP_PROJECT_ID environment variable');
   }
 
-  return cachedVertexClient;
+  // Create appropriate auth client based on environment
+  const authClient = isVercelEnvironment()
+    ? createWIFAuthClient()
+    : createADCAuthClient();
+
+  // Create the Vertex provider with auth
+  cachedVertexProvider = createVertex({
+    project: GCP_PROJECT_ID,
+    location: GCP_LOCATION,
+    googleAuthOptions: {
+      authClient: authClient as any,
+      projectId: GCP_PROJECT_ID,
+    },
+  });
+
+  return cachedVertexProvider;
 }
 
 /**
- * Clear the cached Vertex client (useful for testing or forced refresh)
+ * Get a Google AI Studio provider instance (using API key)
+ * This is used when AI_PROVIDER=google (not vertex)
+ */
+export function getGoogleProvider(): GoogleGenerativeAIProvider {
+  if (cachedGoogleProvider) {
+    return cachedGoogleProvider;
+  }
+
+  if (!process.env.GOOGLE_API_KEY) {
+    throw new Error('GOOGLE_API_KEY environment variable is required');
+  }
+
+  cachedGoogleProvider = createGoogleGenerativeAI({
+    apiKey: process.env.GOOGLE_API_KEY,
+  });
+
+  return cachedGoogleProvider;
+}
+
+/**
+ * Get the appropriate Gemini provider based on the provider setting
+ *
+ * @param provider - The AI provider ('google' for AI Studio, 'vertex' for Vertex AI)
+ * @returns A provider function that can be used to create model instances
+ *
+ * Usage:
+ * ```typescript
+ * import { getGeminiProvider } from '@/lib/vertexAI';
+ * import { getAnalyzeProvider } from '@/lib/aiProvider';
+ * import { generateText } from 'ai';
+ *
+ * const provider = getAnalyzeProvider();
+ * if (provider === 'google' || provider === 'vertex') {
+ *   const gemini = getGeminiProvider(provider);
+ *   const { text } = await generateText({
+ *     model: gemini('gemini-2.5-flash'),
+ *     prompt: 'Hello!',
+ *   });
+ * }
+ * ```
+ */
+export function getGeminiProvider(provider: 'google' | 'vertex'): GoogleVertexProvider | GoogleGenerativeAIProvider {
+  if (provider === 'vertex') {
+    return getVertexProvider();
+  }
+  return getGoogleProvider();
+}
+
+/**
+ * Clear the cached providers (useful for testing or forced refresh)
  */
 export function clearVertexClientCache(): void {
-  cachedVertexClient = null;
-  cachedCredentialsExpiry = null;
+  cachedVertexProvider = null;
+  cachedGoogleProvider = null;
 }
 
 /**
@@ -263,99 +208,84 @@ export function getGCPLocation(): string {
   return GCP_LOCATION;
 }
 
-// Cached Google AI Studio client (for non-Vertex usage)
-let cachedGoogleAIClient: GoogleGenAI | null = null;
+// ============================================================================
+// DEPRECATED: Legacy exports for backward compatibility during migration
+// These will be removed after all consumers are updated to use AI SDK pattern
+// ============================================================================
+
+import { GoogleGenAI } from '@google/genai';
+
+// Cached legacy clients
+let cachedLegacyGoogleClient: GoogleGenAI | null = null;
 
 /**
- * Get a Google AI Studio client (using API key)
- * This is used when AI_PROVIDER=google (not vertex)
+ * @deprecated Use getGeminiProvider() instead with the AI SDK pattern
+ * 
+ * Get a legacy GoogleGenAI client for Google AI Studio (API key auth)
+ * This is kept for backward compatibility during migration.
  */
-function getGoogleAIClient(): GoogleGenAI {
-  if (!cachedGoogleAIClient) {
+export function getLegacyGoogleClient(): GoogleGenAI {
+  if (!cachedLegacyGoogleClient) {
     if (!process.env.GOOGLE_API_KEY) {
       throw new Error('GOOGLE_API_KEY environment variable is required');
     }
-    cachedGoogleAIClient = new GoogleGenAI({
+    cachedLegacyGoogleClient = new GoogleGenAI({
       apiKey: process.env.GOOGLE_API_KEY,
     });
   }
-  return cachedGoogleAIClient;
+  return cachedLegacyGoogleClient;
 }
 
 /**
- * Get the appropriate Gemini client based on the provider setting
- *
- * @param provider - The AI provider ('google' for AI Studio, 'vertex' for Vertex AI)
- * @returns A GoogleGenAI client configured for the appropriate backend
- *
- * Usage:
- * ```typescript
- * import { getGeminiClient } from '@/lib/vertexAI';
- * import { getAnalyzeProvider } from '@/lib/aiProvider';
- *
- * const provider = getAnalyzeProvider();
- * if (provider === 'google' || provider === 'vertex') {
- *   const gemini = await getGeminiClient(provider);
- *   const response = await gemini.models.generateContent({...});
- * }
- * ```
+ * @deprecated Use getGeminiProvider() instead with the AI SDK pattern
+ * 
+ * Legacy function that returns a GoogleGenAI client.
+ * For Vertex AI, this will throw an error - use the new AI SDK pattern instead.
+ * For Google AI Studio, returns the API key-based client.
  */
 export async function getGeminiClient(provider: 'google' | 'vertex'): Promise<GoogleGenAI> {
   if (provider === 'vertex') {
-    return getVertexClient();
+    throw new Error(
+      'getGeminiClient() is deprecated for Vertex AI. ' +
+      'Use getGeminiProvider() with the AI SDK pattern instead:\n\n' +
+      'import { getGeminiProvider } from "@/lib/vertexAI";\n' +
+      'import { generateText } from "ai";\n\n' +
+      'const gemini = getGeminiProvider("vertex");\n' +
+      'const { text } = await generateText({ model: gemini("gemini-2.5-flash"), ... });'
+    );
   }
-  return getGoogleAIClient();
+  return getLegacyGoogleClient();
 }
 
 /**
- * Get a Gemini client with custom HTTP options (e.g., timeout)
- *
- * For Vertex AI, the httpOptions are merged with auth headers.
- * For Google AI Studio, httpOptions are applied directly.
+ * @deprecated Use getGeminiProvider() instead with the AI SDK pattern
  */
 export async function getGeminiClientWithOptions(
   provider: 'google' | 'vertex',
-  httpOptions?: { timeout?: number }
+  _httpOptions?: { timeout?: number }
 ): Promise<GoogleGenAI> {
   if (provider === 'vertex') {
-    // For Vertex, we need to get a fresh client with the options
-    // This is because httpOptions might differ between calls
-    if (!GCP_PROJECT_ID) {
-      throw new Error('Missing GCP_PROJECT_ID environment variable');
-    }
-
-    let accessToken: string;
-    if (isVercelEnvironment()) {
-      accessToken = await getAccessTokenWithWIF();
-    } else {
-      accessToken = await getAccessTokenWithADC();
-    }
-
-    // Use a custom fetch wrapper to inject our auth header
-    const originalFetch = globalThis.fetch;
-    const authFetch = async (input: RequestInfo | URL, init?: RequestInit) => {
-      const headers = new Headers(init?.headers);
-      headers.set('Authorization', `Bearer ${accessToken}`);
-      return originalFetch(input, { ...init, headers });
-    };
-
-    return new GoogleGenAI({
-      vertexai: true,
-      project: GCP_PROJECT_ID,
-      location: GCP_LOCATION,
-      httpOptions: {
-        ...httpOptions,
-        fetch: authFetch,
-      } as any,
-    });
+    throw new Error(
+      'getGeminiClientWithOptions() is deprecated for Vertex AI. ' +
+      'Use getGeminiProvider() with the AI SDK pattern instead.'
+    );
   }
+  
+  // For Google AI Studio, httpOptions aren't easily supported with the legacy client
+  // Just return the standard client
+  return getLegacyGoogleClient();
+}
 
-  // For Google AI Studio with custom options
-  if (!process.env.GOOGLE_API_KEY) {
-    throw new Error('GOOGLE_API_KEY environment variable is required');
-  }
-  return new GoogleGenAI({
-    apiKey: process.env.GOOGLE_API_KEY,
-    httpOptions,
-  });
+/**
+ * @deprecated Use getVertexProvider() instead
+ */
+export async function getVertexClient(): Promise<GoogleGenAI> {
+  throw new Error(
+    'getVertexClient() is deprecated. ' +
+    'Use getVertexProvider() with the AI SDK pattern instead:\n\n' +
+    'import { getVertexProvider } from "@/lib/vertexAI";\n' +
+    'import { generateText } from "ai";\n\n' +
+    'const vertex = getVertexProvider();\n' +
+    'const { text } = await generateText({ model: vertex("gemini-2.5-flash"), ... });'
+  );
 }

@@ -3,16 +3,20 @@
  *
  * Extracts the core parsing functionality from the API route
  * so it can be called directly for background processing.
+ *
+ * Uses AI SDK for Gemini/Vertex AI calls with proper WIF authentication.
  */
 
 import OpenAI from 'openai';
+import { generateObject } from 'ai';
+import { jsonSchema } from 'ai';
 import { prisma } from '@/lib/prisma';
 import { ParsedArmyList } from '@/lib/types';
 import { langfuse } from '@/lib/langfuse';
 import { observeOpenAI } from 'langfuse';
 import { getArmyParseProvider, getArmyParseModel, validateProviderConfig, isGeminiProvider } from '@/lib/aiProvider';
 import { normalizeFactionName } from '@/lib/factionNormalization';
-import { getGeminiClient } from '@/lib/vertexAI';
+import { getGeminiProvider } from '@/lib/vertexAI';
 import * as fs from 'fs-extra';
 import * as path from 'path';
 
@@ -20,7 +24,7 @@ const openai = observeOpenAI(new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 }));
 
-// Note: Gemini client is fetched dynamically based on provider (AI Studio or Vertex AI)
+// Gemini provider is fetched dynamically based on provider setting (AI Studio or Vertex AI)
 
 // Load known detachments from cached files
 async function loadKnownDetachments(): Promise<string> {
@@ -603,9 +607,12 @@ Return structured data matching the exact schema provided.`;
   let parsed: any;
 
   if (isGeminiProvider(provider)) {
-    // Get the Gemini client (AI Studio or Vertex AI)
-    const gemini = await getGeminiClient(provider as 'google' | 'vertex');
-    let geminiContent: any;
+    // Get the Gemini provider (AI Studio or Vertex AI with WIF)
+    const gemini = getGeminiProvider(provider as 'google' | 'vertex');
+
+    // Build the user prompt based on content type
+    let userPrompt: string;
+    let messages: Array<{ role: 'user'; content: any }>;
 
     if (contentType === 'image') {
       const base64Match = content.match(/^data:([^;]+);base64,(.+)$/);
@@ -615,19 +622,25 @@ Return structured data matching the exact schema provided.`;
       const mimeType = base64Match[1];
       const base64Data = base64Match[2];
 
-      geminiContent = [
-        { text: 'Parse this Warhammer 40K army list image and extract all units with their datasheets, weapons, and abilities.' },
-        { inlineData: { mimeType, data: base64Data } },
+      userPrompt = 'Parse this Warhammer 40K army list image and extract all units with their datasheets, weapons, and abilities.';
+      messages = [
+        {
+          role: 'user',
+          content: [
+            { type: 'text', text: userPrompt },
+            { type: 'image', image: `data:${mimeType};base64,${base64Data}` },
+          ],
+        },
       ];
     } else {
-      geminiContent = `Parse this Warhammer 40K army list and extract all units with their datasheets, weapons, and abilities:\n\n${content}`;
+      userPrompt = `Parse this Warhammer 40K army list and extract all units with their datasheets, weapons, and abilities:\n\n${content}`;
+      messages = [{ role: 'user', content: userPrompt }];
     }
 
     // Create Langfuse generation for LLM cost tracking if trace provided
-    // Log FULL input/output for evals and debugging - no truncation
     const generation = trace?.generation({
       name: "gemini-army-parse",
-      model: 'gemini-3-flash-preview',
+      model: modelName,
       input: [
         { role: 'system', content: systemPrompt },
         { role: 'user', content: contentType === 'text' ? content : '[image content - base64 data]' }
@@ -636,64 +649,46 @@ Return structured data matching the exact schema provided.`;
         provider: provider,
         contentType,
         datasheetCount: sortedDatasheets.length,
-        thinkingLevel: 'low',
         maxOutputTokens: 32768,
         systemPromptLength: systemPrompt.length,
         userContentLength: content.length,
       }
     });
 
-    const geminiResponse = await gemini.models.generateContent({
-      model: 'gemini-3-flash-preview',
-      contents: geminiContent,
-      config: {
-        systemInstruction: systemPrompt,
-        thinkingConfig: { thinkingLevel: 'low' } as any,
-        maxOutputTokens: 32768,
-        responseMimeType: 'application/json',
-        responseSchema: ARMY_LIST_SCHEMA,
+    // Use AI SDK generateObject for structured output
+    const { object: parsedObject, usage, finishReason } = await generateObject({
+      model: gemini(modelName),
+      schema: jsonSchema(ARMY_LIST_SCHEMA as any),
+      system: systemPrompt,
+      messages,
+      maxOutputTokens: 32768,
+      providerOptions: {
+        google: {
+          thinkingConfig: { thinkingLevel: 'low' },
+        },
       },
     });
 
-    let responseText = '';
-    const candidates = (geminiResponse as any).candidates;
-    const finishReason = candidates?.[0]?.finishReason;
-
-    if (finishReason && finishReason !== 'STOP') {
-      console.warn(`⚠️ Gemini response may be truncated. finishReason: ${finishReason}`);
-    }
-
-    if (candidates?.[0]?.content?.parts) {
-      for (const part of candidates[0].content.parts) {
-        if (part.thought === true) continue;
-        if (part.thoughtSignature && !part.text) continue;
-        if (part.text) responseText += part.text;
-      }
-    }
-
-    if (!responseText) {
-      console.warn('⚠️ No responseText extracted from parts, falling back to .text');
-      responseText = geminiResponse.text || '{}';
-    }
-
-    // Extract token usage for Langfuse cost tracking
+    // Log token usage
     const geminiUsage = {
-      input: (geminiResponse as any).usageMetadata?.promptTokenCount || 0,
-      output: (geminiResponse as any).usageMetadata?.candidatesTokenCount || 0,
-      total: (geminiResponse as any).usageMetadata?.totalTokenCount || 0
+      input: usage?.inputTokens || 0,
+      output: usage?.outputTokens || 0,
+      total: (usage?.inputTokens || 0) + (usage?.outputTokens || 0)
     };
     console.log(`📊 Army parse token usage: ${geminiUsage.input} input, ${geminiUsage.output} output, ${geminiUsage.total} total`);
 
-    // Update Langfuse generation with FULL output - no truncation for evals/debugging
+    if (finishReason && finishReason !== 'stop') {
+      console.warn(`⚠️ Gemini response may be truncated. finishReason: ${finishReason}`);
+    }
+
+    // Update Langfuse generation
     if (generation) {
       generation.update({
-        output: responseText,
+        output: JSON.stringify(parsedObject),
         metadata: {
-          responseLength: responseText.length,
           finishReason,
         }
       });
-      // End generation with token usage for cost calculation
       generation.end({
         usage: geminiUsage.total > 0 ? {
           input: geminiUsage.input,
@@ -703,7 +698,7 @@ Return structured data matching the exact schema provided.`;
       });
     }
 
-    parsed = JSON.parse(responseText);
+    parsed = parsedObject;
 
   } else {
     let input: any[];

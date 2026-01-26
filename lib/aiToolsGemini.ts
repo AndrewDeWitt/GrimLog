@@ -802,3 +802,259 @@ export type ToolCallArgs =
   | UpdateUnitStatusArgs
   | GetStrategicAdviceArgs
   | EstimateDamageArgs;
+
+// ============================================================================
+// AI SDK Tool Definitions
+// ============================================================================
+// The AI SDK uses a different format - tools are defined with Zod schemas
+// and exported as an object map. Tools without execute functions return
+// tool calls for manual execution.
+
+import { tool } from 'ai';
+import { z } from 'zod';
+
+/**
+ * AI SDK formatted tools for use with generateText({ tools: GEMINI_TOOLS_AI_SDK })
+ * These mirror the GEMINI_TOOLS above but use Zod schemas for the AI SDK.
+ */
+export const GEMINI_TOOLS_AI_SDK = {
+  change_phase: tool({
+    description: "Change the current game phase. Use when announcing a move to a new phase.",
+    inputSchema: z.object({
+      new_phase: z.enum(["Command", "Movement", "Shooting", "Charge", "Fight"]).describe("The phase to transition to"),
+      player_turn: z.enum(["attacker", "defender"]).describe("Whose turn it is (attacker or defender)")
+    }),
+  }),
+
+  change_player_turn: tool({
+    description: "Change whose turn it is. Always resets phase to Command. Use when a side finishes their turn and passes to the other side. IMPORTANT: This tool automatically advances the round when the 2nd turn ends. No need to manually check or advance rounds.",
+    inputSchema: z.object({
+      player_turn: z.enum(["attacker", "defender"]).describe("Whose turn it is now (attacker or defender)")
+    }),
+  }),
+
+  advance_battle_round: tool({
+    description: "Move to the next battle round. Automatically resets to Command phase and sets turn to whoever goes first each round. Use when player explicitly says 'next round', 'round 2', 'starting round X', etc. NOTE: You usually don't need this - change_player_turn automatically advances rounds.",
+    inputSchema: z.object({
+      round_number: z.number().int().describe("The new round number")
+    }),
+  }),
+
+  log_stratagem_use: tool({
+    description: "Record that a stratagem was used. Automatically deducts CP from the appropriate side.",
+    inputSchema: z.object({
+      stratagem_name: z.string().describe("Full or partial name of the stratagem used"),
+      cp_cost: z.number().int().describe("Command Points spent on this stratagem"),
+      used_by: z.enum(["attacker", "defender"]).describe("Who used the stratagem (attacker or defender)"),
+      target_unit: z.string().optional().describe("Unit the stratagem was used on or by (optional)"),
+      description: z.string().optional().describe("Brief description of what the stratagem does or context")
+    }),
+  }),
+
+  update_command_points: tool({
+    description: "Manually adjust command points (for gaining CP at start of round, corrections, etc.)",
+    inputSchema: z.object({
+      player: z.enum(["attacker", "defender"]).describe("Whose CP to update (attacker or defender)"),
+      change: z.number().int().describe("Change in CP (positive to add, negative to subtract)"),
+      reason: z.string().describe("Why CP changed (e.g., 'gained at start of round', 'correction')")
+    }),
+  }),
+
+  update_victory_points: tool({
+    description: "Record victory points scored by either side.",
+    inputSchema: z.object({
+      player: z.enum(["attacker", "defender"]).describe("Who scored the points (attacker or defender)"),
+      points: z.number().int().describe("Number of victory points scored"),
+      source: z.string().describe("What the points were scored for (e.g., 'Primary Objective', 'Secondary: Assassination', 'Hold One Hold Two')")
+    }),
+  }),
+
+  update_objective_control: tool({
+    description: "Record objective capture, loss, or control change.",
+    inputSchema: z.object({
+      objective_number: z.number().int().describe("Objective marker number (typically 1-6)"),
+      controlled_by: z.enum(["attacker", "defender", "contested", "none"]).describe("Who controls the objective now"),
+      controlling_unit: z.string().optional().describe("Name of unit holding the objective (optional)")
+    }),
+  }),
+
+  log_unit_action: tool({
+    description: "Record a significant unit action like deep strike, advance, charge, fall back, etc.",
+    inputSchema: z.object({
+      unit_name: z.string().describe("Name of the unit performing the action"),
+      action_type: z.enum(["deepstrike", "advance", "charge", "fall_back", "heroic_intervention", "pile_in", "consolidate", "remains_stationary"]).describe("Type of action performed"),
+      owner: z.enum(["attacker", "defender"]).describe("Who owns this unit (attacker or defender)"),
+      target: z.string().optional().describe("Target unit (for charges, etc.) or location (optional)"),
+      success: z.boolean().optional().describe("Whether the action succeeded (e.g., charge roll passed)"),
+      details: z.string().optional().describe("Additional context or notes")
+    }),
+  }),
+
+  query_game_state: tool({
+    description: "Query current game state information. Use this when asking a question about the current state.",
+    inputSchema: z.object({
+      query_type: z.enum(["current_phase", "cp_remaining", "victory_points", "objectives_held", "battle_round"]).describe("Type of information requested"),
+      player: z.enum(["attacker", "defender", "both"]).optional().describe("Which side to query about (optional, defaults to 'both')")
+    }),
+  }),
+
+  set_secondary_objectives: tool({
+    description: "Set or update secondary objectives for a side. Usually done during Command Phase at game start.",
+    inputSchema: z.object({
+      player: z.enum(["attacker", "defender"]).describe("Who is setting their secondaries (attacker or defender)"),
+      secondaries: z.array(z.string()).describe("Array of 1-3 secondary objective names")
+    }),
+  }),
+
+  redraw_secondary_objective: tool({
+    description: "Discard a secondary objective and draw a new one (costs 1 CP). Use when redrawing or discarding and drawing.",
+    inputSchema: z.object({
+      player: z.enum(["attacker", "defender"]).describe("Who is redrawing (attacker or defender)"),
+      old_secondary: z.string().describe("The secondary objective being discarded"),
+      new_secondary: z.string().describe("The new secondary objective drawn")
+    }),
+  }),
+
+  score_secondary_vp: tool({
+    description: "Award VP for a secondary objective with progress tracking. Use this for any secondary not covered by specific tools.",
+    inputSchema: z.object({
+      player: z.enum(["attacker", "defender"]).describe("Who is scoring VP (attacker or defender)"),
+      secondary_name: z.string().describe("Name of the secondary objective being scored"),
+      vp_amount: z.number().int().describe("Amount of VP to award"),
+      progress_update: z.object({
+        action: z.string().describe("What action was completed"),
+        details: z.array(z.string()).describe("Specific details like unit names, objective numbers, etc.")
+      }).optional().describe("Optional progress details for tracking")
+    }),
+  }),
+
+  score_assassination: tool({
+    description: "Score VP for Assassination secondary - destroying CHARACTER models. Automatically calculates VP based on wounds characteristic.",
+    inputSchema: z.object({
+      player: z.enum(["attacker", "defender"]).describe("Who is scoring (who destroyed the character)"),
+      character_name: z.string().describe("Name of the CHARACTER destroyed"),
+      wounds_characteristic: z.number().int().describe("Wounds characteristic of the destroyed CHARACTER")
+    }),
+  }),
+
+  score_bring_it_down: tool({
+    description: "Score VP for Bring It Down secondary - destroying MONSTER or VEHICLE units.",
+    inputSchema: z.object({
+      player: z.enum(["attacker", "defender"]).describe("Who is scoring (who destroyed the unit)"),
+      unit_name: z.string().describe("Name of the MONSTER or VEHICLE destroyed"),
+      total_wounds: z.number().int().describe("Total wounds characteristic of the unit at starting strength")
+    }),
+  }),
+
+  score_marked_for_death: tool({
+    description: "Score VP for Marked for Death secondary when Alpha or Gamma targets are destroyed.",
+    inputSchema: z.object({
+      player: z.enum(["attacker", "defender"]).describe("Who is scoring"),
+      target_type: z.enum(["alpha", "gamma"]).describe("Whether this is an Alpha target (5VP) or Gamma target (2VP)"),
+      unit_name: z.string().describe("Name of the target unit destroyed")
+    }),
+  }),
+
+  score_no_prisoners: tool({
+    description: "Score VP for No Prisoners secondary - destroying units (2VP per unit, up to 5VP per turn).",
+    inputSchema: z.object({
+      player: z.enum(["attacker", "defender"]).describe("Who is scoring"),
+      unit_name: z.string().describe("Name of the unit destroyed")
+    }),
+  }),
+
+  score_cull_the_horde: tool({
+    description: "Score VP for Cull the Horde secondary - destroying INFANTRY units with 13+ models (5VP each).",
+    inputSchema: z.object({
+      player: z.enum(["attacker", "defender"]).describe("Who is scoring"),
+      unit_name: z.string().describe("Name of the INFANTRY unit destroyed"),
+      starting_strength: z.number().int().describe("Starting strength of the unit (including attached units)")
+    }),
+  }),
+
+  score_overwhelming_force: tool({
+    description: "Score VP for Overwhelming Force secondary - destroying units that started the turn within range of an objective.",
+    inputSchema: z.object({
+      player: z.enum(["attacker", "defender"]).describe("Who is scoring"),
+      unit_name: z.string().describe("Name of the unit destroyed")
+    }),
+  }),
+
+  update_unit_health: tool({
+    description: "Update unit health/wounds AND log combat context. Use when wounds are dealt, models are removed, or unit takes damage. PREFER models_lost for multi-wound units (player already calculated overkill). Trust player input - excess damage doesn't spill between models in 40K.",
+    inputSchema: z.object({
+      unit_name: z.string().describe("Name of the unit being damaged"),
+      owner: z.enum(["attacker", "defender"]).describe("Who owns this unit"),
+      wounds_lost: z.number().int().optional().describe("Wounds actually applied. Use for partial damage on multi-wound models."),
+      models_lost: z.number().int().optional().describe("Models removed from unit. PREFERRED for multi-wound units."),
+      target_model_role: z.enum(["sergeant", "leader", "heavy_weapon", "special_weapon", "regular"]).optional().describe("Specific model role to target"),
+      context: z.string().optional().describe("Context for the damage"),
+      attacking_unit: z.string().optional().describe("Unit that caused the damage (for combat logging)"),
+      attacking_player: z.enum(["attacker", "defender"]).optional().describe("Who owns the attacking unit"),
+      combat_phase: z.enum(["Shooting", "Fight"]).optional().describe("Phase in which combat occurred")
+    }),
+  }),
+
+  mark_unit_destroyed: tool({
+    description: "Mark a unit as completely destroyed/wiped out. Use when all models in a unit are removed.",
+    inputSchema: z.object({
+      unit_name: z.string().describe("Name of the unit that was destroyed"),
+      owner: z.enum(["attacker", "defender"]).describe("Who owned this unit"),
+      destroyed_by: z.string().optional().describe("What destroyed the unit")
+    }),
+  }),
+
+  update_unit_status: tool({
+    description: "Update unit status effects like battleshock, buffs, debuffs, or movement state.",
+    inputSchema: z.object({
+      unit_name: z.string().describe("Name of the unit"),
+      owner: z.enum(["attacker", "defender"]).describe("Who owns this unit"),
+      is_battle_shocked: z.boolean().optional().describe("Whether unit is battle-shocked"),
+      add_effects: z.array(z.string()).optional().describe("Status effects to add"),
+      remove_effects: z.array(z.string()).optional().describe("Status effects to remove")
+    }),
+  }),
+
+  get_strategic_advice: tool({
+    description: "Get relevant stratagems and abilities for the current phase.",
+    inputSchema: z.object({
+      query_type: z.enum(["opportunities", "threats", "all"]).describe("Type of advice requested")
+    }),
+  }),
+
+  revert_event: tool({
+    description: "Revert/undo a previous game event or correct an error. Use when user says 'undo', 'take back', 'actually it was X not Y', or 'correction'.",
+    inputSchema: z.object({
+      target_event_type: z.enum(["phase", "stratagem", "objective", "vp", "cp", "combat", "unit_action", "secondary", "any"]).describe("Type of event to revert"),
+      search_description: z.string().optional().describe("Search for event by description keywords"),
+      revert_reason: z.string().describe("Why the event is being reverted"),
+      correction_data: z.object({
+        correct_value: z.string().describe("The correct value"),
+        reapply_corrected: z.boolean().optional().describe("If true, immediately apply corrected version after revert")
+      }).optional().describe("If this is a correction, provide the correct values"),
+      how_far_back: z.enum(["last", "last_2", "last_3", "specific"]).optional().describe("How far back to look for the event. Default 'last'.")
+    }),
+  }),
+
+  estimate_damage: tool({
+    description: "Calculate estimated damage between an attacker and a defender.",
+    inputSchema: z.object({
+      attacker_name: z.string().describe("Name of the attacking unit"),
+      defender_name: z.string().describe("Name of the defending unit"),
+      attacker_owner: z.enum(["attacker", "defender"]).describe("Who owns the attacking unit"),
+      weapon_name: z.string().optional().describe("Specific weapon to use"),
+      modifiers: z.object({
+        reroll_hits: z.enum(["ones", "all"]).optional(),
+        reroll_wounds: z.enum(["ones", "all"]).optional(),
+        plus_to_hit: z.number().int().optional(),
+        plus_to_wound: z.number().int().optional(),
+        cover: z.boolean().optional(),
+        stealth: z.boolean().optional(),
+        lethal_hits: z.boolean().optional(),
+        sustained_hits: z.number().int().optional(),
+        devastating_wounds: z.boolean().optional(),
+        lance: z.boolean().optional()
+      }).optional().describe("Active modifiers")
+    }),
+  }),
+};

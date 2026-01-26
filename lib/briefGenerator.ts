@@ -3,8 +3,11 @@
  *
  * Extracts the core brief generation functionality from the API route
  * so it can be called directly for background processing.
+ *
+ * Uses AI SDK for Gemini/Vertex AI calls with proper WIF authentication.
  */
 
+import { streamObject, jsonSchema } from 'ai';
 import { langfuse } from '@/lib/langfuse';
 import { prisma } from '@/lib/prisma';
 import { checkAndDeductCredit } from '@/lib/briefCredits';
@@ -29,7 +32,7 @@ import {
 } from '@/lib/briefSuggestions';
 import { generateSpiritIconInternal } from '@/lib/spiritIconGenerator';
 import { getProvider, isGeminiProvider } from '@/lib/aiProvider';
-import { getGeminiClientWithOptions } from '@/lib/vertexAI';
+import { getGeminiProvider } from '@/lib/vertexAI';
 
 const BRIEF_MODEL = 'gemini-3-pro-preview';
 
@@ -499,10 +502,10 @@ export async function generateBrief(options: GenerateBriefOptions): Promise<Gene
     // Call Gemini for strategic analysis
     console.log(`🤖 Starting AI analysis for brief: ${briefId}`);
 
-    // Get the Gemini client with 10 minute timeout for long-running brief generation
+    // Get the Gemini provider (AI Studio or Vertex AI with WIF)
     const provider = getProvider();
     const geminiProvider = isGeminiProvider(provider) ? (provider as 'google' | 'vertex') : 'google';
-    const gemini = await getGeminiClientWithOptions(geminiProvider, { timeout: 600000 });
+    const gemini = getGeminiProvider(geminiProvider);
 
     const analysisGeneration = trace.generation({
       name: "gemini-brief-analysis",
@@ -514,40 +517,39 @@ export async function generateBrief(options: GenerateBriefOptions): Promise<Gene
       metadata: { provider: geminiProvider, thinkingLevel: 'high', promptLength: userPrompt.length }
     });
 
-    let responseText = '';
     const maxOutputTokens = 12000;
 
-    const stream = await gemini.models.generateContentStream({
-      model: BRIEF_MODEL,
-      contents: userPrompt,
-      config: {
-        systemInstruction: systemPrompt,
-        thinkingConfig: { thinkingLevel: 'high' } as any,
-        maxOutputTokens,
-        responseMimeType: 'application/json',
-        responseJsonSchema: BRIEF_RESPONSE_SCHEMA,
-      }
+    // Use AI SDK streamObject for streaming structured output
+    const streamResult = streamObject({
+      model: gemini(BRIEF_MODEL),
+      schema: jsonSchema(BRIEF_RESPONSE_SCHEMA as any),
+      system: systemPrompt,
+      prompt: userPrompt,
+      maxOutputTokens: maxOutputTokens,
+      providerOptions: {
+        google: {
+          thinkingConfig: { thinkingLevel: 'high' },
+        },
+      },
     });
 
-    let lastChunk: any = null;
-    for await (const chunk of stream) {
-      responseText += chunk.text || '';
-      lastChunk = chunk;
-    }
+    // Wait for the object to be fully streamed
+    const rawAnalysis = await streamResult.object;
+    const usage = await streamResult.usage;
+    const finishReason = await streamResult.finishReason;
 
-    // Extract token usage from last chunk for Langfuse cost tracking
-    // Gemini includes usage metadata in the final streamed chunk
+    // Extract token usage for Langfuse cost tracking
     let mainAnalysisUsage = { input: 0, output: 0, total: 0 };
-    if (lastChunk?.usageMetadata) {
+    if (usage) {
       mainAnalysisUsage = {
-        input: lastChunk.usageMetadata.promptTokenCount || 0,
-        output: lastChunk.usageMetadata.candidatesTokenCount || 0,
-        total: lastChunk.usageMetadata.totalTokenCount || 0
+        input: usage.inputTokens || 0,
+        output: usage.outputTokens || 0,
+        total: (usage.inputTokens || 0) + (usage.outputTokens || 0)
       };
       console.log(`📊 Main analysis token usage: ${mainAnalysisUsage.input} input, ${mainAnalysisUsage.output} output, ${mainAnalysisUsage.total} total`);
     }
 
-    analysisGeneration.update({ output: responseText, metadata: { responseLength: responseText.length } });
+    analysisGeneration.update({ output: JSON.stringify(rawAnalysis), metadata: { finishReason } });
     // End generation with token usage for Langfuse cost calculation
     analysisGeneration.end({
       usage: mainAnalysisUsage.total > 0 ? {
@@ -557,26 +559,22 @@ export async function generateBrief(options: GenerateBriefOptions): Promise<Gene
       } : undefined
     });
 
-    if (!responseText) {
+    if (!rawAnalysis) {
       throw new Error('Empty response from AI');
     }
 
-    // Parse response
+    // Process the parsed response
     const parseSpan = trace.span({
       name: "parse-ai-response",
-      metadata: { responseLength: responseText.length }
+      metadata: { finishReason }
     });
-    const extracted = extractFirstJsonBlock(responseText.trim());
-    if (!extracted.jsonText || extracted.truncated) {
-      parseSpan.end({ level: "ERROR", statusMessage: "Failed to parse" });
-      throw new Error('Failed to parse AI response');
-    }
 
-    const rawAnalysis = JSON.parse(extracted.jsonText);
-    if (rawAnalysis.viralInsights) {
-      rawAnalysis.viralInsights = parseViralInsights(rawAnalysis.viralInsights as ViralInsightsRaw);
+    // Parse viral insights if present
+    const processedAnalysis = { ...rawAnalysis } as any;
+    if (processedAnalysis.viralInsights) {
+      processedAnalysis.viralInsights = parseViralInsights(processedAnalysis.viralInsights as ViralInsightsRaw);
     }
-    const strategicAnalysis: BriefStrategicAnalysis = rawAnalysis;
+    const strategicAnalysis: BriefStrategicAnalysis = processedAnalysis;
     parseSpan.end({
       metadata: {
         strengthsCount: strategicAnalysis.strategicStrengths?.length || 0,
@@ -603,41 +601,40 @@ export async function generateBrief(options: GenerateBriefOptions): Promise<Gene
           { role: 'system', content: SUGGESTION_SYSTEM_PROMPT },
           { role: 'user', content: suggestionPrompt }
         ],
-        metadata: { provider: 'google', thinkingLevel: 'high', promptLength: suggestionPrompt.length }
+        metadata: { provider: geminiProvider, thinkingLevel: 'high', promptLength: suggestionPrompt.length }
       });
 
-      let suggestionsText = '';
-      const suggestionsStream = await gemini.models.generateContentStream({
-        model: BRIEF_MODEL,
-        contents: suggestionPrompt,
-        config: {
-          systemInstruction: SUGGESTION_SYSTEM_PROMPT,
-          thinkingConfig: { thinkingLevel: 'high' } as any,
-          maxOutputTokens: 20000,
-          responseMimeType: 'application/json',
-          responseJsonSchema: SUGGESTION_RESPONSE_SCHEMA,
-        }
+      // Use AI SDK streamObject for streaming structured output
+      const suggestionsStreamResult = streamObject({
+        model: gemini(BRIEF_MODEL),
+        schema: jsonSchema(SUGGESTION_RESPONSE_SCHEMA as any),
+        system: SUGGESTION_SYSTEM_PROMPT,
+        prompt: suggestionPrompt,
+        maxOutputTokens: 20000,
+        providerOptions: {
+          google: {
+            thinkingConfig: { thinkingLevel: 'high' },
+          },
+        },
       });
 
-      let lastSuggestionsChunk: any = null;
-      for await (const chunk of suggestionsStream) {
-        suggestionsText += chunk.text || '';
-        lastSuggestionsChunk = chunk;
-      }
+      // Wait for the object to be fully streamed
+      const suggestionsData = await suggestionsStreamResult.object;
+      const suggestionsUsageData = await suggestionsStreamResult.usage;
+      const suggestionsFinishReason = await suggestionsStreamResult.finishReason;
 
-      // Extract token usage from last chunk for Langfuse cost tracking
-      // Gemini includes usage metadata in the final streamed chunk
+      // Extract token usage for Langfuse cost tracking
       let suggestionsUsage = { input: 0, output: 0, total: 0 };
-      if (lastSuggestionsChunk?.usageMetadata) {
+      if (suggestionsUsageData) {
         suggestionsUsage = {
-          input: lastSuggestionsChunk.usageMetadata.promptTokenCount || 0,
-          output: lastSuggestionsChunk.usageMetadata.candidatesTokenCount || 0,
-          total: lastSuggestionsChunk.usageMetadata.totalTokenCount || 0
+          input: suggestionsUsageData.inputTokens || 0,
+          output: suggestionsUsageData.outputTokens || 0,
+          total: (suggestionsUsageData.inputTokens || 0) + (suggestionsUsageData.outputTokens || 0)
         };
         console.log(`📊 Suggestions token usage: ${suggestionsUsage.input} input, ${suggestionsUsage.output} output, ${suggestionsUsage.total} total`);
       }
 
-      suggestionGeneration.update({ output: suggestionsText, metadata: { responseLength: suggestionsText.length } });
+      suggestionGeneration.update({ output: JSON.stringify(suggestionsData), metadata: { finishReason: suggestionsFinishReason } });
       // End generation with token usage for Langfuse cost calculation
       suggestionGeneration.end({
         usage: suggestionsUsage.total > 0 ? {
@@ -647,13 +644,9 @@ export async function generateBrief(options: GenerateBriefOptions): Promise<Gene
         } : undefined
       });
 
-      if (suggestionsText) {
-        const extractedSuggestions = extractFirstJsonBlock(suggestionsText.trim());
-        if (extractedSuggestions.jsonText && !extractedSuggestions.truncated) {
-          const suggestionsData: SuggestionResponse = JSON.parse(extractedSuggestions.jsonText);
-          listSuggestions = suggestionsData.suggestions || [];
-          console.log(`✅ Generated ${listSuggestions.length} suggestions`);
-        }
+      if (suggestionsData) {
+        listSuggestions = (suggestionsData as SuggestionResponse).suggestions || [];
+        console.log(`✅ Generated ${listSuggestions.length} suggestions`);
       }
       suggestionSpan.end({ metadata: { suggestionsCount: listSuggestions.length } });
     } catch (suggestionError: any) {

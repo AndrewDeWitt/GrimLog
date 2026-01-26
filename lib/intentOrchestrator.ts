@@ -1,14 +1,16 @@
 // Intent Orchestrator
 // Classifies speech intent and determines required context tier
+//
+// Uses AI SDK for Gemini/Vertex AI calls with proper WIF authentication.
 
 import OpenAI from 'openai';
-import { Type } from '@google/genai';
+import { generateObject, jsonSchema } from 'ai';
 import type { ContextTier } from './contextBuilder';
 import { getAnalyzeProvider, validateProviderConfig, getAnalyzeModel, isGeminiProvider, type IntentClassification as IIntentClassification } from './aiProvider';
-import { getGeminiClient } from './vertexAI';
+import { getGeminiProvider } from './vertexAI';
 
 // Use plain OpenAI client (observeOpenAI adds massive overhead - 10-15s per call!)
-// Gemini client is fetched dynamically based on provider (AI Studio or Vertex AI)
+// Gemini provider is fetched dynamically based on provider setting (AI Studio or Vertex AI)
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
@@ -57,31 +59,8 @@ const INTENT_CLASSIFICATION_SCHEMA = {
   additionalProperties: false
 };
 
-// Gemini schema format using Type enums
-const INTENT_CLASSIFICATION_SCHEMA_GEMINI = {
-  type: Type.OBJECT,
-  properties: {
-    isGameRelated: {
-      type: Type.BOOLEAN,
-      description: "Is this speech about the Warhammer 40K game being played?"
-    },
-    intent: {
-      type: Type.STRING,
-      enum: ["SIMPLE_STATE", "UNIT_HEALTH", "COMBAT_LOGGING", "OBJECTIVE_CONTROL", "SECONDARY_SCORING", "STRATEGIC", "UNCLEAR"]
-    },
-    contextTier: {
-      type: Type.STRING,
-      enum: ["minimal", "units_only", "unit_names", "objectives", "secondaries", "full"]
-    },
-    confidence: {
-      type: Type.NUMBER
-    },
-    reasoning: {
-      type: Type.STRING
-    }
-  },
-  required: ["isGameRelated", "intent", "contextTier", "confidence", "reasoning"]
-};
+// Note: We use the same INTENT_CLASSIFICATION_SCHEMA for both OpenAI and Gemini
+// The AI SDK's jsonSchema() helper handles the conversion automatically
 
 /**
  * Combined gatekeeper + intent classification using OpenAI Responses API with structured outputs
@@ -350,6 +329,7 @@ If TRUE, map the speech to the appropriate tool category and determine the conte
 /**
  * Combined gatekeeper + intent classification using Google Gemini with structured outputs
  * Works with both Google AI Studio (google) and Vertex AI (vertex) providers
+ * Uses AI SDK for proper WIF authentication on Vercel
  */
 async function classifyIntentWithGemini(
   transcription: string,
@@ -486,33 +466,28 @@ If TRUE, map the speech to the appropriate tool category and determine the conte
     console.log(`🔄 Starting ${modelName} call for gatekeeper + intent (${provider})...`);
     console.time(`  └─ ${modelName} API call`);
 
-    // Get the appropriate Gemini client (AI Studio or Vertex AI)
-    const gemini = await getGeminiClient(provider);
+    // Get the appropriate Gemini provider (AI Studio or Vertex AI with WIF)
+    const gemini = getGeminiProvider(provider);
 
-    const response = await gemini.models.generateContent({
-      model: modelName,
-      contents: `Analyze this game speech:\n\n"${transcription}"`,
-      config: {
-        systemInstruction: systemPrompt,
-        responseMimeType: 'application/json',
-        responseSchema: INTENT_CLASSIFICATION_SCHEMA_GEMINI,
-        abortSignal: abortSignal
-      }
+    // Use AI SDK generateObject for structured output
+    const { object: classification, usage, finishReason } = await generateObject({
+      model: gemini(modelName),
+      schema: jsonSchema(INTENT_CLASSIFICATION_SCHEMA as any),
+      system: systemPrompt,
+      prompt: `Analyze this game speech:\n\n"${transcription}"`,
+      abortSignal,
     });
 
     console.timeEnd(`  └─ ${modelName} API call`);
     console.time('  └─ Parsing response');
 
     // Extract token usage for Langfuse cost tracking
-    const geminiResponse = response as any;
-    const usage = {
-      input: geminiResponse.usageMetadata?.promptTokenCount || 0,
-      output: geminiResponse.usageMetadata?.candidatesTokenCount || 0,
-      total: geminiResponse.usageMetadata?.totalTokenCount || 0
+    const usageData = {
+      input: usage?.inputTokens || 0,
+      output: usage?.outputTokens || 0,
+      total: (usage?.inputTokens || 0) + (usage?.outputTokens || 0)
     };
-    console.log(`📊 Gemini intent token usage: ${usage.input} input, ${usage.output} output, ${usage.total} total`);
-
-    const classification = JSON.parse(response.text || '{}') as IntentClassification;
+    console.log(`📊 Gemini intent token usage: ${usageData.input} input, ${usageData.output} output, ${usageData.total} total`);
 
     console.timeEnd('  └─ Parsing response');
 
@@ -531,25 +506,27 @@ If TRUE, map the speech to the appropriate tool category and determine the conte
           currentPhase,
           currentRound,
           recentTranscriptsCount: recentTranscripts.length,
-          provider: 'google'
+          provider,
+          finishReason
         }
       });
       // End generation with token usage for Langfuse cost calculation
       langfuseGeneration.end({
-        usage: usage.total > 0 ? {
-          input: usage.input,
-          output: usage.output,
-          total: usage.total
+        usage: usageData.total > 0 ? {
+          input: usageData.input,
+          output: usageData.output,
+          total: usageData.total
         } : undefined
       });
       console.timeEnd('  └─ Langfuse logging');
     }
     
-    console.log(`🚦 Gatekeeper: ${classification.isGameRelated ? 'ALLOWED' : 'BLOCKED'} (${classification.confidence.toFixed(2)} confidence)`);
-    console.log(`🎯 Intent: ${classification.intent} → ${classification.contextTier}`);
-    console.log(`   Reasoning: ${classification.reasoning}`);
+    const typedClassification = classification as IntentClassification;
+    console.log(`🚦 Gatekeeper: ${typedClassification.isGameRelated ? 'ALLOWED' : 'BLOCKED'} (${typedClassification.confidence.toFixed(2)} confidence)`);
+    console.log(`🎯 Intent: ${typedClassification.intent} → ${typedClassification.contextTier}`);
+    console.log(`   Reasoning: ${typedClassification.reasoning}`);
     
-    return classification;
+    return typedClassification;
     
   } catch (error: any) {
     // Handle abort errors gracefully - don't log as error, just re-throw

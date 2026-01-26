@@ -1,9 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server';
 import OpenAI from 'openai';
+import { generateText } from 'ai';
 import { AudioAnalysisResult } from '@/lib/types';
 import { prisma } from '@/lib/prisma';
 import { AI_TOOLS } from '@/lib/aiTools';
-import { GEMINI_TOOLS } from '@/lib/aiToolsGemini';
+import { GEMINI_TOOLS_AI_SDK } from '@/lib/aiToolsGemini';
 import { executeToolCall } from '@/lib/toolHandlers';
 import { langfuse } from '@/lib/langfuse';
 import { fetchGameContext } from '@/lib/validationHelpers';
@@ -14,9 +15,9 @@ import { requireAuth } from '@/lib/auth/apiAuth';
 import { startAnalysisRequest, completeAnalysisRequest } from '@/lib/requestDeduplication';
 import { orchestrateIntent } from '@/lib/intentOrchestrator';
 import { buildContext, formatContextForPrompt } from '@/lib/contextBuilder';
-import { getAnalyzeProvider, validateProviderConfig, getAnalyzeModel, extractOpenAIFunctionCalls, extractGeminiFunctionCalls, isGeminiProvider, type NormalizedFunctionCall } from '@/lib/aiProvider';
+import { getAnalyzeProvider, validateProviderConfig, getAnalyzeModel, extractOpenAIFunctionCalls, isGeminiProvider, type NormalizedFunctionCall } from '@/lib/aiProvider';
 import { checkRateLimit, getRateLimitIdentifier, getClientIp, RATE_LIMITS } from '@/lib/rateLimit';
-import { getGeminiClient } from '@/lib/vertexAI';
+import { getGeminiProvider } from '@/lib/vertexAI';
 
 // Use plain OpenAI client (observeOpenAI adds massive overhead - 5-15 seconds per call!)
 const openai = new OpenAI({
@@ -433,7 +434,7 @@ export async function POST(request: NextRequest) {
         ],
         metadata: {
           provider,
-          tools: isGeminiProvider(provider) ? GEMINI_TOOLS.map(t => t.name) : AI_TOOLS.map(t => t.name),
+          tools: isGeminiProvider(provider) ? Object.keys(GEMINI_TOOLS_AI_SDK) : AI_TOOLS.map(t => t.name),
           contextTier: context.tier,
           intentClassification: intentClassification.intent,
           intentConfidence: intentClassification.confidence,
@@ -443,7 +444,9 @@ export async function POST(request: NextRequest) {
 
       // Retry mechanism for AI calls (max 3 attempts)
       console.time(`⏱️ ${modelName} Analysis`);
-      let response = null;
+      let response: any = null;
+      let functionCallItems: NormalizedFunctionCall[] = [];
+      let usage = { input: 0, output: 0, total: 0 };
       let lastError = null;
       const MAX_RETRIES = 3;
 
@@ -456,20 +459,41 @@ export async function POST(request: NextRequest) {
           }
           
           if (isGeminiProvider(provider)) {
-            // Google Gemini API call with function calling (AI Studio or Vertex AI)
-            // Pass abort signal to cancel if client disconnects
-            const gemini = await getGeminiClient(provider as 'google' | 'vertex');
-            response = await gemini.models.generateContent({
-              model: modelName,
-              contents: transcribedText,
-              config: {
-                systemInstruction: systemPrompt,
-                tools: [{ functionDeclarations: GEMINI_TOOLS }],
-                temperature: 0.7,
-                maxOutputTokens: 8192, // Cap output for voice command analysis
-                abortSignal: abortSignal
-              }
+            // Google Gemini API call with function calling (AI Studio or Vertex AI with WIF)
+            // Uses AI SDK for proper authentication
+            const gemini = getGeminiProvider(provider as 'google' | 'vertex');
+            
+            const result = await generateText({
+              model: gemini(modelName),
+              system: systemPrompt,
+              prompt: transcribedText,
+              tools: GEMINI_TOOLS_AI_SDK,
+              maxOutputTokens: 8192,
+              temperature: 0.7,
+              abortSignal,
             });
+            
+            response = result;
+            
+            // Extract token usage
+            usage = {
+              input: result.usage?.inputTokens || 0,
+              output: result.usage?.outputTokens || 0,
+              total: (result.usage?.inputTokens || 0) + (result.usage?.outputTokens || 0)
+            };
+            console.log(`📊 Gemini token usage: ${usage.input} input, ${usage.output} output, ${usage.total} total`);
+            
+            // Extract tool calls from AI SDK response
+            console.log('🔍 Extracting function calls from Gemini response...');
+            if (result.toolCalls && result.toolCalls.length > 0) {
+              functionCallItems = result.toolCalls.map((tc: any) => ({
+                name: tc.toolName,
+                arguments: JSON.stringify(tc.args),
+                call_id: tc.toolCallId
+              }));
+            }
+            console.log(`📊 Extracted ${functionCallItems.length} function call(s) from Gemini`);
+            
           } else {
             // OpenAI API call
             // Pass abort signal to cancel if client disconnects
@@ -487,6 +511,9 @@ export async function POST(request: NextRequest) {
                 verbosity: 'low' // Concise - we only need tool calls, not explanations
               }
             }, { signal: abortSignal });
+            
+            // Extract function calls from OpenAI response
+            functionCallItems = extractOpenAIFunctionCalls(response);
           }
           
           // Success - break retry loop
@@ -537,29 +564,6 @@ export async function POST(request: NextRequest) {
         });
       }
 
-      // Extract token usage from response for Langfuse cost tracking
-      let usage = { input: 0, output: 0, total: 0 };
-      if (isGeminiProvider(provider) && response) {
-        const geminiResponse = response as any;
-        usage = {
-          input: geminiResponse.usageMetadata?.promptTokenCount || 0,
-          output: geminiResponse.usageMetadata?.candidatesTokenCount || 0,
-          total: geminiResponse.usageMetadata?.totalTokenCount || 0
-        };
-        console.log(`📊 Gemini token usage: ${usage.input} input, ${usage.output} output, ${usage.total} total`);
-      }
-
-      // Extract function calls from response output
-      // Normalize function calls from both providers
-      let functionCallItems: NormalizedFunctionCall[] = [];
-      if (isGeminiProvider(provider)) {
-        console.log('🔍 Extracting function calls from Gemini response...');
-        functionCallItems = extractGeminiFunctionCalls(response);
-        console.log(`📊 Extracted ${functionCallItems.length} function call(s) from Gemini`);
-      } else {
-        functionCallItems = extractOpenAIFunctionCalls(response);
-      }
-
       // Log the response output to the generation (manual logging for control)
       console.time('  └─ Langfuse trace update');
       analysisGeneration.update({
@@ -568,7 +572,7 @@ export async function POST(request: NextRequest) {
           { role: 'system', content: systemPrompt },
           { role: 'user', content: transcribedText }
         ],
-        output: isGeminiProvider(provider) ? (response as any).text || JSON.stringify(response) : (response as any).output,
+        output: isGeminiProvider(provider) ? (response.text || JSON.stringify(response)) : (response as any).output,
         metadata: {
           provider,
           toolCallsDetected: functionCallItems.length,
