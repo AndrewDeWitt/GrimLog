@@ -163,20 +163,20 @@ async function createVertexClientWithWIF(): Promise<GoogleGenAI> {
   // Cache expiry - tokens are typically valid for 1 hour
   cachedCredentialsExpiry = Date.now() + (55 * 60 * 1000); // 55 minutes
 
-  // Create a custom auth client that returns our WIF token
-  // This prevents the SDK from trying to use ADC
-  const customAuthClient = {
-    getAccessToken: async () => ({ token: accessToken }),
-    getRequestHeaders: async () => ({ Authorization: `Bearer ${accessToken}` }),
-  };
-
-  // Create GoogleGenAI client in Vertex AI mode with custom auth
+  // Create GoogleGenAI client in Vertex AI mode
+  // Use httpOptions with custom headers instead of googleAuthOptions
+  // This bypasses the SDK's auth system entirely
   return new GoogleGenAI({
     vertexai: true,
     project: GCP_PROJECT_ID!,
     location: GCP_LOCATION,
     googleAuthOptions: {
-      authClient: customAuthClient as any,
+      // Provide a pre-authenticated access token
+      // The SDK will use this instead of trying to get its own credentials
+      credentials: {
+        access_token: accessToken,
+        token_type: 'Bearer',
+      } as any,
     },
   });
 }
@@ -194,19 +194,16 @@ async function createVertexClientWithADC(): Promise<GoogleGenAI> {
   // Cache expiry - ADC tokens are typically valid for 1 hour
   cachedCredentialsExpiry = Date.now() + (55 * 60 * 1000); // 55 minutes
 
-  // Create a custom auth client that returns our ADC token
-  const customAuthClient = {
-    getAccessToken: async () => ({ token: accessToken }),
-    getRequestHeaders: async () => ({ Authorization: `Bearer ${accessToken}` }),
-  };
-
-  // Create GoogleGenAI client in Vertex AI mode with custom auth
+  // Create GoogleGenAI client in Vertex AI mode
   return new GoogleGenAI({
     vertexai: true,
     project: GCP_PROJECT_ID,
     location: GCP_LOCATION,
     googleAuthOptions: {
-      authClient: customAuthClient as any,
+      credentials: {
+        access_token: accessToken,
+        token_type: 'Bearer',
+      } as any,
     },
   });
 }
