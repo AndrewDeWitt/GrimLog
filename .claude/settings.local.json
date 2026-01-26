@@ -22,7 +22,11 @@
       "WebSearch",
       "WebFetch(domain:docs.cloud.google.com)",
       "Bash(find:*)",
-      "Bash(yarn add:*)"
+      "Bash(yarn add:*)",
+      "mcp__supabase__get_project",
+      "mcp__supabase__get_publishable_keys",
+      "mcp__supabase__get_project_url",
+      "mcp__supabase__search_docs"
     ]
   },
   "enableAllProjectMcpServers": true,

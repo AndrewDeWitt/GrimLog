@@ -142,10 +142,10 @@ export interface IntentClassification {
 
 /**
  * Get the configured AI provider for army list parsing
- * Uses ARMY_PARSE_PROVIDER env var, defaults to OpenAI
+ * Uses ARMY_PARSE_PROVIDER env var, falls back to AI_PROVIDER, then defaults to OpenAI
  */
 export function getArmyParseProvider(): AIProvider {
-  const provider = process.env.ARMY_PARSE_PROVIDER?.toLowerCase();
+  const provider = process.env.ARMY_PARSE_PROVIDER?.toLowerCase() || process.env.AI_PROVIDER?.toLowerCase();
   if (provider === 'google') {
     return 'google';
   }
@@ -166,10 +166,10 @@ export function getArmyParseModel(provider: AIProvider): string {
 
 /**
  * Get the configured AI provider for game analysis (voice-to-event workflow)
- * Uses ANALYZE_PROVIDER env var, defaults to OpenAI
+ * Uses ANALYZE_PROVIDER env var, falls back to AI_PROVIDER, then defaults to OpenAI
  */
 export function getAnalyzeProvider(): AIProvider {
-  const provider = process.env.ANALYZE_PROVIDER?.toLowerCase();
+  const provider = process.env.ANALYZE_PROVIDER?.toLowerCase() || process.env.AI_PROVIDER?.toLowerCase();
   if (provider === 'google') {
     return 'google';
   }
