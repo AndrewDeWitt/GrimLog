@@ -2,7 +2,7 @@
  * Detachment Context Fetcher
  * 
  * Fetches faction and detachment rules from the database to enrich
- * the dossier analysis LLM prompt with accurate, current game rules.
+ * the brief analysis LLM prompt with accurate, current game rules.
  */
 
 import { prisma } from './prisma';

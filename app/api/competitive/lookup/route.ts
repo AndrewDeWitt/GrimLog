@@ -3,7 +3,7 @@
  * POST /api/competitive/lookup
  * 
  * Looks up competitive context for an army list's units and faction.
- * Used to enrich the Dossier with competitive insights.
+ * Used to enrich the Brief with competitive insights.
  */
 
 import { NextRequest, NextResponse } from 'next/server';

@@ -384,27 +384,27 @@ export default function HamburgerMenu({
                   </button>
                 )}
                 
-                {/* Dossier - Available to all users */}
+                {/* Brief - Available to all users */}
                 <button
-                  onClick={() => handleNavigation('/dossier')}
+                  onClick={() => handleNavigation('/brief')}
                   className="w-full p-3.5 bg-transparent hover:bg-grimlog-steel/20 text-grimlog-amber border border-grimlog-steel/50 hover:border-grimlog-amber transition-all uppercase text-sm font-bold text-left flex items-center gap-3 px-3"
                 >
-                  <span className="text-grimlog-steel">📋</span> TACTICAL DOSSIER
+                  <span className="text-grimlog-steel">📋</span> TACTICAL BRIEF
                 </button>
                 
-                {/* My Dossiers - Only for authenticated users */}
+                {/* My Briefs - Only for authenticated users */}
                 {user && (
                   <button
-                    onClick={() => handleNavigation('/dossier/history')}
+                    onClick={() => handleNavigation('/brief/history')}
                     className="w-full p-3.5 bg-transparent hover:bg-grimlog-steel/20 text-grimlog-green border border-grimlog-steel/50 hover:border-grimlog-green transition-all uppercase text-sm font-bold text-left flex items-center gap-3 px-3"
                   >
-                    <span className="text-grimlog-steel">📚</span> MY DOSSIERS
+                    <span className="text-grimlog-steel">📚</span> MY BRIEFS
                   </button>
                 )}
                 
                 {/* Public Gallery - Available to everyone */}
                 <button
-                  onClick={() => handleNavigation('/dossier/gallery')}
+                  onClick={() => handleNavigation('/brief/gallery')}
                   className="w-full p-3.5 bg-transparent hover:bg-grimlog-steel/20 text-grimlog-light-steel border border-grimlog-steel/50 hover:border-grimlog-light-steel transition-all uppercase text-sm font-bold text-left flex items-center gap-3 px-3"
                 >
                   <span className="text-grimlog-steel">🌐</span> PUBLIC GALLERY

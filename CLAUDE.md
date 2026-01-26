@@ -88,7 +88,7 @@ npx tsc --noEmit
 - `/api/datasheets/` - Unit datasheet lookups
 - `/api/stratagems/` - Stratagem database
 - `/api/admin/` - Admin-only data management
-- `/api/dossier/` - Tactical dossier generation
+- `/api/brief/` - Tactical brief generation
 
 ### Database Models (Prisma)
 Core models: `GameSession`, `TranscriptHistory`, `TimelineEvent`, `Army`, `Unit`, `UnitInstance`, `Datasheet`, `StratagemData`, `Ability`, `Weapon`

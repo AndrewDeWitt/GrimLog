@@ -17,7 +17,7 @@ const globalRateLimiter = (process.env.KV_REST_API_URL && process.env.KV_REST_AP
 const PUBLIC_ROUTES = ['/', '/auth/callback']
 
 // Routes that require authentication but not admin
-const AUTH_ROUTES = ['/dossier']
+const AUTH_ROUTES = ['/brief']
 
 // Admin-only routes - require isAdmin flag
 const ADMIN_ROUTES = ['/sessions', '/armies', '/datasheets', '/calculator', '/admin']
@@ -140,7 +140,7 @@ export async function middleware(request: NextRequest) {
   // Check if this is a public route
   const isPublicRoute = PUBLIC_ROUTES.some(route => pathname === route)
 
-  // Check if this is an auth-required route (dossier)
+  // Check if this is an auth-required route (brief)
   const isAuthRoute = AUTH_ROUTES.some(route => pathname.startsWith(route))
 
   // Check if this is an admin-only route

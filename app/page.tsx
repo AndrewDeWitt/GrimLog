@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import GrimlogFrame from '@/components/MechanicusFrame';
-import { DossierHero, DossierSamplePreview } from '@/components/dossier';
+import { BriefHero, BriefSamplePreview } from '@/components/brief';
 import { useAuth } from '@/lib/auth/AuthContext';
 import AuthModal from '@/components/AuthModal';
 
@@ -16,7 +16,7 @@ export default function HomePage() {
   // Redirect logged-in users to the public gallery
   useEffect(() => {
     if (!authLoading && user) {
-      router.push('/dossier/gallery');
+      router.push('/brief/gallery');
     }
   }, [authLoading, user, router]);
   
@@ -67,7 +67,7 @@ export default function HomePage() {
 
       <main className="bg-grimlog-black">
         {/* Hero Section */}
-        <DossierHero 
+        <BriefHero 
           onAnalyzeClick={() => setShowAuthModal(true)}
           onPreviewClick={() => {
             document.getElementById('sample-preview')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -77,7 +77,7 @@ export default function HomePage() {
 
         {/* Sample Preview Section */}
         <div id="sample-preview">
-          <DossierSamplePreview 
+          <BriefSamplePreview 
             onGenerateClick={() => setShowAuthModal(true)} 
             ctaLabel="Sign Up Free"
             ctaVariant="green"

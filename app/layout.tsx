@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { AuthProvider } from "@/lib/auth/AuthContext";
-import { DossierNotificationProvider } from "@/lib/dossier/DossierNotificationContext";
+import { BriefNotificationProvider } from "@/lib/brief/BriefNotificationContext";
 import NavigationWrapper from "@/components/NavigationWrapper";
-import DossierNotificationToast from "@/components/DossierNotificationToast";
+import BriefNotificationToast from "@/components/BriefNotificationToast";
 
 export const metadata: Metadata = {
   title: "Grimlog | AI Battle Tracker",
@@ -19,12 +19,12 @@ export default function RootLayout({
     <html lang="en">
       <body className="antialiased">
         <AuthProvider>
-          <DossierNotificationProvider>
+          <BriefNotificationProvider>
             <NavigationWrapper>
               {children}
             </NavigationWrapper>
-            <DossierNotificationToast />
-          </DossierNotificationProvider>
+            <BriefNotificationToast />
+          </BriefNotificationProvider>
         </AuthProvider>
       </body>
     </html>

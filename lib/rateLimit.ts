@@ -107,8 +107,8 @@ export const RATE_LIMITS = {
     windowMs: 60 * 1000, // per minute
   },
   
-  // Dossier analysis - VERY expensive (multiple Gemini calls + icon generation)
-  dossierAnalyze: {
+  // Brief analysis - VERY expensive (multiple Gemini calls + icon generation)
+  briefAnalyze: {
     maxRequests: 5, // 5 requests
     windowMs: 60 * 1000, // per minute
   },

@@ -10,10 +10,10 @@
     "app/api/tactical-advisor/route.ts": {
       "maxDuration": 60
     },
-    "app/api/dossier/generate-spirit-icon/route.ts": {
+    "app/api/brief/generate-spirit-icon/route.ts": {
       "maxDuration": 60
     },
-    "app/api/dossier/generate-stat-icons/route.ts": {
+    "app/api/brief/generate-stat-icons/route.ts": {
       "maxDuration": 120
     },
     "app/api/admin/icons/generate/route.ts": {
@@ -23,6 +23,11 @@
       "maxDuration": 30
     }
   },
+  "redirects": [
+    { "source": "/dossier", "destination": "/brief", "permanent": true },
+    { "source": "/dossier/:path*", "destination": "/brief/:path*", "permanent": true },
+    { "source": "/api/dossier/:path*", "destination": "/api/brief/:path*", "permanent": true }
+  ],
   "headers": [
     {
       "source": "/(.*)",

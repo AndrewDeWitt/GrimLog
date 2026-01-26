@@ -1,10 +1,10 @@
 'use client';
 
 import { useState } from 'react';
-import { 
-  UnitCompetitiveContextSummary, 
-  FactionCompetitiveContextSummary 
-} from '@/lib/dossierAnalysis';
+import {
+  UnitCompetitiveContextSummary,
+  FactionCompetitiveContextSummary
+} from '@/lib/briefAnalysis';
 
 // ============================================
 // UNIT COMPETITIVE CONTEXT CARD

@@ -48,12 +48,12 @@ export const rateLimiters = isKVConfigured
         prefix: 'ratelimit:parseArmy',
       }),
       
-      // Dossier analysis - 5 requests per minute (most expensive)
-      dossierAnalyze: new Ratelimit({
+      // Brief analysis - 5 requests per minute (most expensive)
+      briefAnalyze: new Ratelimit({
         redis: kv,
         limiter: Ratelimit.slidingWindow(5, '1 m'),
         analytics: true,
-        prefix: 'ratelimit:dossierAnalyze',
+        prefix: 'ratelimit:briefAnalyze',
       }),
       
       // Tactical advisor - 20 requests per minute

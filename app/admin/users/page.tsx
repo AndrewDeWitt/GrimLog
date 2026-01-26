@@ -12,7 +12,7 @@ interface UserData {
   name: string | null;
   avatar: string | null;
   isAdmin: boolean;
-  dossierCredits: number;
+  briefCredits: number;
   createdAt: string;
   updatedAt: string;
 }
@@ -42,7 +42,7 @@ export default function AdminUsersPage() {
         if (response.ok) {
           const data = await response.json();
           if (!data.isAdmin) {
-            router.push('/dossier');
+            router.push('/brief');
             return;
           }
           setIsAdmin(true);
@@ -98,7 +98,7 @@ export default function AdminUsersPage() {
       
       // Update local state
       setUsers(prev => prev.map(u => 
-        u.id === userId ? { ...u, dossierCredits: result.newCredits } : u
+        u.id === userId ? { ...u, briefCredits: result.newCredits } : u
       ));
       
       setSuccessMessage(`Credits updated to ${result.newCredits}`);
@@ -129,7 +129,7 @@ export default function AdminUsersPage() {
       
       // Update local state
       setUsers(prev => prev.map(u => 
-        u.id === userId ? { ...u, dossierCredits: result.newCredits } : u
+        u.id === userId ? { ...u, briefCredits: result.newCredits } : u
       ));
       
       setEditingUserId(null);
@@ -172,7 +172,7 @@ export default function AdminUsersPage() {
                   👤 USER CREDITS
                 </h1>
                 <p className="text-grimlog-green text-sm font-mono mt-2">
-                  Manage dossier generation credits for users
+                  Manage brief generation credits for users
                 </p>
               </div>
               <Link
@@ -265,16 +265,16 @@ export default function AdminUsersPage() {
                         ) : (
                           <span 
                             className={`font-mono font-bold text-lg cursor-pointer hover:underline ${
-                              u.dossierCredits === 0 ? 'text-grimlog-red' : 
-                              u.dossierCredits > 5 ? 'text-grimlog-green' : 'text-grimlog-amber'
+                              u.briefCredits === 0 ? 'text-grimlog-red' : 
+                              u.briefCredits > 5 ? 'text-grimlog-green' : 'text-grimlog-amber'
                             }`}
                             onClick={() => {
                               setEditingUserId(u.id);
-                              setCreditInput(u.dossierCredits.toString());
+                              setCreditInput(u.briefCredits.toString());
                             }}
                             title="Click to edit"
                           >
-                            {u.isAdmin ? '∞' : u.dossierCredits}
+                            {u.isAdmin ? '∞' : u.briefCredits}
                           </span>
                         )}
                       </td>
@@ -302,7 +302,7 @@ export default function AdminUsersPage() {
                         <div className="flex items-center justify-end gap-2">
                           <button
                             onClick={() => handleAdjustCredits(u.id, -1)}
-                            disabled={actionLoading === u.id || u.isAdmin || u.dossierCredits === 0}
+                            disabled={actionLoading === u.id || u.isAdmin || u.briefCredits === 0}
                             className="w-8 h-8 bg-grimlog-red/20 hover:bg-grimlog-red/40 text-grimlog-red border border-grimlog-red/50 font-bold transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                             title="Remove 1 credit"
                           >
@@ -348,13 +348,13 @@ export default function AdminUsersPage() {
               </div>
               <div className="bg-grimlog-black border border-grimlog-steel p-4 text-center">
                 <div className="text-3xl font-bold text-grimlog-green">
-                  {users.filter(u => u.dossierCredits > 0 || u.isAdmin).length}
+                  {users.filter(u => u.briefCredits > 0 || u.isAdmin).length}
                 </div>
                 <div className="text-grimlog-steel text-xs uppercase tracking-wider">With Credits</div>
               </div>
               <div className="bg-grimlog-black border border-grimlog-steel p-4 text-center">
                 <div className="text-3xl font-bold text-grimlog-red">
-                  {users.filter(u => !u.isAdmin && u.dossierCredits === 0).length}
+                  {users.filter(u => !u.isAdmin && u.briefCredits === 0).length}
                 </div>
                 <div className="text-grimlog-steel text-xs uppercase tracking-wider">No Credits</div>
               </div>

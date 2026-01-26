@@ -17,7 +17,7 @@ model User {
   name      String?
   avatar    String?
   isAdmin   Boolean  @default(false) // Admin role for data management
-  dossierCredits Int @default(2) // Free dossier generations for new users
+  briefCredits Int @default(2) // Free brief generations for new users
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -28,8 +28,8 @@ model User {
   unitIcons           UnitIcon[]
   ownedDatasheets     Datasheet[]          @relation("DatasheetOwner")
   datasheetVersions   DatasheetVersion[]   @relation("DatasheetVersionCreator")
-  dossierGenerations  DossierGeneration[]
-  dossierVersions     DossierVersion[]     @relation("DossierVersionCreator")
+  briefGenerations  BriefGeneration[]
+  briefVersions     BriefVersion[]     @relation("BriefVersionCreator")
 }
 
 // User-generated unit icons (stored in Vercel Blob)
@@ -1339,11 +1339,11 @@ model FactionCompetitiveContext {
 }
 
 // ============================================
-// DOSSIER GENERATION HISTORY & SHARING
+// BRIEF GENERATION HISTORY & SHARING
 // ============================================
 
-// Stores generated tactical dossiers with history and sharing capabilities
-model DossierGeneration {
+// Stores generated tactical briefs with history and sharing capabilities
+model BriefGeneration {
   id     String @id @default(uuid())
   userId String
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -1355,7 +1355,7 @@ model DossierGeneration {
   completedAt  DateTime?                      // When processing finished
 
   // Notification tracking - when user acknowledged the completion
-  notificationDismissedAt DateTime?           // Set when user clicks badge/toast or views dossier
+  notificationDismissedAt DateTime?           // Set when user clicks badge/toast or views brief
 
   // Army metadata (nullable until processing completes)
   faction     String?  // Detected or selected faction
@@ -1369,8 +1369,8 @@ model DossierGeneration {
   spiritIconUrl String? // AI-generated spirit icon URL (Supabase Storage)
 
   // Analysis data (JSONB for complex nested structures, nullable until complete)
-  localAnalysis     Json? // DossierAnalysis object (MathHammer, radar scores, etc.)
-  strategicAnalysis Json? // DossierStrategicAnalysis object (AI insights)
+  localAnalysis     Json? // BriefAnalysis object (MathHammer, radar scores, etc.)
+  strategicAnalysis Json? // BriefStrategicAnalysis object (AI insights)
   listSuggestions   Json? // Array of ListSuggestion objects
 
   // Sharing & Visibility
@@ -1390,7 +1390,7 @@ model DossierGeneration {
   updatedAt DateTime @updatedAt
 
   // Relations
-  versions DossierVersion[]
+  versions BriefVersion[]
 
   @@index([userId])
   @@index([userId, status])
@@ -1400,20 +1400,20 @@ model DossierGeneration {
   @@index([visibility, createdAt])
 }
 
-// Stores version history for dossier edits
-model DossierVersion {
-  id            String            @id @default(uuid())
-  dossierId     String
-  dossier       DossierGeneration @relation(fields: [dossierId], references: [id], onDelete: Cascade)
-  versionNumber Int               // Sequential version (1, 2, 3...)
-  versionLabel  String?           // Optional label ("Pre-tournament tweaks", "v1.2")
-  snapshotData  String            @db.Text // Full JSON snapshot of strategicAnalysis + listSuggestions
-  changelog     String?           @db.Text // What changed in this version
-  createdAt     DateTime          @default(now())
-  createdById   String?           // User ID who created this version
-  createdBy     User?             @relation("DossierVersionCreator", fields: [createdById], references: [id], onDelete: SetNull)
+// Stores version history for brief edits
+model BriefVersion {
+  id            String          @id @default(uuid())
+  briefId       String
+  brief         BriefGeneration @relation(fields: [briefId], references: [id], onDelete: Cascade)
+  versionNumber Int             // Sequential version (1, 2, 3...)
+  versionLabel  String?         // Optional label ("Pre-tournament tweaks", "v1.2")
+  snapshotData  String          @db.Text // Full JSON snapshot of strategicAnalysis + listSuggestions
+  changelog     String?         @db.Text // What changed in this version
+  createdAt     DateTime        @default(now())
+  createdById   String?         // User ID who created this version
+  createdBy     User?           @relation("BriefVersionCreator", fields: [createdById], references: [id], onDelete: SetNull)
 
-  @@unique([dossierId, versionNumber])
-  @@index([dossierId])
+  @@unique([briefId, versionNumber])
+  @@index([briefId])
   @@index([createdById])
 }

@@ -215,7 +215,7 @@ export default function LiveSessionPage() {
     { ttl: 30000, autoFetch: true }
   );
 
-  // Check admin status and redirect non-admin users to dossier
+  // Check admin status and redirect non-admin users to brief
   useEffect(() => {
     const checkAdminStatus = async () => {
       if (!user) {
@@ -230,9 +230,9 @@ export default function LiveSessionPage() {
           const data = await response.json();
           setIsAdmin(data.isAdmin);
           
-          // Redirect non-admin users to dossier
+          // Redirect non-admin users to brief
           if (!data.isAdmin) {
-            router.push('/dossier');
+            router.push('/brief');
             return;
           }
         }

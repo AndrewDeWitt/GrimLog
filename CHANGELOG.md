@@ -4,18 +4,18 @@ This file contains the **last 30 versions**. For older entries, see [CHANGELOG_A
 
 ---
 
-## [4.90.4] - 2026-01-19 - Dossier Faction Selector
+## [4.90.4] - 2026-01-19 - Brief Faction Selector
 
 ### Added
 
-- **Faction dropdown on dossier page:**
+- **Faction dropdown on brief page:**
   - Required faction selector above the army list textarea
   - Fetches factions from `/api/factions` on page load
   - Styled to match Mechanicus theme with custom dropdown arrow
   - Button shows "Select a Faction" when no faction selected
 
 - **Backend faction validation:**
-  - `/api/dossier/submit` now requires `factionId` in request body
+  - `/api/brief/submit` now requires `factionId` in request body
   - Returns 400 error if faction not selected
   - Passes `factionId` to army parser for filtered datasheet matching
 
@@ -28,8 +28,8 @@ This file contains the **last 30 versions**. For older entries, see [CHANGELOG_A
 
 ### Files Modified
 
-- `app/dossier/page.tsx` - Added faction state, fetch, dropdown UI, and submit validation
-- `app/api/dossier/submit/route.ts` - Added factionId to interface, validation, and parser call
+- `app/brief/page.tsx` - Added faction state, fetch, dropdown UI, and submit validation
+- `app/api/brief/submit/route.ts` - Added factionId to interface, validation, and parser call
 
 ### Verification
 
@@ -38,34 +38,34 @@ This file contains the **last 30 versions**. For older entries, see [CHANGELOG_A
 
 ---
 
-## [4.90.3] - 2026-01-19 - Dossier Reliability: Timeout Handling & Polling Optimization
+## [4.90.3] - 2026-01-19 - Brief Reliability: Timeout Handling & Polling Optimization
 
 ### Added
 
-- **Auto-fail stuck dossiers:**
-  - Status endpoint now detects dossiers stuck in pending/processing for >15 minutes
+- **Auto-fail stuck briefs:**
+  - Status endpoint now detects briefs stuck in pending/processing for >15 minutes
   - Automatically marks them as failed with "Generation timed out. Please try again."
   - Prevents indefinite "Generating..." state when background processing errors
 
-- **Null guard for DossierReport:**
+- **Null guard for BriefReport:**
   - Component now handles null `analysis` prop gracefully during loading states
   - Prevents "Cannot destructure property 'faction' of 'analysis' as it is null" error
 
 ### Changed
 
 - **Optimized polling intervals:**
-  - Removed idle polling entirely - only polls when there are pending dossiers
+  - Removed idle polling entirely - only polls when there are pending briefs
   - Initial polling: 20 seconds (since we know generation takes ~2 minutes)
   - After ~2 minutes: speeds up to 10 seconds as completion approaches
-  - `triggerRefresh()` automatically starts polling when a new dossier is submitted
+  - `triggerRefresh()` automatically starts polling when a new brief is submitted
   - **Before:** 12+ requests/min continuous (even when idle)
   - **After:** 0 requests/min when idle, 3-6 req/min when generating
 
 ### Files Modified
 
-- `app/api/dossier/status/route.ts` - Added 15-minute timeout detection
-- `lib/dossier/DossierNotificationContext.tsx` - Optimized polling logic
-- `components/DossierReport.tsx` - Added null guard for analysis prop
+- `app/api/brief/status/route.ts` - Added 15-minute timeout detection
+- `lib/brief/BriefNotificationContext.tsx` - Optimized polling logic
+- `components/BriefReport.tsx` - Added null guard for analysis prop
 
 ### Verification
 
@@ -74,14 +74,14 @@ This file contains the **last 30 versions**. For older entries, see [CHANGELOG_A
 
 ---
 
-## [4.90.2] - 2026-01-19 - Dead Code Cleanup: Dossier Analyze Endpoint
+## [4.90.2] - 2026-01-19 - Dead Code Cleanup: Brief Analyze Endpoint
 
 ### Removed
 
-- **Deleted `/api/dossier/analyze` endpoint (1,602 lines of dead code):**
-  - Endpoint was completely unused after migration to async dossier generation via `/api/dossier/submit`
-  - Submit endpoint calls `generateDossier()` directly from `lib/dossierGenerator.ts` - no HTTP call needed
-  - All business logic already extracted to `lib/dossierGenerator.ts`
+- **Deleted `/api/brief/analyze` endpoint (1,602 lines of dead code):**
+  - Endpoint was completely unused after migration to async brief generation via `/api/brief/submit`
+  - Submit endpoint calls `generateBrief()` directly from `lib/briefGenerator.ts` - no HTTP call needed
+  - All business logic already extracted to `lib/briefGenerator.ts`
 
 - **Deleted `docs/api/DOSSIER_ANALYZE_ENDPOINT.md`:**
   - Obsolete documentation for removed endpoint
@@ -104,8 +104,8 @@ This file contains the **last 30 versions**. For older entries, see [CHANGELOG_A
   - `PRODUCTION_CHECKLIST.md` - Updated rate limit table
 
 - **Code comments:**
-  - `scripts/security-test.ps1` - Updated test to use `/api/dossier/submit`
-  - `app/api/dossier/generate-spirit-icon/route.ts` - Updated comment
+  - `scripts/security-test.ps1` - Updated test to use `/api/brief/submit`
+  - `app/api/brief/generate-spirit-icon/route.ts` - Updated comment
   - `lib/competitiveContextParser.ts` - Updated comment
   - `app/api/competitive/parse-from-text/route.ts` - Updated comment
 
@@ -113,7 +113,7 @@ This file contains the **last 30 versions**. For older entries, see [CHANGELOG_A
 
 - ✅ `npm run lint` passes (only pre-existing warnings)
 - ✅ `npx tsc --noEmit` compiles successfully
-- ✅ Only CHANGELOG files contain historical `/api/dossier/analyze` references
+- ✅ Only CHANGELOG files contain historical `/api/brief/analyze` references
 
 ---
 
@@ -142,10 +142,10 @@ This file contains the **last 30 versions**. For older entries, see [CHANGELOG_A
   - Token counts passed to Langfuse `generation.end()` for automatic cost calculation
   - Console logging of token usage for all LLM calls
 
-- **Unified Dossier Trace:**
-  - Single trace (`dossier-strategic-analysis-background`) encompasses entire dossier generation flow
-  - Army parsing step (`gemini-army-parse`) now tracked within same trace as dossier analysis
-  - Three LLM generations in one trace: army parse → dossier analysis → suggestions
+- **Unified Brief Trace:**
+  - Single trace (`brief-strategic-analysis-background`) encompasses entire brief generation flow
+  - Army parsing step (`gemini-army-parse`) now tracked within same trace as brief analysis
+  - Three LLM generations in one trace: army parse → brief analysis → suggestions
 
 - **Langfuse Model Pricing Setup Script:**
   - New `scripts/setup-langfuse-models.ts` for one-time Langfuse pricing configuration
@@ -156,19 +156,19 @@ This file contains the **last 30 versions**. For older entries, see [CHANGELOG_A
 
 - **Files with Token Tracking:**
   - `app/api/analyze/route.ts` - Voice analysis Gemini calls
-  - `app/api/dossier/analyze/route.ts` - Dossier analysis + suggestions (streaming)
-  - `app/api/dossier/submit/route.ts` - Creates unified trace for background processing
+  - `app/api/brief/analyze/route.ts` - Brief analysis + suggestions (streaming)
+  - `app/api/brief/submit/route.ts` - Creates unified trace for background processing
   - `app/api/tactical-advisor/route.ts` - Tactical suggestions
   - `app/api/armies/parse/route.ts` - Army parsing via API
-  - `lib/dossierGenerator.ts` - Background dossier generation (streaming)
-  - `lib/armyListParser.ts` - Army parsing for dossier flow
+  - `lib/briefGenerator.ts` - Background brief generation (streaming)
+  - `lib/armyListParser.ts` - Army parsing for brief flow
   - `lib/intentOrchestrator.ts` - Intent classification
   - `lib/competitiveContextParser.ts` - Competitive context extraction
 
 - **Trace Architecture:**
-  - `generateDossier()` accepts optional `trace` parameter for unified tracing
+  - `generateBrief()` accepts optional `trace` parameter for unified tracing
   - `parseArmyListFromText()` accepts optional `trace` parameter
-  - Background dossier flow creates trace at top level, passes to all steps
+  - Background brief flow creates trace at top level, passes to all steps
 
 ### Documentation
 
@@ -183,15 +183,15 @@ This file contains the **last 30 versions**. For older entries, see [CHANGELOG_A
 - **Unsafe Regex Patterns (11 errors):**
   - Added bounded quantifiers (`\s{0,10}`, `\s{0,20}`) to prevent potential ReDoS
   - Added anchors (`^...$`) to dice formula and unit size patterns
-  - Files: `armies/parse/route.ts`, `UnitBuilder.tsx`, `armyListParser.ts`, `damageCalculation.ts`, `dossierAnalysis.ts`, `weaponRulesEngine.ts`, `migrate-weapon-data.ts`, `patchPointsTiers.ts`
+  - Files: `armies/parse/route.ts`, `UnitBuilder.tsx`, `armyListParser.ts`, `damageCalculation.ts`, `briefAnalysis.ts`, `weaponRulesEngine.ts`, `migrate-weapon-data.ts`, `patchPointsTiers.ts`
   - Added eslint-disable comments with justification (controlled datasheet input)
 
 - **ESLint Rule Definition Errors (2 errors):**
-  - `api/dossier/[id]/route.ts`: Replaced `any` type with `Record<string, unknown>`
+  - `api/brief/[id]/route.ts`: Replaced `any` type with `Record<string, unknown>`
   - `lib/auth/adminAuth.ts`: Renamed unused deprecated function with `_` prefix
 
 - **React Unescaped Entities (2 errors):**
-  - `DossierHistoryDropdown.tsx`: Escaped `"` as `&quot;` in JSX
+  - `BriefHistoryDropdown.tsx`: Escaped `"` as `&quot;` in JSX
 
 ### Changed
 
@@ -259,7 +259,7 @@ This file contains the **last 30 versions**. For older entries, see [CHANGELOG_A
   - Added `verifySessionAccess()` check using shared utility from parent route
 
 - **Database Security:**
-  - Enabled RLS on `DossierGeneration` table (was ERROR, now INFO)
+  - Enabled RLS on `BriefGeneration` table (was ERROR, now INFO)
   - Defense-in-depth: direct client access blocked even if anon key exposed
 
 - **Input Validation:**
@@ -278,7 +278,7 @@ This file contains the **last 30 versions**. For older entries, see [CHANGELOG_A
   - Fails open if KV unavailable (individual endpoint limits still apply)
 
 - **Public Endpoint Rate Limiting:**
-  - `/api/dossier/public`, `/api/armies/public`, `/api/datasheets/public`
+  - `/api/brief/public`, `/api/armies/public`, `/api/datasheets/public`
   - 60 req/min per IP address
   - Returns 429 with `Retry-After` header when exceeded
 
@@ -304,20 +304,20 @@ This file contains the **last 30 versions**. For older entries, see [CHANGELOG_A
 - `app/api/armies/import/[shareToken]/route.ts` - Safe JSON parsing
 - `app/api/armies/route.ts` - Remove `error.meta` from response
 - `app/api/armies/public/route.ts` - Rate limiting + safe numeric parsing
-- `app/api/dossier/public/route.ts` - Rate limiting + safe numeric parsing
+- `app/api/brief/public/route.ts` - Rate limiting + safe numeric parsing
 - `app/api/datasheets/public/route.ts` - Rate limiting + safe JSON/numeric parsing
 - `middleware.ts` - Global API rate limiting
 
 ### Database Migrations
 
-- `enable_rls_dossier_generation` - Enable RLS on DossierGeneration table
+- `enable_rls_brief_generation` - Enable RLS on BriefGeneration table
 
 ---
 
-## [4.87.0] - 2026-01-18 - Dossier Editing & Versioning System
+## [4.87.0] - 2026-01-18 - Brief Editing & Versioning System
 
 ### Added
-- **Dossier Editing System:**
+- **Brief Editing System:**
   - Inline editing for all AI-generated content (quirks, unit summaries, matchups, list suggestions)
   - Edit mode toggle via kebab menu (⋮) with Edit, History, Share options
   - EditableText component for inline text/multiline editing
@@ -326,10 +326,10 @@ This file contains the **last 30 versions**. For older entries, see [CHANGELOG_A
 - **Version History:**
   - Every save creates a version snapshot (simplified from separate Save/Version buttons)
   - SaveVersionModal with optional label and changelog fields
-  - DossierVersionHistoryPanel slide-out showing all versions
+  - BriefVersionHistoryPanel slide-out showing all versions
   - Restore any previous version (creates new version with restored content)
-  - v1 "AI Generated" snapshot auto-created on dossier generation
-  - Synthetic v1 display for legacy dossiers created before versioning
+  - v1 "AI Generated" snapshot auto-created on brief generation
+  - Synthetic v1 display for legacy briefs created before versioning
 
 - **Auto-Save & Recovery:**
   - localStorage auto-save every 30 seconds while editing
@@ -337,8 +337,8 @@ This file contains the **last 30 versions**. For older entries, see [CHANGELOG_A
   - beforeunload warning when leaving with unsaved changes
 
 - **UI Components:**
-  - DossierActionsMenu (kebab menu) consolidating Edit, History, Share
-  - DossierEditToolbar with stacked Editing/Unsaved labels (mobile-optimized)
+  - BriefActionsMenu (kebab menu) consolidating Edit, History, Share
+  - BriefEditToolbar with stacked Editing/Unsaved labels (mobile-optimized)
   - Full-width "Remove" buttons on own row (quirks, matchups) - clearer, harder to accidentally click
 
 ### Fixed
@@ -352,45 +352,45 @@ This file contains the **last 30 versions**. For older entries, see [CHANGELOG_A
 - **Remove button styling:** Brighter red background (20% opacity), clearer visibility
 
 ### Database
-- Added `DossierVersion` model for version snapshots
-- Added `currentVersion`, `isEdited`, `lastEditedAt` fields to `DossierGeneration`
+- Added `BriefVersion` model for version snapshots
+- Added `currentVersion`, `isEdited`, `lastEditedAt` fields to `BriefGeneration`
 
 ### API
-- Extended `PATCH /api/dossier/[id]` for content edits with optional version creation
-- Added `GET/POST /api/dossier/[id]/versions` for version management
-- Added `POST /api/dossier/[id]/versions/[versionNumber]/restore` for restoration
+- Extended `PATCH /api/brief/[id]` for content edits with optional version creation
+- Added `GET/POST /api/brief/[id]/versions` for version management
+- Added `POST /api/brief/[id]/versions/[versionNumber]/restore` for restoration
 
 ### Technical
 - **New Files:**
-  - `components/dossier/DossierActionsMenu.tsx`
-  - `components/dossier/DossierEditToolbar.tsx`
-  - `components/dossier/EditableText.tsx`
-  - `components/dossier/EditableSelect.tsx`
-  - `components/dossier/SaveVersionModal.tsx`
-  - `components/dossier/DossierVersionHistoryPanel.tsx`
-  - `components/dossier/WIPRecoveryModal.tsx`
-  - `hooks/useDossierAutoSave.ts`
-  - `app/api/dossier/[id]/versions/route.ts`
-  - `app/api/dossier/[id]/versions/[versionNumber]/route.ts`
-  - `app/api/dossier/[id]/versions/[versionNumber]/restore/route.ts`
+  - `components/brief/BriefActionsMenu.tsx`
+  - `components/brief/BriefEditToolbar.tsx`
+  - `components/brief/EditableText.tsx`
+  - `components/brief/EditableSelect.tsx`
+  - `components/brief/SaveVersionModal.tsx`
+  - `components/brief/BriefVersionHistoryPanel.tsx`
+  - `components/brief/WIPRecoveryModal.tsx`
+  - `hooks/useBriefAutoSave.ts`
+  - `app/api/brief/[id]/versions/route.ts`
+  - `app/api/brief/[id]/versions/[versionNumber]/route.ts`
+  - `app/api/brief/[id]/versions/[versionNumber]/restore/route.ts`
 
 - **Modified Files:**
-  - `app/dossier/[id]/page.tsx` - Edit mode state, version management, WIP recovery
-  - `components/DossierReport.tsx` - Pass edit mode props to children
-  - `components/dossier/report/ArmyQuirksGrid.tsx` - Inline editing, add/remove quirks
-  - `components/dossier/report/UnitRoleGroup.tsx` - Editable role dropdown, tactical summary
-  - `components/dossier/report/ListSuggestionsSection.tsx` - Editable suggestions
-  - `components/dossier/report/MatchupGuide.tsx` - Editable matchups with dropdowns
-  - `lib/dossierGenerator.ts` - Auto-create v1 snapshot on generation
-  - `prisma/schema.prisma` - DossierVersion model
+  - `app/brief/[id]/page.tsx` - Edit mode state, version management, WIP recovery
+  - `components/BriefReport.tsx` - Pass edit mode props to children
+  - `components/brief/report/ArmyQuirksGrid.tsx` - Inline editing, add/remove quirks
+  - `components/brief/report/UnitRoleGroup.tsx` - Editable role dropdown, tactical summary
+  - `components/brief/report/ListSuggestionsSection.tsx` - Editable suggestions
+  - `components/brief/report/MatchupGuide.tsx` - Editable matchups with dropdowns
+  - `lib/briefGenerator.ts` - Auto-create v1 snapshot on generation
+  - `prisma/schema.prisma` - BriefVersion model
 
 ---
 
-## [4.86.0] - 2026-01-18 - Dossier Simplification & Langfuse Full Logging
+## [4.86.0] - 2026-01-18 - Brief Simplification & Langfuse Full Logging
 
 ### Removed
 - **Detailed Analysis Section:**
-  - Removed entire "Detailed Analysis" collapsible from dossier report UI
+  - Removed entire "Detailed Analysis" collapsible from brief report UI
   - Removed `PlaystyleCombatSection` component (Playstyle blend, Combat Focus slider, Meta Readiness)
   - Removed `StrengthsWeaknesses` summary component (redundant with inline S&W in Unit Profiles)
   - Removed `CollectionGapsSection` component
@@ -410,16 +410,16 @@ This file contains the **last 30 versions**. For older entries, see [CHANGELOG_A
 
 ### Technical
 - **Deleted Files:**
-  - `components/dossier/report/PlaystyleCombatSection.tsx`
-  - `components/dossier/report/StrengthsWeaknesses.tsx`
-  - `components/dossier/report/CollectionGapsSection.tsx`
+  - `components/brief/report/PlaystyleCombatSection.tsx`
+  - `components/brief/report/StrengthsWeaknesses.tsx`
+  - `components/brief/report/CollectionGapsSection.tsx`
 
 - **Modified Files:**
-  - `components/DossierReport.tsx` - Removed Detailed Analysis section and unused imports
-  - `components/dossier/report/index.ts` - Removed deleted component exports
-  - `lib/dossierGenerator.ts` - Removed playstyle/combatSpectrum from schema, fixed Langfuse logging
-  - `lib/dossierAnalysis.ts` - Removed PlaystyleArchetype type, updated ViralInsights interfaces and parsing
-  - `lib/dossierExport.ts` - Removed playstyle section from HTML export
+  - `components/BriefReport.tsx` - Removed Detailed Analysis section and unused imports
+  - `components/brief/report/index.ts` - Removed deleted component exports
+  - `lib/briefGenerator.ts` - Removed playstyle/combatSpectrum from schema, fixed Langfuse logging
+  - `lib/briefAnalysis.ts` - Removed PlaystyleArchetype type, updated ViralInsights interfaces and parsing
+  - `lib/briefExport.ts` - Removed playstyle section from HTML export
 
 ---
 
@@ -453,8 +453,8 @@ This file contains the **last 30 versions**. For older entries, see [CHANGELOG_A
 
 ### Technical
 - **Modified Files:**
-  - `lib/dossierGenerator.ts` (fixed archetype enum)
-  - `components/dossier/report/MatchupGuide.tsx` (all UI/UX changes)
+  - `lib/briefGenerator.ts` (fixed archetype enum)
+  - `components/brief/report/MatchupGuide.tsx` (all UI/UX changes)
 
 ---
 
@@ -493,17 +493,17 @@ This file contains the **last 30 versions**. For older entries, see [CHANGELOG_A
   - TARGET PRIORITY: What to kill first and why
 
 - **`DISABLE_SPIRIT_ICON` Environment Variable:** Set to `true` to skip spirit icon generation during testing
-  - Reduces costs when iterating on dossier prompts
-  - Affects both `/api/dossier/analyze` route and background processor
+  - Reduces costs when iterating on brief prompts
+  - Affects both `/api/brief/analyze` route and background processor
 
-- **Comprehensive Langfuse Tracing:** Added detailed spans to dossier generation
+- **Comprehensive Langfuse Tracing:** Added detailed spans to brief generation
   - `db-lookup-faction-detachment`
   - `enrich-army-from-database`
   - `fetch-faction-competitive-context`
   - `fetch-detachment-context`
   - `fetch-faction-datasheets`
   - `parse-ai-response`
-  - `save-dossier-to-database`
+  - `save-brief-to-database`
   - Applied to both route handler and background generator
 
 ### Changed
@@ -512,11 +512,11 @@ This file contains the **last 30 versions**. For older entries, see [CHANGELOG_A
 
 ### Technical
 - **Modified Files:**
-  - `lib/dossierGenerator.ts` (schema: added winCondition, battlePlan; tracing spans)
-  - `lib/dossierAnalysis.ts` (types + prompt guidance for stat checks, resource economy, phased tips)
+  - `lib/briefGenerator.ts` (schema: added winCondition, battlePlan; tracing spans)
+  - `lib/briefAnalysis.ts` (types + prompt guidance for stat checks, resource economy, phased tips)
   - `lib/types.ts` (added competitiveContext to ParsedDatasheet interface)
-  - `app/api/dossier/analyze/route.ts` (schema update, tracing spans, DISABLE_SPIRIT_ICON check)
-  - `components/dossier/report/MatchupGuide.tsx` (winCondition badge, battlePlan display)
+  - `app/api/brief/analyze/route.ts` (schema update, tracing spans, DISABLE_SPIRIT_ICON check)
+  - `components/brief/report/MatchupGuide.tsx` (winCondition badge, battlePlan display)
 
 ---
 
@@ -540,21 +540,21 @@ This file contains the **last 30 versions**. For older entries, see [CHANGELOG_A
   - Each matchup must include specific unit names, stratagems, and tactical tips
 
 ### Added
-- **New Component:** `components/dossier/report/MatchupGuide.tsx`
+- **New Component:** `components/brief/report/MatchupGuide.tsx`
   - Expandable matchup rows with icons and rating bars
   - Fallback handling for legacy archetype values (backward compatible)
 
 ### Technical
 - **Modified Files:**
-  - `components/dossier/report/MatchupGuide.tsx` (NEW)
-  - `components/dossier/report/index.ts` (added export)
-  - `components/DossierReport.tsx` (replaced Strategic Assessment section)
-  - `lib/dossierAnalysis.ts` (updated types + prompt guidance)
-  - `app/api/dossier/analyze/route.ts` (updated JSON schema enum)
+  - `components/brief/report/MatchupGuide.tsx` (NEW)
+  - `components/brief/report/index.ts` (added export)
+  - `components/BriefReport.tsx` (replaced Strategic Assessment section)
+  - `lib/briefAnalysis.ts` (updated types + prompt guidance)
+  - `app/api/brief/analyze/route.ts` (updated JSON schema enum)
 
 ---
 
-## [4.82.0] - 2026-01-15 - Dossier Report UX Improvements
+## [4.82.0] - 2026-01-15 - Brief Report UX Improvements
 
 ### Changed
 - **Unit Profile Cards (UnitRoleGroup):**
@@ -578,34 +578,34 @@ This file contains the **last 30 versions**. For older entries, see [CHANGELOG_A
 
 ### Technical
 - **Modified Files:**
-  - `components/dossier/report/UnitRoleGroup.tsx`:
+  - `components/brief/report/UnitRoleGroup.tsx`:
     - Removed `truncate` and `line-clamp-*` classes
     - Changed `text-taclog-amber italic` to `text-gray-200`
     - Restructured header flex layout
-  - `components/dossier/report/ListSuggestionsSection.tsx`:
+  - `components/brief/report/ListSuggestionsSection.tsx`:
     - Updated all chip styling classes
     - Changed label colors from `text-gray-400` to `text-taclog-orange`
     - Increased header padding and title font size
 
 ---
 
-## [4.81.0] - 2026-01-15 - Dossier Share Icon Relocation
+## [4.81.0] - 2026-01-15 - Brief Share Icon Relocation
 
 ### Changed
 - **Share Button Moved to Army Identity Card:**
   - Removed sticky footer bar with Share/Export buttons
   - Share icon now appears in top-right corner of the Army Identity Card
-  - Only visible to dossier owner (`isOwner` check)
+  - Only visible to brief owner (`isOwner` check)
   - Uses standard share icon (three connected nodes)
   - Responsive sizing: 24px (mobile) → 32px (desktop)
 
 - **Export Button Removed:**
-  - Export functionality removed from dossier view page UI
+  - Export functionality removed from brief view page UI
   - Reserved as potential premium feature
 
 ### Technical
 - **Modified Files:**
-  - `app/dossier/[id]/page.tsx`:
+  - `app/brief/[id]/page.tsx`:
     - Removed sticky footer component (lines 217-238)
     - Added share button inside Army Identity Card with absolute positioning
     - Added `pr-10` padding to text container to prevent collision with share icon
@@ -624,16 +624,16 @@ This file contains the **last 30 versions**. For older entries, see [CHANGELOG_A
 ### Technical
 - **Modified Files:**
   - `components/ui/Collapsible.tsx` - Added `red` and `yellow` to SectionColor type and SECTION_COLORS config, exported SectionColor type
-  - `components/dossier/report/UnitRoleGroup.tsx` - Added `sectionColor` field to ROLE_CONFIG mapping each role to its section color
-  - `components/DossierReport.tsx` - Pass `color={config.sectionColor}` to role Collapsibles, increased spacing from `space-y-2` to `space-y-4`
+  - `components/brief/report/UnitRoleGroup.tsx` - Added `sectionColor` field to ROLE_CONFIG mapping each role to its section color
+  - `components/BriefReport.tsx` - Pass `color={config.sectionColor}` to role Collapsibles, increased spacing from `space-y-2` to `space-y-4`
 
 ---
 
-## [4.79.0] - 2026-01-15 - Dossier Section Theming & Unit Profile Styling
+## [4.79.0] - 2026-01-15 - Brief Section Theming & Unit Profile Styling
 
 ### Added
 - **Section Color Theming:**
-  - Each dossier section now has its own distinct color theme with corner accents
+  - Each brief section now has its own distinct color theme with corner accents
   - Color prop added to Collapsible component: `green`, `orange`, `amber`, `blue`, `cyan`, `purple`
   - All sections display themed corner brackets, title text, and borders
 
@@ -659,12 +659,12 @@ This file contains the **last 30 versions**. For older entries, see [CHANGELOG_A
 ### Technical
 - **Modified Files:**
   - `components/ui/Collapsible.tsx` - Added `color` prop with 6 theme options, all sections now have corner accents
-  - `components/DossierReport.tsx` - Updated all section icons and added color props
-  - `components/dossier/report/UnitRoleGroup.tsx` - Corner accents, increased text/icon sizes, monospace points
+  - `components/BriefReport.tsx` - Updated all section icons and added color props
+  - `components/brief/report/UnitRoleGroup.tsx` - Corner accents, increased text/icon sizes, monospace points
 
 ---
 
-## [4.78.0] - 2026-01-15 - Dossier Report Restructure
+## [4.78.0] - 2026-01-15 - Brief Report Restructure
 
 ### Added
 - **4 Army Quirks (expanded from 2):**
@@ -680,8 +680,8 @@ This file contains the **last 30 versions**. For older entries, see [CHANGELOG_A
   - Tooltips show full descriptions
 
 - **Exported Type Definitions:**
-  - `StrategicStrength` interface exported from dossierAnalysis.ts
-  - `StrategicWeakness` interface exported from dossierAnalysis.ts
+  - `StrategicStrength` interface exported from briefAnalysis.ts
+  - `StrategicWeakness` interface exported from briefAnalysis.ts
   - Enables type-safe cross-component usage
 
 ### Changed
@@ -712,11 +712,11 @@ This file contains the **last 30 versions**. For older entries, see [CHANGELOG_A
 
 ### Technical
 - **Modified Files:**
-  - `lib/dossierGenerator.ts` - Added funStat3/4 to DOSSIER_RESPONSE_SCHEMA and required array
-  - `lib/dossierAnalysis.ts` - Extended ViralInsightsRaw, parseViralInsights, updated prompt from 2→4 quirks
-  - `components/dossier/report/ArmyQuirksGrid.tsx` - Complete restyling, removed .slice(0,2)
-  - `components/DossierReport.tsx` - Wrapped all sections in Collapsible, new section order
-  - `components/dossier/report/UnitRoleGroup.tsx` - Added inline S&W display with new props
+  - `lib/briefGenerator.ts` - Added funStat3/4 to DOSSIER_RESPONSE_SCHEMA and required array
+  - `lib/briefAnalysis.ts` - Extended ViralInsightsRaw, parseViralInsights, updated prompt from 2→4 quirks
+  - `components/brief/report/ArmyQuirksGrid.tsx` - Complete restyling, removed .slice(0,2)
+  - `components/BriefReport.tsx` - Wrapped all sections in Collapsible, new section order
+  - `components/brief/report/UnitRoleGroup.tsx` - Added inline S&W display with new props
 
 ---
 
@@ -746,12 +746,12 @@ This file contains the **last 30 versions**. For older entries, see [CHANGELOG_A
 ### Technical
 - **Modified Components:**
   - `components/ui/Collapsible.tsx` - Added featured variant with corner accents
-  - `components/DossierReport.tsx` - Reordered sections, added featured variant
-  - `components/dossier/report/ListSuggestionsSection.tsx` - Complete restyling
+  - `components/BriefReport.tsx` - Reordered sections, added featured variant
+  - `components/brief/report/ListSuggestionsSection.tsx` - Complete restyling
 
 ---
 
-## [4.76.0] - 2026-01-14 - Dossier Report Mobile-First Refactor
+## [4.76.0] - 2026-01-14 - Brief Report Mobile-First Refactor
 
 ### Changed
 - **Army Identity Card Redesign:**
@@ -771,7 +771,7 @@ This file contains the **last 30 versions**. For older entries, see [CHANGELOG_A
     - CollectionGapsSection (suggestions, empty state)
     - ListSuggestionsSection (arrows, details, tradeoffs, reasoning)
     - UnitRoleGroup (points cost, tactical reasoning)
-    - DossierReport (instruction text, footer)
+    - BriefReport (instruction text, footer)
 
 - **Navigation Simplified:**
   - Removed back button / breadcrumb navigation
@@ -788,10 +788,10 @@ This file contains the **last 30 versions**. For older entries, see [CHANGELOG_A
 
 ---
 
-## [4.75.0] - 2026-01-13 - My Dossiers Page Redesign
+## [4.75.0] - 2026-01-13 - My Briefs Page Redesign
 
 ### Added
-- **Gallery-Style My Dossiers Page:**
+- **Gallery-Style My Briefs Page:**
   - Grid layout matching Public Gallery (2→3→4 columns responsive)
   - CRT terminal aesthetic with orange theme (vs green for public)
   - Scanlines overlay and atmospheric gradients
@@ -807,18 +807,18 @@ This file contains the **last 30 versions**. For older entries, see [CHANGELOG_A
 
 - **Bulk Actions:**
   - Selection mode toggle in header
-  - Multi-select dossiers with checkbox overlay
+  - Multi-select briefs with checkbox overlay
   - Bulk delete with confirmation
   - Bulk visibility change (Private/Link/Public)
   - Fixed bottom toolbar when items selected
   - Select All / Clear selection buttons
 
 - **Inline Rename:**
-  - Click dossier title to edit
+  - Click brief title to edit
   - Save on Enter/blur, Cancel on Escape
   - Optimistic UI update with API sync
 
-- **Visual Distinction for Private Dossiers:**
+- **Visual Distinction for Private Briefs:**
   - Reduced opacity (80%)
   - Grayscale filter on hero image (30%)
   - Lock icon badge in top-left
@@ -831,10 +831,10 @@ This file contains the **last 30 versions**. For older entries, see [CHANGELOG_A
   - Safe area insets for notched phones
 
 - **New API Endpoint:**
-  - `POST /api/dossier/bulk` - Bulk delete or visibility change
+  - `POST /api/brief/bulk` - Bulk delete or visibility change
 
 ### Changed
-- **API Response (`/api/dossier/list`):**
+- **API Response (`/api/brief/list`):**
   - Added `detachment` filter parameter
   - Added `minPoints`/`maxPoints` filter parameters
   - Added `sort` parameter (recent/popular/oldest)
@@ -844,14 +844,14 @@ This file contains the **last 30 versions**. For older entries, see [CHANGELOG_A
 
 ### Technical
 - **New Components:**
-  - `components/dossier/DossierCard.tsx` - Reusable gallery card with selection/rename
-  - `components/dossier/BulkActionsToolbar.tsx` - Fixed bottom bulk actions bar
-  - `components/dossier/MyDossiersMobileFilterPanel.tsx` - Mobile filter slide-up panel
+  - `components/brief/BriefCard.tsx` - Reusable gallery card with selection/rename
+  - `components/brief/BulkActionsToolbar.tsx` - Fixed bottom bulk actions bar
+  - `components/brief/MyBriefsMobileFilterPanel.tsx` - Mobile filter slide-up panel
 
 - **Modified Files:**
-  - `app/dossier/history/page.tsx` - Complete rewrite with gallery layout
-  - `app/api/dossier/list/route.ts` - Extended with filters, sort, search
-  - `components/dossier/index.ts` - Export new components
+  - `app/brief/history/page.tsx` - Complete rewrite with gallery layout
+  - `app/api/brief/list/route.ts` - Extended with filters, sort, search
+  - `components/brief/index.ts` - Export new components
 
 ---
 
@@ -870,7 +870,7 @@ This file contains the **last 30 versions**. For older entries, see [CHANGELOG_A
   - `MobileFilterPanel` - Slide-up panel for mobile filter controls
 
 - **Detachment Filter:**
-  - Filter dossiers by detachment name
+  - Filter briefs by detachment name
   - Only visible when a specific faction is selected
   - Clears automatically when faction changes
 
@@ -904,13 +904,13 @@ This file contains the **last 30 versions**. For older entries, see [CHANGELOG_A
   - `components/gallery/index.ts`
 
 - **Modified Files:**
-  - `app/dossier/gallery/page.tsx` - Replaced native selects with new components
+  - `app/brief/gallery/page.tsx` - Replaced native selects with new components
   - `app/admin/factions/[id]/page.tsx` - Added icon URL upload UI
-  - `app/api/dossier/public/route.ts` - Added filter params and metadata
+  - `app/api/brief/public/route.ts` - Added filter params and metadata
 
 ---
 
-## [4.73.0] - 2026-01-12 - Dossier Gallery Revamp
+## [4.73.0] - 2026-01-12 - Brief Gallery Revamp
 
 ### Added
 - **CRT Terminal Header:**
@@ -945,15 +945,15 @@ This file contains the **last 30 versions**. For older entries, see [CHANGELOG_A
 
 ### Technical
 - **Files Modified:**
-  - `app/dossier/gallery/page.tsx` - Complete UI redesign
-  - `app/api/dossier/public/route.ts` - Extended response fields
+  - `app/brief/gallery/page.tsx` - Complete UI redesign
+  - `app/api/brief/public/route.ts` - Extended response fields
 
 ---
 
-## [4.72.0] - 2026-01-12 - Dossier Page Max-Width Layout
+## [4.72.0] - 2026-01-12 - Brief Page Max-Width Layout
 
 ### Changed
-- **Dossier Page Layout:**
+- **Brief Page Layout:**
   - Added max-width constraint (1200px) to content area for better readability on large screens
   - Content is now centered horizontally on wide displays
   - Background gradient still extends full width for visual continuity
@@ -961,15 +961,15 @@ This file contains the **last 30 versions**. For older entries, see [CHANGELOG_A
 
 ### Technical
 - **Files Modified:**
-  - `app/dossier/page.tsx` - Added centered max-width container wrapper
+  - `app/brief/page.tsx` - Added centered max-width container wrapper
 
 ---
 
-## [4.71.0] - 2026-01-11 - Dossier Page & Navigation UI Polish
+## [4.71.0] - 2026-01-11 - Brief Page & Navigation UI Polish
 
 ### Changed
-- **Dossier Page Redesign:**
-  - Removed "Tactical Dossier" header for cleaner look
+- **Brief Page Redesign:**
+  - Removed "Tactical Brief" header for cleaner look
   - Added minimal status bar with "Ready" indicator and pulsing dot
   - Changed label to "Paste Army List Below" for clearer guidance
   - Moved credits display near the submit button
@@ -992,7 +992,7 @@ This file contains the **last 30 versions**. For older entries, see [CHANGELOG_A
 
 ### Technical
 - **Files Modified:**
-  - `app/dossier/page.tsx` - Dossier page UI improvements
+  - `app/brief/page.tsx` - Brief page UI improvements
   - `components/GlobalHeader.tsx` - Header sizing and centering
   - `components/HamburgerMenu.tsx` - Button square sizing fix
   - `app/globals.css` - Added `.touch-size-override` utility class
@@ -1003,57 +1003,57 @@ This file contains the **last 30 versions**. For older entries, see [CHANGELOG_A
 
 ---
 
-## [4.70.0] - 2026-01-11 - Async Dossier Generation
+## [4.70.0] - 2026-01-11 - Async Brief Generation
 
 ### Added
 - **Async Background Processing:**
-  - Dossier generation now runs in the background using Next.js `after()` API
+  - Brief generation now runs in the background using Next.js `after()` API
   - User submits and redirects to gallery immediately (no more 3-5 min blocking)
   - Direct function calls for parsing and analysis (no internal HTTP requests)
 
 - **Smart Notification System:**
   - Header badge shows generation status: "X Generating" (amber) → "Ready!" (green) → "Failed" (red)
   - Toast notifications for completions (auto-hides after 10 seconds, badge persists)
-  - Click badge to navigate directly to completed dossier
+  - Click badge to navigate directly to completed brief
   - Database-persisted notification state via `notificationDismissedAt` field
 
 - **Smart Polling:**
-  - Active mode: Polls every 5 seconds when dossiers are generating
+  - Active mode: Polls every 5 seconds when briefs are generating
   - Idle mode: Polls every 60 seconds when nothing pending
   - Local dismiss tracking prevents re-showing dismissed notifications
 
 - **New API Endpoints:**
-  - `POST /api/dossier/submit` - Quick submission, returns immediately with dossier ID
-  - `GET /api/dossier/status` - Polling endpoint for pending/completed/failed dossiers
-  - `POST /api/dossier/dismiss` - Mark notification as acknowledged
+  - `POST /api/brief/submit` - Quick submission, returns immediately with brief ID
+  - `GET /api/brief/status` - Polling endpoint for pending/completed/failed briefs
+  - `POST /api/brief/dismiss` - Mark notification as acknowledged
 
 ### Changed
-- **Simplified Dossier Page:**
+- **Simplified Brief Page:**
   - Removed file upload (paste text only)
   - Removed optional settings (faction hint, list name)
   - Cleaner single-purpose interface
 
 - **Status Endpoint Filtering:**
-  - Only returns completions from last 24 hours (prevents old dossier flooding)
+  - Only returns completions from last 24 hours (prevents old brief flooding)
   - Limited to 5 items per category to prevent UI overwhelm
 
 ### Technical
 - **Files Created:**
   - `lib/armyListParser.ts` - Extracted core parsing logic for direct calls
-  - `lib/dossierGenerator.ts` - Extracted core analysis logic for direct calls
-  - `app/api/dossier/submit/route.ts` - Async submission endpoint
-  - `app/api/dossier/status/route.ts` - Status polling endpoint
-  - `app/api/dossier/dismiss/route.ts` - Notification dismiss endpoint
-  - `lib/dossier/DossierNotificationContext.tsx` - Global notification state
-  - `components/PendingDossierBadge.tsx` - Header status badge
-  - `components/DossierNotificationToast.tsx` - Completion toast
+  - `lib/briefGenerator.ts` - Extracted core analysis logic for direct calls
+  - `app/api/brief/submit/route.ts` - Async submission endpoint
+  - `app/api/brief/status/route.ts` - Status polling endpoint
+  - `app/api/brief/dismiss/route.ts` - Notification dismiss endpoint
+  - `lib/brief/BriefNotificationContext.tsx` - Global notification state
+  - `components/PendingBriefBadge.tsx` - Header status badge
+  - `components/BriefNotificationToast.tsx` - Completion toast
 
 - **Database Schema:**
-  - Added `notificationDismissedAt` field to `DossierGeneration` model
+  - Added `notificationDismissedAt` field to `BriefGeneration` model
 
 ---
 
-## [4.69.0] - 2026-01-11 - Dossier Recommendations Redesign
+## [4.69.0] - 2026-01-11 - Brief Recommendations Redesign
 
 ### Changed
 - **4 Independent Suggestions:**
@@ -1080,15 +1080,15 @@ This file contains the **last 30 versions**. For older entries, see [CHANGELOG_A
 
 ### Technical
 - **Files Modified:**
-  - `app/api/dossier/analyze/route.ts`: Moved `fetchFactionDatasheets` before strategic analysis
-  - `lib/dossierAnalysis.ts`: Added `availableDatasheets` param to `buildDossierUserPrompt`
-  - `lib/dossierSuggestions.ts`: Simplified `ListSuggestion` interface, updated prompts
+  - `app/api/brief/analyze/route.ts`: Moved `fetchFactionDatasheets` before strategic analysis
+  - `lib/briefAnalysis.ts`: Added `availableDatasheets` param to `buildBriefUserPrompt`
+  - `lib/briefSuggestions.ts`: Simplified `ListSuggestion` interface, updated prompts
   - `lib/fetchDetachmentContext.ts`: Parent faction lookup with proper AND/OR query structure
-  - `components/DossierReport.tsx`: Updated UI for 4-option layout
+  - `components/BriefReport.tsx`: Updated UI for 4-option layout
 
 ---
 
-## [4.68.0] - 2026-01-10 - Dossier Analysis Quality Improvements
+## [4.68.0] - 2026-01-10 - Brief Analysis Quality Improvements
 
 ### Added
 - **Uniqueness Framework in System Prompt:**
@@ -1105,7 +1105,7 @@ This file contains the **last 30 versions**. For older entries, see [CHANGELOG_A
 - **DisplayName Mismatch Bug:**
   - Unit role lookups now use `displayName` (e.g., "Wolf Guard Terminators (340pts)")
   - Previously used `unitName` which didn't match AI output keys
-  - Fixed in both `dossierAnalysis.ts` and `DossierReport.tsx`
+  - Fixed in both `briefAnalysis.ts` and `BriefReport.tsx`
 
 - **Identical Unit Differentiation:**
   - Units with same name AND same points now get A/B/C suffixes
@@ -1121,13 +1121,13 @@ This file contains the **last 30 versions**. For older entries, see [CHANGELOG_A
 ### Technical
 - **New `displayName` Field:**
   - Added to `UnitEngagementProfile` interface
-  - Generated consistently in both `analyzeDossier()` and `buildDossierContext()`
+  - Generated consistently in both `analyzeBrief()` and `buildBriefContext()`
   - Handles three cases: unique names, same name/different points, same name/same points
 
 - **Files Modified:**
-  - `lib/dossierAnalysis.ts`: Interface, helper function, synergy formatting, system prompt
-  - `components/DossierReport.tsx`: Lookups now use `unit.displayName`
-  - `app/api/dossier/analyze/route.ts`: Schema descriptions with leader rules
+  - `lib/briefAnalysis.ts`: Interface, helper function, synergy formatting, system prompt
+  - `components/BriefReport.tsx`: Lookups now use `unit.displayName`
+  - `app/api/brief/analyze/route.ts`: Schema descriptions with leader rules
 
 ---
 
@@ -1295,17 +1295,17 @@ This file contains the **last 30 versions**. For older entries, see [CHANGELOG_A
 
 ---
 
-## [4.64.0] - 2026-01-09 - Enhanced Dossier Competitive Context
+## [4.64.0] - 2026-01-09 - Enhanced Brief Competitive Context
 
 ### Added
-- **Comprehensive Competitive Context in Dossier Analysis:**
+- **Comprehensive Competitive Context in Brief Analysis:**
   - Unit-level fields now sent to AI: `bestTargets`, `avoidTargets`, `phasePriority`, `pointsEfficiency`, `competitiveNotes`
   - Faction-level meta context: `metaTier`, `metaPosition`, `playstyleArchetype`, `strengths`, `weaknesses`
   - Faction matchup data: `favorableMatchups`, `unfavorableMatchups`
   - Unit recommendations: `mustTakeUnits`, `avoidUnits`, `sleepHitUnits`, `recommendedDetachments`
 
 - **FactionCompetitiveContext Integration:**
-  - New faction-level competitive context section in dossier prompts
+  - New faction-level competitive context section in brief prompts
   - Includes meta tier ranking (S/A/B/C/D/F) and position (top tier, gatekeeper, mid tier, struggling)
   - Playstyle archetype classification (aggressive_melee, gunline, balanced, etc.)
 
@@ -1314,7 +1314,7 @@ This file contains the **last 30 versions**. For older entries, see [CHANGELOG_A
   - Fixed competitive context not appearing for units with case differences (e.g., "Bjorn the Fell-Handed" vs "Bjorn The Fell-handed")
   - Prisma queries now use `mode: 'insensitive'` for datasheet name matching
 
-- **Extended DossierContext Interface:**
+- **Extended BriefContext Interface:**
   - Added `factionContext` field for faction-level competitive data
   - Extended unit competitive context with `avoidTargets`, `phasePriority`, `pointsEfficiency` fields
 
@@ -1326,8 +1326,8 @@ This file contains the **last 30 versions**. For older entries, see [CHANGELOG_A
 
 ### Technical
 - **Files Modified:**
-  - `lib/dossierAnalysis.ts` - Extended interfaces, added `formatFactionContext()` helper, enhanced `formatUnitCard()`
-  - `app/api/dossier/analyze/route.ts` - Fetch `UnitCompetitiveContext` and `FactionCompetitiveContext`, case-insensitive queries
+  - `lib/briefAnalysis.ts` - Extended interfaces, added `formatFactionContext()` helper, enhanced `formatUnitCard()`
+  - `app/api/brief/analyze/route.ts` - Fetch `UnitCompetitiveContext` and `FactionCompetitiveContext`, case-insensitive queries
   - `app/api/armies/parse/route.ts` - Gemini thought signature filtering, increased token limit
 
 ---
@@ -1339,14 +1339,14 @@ This file contains the **last 30 versions**. For older entries, see [CHANGELOG_A
   - Public-facing landing page with grimdark aesthetic
   - "2 Free Analyses" banner with terminal green styling (terminal/cogitator aesthetic)
   - Integrated "Sign Up Free" CTA button in banner
-  - Interactive sample dossier preview with collapsible sections
+  - Interactive sample brief preview with collapsible sections
   - Multiple conversion points throughout the page
   - Mobile-first responsive design optimized for phones
 
 - **Route Separation:**
   - `/` - Marketing homepage (public, redirects logged-in users to gallery)
-  - `/dossier` - Functional dossier generation tool (requires authentication)
-  - `/dossier/gallery` - Landing page for logged-in users (public dossier gallery)
+  - `/brief` - Functional brief generation tool (requires authentication)
+  - `/brief/gallery` - Landing page for logged-in users (public brief gallery)
 
 ### Changed
 - **Homepage UX:**
@@ -1355,11 +1355,11 @@ This file contains the **last 30 versions**. For older entries, see [CHANGELOG_A
   - Removed emoji from banner (replaced with geometric checkmark icon)
   - Banner text: "++ TACTICAL SUBSIDY ++ NO SURCHARGE ++" (IP-safe military terminology)
   - CTA buttons use emerald-700 styling (grimdark, not bright lime)
-  - Sample preview CTA changed from "Generate Your Own Dossier" to "Sign Up Free"
+  - Sample preview CTA changed from "Generate Your Own Brief" to "Sign Up Free"
 
 - **Authentication Flow:**
-  - Logged-in users automatically redirected from `/` to `/dossier/gallery`
-  - Unauthenticated users redirected from `/dossier` to `/` (marketing page)
+  - Logged-in users automatically redirected from `/` to `/brief/gallery`
+  - Unauthenticated users redirected from `/brief` to `/` (marketing page)
   - Auth modal opens from all CTAs (banner, sample preview, features section)
 
 - **Navigation:**
@@ -1370,9 +1370,9 @@ This file contains the **last 30 versions**. For older entries, see [CHANGELOG_A
 ### Technical
 - **Components:**
   - `app/page.tsx` - New marketing homepage with conditional rendering
-  - `components/dossier/DossierHero.tsx` - Redesigned banner with integrated CTA
-  - `components/dossier/DossierSamplePreview.tsx` - Added `ctaLabel` and `ctaVariant` props
-  - Updated `DossierHero` to accept `onAnalyzeClick` for auth modal integration
+  - `components/brief/BriefHero.tsx` - Redesigned banner with integrated CTA
+  - `components/brief/BriefSamplePreview.tsx` - Added `ctaLabel` and `ctaVariant` props
+  - Updated `BriefHero` to accept `onAnalyzeClick` for auth modal integration
 
 - **Styling:**
   - Terminal green color scheme (`green-400`/`green-500`) for banner
@@ -1390,86 +1390,86 @@ This file contains the **last 30 versions**. For older entries, see [CHANGELOG_A
 
 ### Notes
 - Marketing homepage focuses on conversion with clear value proposition
-- Sample dossier preview provides "Try Before You Buy" experience
+- Sample brief preview provides "Try Before You Buy" experience
 - All CTAs lead to auth modal (handles both sign-up and sign-in)
 - IP-safe terminology used throughout (no Games Workshop trademarks)
 
 ---
 
-## [4.62.0] - 2026-01-07 - Dossier History & Public Sharing
+## [4.62.0] - 2026-01-07 - Brief History & Public Sharing
 
 ### Added
-- **Dossier History System:**
-  - All dossier generations are now automatically saved to database after successful analysis.
-  - New `DossierGeneration` model stores complete analysis data (local analysis, strategic analysis, suggestions) in JSONB columns.
-  - Permanent URLs: `/dossier/{id}` for bookmarkable, shareable dossier links.
+- **Brief History System:**
+  - All brief generations are now automatically saved to database after successful analysis.
+  - New `BriefGeneration` model stores complete analysis data (local analysis, strategic analysis, suggestions) in JSONB columns.
+  - Permanent URLs: `/brief/{id}` for bookmarkable, shareable brief links.
   - Auto-redirect to permanent URL after generation completes.
 
 - **Share & Visibility Controls:**
   - Three visibility levels: `private` (owner only), `link` (shareable via token), `public` (listed in gallery).
   - Share modal with copy link button, visibility toggle, and social share options (Twitter, Discord).
-  - Share tokens generate unique URLs: `/dossier/share/{token}` for link-based sharing.
+  - Share tokens generate unique URLs: `/brief/share/{token}` for link-based sharing.
   - View counting tracks popularity for gallery sorting.
 
 - **History & Gallery Pages:**
-  - `/dossier/history` - View all your past dossiers with thumbnails, faction filters, and quick actions.
-  - `/dossier/gallery` - Browse public dossiers with faction filtering and sorting (recent/popular).
-  - History dropdown in navigation menu for quick access to recent dossiers.
-  - Delete functionality for user's own dossiers.
+  - `/brief/history` - View all your past briefs with thumbnails, faction filters, and quick actions.
+  - `/brief/gallery` - Browse public briefs with faction filtering and sorting (recent/popular).
+  - History dropdown in navigation menu for quick access to recent briefs.
+  - Delete functionality for user's own briefs.
 
 - **Navigation Integration:**
   - Added "MY DOSSIERS" and "PUBLIC GALLERY" links to main navigation menu.
-  - History dropdown component shows recent dossiers with spirit icons.
+  - History dropdown component shows recent briefs with spirit icons.
 
 ### Changed
 - **Auto-Save on Generation:**
-  - `/api/dossier/analyze` now automatically saves dossier to database after successful generation.
-  - Returns `dossierId` in response for immediate redirect.
-  - Failed saves don't block dossier display (graceful degradation).
+  - `/api/brief/analyze` now automatically saves brief to database after successful generation.
+  - Returns `briefId` in response for immediate redirect.
+  - Failed saves don't block brief display (graceful degradation).
 
-- **Dossier View Pages:**
-  - `/dossier/[id]` - View saved dossier by ID (respects visibility settings).
-  - `/dossier/share/[token]` - Access shared dossier via token (no auth required).
-  - Both pages use same `DossierReport` component for consistent display.
+- **Brief View Pages:**
+  - `/brief/[id]` - View saved brief by ID (respects visibility settings).
+  - `/brief/share/[token]` - Access shared brief via token (no auth required).
+  - Both pages use same `BriefReport` component for consistent display.
 
 ### Technical
 - **Database:**
-  - Added `DossierGeneration` model to Prisma schema with hybrid columns (indexed metadata + JSONB for complex data).
+  - Added `BriefGeneration` model to Prisma schema with hybrid columns (indexed metadata + JSONB for complex data).
   - Migration applied via Supabase MCP tool.
   - Indexes on `userId`, `faction`, `visibility`, `shareToken` for fast queries.
 
 - **API Endpoints:**
-  - `GET/PATCH/DELETE /api/dossier/[id]` - CRUD operations for dossiers.
-  - `GET /api/dossier/list` - List user's dossier history with pagination.
-  - `GET /api/dossier/public` - Browse public gallery with filtering and sorting.
-  - `GET /api/dossier/share/[token]` - Access shared dossier by token.
+  - `GET/PATCH/DELETE /api/brief/[id]` - CRUD operations for briefs.
+  - `GET /api/brief/list` - List user's brief history with pagination.
+  - `GET /api/brief/public` - Browse public gallery with filtering and sorting.
+  - `GET /api/brief/share/[token]` - Access shared brief by token.
 
 - **Components:**
-  - `DossierShareModal` - Share controls with visibility settings and link copying.
-  - `DossierHistoryDropdown` - Quick access dropdown for recent dossiers.
-  - Updated `DossierReport` to accept `dossierId` prop and show share button.
+  - `BriefShareModal` - Share controls with visibility settings and link copying.
+  - `BriefHistoryDropdown` - Quick access dropdown for recent briefs.
+  - Updated `BriefReport` to accept `briefId` prop and show share button.
 
 - **Updated Files:**
-  - `prisma/schema.prisma` - Added `DossierGeneration` model.
-  - `app/api/dossier/analyze/route.ts` - Auto-save after generation.
-  - `app/api/dossier/[id]/route.ts` - CRUD endpoints.
-  - `app/api/dossier/list/route.ts` - History endpoint.
-  - `app/api/dossier/public/route.ts` - Gallery endpoint.
-  - `app/api/dossier/share/[token]/route.ts` - Share token endpoint.
-  - `components/DossierReport.tsx` - Share button and modal integration.
-  - `components/dossier/DossierShareModal.tsx` - New share modal component.
-  - `components/dossier/DossierHistoryDropdown.tsx` - New history dropdown.
+  - `prisma/schema.prisma` - Added `BriefGeneration` model.
+  - `app/api/brief/analyze/route.ts` - Auto-save after generation.
+  - `app/api/brief/[id]/route.ts` - CRUD endpoints.
+  - `app/api/brief/list/route.ts` - History endpoint.
+  - `app/api/brief/public/route.ts` - Gallery endpoint.
+  - `app/api/brief/share/[token]/route.ts` - Share token endpoint.
+  - `components/BriefReport.tsx` - Share button and modal integration.
+  - `components/brief/BriefShareModal.tsx` - New share modal component.
+  - `components/brief/BriefHistoryDropdown.tsx` - New history dropdown.
   - `components/HamburgerMenu.tsx` - Added navigation links.
-  - `app/dossier/page.tsx` - Redirect to permanent URL after generation.
-  - `app/dossier/history/page.tsx` - New history page.
-  - `app/dossier/gallery/page.tsx` - New gallery page.
-  - `app/dossier/[id]/page.tsx` - New view page.
-  - `app/dossier/share/[token]/page.tsx` - New share token view page.
+  - `app/brief/page.tsx` - Redirect to permanent URL after generation.
+  - `app/brief/history/page.tsx` - New history page.
+  - `app/brief/gallery/page.tsx` - New gallery page.
+  - `app/brief/[id]/page.tsx` - New view page.
+  - `app/brief/share/[token]/page.tsx` - New share token view page.
 
 ### Notes
-- Dossiers are automatically saved with `private` visibility by default.
+- Briefs are automatically saved with `private` visibility by default.
 - Share tokens are generated automatically when visibility is set to `link` or `public`.
-- Public gallery shows dossiers sorted by view count (popular) or creation date (recent).
+- Public gallery shows briefs sorted by view count (popular) or creation date (recent).
 - History page supports faction filtering and pagination for large histories.
 
 ---
@@ -1487,11 +1487,11 @@ This file contains the **last 30 versions**. For older entries, see [CHANGELOG_A
   - Added proper JSON extraction with `extractFirstJsonBlock()` to handle truncated responses gracefully.
   - Changed suggestions `thinkingLevel` from `'high'` to `'medium'` (suggestions don't need deep reasoning).
   - Increased `maxOutputTokens` from 8192 to 10000 to prevent truncation.
-  - Suggestions failures now log warnings instead of crashing the main dossier generation.
+  - Suggestions failures now log warnings instead of crashing the main brief generation.
 
 ### Technical
-- **Updated:** `lib/dossierAnalysis.ts` - Unit-focused quirk guidance in system prompt
-- **Updated:** `app/api/dossier/analyze/route.ts` - Unit-focused quirk schema descriptions + suggestions error handling
+- **Updated:** `lib/briefAnalysis.ts` - Unit-focused quirk guidance in system prompt
+- **Updated:** `app/api/brief/analyze/route.ts` - Unit-focused quirk schema descriptions + suggestions error handling
 
 ### Notes
 - Army Quirks now answer "What do the UNITS bring?" not "What does the detachment do?"
@@ -1500,11 +1500,11 @@ This file contains the **last 30 versions**. For older entries, see [CHANGELOG_A
 
 ---
 
-## [4.61.0] - 2026-01-07 - Gemini 3 Pro Upgrade for Tactical Dossier
+## [4.61.0] - 2026-01-07 - Gemini 3 Pro Upgrade for Tactical Brief
 
 ### Changed
 - **AI Model Upgrade:**
-  - Switched dossier strategic analysis from `gemini-3-flash-preview` to `gemini-3-pro-preview` for deeper reasoning.
+  - Switched brief strategic analysis from `gemini-3-flash-preview` to `gemini-3-pro-preview` for deeper reasoning.
   - Added `thinkingConfig: { thinkingLevel: 'high' }` to both main analysis and suggestions LLM calls.
   - Removed explicit temperature settings to use Gemini 3 default (1.0) per Google's recommendations.
 
@@ -1517,15 +1517,15 @@ This file contains the **last 30 versions**. For older entries, see [CHANGELOG_A
   - Added `thinkingConfig: { thinkingLevel: 'minimal' }` to army parsing to prevent thought signature interference with JSON output.
   - Fixes JSON parse errors caused by Gemini 3's default thinking mode.
 
-- **Sample Dossier Updated:**
+- **Sample Brief Updated:**
   - New sample output "The Frost-Clad Avalanche" showcases Gemini 3 Pro's improved analysis quality.
   - Richer executive summaries, more actionable tactical fun stats, specific mitigation strategies.
 
 ### Technical
-- **Updated:** `app/api/dossier/analyze/route.ts` - Model upgrade + thinking config
+- **Updated:** `app/api/brief/analyze/route.ts` - Model upgrade + thinking config
 - **Updated:** `app/api/armies/parse/route.ts` - Thinking level minimal for JSON extraction
-- **Updated:** `lib/dossierAnalysis.ts` - Optimized prompts for Gemini 3
-- **Updated:** `data/sample-dossier-response.json` - New Gemini 3 Pro sample output
+- **Updated:** `lib/briefAnalysis.ts` - Optimized prompts for Gemini 3
+- **Updated:** `data/sample-brief-response.json` - New Gemini 3 Pro sample output
 
 ### Notes
 - Gemini 3 Pro pricing: $2/$12 per 1M tokens (vs Flash at $0.50/$3)
@@ -1534,13 +1534,13 @@ This file contains the **last 30 versions**. For older entries, see [CHANGELOG_A
 
 ---
 
-## [4.60.1] - 2026-01-06 - Dossier Landing Page Simplification
+## [4.60.1] - 2026-01-06 - Brief Landing Page Simplification
 
 ### Changed
 - **Hero Section Streamlined:**
   - Removed feature cards (MathHammer, Meta Insights, Role Analysis, Gap Analysis) from hero.
   - Hero now prominently features just the "2 Free Generations" banner with tagline.
-  - Sample dossier report is now immediately visible as the featured content.
+  - Sample brief report is now immediately visible as the featured content.
 
 - **Conversion Focus:**
   - Landing page now leads with value (free generations + sample output visible).
@@ -1548,25 +1548,25 @@ This file contains the **last 30 versions**. For older entries, see [CHANGELOG_A
   - Cleaner visual hierarchy: banner → sample → form.
 
 ### Removed
-- Feature cards from `DossierHero` (MathHammer, Role Analysis, Meta Insights, Gap Analysis).
+- Feature cards from `BriefHero` (MathHammer, Role Analysis, Meta Insights, Gap Analysis).
 - `FeatureCard` component (no longer used).
 - Scroll indicator and atmospheric background from hero.
 
 ### Technical
-- **Updated:** `components/dossier/DossierHero.tsx` - Simplified to banner + tagline only.
+- **Updated:** `components/brief/BriefHero.tsx` - Simplified to banner + tagline only.
 
 ---
 
-## [4.60.0] - 2026-01-06 - Tactical Dossier Landing Page UX Refresh
+## [4.60.0] - 2026-01-06 - Tactical Brief Landing Page UX Refresh
 
 ### Added
-- **Dossier Landing Hero:**
-  - New `/dossier` hero section that frames the feature as a premium service.
+- **Brief Landing Hero:**
+  - New `/brief` hero section that frames the feature as a premium service.
   - Mobile-first 2×2 feature grid with primary/secondary CTAs.
 
-- **Interactive Sample Dossier Preview:**
+- **Interactive Sample Brief Preview:**
   - New collapsible sample report preview section (no iframe) to show realistic output before sign-in.
-  - Uses static sample output in `data/sample-dossier-response.json`.
+  - Uses static sample output in `data/sample-brief-response.json`.
 
 ### Changed
 - **"Try Before You Buy" Conversion Flow:**
@@ -1578,18 +1578,18 @@ This file contains the **last 30 versions**. For older entries, see [CHANGELOG_A
   - Reduced unnecessary padding so content uses available width on phones.
 
 - **Visual Design (Grimdark, Less "AI UI"):**
-  - Removed distracting background glow ("lens flare") from dossier hero.
-  - Improved contrast choices across dossier landing sections.
+  - Removed distracting background glow ("lens flare") from brief hero.
+  - Improved contrast choices across brief landing sections.
 
 ### Fixed
 - **Tailwind v4 Theme Token Mismatch:**
   - Added kebab-case `@theme` color aliases so classes like `text-taclog-light-steel` resolve correctly (previously could fall back to default text).
 
 ### Technical
-- **New:** `components/dossier/DossierHero.tsx`
-- **New:** `components/dossier/DossierSamplePreview.tsx`
-- **New:** `data/sample-dossier-response.json`
-- **Updated:** `app/dossier/page.tsx`, `components/dossier/index.ts`, `app/globals.css`
+- **New:** `components/brief/BriefHero.tsx`
+- **New:** `components/brief/BriefSamplePreview.tsx`
+- **New:** `data/sample-brief-response.json`
+- **Updated:** `app/brief/page.tsx`, `components/brief/index.ts`, `app/globals.css`
 
 ---
 
@@ -1627,14 +1627,14 @@ This file contains the **last 30 versions**. For older entries, see [CHANGELOG_A
 
 ---
 
-## [4.58.0] - 2026-01-04 - Production Security & Dossier Credits System
+## [4.58.0] - 2026-01-04 - Production Security & Brief Credits System
 
 ### Added
-- **Dossier Credits System:**
-  - Users receive 2 free dossier generations upon Google sign-up.
-  - Credits tracked per-user in database (`dossierCredits` field on `User` model).
+- **Brief Credits System:**
+  - Users receive 2 free brief generations upon Google sign-up.
+  - Credits tracked per-user in database (`briefCredits` field on `User` model).
   - Admin bypass: admins have unlimited generations.
-  - Credits displayed in dossier page header with remaining count.
+  - Credits displayed in brief page header with remaining count.
   - Button disabled when credits depleted with helpful messaging.
 
 - **Admin User Management Panel:**
@@ -1656,8 +1656,8 @@ This file contains the **last 30 versions**. For older entries, see [CHANGELOG_A
   - `PATCH /api/admin/users/[id]/credits` - Adjust user credits (admin only).
 
 - **LLM Output Token Limits:**
-  - `/api/dossier/analyze` main analysis: 24,576 tokens (~100KB max).
-  - `/api/dossier/analyze` suggestions: 8,192 tokens (~32KB max).
+  - `/api/brief/analyze` main analysis: 24,576 tokens (~100KB max).
+  - `/api/brief/analyze` suggestions: 8,192 tokens (~32KB max).
   - `/api/armies/parse` army parsing: 16,384 tokens (~64KB max).
   - `/api/analyze` voice commands: 8,192 tokens (~32KB max).
   - Prevents runaway generation and excessive API costs.
@@ -1665,17 +1665,17 @@ This file contains the **last 30 versions**. For older entries, see [CHANGELOG_A
 ### Changed
 - **Route Protection:**
   - Middleware now enforces admin-only access to `/sessions`, `/armies`, `/datasheets`, `/calculator`, `/admin`.
-  - Non-admin users redirected to `/dossier` from admin routes.
+  - Non-admin users redirected to `/brief` from admin routes.
   - Unauthenticated API requests return 401 JSON response (not redirect).
 
 - **HamburgerMenu Navigation:**
   - Navigation links conditionally shown based on admin status.
   - Loading state while checking admin status prevents flash.
-  - Dossier link available to all authenticated users.
+  - Brief link available to all authenticated users.
   - Admin links (Sessions, Armies, Datasheets, Admin panels) only shown to admins.
 
 - **Landing Page Behavior:**
-  - Root page (`/`) redirects non-admins to `/dossier`.
+  - Root page (`/`) redirects non-admins to `/brief`.
   - Admins see full game tracker UI.
   - Loading state while determining admin status.
 
@@ -1690,16 +1690,16 @@ This file contains the **last 30 versions**. For older entries, see [CHANGELOG_A
 - API security verified via automated test suite.
 
 ### Technical
-- New: `lib/dossierCredits.ts` - Credit management functions (check, deduct, get, set, adjust).
+- New: `lib/briefCredits.ts` - Credit management functions (check, deduct, get, set, adjust).
 - New: `app/api/users/credits/route.ts` - User credits endpoint.
 - New: `app/api/admin/users/route.ts` - Admin users list endpoint.
 - New: `app/api/admin/users/[id]/credits/route.ts` - Admin credit adjustment endpoint.
 - New: `app/admin/users/page.tsx` - Admin user management UI.
 - New: `scripts/security-test.ps1` - Automated API security tests.
-- New: `prisma/manual_migrations/add_dossier_credits.sql` - Database migration.
-- Updated: `prisma/schema.prisma` - Added `dossierCredits` field to User model.
+- New: `prisma/manual_migrations/add_brief_credits.sql` - Database migration.
+- Updated: `prisma/schema.prisma` - Added `briefCredits` field to User model.
 - Updated: `middleware.ts` - Route protection with admin checks.
-- Updated: `app/dossier/page.tsx` - Credits display and enforcement.
+- Updated: `app/brief/page.tsx` - Credits display and enforcement.
 - Updated: `components/HamburgerMenu.tsx` - Conditional navigation.
 - Updated: `components/AuthModal.tsx` - Google-only authentication.
 - Updated: All LLM endpoints - Added `requireAuth()` and proper error handling.
@@ -1707,7 +1707,7 @@ This file contains the **last 30 versions**. For older entries, see [CHANGELOG_A
 ### Database Migration Required
 ```sql
 ALTER TABLE "User" 
-ADD COLUMN IF NOT EXISTS "dossierCredits" INTEGER NOT NULL DEFAULT 2;
+ADD COLUMN IF NOT EXISTS "briefCredits" INTEGER NOT NULL DEFAULT 2;
 ```
 
 ---
@@ -1716,16 +1716,16 @@ ADD COLUMN IF NOT EXISTS "dossierCredits" INTEGER NOT NULL DEFAULT 2;
 
 ### Added
 - **List Modification Suggestions:**
-  - AI-powered army list improvement recommendations integrated into dossier analysis.
+  - AI-powered army list improvement recommendations integrated into brief analysis.
   - Two independent suggestions per analysis (Option 1, Option 2) - user can implement either.
   - Supports complex swaps: remove 1+ units, add 1+ units within a single suggestion.
   - Suggestions include: unit names, points costs, key capabilities, and tactical rationale.
   - Full faction datasheet context sent to LLM - can suggest adding more of existing units.
   - Strategic analysis output included in suggestion prompt for context-aware recommendations.
-  - Rendered in DossierReport UI with remove/add unit sections and points delta.
+  - Rendered in BriefReport UI with remove/add unit sections and points delta.
 
 - **Unified Backend Spirit Icon Generation:**
-  - Spirit icon generation moved from frontend `useEffect` to backend `/api/dossier/analyze`.
+  - Spirit icon generation moved from frontend `useEffect` to backend `/api/brief/analyze`.
   - Prevents duplicate icon generation (was generating twice per analysis).
   - `generateSpiritIconInternal()` function for internal use with Langfuse trace nesting.
   - Spirit icon URL returned alongside strategic analysis in single API response.
@@ -1748,13 +1748,13 @@ ADD COLUMN IF NOT EXISTS "dossierCredits" INTEGER NOT NULL DEFAULT 2;
   - Exactly 2 suggestions enforced via schema `minItems: 2, maxItems: 2`.
 
 ### Technical
-- New: `lib/dossierSuggestions.ts` - Datasheet fetching, prompt building, schema definition.
-- Updated: `app/api/dossier/analyze/route.ts` - Second LLM call for suggestions, spirit icon integration, streaming.
-- Updated: `app/api/dossier/generate-spirit-icon/route.ts` - Extracted `generateSpiritIconInternal()` function.
-- Updated: `components/DossierReport.tsx` - Suggestions UI, icon fetching for suggestion units.
-- Updated: `lib/dossierExport.ts` - HTML export with suggestions section and unit icons.
-- Updated: `app/dossier/page.tsx` - State management for suggestions and spirit icon URL.
-- Updated: `lib/dossierAnalysis.ts` - Exported suggestion types.
+- New: `lib/briefSuggestions.ts` - Datasheet fetching, prompt building, schema definition.
+- Updated: `app/api/brief/analyze/route.ts` - Second LLM call for suggestions, spirit icon integration, streaming.
+- Updated: `app/api/brief/generate-spirit-icon/route.ts` - Extracted `generateSpiritIconInternal()` function.
+- Updated: `components/BriefReport.tsx` - Suggestions UI, icon fetching for suggestion units.
+- Updated: `lib/briefExport.ts` - HTML export with suggestions section and unit icons.
+- Updated: `app/brief/page.tsx` - State management for suggestions and spirit icon URL.
+- Updated: `lib/briefAnalysis.ts` - Exported suggestion types.
 
 ### Langfuse Observability
 - All LLM calls traced: strategic analysis, list suggestions, spirit icon generation.
@@ -1763,11 +1763,11 @@ ADD COLUMN IF NOT EXISTS "dossierCredits" INTEGER NOT NULL DEFAULT 2;
 
 ---
 
-## [4.56.0] - 2026-01-02 - Enhanced Dossier Analysis Prompts & Competitive Context Integration
+## [4.56.0] - 2026-01-02 - Enhanced Brief Analysis Prompts & Competitive Context Integration
 
 ### Added
 - **Competitive Context Integration:**
-  - Dossier analysis now fetches and includes competitive context data (tier, synergies, counters, playstyle notes) when available.
+  - Brief analysis now fetches and includes competitive context data (tier, synergies, counters, playstyle notes) when available.
   - Competitive context is displayed in unit cards within the AI prompt for enhanced strategic analysis.
   - Falls back gracefully when competitive context data is not available (no breaking changes).
 
@@ -1793,8 +1793,8 @@ ADD COLUMN IF NOT EXISTS "dossierCredits" INTEGER NOT NULL DEFAULT 2;
   - Better integration of detachment rules, stratagems, and enhancements into analysis.
 
 ### Technical
-- Updated: `app/api/dossier/analyze/route.ts` - Added competitive context fetching from `DatasheetCompetitiveContext` table with fallback to `Datasheet` fields. Updated weakness schema to include `specificCounterArmies` and `mitigationStrategy`.
-- Updated: `lib/dossierAnalysis.ts` - Enhanced `buildDossierSystemPrompt()` with refined guidance for actionable but theory-focused insights. Updated `buildDossierUserPrompt()` with detachment-specific requirements. Added competitive context to `DossierContext` interface and `formatUnitCard()`.
+- Updated: `app/api/brief/analyze/route.ts` - Added competitive context fetching from `DatasheetCompetitiveContext` table with fallback to `Datasheet` fields. Updated weakness schema to include `specificCounterArmies` and `mitigationStrategy`.
+- Updated: `lib/briefAnalysis.ts` - Enhanced `buildBriefSystemPrompt()` with refined guidance for actionable but theory-focused insights. Updated `buildBriefUserPrompt()` with detachment-specific requirements. Added competitive context to `BriefContext` interface and `formatUnitCard()`.
 - Updated: `lib/fetchDetachmentContext.ts` - Enhanced `formatDetachmentContextForPrompt()` to include tactical usage hints for stratagems.
 - Documentation: Updated `docs/features/TACTICAL_DOSSIER.md` and `docs/api/DOSSIER_ANALYZE_ENDPOINT.md`
 
@@ -1816,8 +1816,8 @@ ADD COLUMN IF NOT EXISTS "dossierCredits" INTEGER NOT NULL DEFAULT 2;
 
 ### Technical
 - New: `lib/fetchDetachmentContext.ts`
-- Updated: `app/api/dossier/analyze/route.ts` - Added context fetch and prompt injection.
-- Updated: `lib/dossierAnalysis.ts` - Expanded `buildDossierUserPrompt` to accept detachment context.
+- Updated: `app/api/brief/analyze/route.ts` - Added context fetch and prompt injection.
+- Updated: `lib/briefAnalysis.ts` - Expanded `buildBriefUserPrompt` to accept detachment context.
 - Documentation: Updated `docs/features/TACTICAL_DOSSIER.md`
 
 ---

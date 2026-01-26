@@ -6,7 +6,7 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import { withAdminAuth } from '@/lib/auth/adminAuth';
-import { adjustUserCredits, setUserCredits } from '@/lib/dossierCredits';
+import { adjustUserCredits, setUserCredits } from '@/lib/briefCredits';
 
 interface RouteParams {
   params: Promise<{ id: string }>;

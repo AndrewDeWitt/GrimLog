@@ -49,7 +49,7 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
             <span>⚙️</span> SIGN IN
           </h2>
           <p className="text-sm text-gray-600">
-            Sign in to access Tactical Dossier
+            Sign in to access Tactical Brief
           </p>
           
           {/* Close button */}
@@ -79,7 +79,7 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
           <div className="mb-6 p-4 bg-grimlog-green/10 border border-grimlog-green/30 rounded-lg text-center">
             <div className="text-grimlog-green font-bold text-lg mb-1">🎁 2 Free Generations</div>
             <p className="text-grimlog-steel text-sm">
-              Sign in with Google to get 2 free tactical dossier generations!
+              Sign in with Google to get 2 free tactical brief generations!
             </p>
           </div>
 

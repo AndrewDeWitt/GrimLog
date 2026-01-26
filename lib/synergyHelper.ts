@@ -5,7 +5,7 @@
  * to identify "active" synergies that the player can leverage.
  */
 
-import { UnitCompetitiveContextSummary } from './dossierAnalysis';
+import { UnitCompetitiveContextSummary } from './briefAnalysis';
 
 interface UnitWithContext {
   unitName: string;

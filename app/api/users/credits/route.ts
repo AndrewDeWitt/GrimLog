@@ -6,7 +6,7 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import { requireAuth } from '@/lib/auth/apiAuth';
-import { getUserCredits, checkIsAdmin } from '@/lib/dossierCredits';
+import { getUserCredits, checkIsAdmin } from '@/lib/briefCredits';
 
 export async function GET(request: NextRequest) {
   try {

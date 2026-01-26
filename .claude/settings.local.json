@@ -17,7 +17,10 @@
       "WebFetch(domain:ai.google.dev)",
       "WebFetch(domain:langfuse.com)",
       "Bash(dir:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git mv:*)",
+      "WebSearch",
+      "WebFetch(domain:docs.cloud.google.com)"
     ]
   },
   "enableAllProjectMcpServers": true,

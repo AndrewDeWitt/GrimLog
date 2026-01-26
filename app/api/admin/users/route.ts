@@ -18,7 +18,7 @@ export async function GET(request: NextRequest) {
           name: true,
           avatar: true,
           isAdmin: true,
-          dossierCredits: true,
+          briefCredits: true,
           createdAt: true,
           updatedAt: true,
         },

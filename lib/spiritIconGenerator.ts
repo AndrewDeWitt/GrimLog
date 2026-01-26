@@ -2,7 +2,7 @@
  * Spirit Icon Generator Utility
  * 
  * Generates grimdark comic book style icons for armies using Gemini.
- * This module is shared between the API route and dossier analysis.
+ * This module is shared between the API route and brief analysis.
  */
 
 import { GoogleGenAI } from '@google/genai';

@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import HamburgerMenu from './HamburgerMenu';
-import PendingDossierBadge from './PendingDossierBadge';
+import PendingBriefBadge from './PendingBriefBadge';
 
 export default function GlobalHeader() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -29,7 +29,7 @@ export default function GlobalHeader() {
 
         {/* Right Side: Pending Badge + Menu */}
         <nav className="flex items-center gap-3 mt-1" aria-label="Main navigation">
-          <PendingDossierBadge />
+          <PendingBriefBadge />
           <HamburgerMenu
             isOpen={isMenuOpen}
             onClose={() => setIsMenuOpen(false)}
