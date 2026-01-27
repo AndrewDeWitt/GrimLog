@@ -1,6 +1,6 @@
 {
   "name": "warhammer_app",
-  "version": "4.90.3",
+  "version": "4.90.7",
   "main": "index.js",
   "scripts": {
     "dev": "next dev",
@@ -9,11 +9,11 @@
     "lint": "eslint .",
     "postinstall": "prisma generate",
     "seed": "tsx prisma/seed-unit-templates.ts",
-    "security:audit": "npm audit --audit-level=moderate",
-    "security:audit:fix": "npm audit fix",
+    "security:audit": "yarn audit --level moderate",
+    "security:audit:fix": "yarn upgrade",
     "security:secrets": "gitleaks detect --source . --verbose",
     "security:semgrep": "semgrep scan --config auto --config p/nextjs --config p/typescript",
-    "security:all": "npm run security:audit && npm run security:secrets && npm run security:semgrep",
+    "security:all": "yarn security:audit && yarn security:secrets && yarn security:semgrep",
     "prepare": "husky"
   },
   "keywords": [],

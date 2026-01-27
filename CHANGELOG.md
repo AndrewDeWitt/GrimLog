@@ -4,6 +4,32 @@ This file contains the **last 30 versions**. For older entries, see [CHANGELOG_A
 
 ---
 
+## [4.90.7] - 2026-01-26 - Security Workflow Fix & Dependency Audit
+
+### Fixed
+
+- **GitHub Actions Security Workflow:**
+  - Changed from `npm` to `yarn` commands (project uses yarn, not npm)
+  - `npm ci` → `yarn install --frozen-lockfile`
+  - `npm audit` → `yarn audit`
+  - Fixed vulnerability check script for yarn's output format
+
+### Security
+
+- **Resolved 2 dependency vulnerabilities:**
+  - **High:** `tar` race condition (CVE in `@tailwindcss/postcss > @tailwindcss/oxide > tar`)
+  - **Moderate:** `undici` decompression chain issue (in `@vercel/blob > undici`)
+  - Added yarn resolutions to force patched versions: `tar >=7.5.4`, `undici >=6.23.0`
+
+### Technical
+
+- **Files Modified:**
+  - `.github/workflows/security.yml` - npm → yarn migration
+  - `package.json` - Added resolutions for vulnerable transitive dependencies
+  - `yarn.lock` - Updated with patched dependency versions
+
+---
+
 ## [4.90.6] - 2026-01-26 - AI SDK Migration & Local Dev Impersonation
 
 ### Changed
