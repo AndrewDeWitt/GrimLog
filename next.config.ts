@@ -5,7 +5,7 @@ const nextConfig: NextConfig = {
 
   // Security headers
   async headers() {
-    return [
+    const baseHeaders = [
       {
         // Apply to all routes
         source: '/:path*',
@@ -31,16 +31,6 @@ const nextConfig: NextConfig = {
             value: 'camera=(), microphone=(self), geolocation=()',
           },
         ],
-      },
-      {
-        // HSTS for production (only on HTTPS)
-        source: '/:path*',
-        headers: process.env.NODE_ENV === 'production' ? [
-          {
-            key: 'Strict-Transport-Security',
-            value: 'max-age=31536000; includeSubDomains',
-          },
-        ] : [],
       },
       {
         // CSP for API routes (more restrictive)
@@ -72,6 +62,21 @@ const nextConfig: NextConfig = {
         ],
       },
     ];
+
+    // Add HSTS header only in production (requires HTTPS)
+    if (process.env.NODE_ENV === 'production') {
+      baseHeaders.push({
+        source: '/:path*',
+        headers: [
+          {
+            key: 'Strict-Transport-Security',
+            value: 'max-age=31536000; includeSubDomains',
+          },
+        ],
+      });
+    }
+
+    return baseHeaders;
   },
 };
 

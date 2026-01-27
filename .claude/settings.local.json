@@ -33,7 +33,10 @@
       "Bash(yarn audit:*)",
       "Bash(yarn install)",
       "Bash(yarn lint:*)",
-      "Bash(yarn tsc:*)"
+      "Bash(yarn tsc:*)",
+      "mcp__supabase__list_tables",
+      "mcp__supabase__list_migrations",
+      "mcp__supabase__apply_migration"
     ]
   },
   "enableAllProjectMcpServers": true,
