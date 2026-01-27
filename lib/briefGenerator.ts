@@ -618,7 +618,7 @@ export async function generateBrief(options: GenerateBriefOptions): Promise<Gene
           { role: 'system', content: SUGGESTION_SYSTEM_PROMPT },
           { role: 'user', content: suggestionPrompt }
         ],
-        metadata: { provider: geminiProvider, thinkingLevel: 'low', promptLength: suggestionPrompt.length }
+        metadata: { provider: geminiProvider, thinkingLevel: 'high', promptLength: suggestionPrompt.length }
       });
 
       // Use AI SDK streamObject for streaming structured output
@@ -633,7 +633,7 @@ export async function generateBrief(options: GenerateBriefOptions): Promise<Gene
         maxOutputTokens: 8000, // Reduced from 20000 - suggestions are simpler output
         providerOptions: {
           google: {
-            thinkingConfig: { thinkingLevel: 'low' }, // Reduced from 'high' - suggestions don't need deep reasoning
+            thinkingConfig: { thinkingLevel: 'high' },
           },
         },
       });
