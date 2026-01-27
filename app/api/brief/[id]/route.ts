@@ -10,6 +10,18 @@ import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { getOptionalAuth, requireAuth } from '@/lib/auth/apiAuth';
 import { BriefStrategicAnalysis, ListSuggestion } from '@/lib/briefAnalysis';
+import { z } from 'zod';
+
+// Schema for allowed brief update fields (prevents mass assignment)
+const BriefUpdateSchema = z.object({
+  visibility: z.enum(['private', 'link', 'public']).optional(),
+  listName: z.string().max(200).nullable().optional(),
+  strategicAnalysis: z.record(z.string(), z.unknown()).optional(), // Allows any JSON object
+  listSuggestions: z.array(z.record(z.string(), z.unknown())).optional(),
+  createVersion: z.boolean().optional(),
+  versionLabel: z.string().max(100).optional(),
+  changelog: z.string().max(1000).optional(),
+}).strict(); // Reject additional properties
 
 export const dynamic = 'force-dynamic';
 
@@ -118,8 +130,18 @@ export async function PATCH(request: NextRequest, { params }: RouteParams) {
       );
     }
 
-    // Parse update data
+    // Parse and validate update data (prevents mass assignment)
     const body = await request.json();
+    const parseResult = BriefUpdateSchema.safeParse(body);
+
+    if (!parseResult.success) {
+      console.error('Brief update validation failed:', parseResult.error.issues);
+      return NextResponse.json(
+        { error: 'Invalid request body' },
+        { status: 400 }
+      );
+    }
+
     const {
       visibility,
       listName,
@@ -128,23 +150,7 @@ export async function PATCH(request: NextRequest, { params }: RouteParams) {
       createVersion,
       versionLabel,
       changelog,
-    } = body as {
-      visibility?: string;
-      listName?: string;
-      strategicAnalysis?: Partial<BriefStrategicAnalysis>;
-      listSuggestions?: ListSuggestion[];
-      createVersion?: boolean;
-      versionLabel?: string;
-      changelog?: string;
-    };
-
-    // Validate visibility
-    if (visibility && !['private', 'link', 'public'].includes(visibility)) {
-      return NextResponse.json(
-        { error: 'Invalid visibility. Must be private, link, or public.' },
-        { status: 400 }
-      );
-    }
+    } = parseResult.data;
 
     // Build update data
     const updateData: Record<string, unknown> = {};
@@ -291,14 +297,11 @@ export async function DELETE(request: NextRequest, { params }: RouteParams) {
 }
 
 /**
- * Generate a URL-safe share token
+ * Generate a cryptographically secure URL-safe share token
  */
 function generateShareToken(): string {
-  const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-  let token = '';
-  for (let i = 0; i < 12; i++) {
-    token += chars.charAt(Math.floor(Math.random() * chars.length));
-  }
-  return token;
+  // Use crypto.randomUUID() for cryptographic randomness
+  // Take first 12 chars (removing hyphens) for a compact, secure token
+  return crypto.randomUUID().replace(/-/g, '').substring(0, 12);
 }
 

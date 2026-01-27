@@ -6,6 +6,7 @@ import { prisma } from '@/lib/prisma';
 import { AI_TOOLS } from '@/lib/aiTools';
 import { GEMINI_TOOLS_AI_SDK } from '@/lib/aiToolsGemini';
 import { executeToolCall } from '@/lib/toolHandlers';
+import { validateToolArgs } from '@/lib/toolValidation';
 import { langfuse } from '@/lib/langfuse';
 import { fetchGameContext } from '@/lib/validationHelpers';
 import { logValidationEvent } from '@/lib/validationLogger';
@@ -115,7 +116,8 @@ export async function POST(request: NextRequest) {
       );
     }
     
-    console.log(`📝 Received transcription (${transcribedText.length} chars): "${transcribedText.substring(0, 100)}..."`);
+    // Log transcription metadata only (not full content for privacy)
+    console.log(`📝 Received transcription (${transcribedText.length} chars)`);
 
     // Fetch full game context once (includes session, stratagems, objectives)
     // This replaces multiple sequential queries with a single optimized query
@@ -416,7 +418,7 @@ export async function POST(request: NextRequest) {
           confidence: 0,
           toolCalls: [],
           analyzed: false,
-          reason: `Provider configuration error: ${error instanceof Error ? error.message : 'Unknown error'}`
+          reason: 'AI provider configuration error. Please check server configuration.'
         });
       }
       
@@ -614,7 +616,7 @@ export async function POST(request: NextRequest) {
         const toolPromises = functionCallItems.map(async (functionCall: NormalizedFunctionCall, toolIndex: number) => {
           const functionName = functionCall.name;
           let args;
-          
+
           try {
             // Arguments are already normalized to JSON string format by our extraction functions
             args = JSON.parse(functionCall.arguments);
@@ -625,7 +627,7 @@ export async function POST(request: NextRequest) {
               success: false,
               message: `Invalid arguments: ${parseError instanceof Error ? parseError.message : 'Unknown error'}`
             };
-            
+
             trace.event({
               name: `tool-${functionName}`,
               input: functionCall.arguments,
@@ -638,10 +640,39 @@ export async function POST(request: NextRequest) {
                 error: 'Argument parse error'
               }
             });
-            
+
             return errorResult;
           }
-          
+
+          // Validate tool arguments against schema (security: prevents malformed AI arguments)
+          const validation = validateToolArgs(functionName, args);
+          if (!validation.valid) {
+            console.error(`[SECURITY] Tool argument validation failed for ${functionName}:`, validation.error);
+            const errorResult = {
+              toolName: functionName,
+              success: false,
+              message: validation.error
+            };
+
+            trace.event({
+              name: `tool-${functionName}`,
+              input: args,
+              output: errorResult,
+              level: "ERROR",
+              metadata: {
+                callId: functionCall.call_id,
+                sessionId: sessionId,
+                provider,
+                error: 'Schema validation failed'
+              }
+            });
+
+            return errorResult;
+          }
+
+          // Use validated data
+          args = validation.data;
+
           console.log(`Executing tool: ${functionName}`, args);
           
           // Use simple timestamp since we don't have word-level timing from Speech API

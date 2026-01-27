@@ -1,0 +1,8 @@
+Name:
+gemini-spirit-icon-generation
+
+INPUT:
+{
+    "prompt": "Create a grimdark Warhammer 40K style icon/emblem based on this description:\n\nA massive bearded king in terminator armor standing atop a pile of iron-clad skulls, holding a frost axe high, lightning striking in the background, Fenrisian wolf by his side, grimdark 40k style, vibrant blues and cold greys.\n\nSTYLE REQUIREMENTS:\n- Bold comic book illustration style with heavy ink outlines\n- GRIMDARK 40K aesthetic - weathered, battle-worn, ominous, menacing\n- Dark moody background (deep blacks, dark grays, or faction-appropriate dark colors) - NO white backgrounds\n- High contrast with dramatic shadows and subtle glow effects\n- Weathered metallic textures, rust, battle damage, scratches\n- Skulls, cogs, aquilas, and gothic elements welcome\n- NO text, NO borders, NO frames around the image\n- Should feel like a war-torn chapter badge or kill-team insignia\n- Evocative, intimidating, and instantly recognizable",
+    "originalPrompt": "A massive bearded king in terminator armor standing atop a pile of iron-clad skulls, holding a frost axe high, lightning striking in the background, Fenrisian wolf by his side, grimdark 40k style, vibrant blues and cold greys."
+}

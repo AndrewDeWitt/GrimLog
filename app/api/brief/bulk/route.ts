@@ -11,15 +11,12 @@ import { requireAuth } from '@/lib/auth/apiAuth';
 export const dynamic = 'force-dynamic';
 
 /**
- * Generate a URL-safe share token
+ * Generate a cryptographically secure URL-safe share token
  */
 function generateShareToken(): string {
-  const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-  let token = '';
-  for (let i = 0; i < 12; i++) {
-    token += chars.charAt(Math.floor(Math.random() * chars.length));
-  }
-  return token;
+  // Use crypto.randomUUID() for cryptographic randomness
+  // Take first 12 chars (removing hyphens) for a compact, secure token
+  return crypto.randomUUID().replace(/-/g, '').substring(0, 12);
 }
 
 /**

@@ -86,8 +86,11 @@ export async function POST(request: NextRequest) {
       );
     }
     
+    // Log detailed error server-side only
+    console.error('Spirit icon error details:', error.message?.substring(0, 200));
+
     return NextResponse.json(
-      { success: false, error: error.message || 'Failed to generate icon' },
+      { success: false, error: 'Failed to generate icon. Please try again later.' },
       { status: 500 }
     );
   }

@@ -65,9 +65,14 @@ export async function GET(request: NextRequest) {
 
     return NextResponse.json({ images });
   } catch (error: any) {
-    console.error('Google Search API Error Details:', JSON.stringify(error.response?.data || error, null, 2));
+    // Log error code/status only (not full response which may contain sensitive data)
+    const errorCode = error.response?.status || error.code || 'UNKNOWN';
+    const errorMessage = error.response?.data?.error?.message || error.message || 'Unknown error';
+    console.error(`Google Search API Error: code=${errorCode}, message=${errorMessage.substring(0, 100)}`);
+
+    // Return generic error to client
     return NextResponse.json(
-      { error: error.message || 'Failed to fetch images' },
+      { error: 'Failed to fetch images. Please try again later.' },
       { status: 500 }
     );
   }
