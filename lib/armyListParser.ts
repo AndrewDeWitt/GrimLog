@@ -43,7 +43,8 @@ const openai = observeOpenAI(new OpenAI({
 // Gemini provider is fetched dynamically based on provider setting (AI Studio or Vertex AI)
 
 // Load known detachments from cached files
-async function loadKnownDetachments(): Promise<string> {
+// Load known detachments from cached files (exported for reuse in briefGenerator)
+export async function loadKnownDetachments(): Promise<string> {
   const dataDir = path.join(process.cwd(), 'data', 'parsed-rules');
   let context = 'KNOWN DETACHMENTS:\n';
 
@@ -459,18 +460,107 @@ function postProcessFactionNormalization(parsedList: ParsedArmyList): ParsedArmy
   return parsedList;
 }
 
+// Parser-specific instructions (appended to shared prefix or used standalone)
+const PARSER_INSTRUCTIONS = `
+## YOUR TASK: ARMY LIST PARSER
+You are an expert at parsing Warhammer 40K 10th Edition army lists.
+Your job is to extract structured unit data from army list documents and match them to available datasheets.
+
+Each datasheet in the REFERENCE DATA section contains its specific WEAPONS and ABILITIES with their IDs.
+When matching, use ONLY the weapons and abilities listed under the matched datasheet.
+
+CRITICAL: EXACT NAME MATCHING - READ CAREFULLY
+1. ALWAYS use EXACT name matching first - if input says "Logan Grimnar", find the datasheet named exactly "Logan Grimnar"
+2. The datasheets are sorted ALPHABETICALLY - scroll through to find the exact name
+3. Each datasheet line starts with [ID] - use THIS ID for datasheetId, not an ID from a different datasheet
+4. Example: Input "Logan Grimnar" → Find "[0b24550b-...] DATASHEET: "Logan Grimnar"" → Use ID "0b24550b-..."
+5. Do NOT match to similar-sounding names (e.g., "Ragnar Blackmane" is NOT "Logan Grimnar")
+6. If you cannot find an exact match, ONLY then consider partial matches with lower confidence
+
+CRITICAL: MATCHING RULES
+1. First, match each unit in the army list to a DATASHEET by EXACT NAME
+2. Then, match weapons and abilities using ONLY the IDs listed under that specific datasheet
+3. Each datasheet shows: [ID] Name | stats for weapons, and [ID] Name (type) for abilities
+4. Copy the exact ID in brackets when matching
+5. The datasheetId MUST come from the datasheet with the matching name
+
+CRITICAL: FACTION DETECTION
+- For subfactions (Space Wolves, Blood Angels, Dark Angels, Black Templars, Deathwatch), return JUST the subfaction name
+- If army list says "Space Marines (Space Wolves)" → detectedFaction should be "Space Wolves" (not the full composite)
+- If army list says "Adeptus Astartes - Space Wolves" → detectedFaction should be "Space Wolves"
+- The most specific faction identifier wins - if "Space Wolves" is mentioned, use that instead of "Space Marines"
+- Do NOT include parentheses or dashes in the detectedFaction - return clean faction names only
+
+CRITICAL: DETACHMENT DETECTION
+- Look for lines like "Detachment: Gladius Task Force" or "Detachment Rule: Saga of the Beastslayer"
+- The Detachment is NOT the battle size (Strike Force, Incursion, etc.) and NOT the faction name
+- Use the KNOWN DETACHMENTS list in the REFERENCE DATA to validate your choice
+
+CRITICAL: DUPLICATE UNITS ARE VALID
+- Army lists frequently contain multiple instances of the same unit type
+- Each instance is a SEPARATE unit - do NOT merge units with the same name
+- Example: If "Blood Claws (135 Points)" appears twice → output TWO separate Blood Claws entries
+
+CONFIDENCE SCORING:
+- 1.0 = exact name match with ID from datasheet
+- 0.9 = close match (minor spelling difference, variant profile)
+- 0.5-0.8 = uncertain match
+- 0.0 = no match found (set ID to null, needsReview: true)
+
+For each unit, extract:
+- Match to datasheet by name → use datasheet ID
+- Match weapons using IDs from that datasheet's WEAPONS section
+- Match abilities using IDs from that datasheet's ABILITIES section
+- Build composition with correct modelType and woundsPerModel
+
+IMPORTANT: Count each unit occurrence separately. Two "Blood Claws" entries = two objects in output.
+
+Return structured data matching the exact schema provided.`;
+
 // Core AI parsing function
 async function parseArmyListWithAI(
   content: string,
   contentType: 'text' | 'image',
   availableDatasheets: any[],
-  trace?: any // Optional Langfuse trace for LLM cost tracking
+  trace?: any, // Optional Langfuse trace for LLM cost tracking
+  sharedSystemPrefix?: string // Pre-built shared context for cache optimization
 ): Promise<ParsedArmyList> {
-  const sortedDatasheets = [...availableDatasheets].sort((a, b) =>
-    a.name.toLowerCase().localeCompare(b.name.toLowerCase())
-  );
+  let systemPrompt: string;
+  let datasheetCount: number;
 
-  const datasheetContext = sortedDatasheets.map(d => {
+  if (sharedSystemPrefix) {
+    // Use shared prefix (for cache optimization) + parser instructions
+    systemPrompt = `${sharedSystemPrefix}\n\n${PARSER_INSTRUCTIONS}`;
+    datasheetCount = -1; // Unknown when using shared prefix
+    console.log(`📋 Using shared system prefix (${sharedSystemPrefix.length} chars)`);
+  } else {
+    // Build local context (backwards compatibility / standalone use)
+    const sortedDatasheets = [...availableDatasheets].sort((a, b) =>
+      a.name.toLowerCase().localeCompare(b.name.toLowerCase())
+    );
+    datasheetCount = sortedDatasheets.length;
+
+    const datasheetContext = buildLocalDatasheetContext(sortedDatasheets);
+    const detachmentContext = await loadKnownDetachments();
+
+    systemPrompt = `## REFERENCE DATA: FACTION DATASHEETS
+Use these datasheets for matching units, weapons, and abilities.
+
+${detachmentContext}
+
+AVAILABLE DATASHEETS (sorted alphabetically):
+${datasheetContext}
+
+${PARSER_INSTRUCTIONS}`;
+  }
+
+  // Rest of function continues below...
+  return await executeParseWithAI(content, contentType, systemPrompt, datasheetCount, availableDatasheets, trace);
+}
+
+// Build local datasheet context (used when no shared prefix provided)
+function buildLocalDatasheetContext(sortedDatasheets: any[]): string {
+  return sortedDatasheets.map(d => {
     const keywords = JSON.parse(d.keywords);
 
     let weaponsList = '';
@@ -550,68 +640,17 @@ async function parseArmyListWithAI(
   Stats: M:${d.movement} T:${d.toughness} SV:${d.save} W:${d.wounds} LD:${d.leadership} OC:${d.objectiveControl}
   Keywords: ${keywords.join(', ')}${compositionInfo}${weaponsList}${abilitiesList}`;
   }).join('\n\n');
+}
 
-  const detachmentContext = await loadKnownDetachments();
-
-  const systemPrompt = `You are an expert at parsing Warhammer 40K 10th Edition army lists.
-Your job is to extract structured unit data from army list documents and match them to available datasheets.
-
-Each datasheet below contains its specific WEAPONS and ABILITIES with their IDs.
-When matching, use ONLY the weapons and abilities listed under the matched datasheet.
-
-${detachmentContext}
-
-AVAILABLE DATASHEETS (sorted alphabetically):
-${datasheetContext}
-
-CRITICAL: EXACT NAME MATCHING - READ CAREFULLY
-1. ALWAYS use EXACT name matching first - if input says "Logan Grimnar", find the datasheet named exactly "Logan Grimnar"
-2. The datasheets are sorted ALPHABETICALLY - scroll through to find the exact name
-3. Each datasheet line starts with [ID] - use THIS ID for datasheetId, not an ID from a different datasheet
-4. Example: Input "Logan Grimnar" → Find "[0b24550b-...] DATASHEET: "Logan Grimnar"" → Use ID "0b24550b-..."
-5. Do NOT match to similar-sounding names (e.g., "Ragnar Blackmane" is NOT "Logan Grimnar")
-6. If you cannot find an exact match, ONLY then consider partial matches with lower confidence
-
-CRITICAL: MATCHING RULES
-1. First, match each unit in the army list to a DATASHEET by EXACT NAME
-2. Then, match weapons and abilities using ONLY the IDs listed under that specific datasheet
-3. Each datasheet shows: [ID] Name | stats for weapons, and [ID] Name (type) for abilities
-4. Copy the exact ID in brackets when matching
-5. The datasheetId MUST come from the datasheet with the matching name
-
-CRITICAL: FACTION DETECTION
-- For subfactions (Space Wolves, Blood Angels, Dark Angels, Black Templars, Deathwatch), return JUST the subfaction name
-- If army list says "Space Marines (Space Wolves)" → detectedFaction should be "Space Wolves" (not the full composite)
-- If army list says "Adeptus Astartes - Space Wolves" → detectedFaction should be "Space Wolves"
-- The most specific faction identifier wins - if "Space Wolves" is mentioned, use that instead of "Space Marines"
-- Do NOT include parentheses or dashes in the detectedFaction - return clean faction names only
-
-CRITICAL: DETACHMENT DETECTION
-- Look for lines like "Detachment: Gladius Task Force" or "Detachment Rule: Saga of the Beastslayer"
-- The Detachment is NOT the battle size (Strike Force, Incursion, etc.) and NOT the faction name
-- Use the KNOWN DETACHMENTS list above to validate your choice
-
-CRITICAL: DUPLICATE UNITS ARE VALID
-- Army lists frequently contain multiple instances of the same unit type
-- Each instance is a SEPARATE unit - do NOT merge units with the same name
-- Example: If "Blood Claws (135 Points)" appears twice → output TWO separate Blood Claws entries
-
-CONFIDENCE SCORING:
-- 1.0 = exact name match with ID from datasheet
-- 0.9 = close match (minor spelling difference, variant profile)
-- 0.5-0.8 = uncertain match
-- 0.0 = no match found (set ID to null, needsReview: true)
-
-For each unit, extract:
-- Match to datasheet by name → use datasheet ID
-- Match weapons using IDs from that datasheet's WEAPONS section
-- Match abilities using IDs from that datasheet's ABILITIES section
-- Build composition with correct modelType and woundsPerModel
-
-IMPORTANT: Count each unit occurrence separately. Two "Blood Claws" entries = two objects in output.
-
-Return structured data matching the exact schema provided.`;
-
+// Execute the AI parsing with the built system prompt
+async function executeParseWithAI(
+  content: string,
+  contentType: 'text' | 'image',
+  systemPrompt: string,
+  datasheetCount: number,
+  availableDatasheets: any[],
+  trace?: any
+): Promise<ParsedArmyList> {
   const provider = getArmyParseProvider();
   const modelName = getArmyParseModel(provider);
 
@@ -664,10 +703,11 @@ Return structured data matching the exact schema provided.`;
       metadata: {
         provider: provider,
         contentType,
-        datasheetCount: sortedDatasheets.length,
+        datasheetCount: datasheetCount > 0 ? datasheetCount : 'shared-prefix',
         maxOutputTokens: 32768,
         systemPromptLength: systemPrompt.length,
         userContentLength: content.length,
+        usingSharedPrefix: datasheetCount < 0,
       }
     });
 
@@ -791,6 +831,7 @@ export interface ParseArmyListOptions {
   factionId?: string;
   factionName?: string;
   trace?: any; // Optional Langfuse trace for observability
+  sharedSystemPrefix?: string; // Pre-built shared context for cache optimization
 }
 
 export interface ParseArmyListResult {
@@ -899,8 +940,8 @@ export async function parseArmyListFromText(options: ParseArmyListOptions): Prom
 
     console.log(`Loaded ${validDatasheets.length} datasheets for parsing`);
 
-    // Parse with AI (pass trace for Langfuse LLM cost tracking)
-    let parsedList = await parseArmyListWithAI(text, 'text', validDatasheets, trace);
+    // Parse with AI (pass trace for Langfuse LLM cost tracking, and shared prefix for cache optimization)
+    let parsedList = await parseArmyListWithAI(text, 'text', validDatasheets, trace, options.sharedSystemPrefix);
 
     // Post-processing pipeline
     parsedList = postProcessFactionNormalization(parsedList);

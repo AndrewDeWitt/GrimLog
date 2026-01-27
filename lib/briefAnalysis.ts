@@ -2130,8 +2130,16 @@ export function buildBriefContext(
  * Build system prompt for strategic army analysis
  * Optimized for Gemini 3 Pro: concise, direct instructions
  */
-export function buildBriefSystemPrompt(): string {
-  return `You are an expert Warhammer 40,000 10th Edition strategic analyst. Analyze army lists to help players understand what makes THEIR SPECIFIC LIST unique - not generic faction advice.
+/**
+ * Build system prompt for strategic army analysis.
+ * Optionally accepts a shared prefix containing datasheets/rules for cache optimization.
+ * 
+ * @param sharedSystemPrefix - Pre-built shared context (datasheets, rules, detachment)
+ * @returns Complete system prompt string
+ */
+export function buildBriefSystemPrompt(sharedSystemPrefix?: string): string {
+  const analystInstructions = `## YOUR TASK: STRATEGIC ANALYST
+You are an expert Warhammer 40,000 10th Edition strategic analyst. Analyze army lists to help players understand what makes THEIR SPECIFIC LIST unique - not generic faction advice.
 
 ## Core Principle: LIST-SPECIFIC Analysis
 Generic faction advice is NOT valuable - the player already knows their faction rules. Your job is to identify what makes THIS PARTICULAR LIST different from other lists using the same faction/detachment.
@@ -2267,6 +2275,14 @@ WHY GOOD: Names win condition, timing, stat check awareness, specific unit count
 Assign roles based on actual battlefield purpose: hammer, anvil, scoring, screening, support, skirmisher, utility, specialist
 
 Provide analysis in the exact JSON schema format specified.`;
+
+  // If shared prefix is provided, prepend it for cache optimization
+  if (sharedSystemPrefix) {
+    return `${sharedSystemPrefix}\n\n${analystInstructions}`;
+  }
+  
+  // Backwards compatibility: return just analyst instructions
+  return analystInstructions;
 }
 
 /** Minimal datasheet info for available units list */
@@ -2318,11 +2334,13 @@ function formatAvailableUnitsForStrategicAnalysis(datasheets: AvailableDatasheet
  * @param context - The brief context with army composition
  * @param detachmentRulesPrompt - Optional formatted string with detachment rules, stratagems, enhancements
  * @param availableDatasheets - Optional list of all faction datasheets for accurate collection recommendations
+ * @param usingSharedPrefix - If true, skip detachment rules and datasheets (they're in system prompt)
  */
 export function buildBriefUserPrompt(
   context: BriefContext,
   detachmentRulesPrompt?: string,
-  availableDatasheets?: AvailableDatasheet[]
+  availableDatasheets?: AvailableDatasheet[],
+  usingSharedPrefix?: boolean
 ): string {
   // Helper to safely format numbers (handles null, undefined, NaN)
   const safeNum = (val: number | null | undefined, decimals: number = 1): string => {
@@ -2643,7 +2661,7 @@ ${unitCards}
 - Infiltrate: ${context.capabilities.hasInfiltrators ? `YES (${context.capabilities.infiltrateUnits.join(', ')})` : 'NO'}
 - FLY units: ${context.capabilities.flyUnits.length > 0 ? context.capabilities.flyUnits.join(', ') : 'None'}
 
-${formatFactionContext(context.factionContext)}${detachmentRulesPrompt ? `${detachmentRulesPrompt}\n` : ''}## DETACHMENT-SPECIFIC ANALYSIS REQUIRED
+${formatFactionContext(context.factionContext)}${!usingSharedPrefix && detachmentRulesPrompt ? `${detachmentRulesPrompt}\n` : ''}## DETACHMENT-SPECIFIC ANALYSIS REQUIRED
 
 For the **${context.detachment || 'Unknown'}** detachment, your analysis MUST address:
 

@@ -311,12 +311,24 @@ function formatSingleDatasheet(ds: DatasheetWithWeaponsAndAbilities): string {
  * @param detachmentEnhancements - Available enhancements for this detachment
  * @returns Complete prompt string
  */
+/**
+ * Build the user prompt for list suggestions.
+ * 
+ * @param context - Current army composition (BriefContext)
+ * @param strategicAnalysis - Full output from the analysis LLM call
+ * @param detachmentRulesPrompt - Faction/detachment rules (skipped if usingSharedPrefix)
+ * @param allDatasheets - All available faction datasheets (skipped if usingSharedPrefix)
+ * @param detachmentEnhancements - Available enhancements for this detachment
+ * @param usingSharedPrefix - If true, skip detachment rules and datasheets (they're in system prompt)
+ * @returns Complete user prompt string
+ */
 export function buildSuggestionPrompt(
   context: BriefContext,
   strategicAnalysis: BriefStrategicAnalysis,
   detachmentRulesPrompt: string,
   allDatasheets: DatasheetWithWeaponsAndAbilities[],
-  detachmentEnhancements: DetachmentEnhancement[] = []
+  detachmentEnhancements: DetachmentEnhancement[] = [],
+  usingSharedPrefix?: boolean
 ): string {
   const sections: string[] = [];
 
@@ -343,8 +355,8 @@ export function buildSuggestionPrompt(
   sections.push('- All 4 options are INDEPENDENT - each stands alone as a complete modification');
   sections.push('');
 
-  // Detachment rules (reuse from first call)
-  if (detachmentRulesPrompt) {
+  // Detachment rules (skip if using shared prefix - they're in system prompt)
+  if (!usingSharedPrefix && detachmentRulesPrompt) {
     sections.push(detachmentRulesPrompt);
     sections.push('');
   }
@@ -374,12 +386,14 @@ export function buildSuggestionPrompt(
     sections.push('');
   }
 
-  // All available datasheets
-  sections.push('## ALL AVAILABLE FACTION DATASHEETS');
-  sections.push('These are ALL units available to this faction (including units already in the army - you may suggest adding more of the same unit):');
-  sections.push('');
-  sections.push(formatDatasheetsForPrompt(allDatasheets));
-  sections.push('');
+  // All available datasheets (skip if using shared prefix - they're in system prompt)
+  if (!usingSharedPrefix) {
+    sections.push('## ALL AVAILABLE FACTION DATASHEETS');
+    sections.push('These are ALL units available to this faction (including units already in the army - you may suggest adding more of the same unit):');
+    sections.push('');
+    sections.push(formatDatasheetsForPrompt(allDatasheets));
+    sections.push('');
+  }
 
   // Instructions - 4 independent complete options
   sections.push('## INSTRUCTIONS');
@@ -404,7 +418,8 @@ export function buildSuggestionPrompt(
   sections.push('- Each suggestion should address a different strategic gap when possible');
   sections.push('');
   sections.push('### UNIT AVAILABILITY (VERY IMPORTANT)');
-  sections.push('- **ONLY suggest units that have a full datasheet entry in ALL AVAILABLE FACTION DATASHEETS above**');
+  const datasheetLocation = usingSharedPrefix ? 'the REFERENCE DATA: FACTION DATASHEETS section' : 'ALL AVAILABLE FACTION DATASHEETS above';
+  sections.push(`- **ONLY suggest units that have a full datasheet entry in ${datasheetLocation}**`);
   sections.push('- Do NOT suggest units mentioned in "Can Lead" text, collection recommendations, or strategic analysis if they lack a datasheet');
   sections.push('- If a unit name appears but has no stats/points in the datasheet section, it does NOT exist and must not be suggested');
   sections.push('- Legends units and discontinued models are NOT in the datasheet list - do not hallucinate them');
@@ -520,6 +535,101 @@ function formatCurrentArmyUnit(unit: BriefContext['units'][0]): string {
 // SUGGESTION SYSTEM PROMPT
 // ============================================
 
+// Optimizer instructions (appended to shared prefix or used standalone)
+const OPTIMIZER_INSTRUCTIONS = `## YOUR TASK: LIST OPTIMIZER
+You are an expert Warhammer 40,000 10th Edition list optimizer. Generate 4 complete, independent list modification options.`;
+
+/**
+ * Build system prompt for list suggestions.
+ * Optionally accepts a shared prefix containing datasheets/rules for cache optimization.
+ * 
+ * @param sharedSystemPrefix - Pre-built shared context (datasheets, rules, detachment)
+ * @returns Complete system prompt string
+ */
+export function buildSuggestionSystemPrompt(sharedSystemPrefix?: string): string {
+  const fullInstructions = OPTIMIZER_INSTRUCTIONS + SUGGESTION_INSTRUCTIONS_BODY;
+  
+  if (sharedSystemPrefix) {
+    return `${sharedSystemPrefix}\n\n${fullInstructions}`;
+  }
+  
+  // Backwards compatibility: return just optimizer instructions
+  return fullInstructions;
+}
+
+// Full suggestion instructions body (separated from header for modularity)
+const SUGGESTION_INSTRUCTIONS_BODY = `
+
+## YOUR TASK
+Generate EXACTLY 4 self-contained suggestions. Each is a COMPLETE modification that results in a valid ~2000pt list. User will pick ONE option that fits their collection.
+
+## SUGGESTION STRUCTURE
+Each suggestion can include ANY combination of:
+- **removeUnits**: Units to remove from the list
+- **addUnits**: Units to add to the list
+- **addEnhancements**: Enhancements to add to characters
+
+Examples of valid suggestions:
+1. SIMPLE: Remove 1 unit, add 1 unit of similar cost
+2. MEDIUM: Remove 2 units, add 2-3 units + 1 enhancement
+3. COMPLEX: Remove 2 units, add 3 units + 2 enhancements + upgrade existing unit
+
+## CRITICAL RULES
+
+### Points Efficiency (MOST IMPORTANT)
+**Final list MUST be 1990-2000pts. Unused points = bad suggestion.**
+
+- Current list is at TOTAL_POINTS. AVAILABLE_POINTS shows what's free.
+- Every suggestion's pointsDelta should be between -10 and +AVAILABLE_POINTS
+- If removing units frees points → ADD MORE to spend them!
+
+BAD: Remove 255pts, add 180pts → 75pts wasted!
+GOOD: Remove 255pts, add 250pts → Only 5pts under (acceptable)
+
+### 10th Edition Rules
+- **Rule of 3**: Max 3 copies of any non-Battleline datasheet
+- **Max 3 Enhancements**: Army total, not per suggestion
+- **One Enhancement Per Character**: Characters with enhancements cannot take another
+- **Epic Heroes**: Max 1 of each
+
+### Enhancement Rules
+- ONLY suggest enhancements listed in ENHANCEMENT OPPORTUNITIES section
+- Characters already equipped with an enhancement CANNOT take another
+- Check army's current enhancement count before suggesting more
+
+### Independence
+- All 4 suggestions are INDEPENDENT ALTERNATIVES
+- Each must stand alone as a complete, valid modification
+- Do NOT create suggestions that depend on each other
+
+### Unit Availability (CRITICAL)
+- **ONLY suggest units that have a full datasheet entry in the REFERENCE DATA section**
+- Do NOT suggest units mentioned in "Can Lead" text if they don't have their own datasheet
+- Do NOT suggest units from collection recommendations or strategic analysis if they lack a datasheet
+- Legends units and discontinued models will NOT have datasheets - do not hallucinate them
+
+## TITLE GUIDELINES
+Create short, descriptive titles (2-5 words):
+- "Add Cavalry Leader" (adding leader to a mounted unit)
+- "Upgrade Scoring Units" (swapping battleline)
+- "Anti-Tank Package" (adding anti-vehicle capability)
+- "Mobility Boost" (adding fast units)
+
+## OUTPUT QUALITY
+
+GOOD suggestions:
+✓ Points-efficient: Remove 255pts, add 250pts → Only 5pts under (acceptable)
+✓ Only uses units with datasheets listed in the prompt
+✓ Each suggestion is independent
+
+BAD suggestions:
+✗ Remove 255pts, add only 180pts → 75pts wasted
+✗ Enhancement for character who already has one
+✗ Suggestion that exceeds 2000pt limit
+✗ Two suggestions that remove the same unit
+✗ Suggesting a unit that has no datasheet entry (even if mentioned in Can Lead or analysis)`;
+
+// Legacy export for backwards compatibility
 export const SUGGESTION_SYSTEM_PROMPT = `You are an expert Warhammer 40,000 10th Edition list optimizer. Generate 4 complete, independent list modification options.
 
 ## YOUR TASK
