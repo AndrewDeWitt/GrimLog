@@ -51,59 +51,11 @@ function sanitizeJsonString(text: string): string {
     .replace(/  +/g, ' ');
 }
 
-// JSON Schema for structured output (same as analyze route)
+// JSON Schema for structured output - optimized to only include sections displayed in UI
+// Removed: executiveSummary, armyArchetype, statisticalBreakdown, secondaryRecommendations, collectionRecommendations, threatAssessment
 const BRIEF_RESPONSE_SCHEMA = {
   type: "object",
   properties: {
-    executiveSummary: { type: "string", description: "2-3 sentence high-level overview of the army's strategic identity and playstyle" },
-    armyArchetype: {
-      type: "object",
-      description: "Classification of the army's playstyle",
-      properties: {
-        primary: { type: "string", enum: ["horde", "elite", "balanced", "skew", "castle", "alpha_strike", "attrition", "objective_play"] },
-        secondary: { type: "string", enum: ["melee_focused", "ranged_focused", "hybrid", "psychic", "vehicle_heavy", "monster_mash", "character_hammer", "transport_rush"] },
-        description: { type: "string" }
-      },
-      required: ["primary", "secondary", "description"]
-    },
-    statisticalBreakdown: {
-      type: "object",
-      properties: {
-        totalUnits: { type: "integer" },
-        totalModels: { type: "integer" },
-        totalWounds: { type: "integer" },
-        averageToughness: { type: "number" },
-        toughnessDistribution: {
-          type: "object",
-          properties: { t3OrLess: { type: "integer" }, t4to5: { type: "integer" }, t6to8: { type: "integer" }, t9to11: { type: "integer" }, t12Plus: { type: "integer" } },
-          required: ["t3OrLess", "t4to5", "t6to8", "t9to11", "t12Plus"]
-        },
-        damageProfile: {
-          type: "object",
-          properties: {
-            totalRangedDamage: { type: "number" },
-            totalMeleeDamage: { type: "number" },
-            antiTankCapability: { type: "string", enum: ["none", "minimal", "moderate", "strong", "exceptional"] },
-            antiInfantryCapability: { type: "string", enum: ["none", "minimal", "moderate", "strong", "exceptional"] },
-            rangedVsMeleeRatio: { type: "string" }
-          },
-          required: ["totalRangedDamage", "totalMeleeDamage", "antiTankCapability", "antiInfantryCapability", "rangedVsMeleeRatio"]
-        },
-        mobilityProfile: {
-          type: "object",
-          properties: {
-            averageMovement: { type: "number" },
-            hasDeepStrike: { type: "boolean" },
-            hasScouts: { type: "boolean" },
-            hasInfiltrate: { type: "boolean" },
-            hasFly: { type: "boolean" },
-            fastUnitsCount: { type: "integer" }
-          },
-          required: ["averageMovement", "hasDeepStrike", "hasScouts", "hasInfiltrate", "hasFly", "fastUnitsCount"]
-        }
-      },
-      required: ["totalUnits", "totalModels", "totalWounds", "averageToughness", "toughnessDistribution", "damageProfile", "mobilityProfile"]
-    },
     strategicStrengths: {
       type: "array",
       items: {
@@ -141,38 +93,6 @@ const BRIEF_RESPONSE_SCHEMA = {
         },
         required: ["opponentArchetype", "matchupRating", "winCondition", "battlePlan", "reasoning", "keyTips"]
       }
-    },
-    secondaryRecommendations: {
-      type: "object",
-      properties: {
-        strongSecondaries: { type: "array", items: { type: "object", properties: { name: { type: "string" }, reasoning: { type: "string" }, expectedScore: { type: "string" } }, required: ["name", "reasoning", "expectedScore"] } },
-        avoidSecondaries: { type: "array", items: { type: "object", properties: { name: { type: "string" }, reasoning: { type: "string" } }, required: ["name", "reasoning"] } },
-        overallScoringPotential: { type: "string", enum: ["poor", "below_average", "average", "above_average", "excellent"] }
-      },
-      required: ["strongSecondaries", "avoidSecondaries", "overallScoringPotential"]
-    },
-    collectionRecommendations: {
-      type: "array",
-      items: {
-        type: "object",
-        properties: {
-          unitName: { type: "string" },
-          reason: { type: "string" },
-          priority: { type: "string", enum: ["low", "medium", "high"] },
-          alternativeOptions: { type: "array", items: { type: "string" } }
-        },
-        required: ["unitName", "reason", "priority", "alternativeOptions"]
-      }
-    },
-    threatAssessment: {
-      type: "object",
-      properties: {
-        overallThreatLevel: { type: "string", enum: ["low", "moderate", "high", "very_high", "extreme"] },
-        peakThreatPhase: { type: "string", enum: ["deployment", "early_game", "mid_game", "late_game"] },
-        keyThreats: { type: "array", items: { type: "string" } },
-        counterStrategies: { type: "array", items: { type: "string" } }
-      },
-      required: ["overallThreatLevel", "peakThreatPhase", "keyThreats", "counterStrategies"]
     },
     viralInsights: {
       type: "object",
@@ -216,7 +136,7 @@ const BRIEF_RESPONSE_SCHEMA = {
       }
     }
   },
-  required: ["executiveSummary", "armyArchetype", "statisticalBreakdown", "strategicStrengths", "strategicWeaknesses", "matchupConsiderations", "secondaryRecommendations", "collectionRecommendations", "threatAssessment", "viralInsights", "unitTacticalSummaries", "unitRoleAssignments"]
+  required: ["strategicStrengths", "strategicWeaknesses", "matchupConsiderations", "viralInsights", "unitTacticalSummaries", "unitRoleAssignments"]
 };
 
 // Enrich parsed army with real database values
@@ -532,8 +452,8 @@ export async function generateBrief(options: GenerateBriefOptions): Promise<Gene
       metadata: { provider: geminiProvider, thinkingLevel: 'high', promptLength: userPrompt.length }
     });
 
-    // Increased from 12000 - model generates very detailed analysis that was hitting token limit
-    const maxOutputTokens = 32000;
+    // Reduced from 32000 - removed 6 unused sections, actual output is ~4-6K tokens
+    const maxOutputTokens = 12000;
 
     // Use AI SDK streamObject for streaming structured output
     console.log(`🔄 [Brief] Starting streamObject call to ${BRIEF_MODEL}...`);
@@ -596,10 +516,10 @@ export async function generateBrief(options: GenerateBriefOptions): Promise<Gene
       if (lastPartialObject && Object.keys(lastPartialObject).length > 0) {
         console.log(`⚠️ [Brief] Attempting to use last partial object with keys: ${Object.keys(lastPartialObject).join(', ')}`);
         
-        // Check if we have the critical fields
-        const hasMinimumFields = lastPartialObject.executiveSummary && 
-                                  lastPartialObject.armyArchetype && 
-                                  lastPartialObject.strategicStrengths;
+        // Check if we have the critical fields (updated after removing unused sections)
+        const hasMinimumFields = lastPartialObject.strategicStrengths && 
+                                  lastPartialObject.viralInsights && 
+                                  lastPartialObject.matchupConsiderations;
         
         if (hasMinimumFields) {
           console.log(`✅ [Brief] Using last partial object as fallback (has minimum required fields)`);
@@ -698,7 +618,7 @@ export async function generateBrief(options: GenerateBriefOptions): Promise<Gene
           { role: 'system', content: SUGGESTION_SYSTEM_PROMPT },
           { role: 'user', content: suggestionPrompt }
         ],
-        metadata: { provider: geminiProvider, thinkingLevel: 'high', promptLength: suggestionPrompt.length }
+        metadata: { provider: geminiProvider, thinkingLevel: 'low', promptLength: suggestionPrompt.length }
       });
 
       // Use AI SDK streamObject for streaming structured output
@@ -710,10 +630,10 @@ export async function generateBrief(options: GenerateBriefOptions): Promise<Gene
         schema: jsonSchema(SUGGESTION_RESPONSE_SCHEMA as any),
         system: SUGGESTION_SYSTEM_PROMPT,
         prompt: suggestionPrompt,
-        maxOutputTokens: 20000,
+        maxOutputTokens: 8000, // Reduced from 20000 - suggestions are simpler output
         providerOptions: {
           google: {
-            thinkingConfig: { thinkingLevel: 'high' },
+            thinkingConfig: { thinkingLevel: 'low' }, // Reduced from 'high' - suggestions don't need deep reasoning
           },
         },
       });

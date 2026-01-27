@@ -256,8 +256,8 @@ export async function generateBriefHTML(
       </section>
     ` : ''}
 
-    <!-- Strategic Assessment -->
-    ${strategicAnalysis ? `
+    <!-- Strategic Assessment (only shown for legacy data with executiveSummary) -->
+    ${strategicAnalysis?.executiveSummary ? `
       <section class="card full-width strategic-assessment">
         <div class="assessment-content">
           <span class="assessment-icon">🎖</span>

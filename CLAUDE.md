@@ -6,36 +6,40 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Grimlog is an AI-powered tactical logger for Warhammer 40K tabletop games. It features voice-activated phase tracking, per-model wound tracking, damage calculation (MathHammer), character attachments, official datasheet integration, rules validation, and multi-provider AI support (OpenAI GPT + Google Gemini).
 
+## Package Manager
+
+This project uses **yarn**. Do not use npm.
+
 ## Build & Development Commands
 
 ```bash
 # Install dependencies
-npm install
+yarn install
 
 # Run development server
-npm run dev
+yarn dev
 
 # Build for production
-npm run build
+yarn build
 
 # Start production server
-npm run start
+yarn start
 
 # Run linter
-npm run lint
+yarn lint
 
 # Generate Prisma client (runs automatically on postinstall)
-npx prisma generate
+yarn prisma generate
 
 # Push schema changes to database
-npx prisma db push
+yarn prisma db push
 
 # Seed unit templates
-npm run seed
+yarn seed
 # or: tsx prisma/seed-unit-templates.ts
 
 # Type check without emit
-npx tsc --noEmit
+yarn tsc --noEmit
 ```
 
 ## Architecture
@@ -132,8 +136,8 @@ try {
 ## Testing Checklist
 
 Before claiming a feature is complete:
-1. Linter passes (`npm run lint`)
-2. TypeScript compiles (`npx tsc --noEmit`)
+1. Linter passes (`yarn lint`)
+2. TypeScript compiles (`yarn tsc --noEmit`)
 3. Manual testing in browser
 4. Check console for errors
 5. Verify Langfuse traces (if AI feature)

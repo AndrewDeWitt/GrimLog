@@ -1668,13 +1668,19 @@ export interface MatchupConsideration {
 }
 
 export interface BriefStrategicAnalysis {
-  executiveSummary: string;
-  armyArchetype: {
+  // Core required fields (displayed in UI)
+  strategicStrengths: StrategicStrength[];
+  strategicWeaknesses: StrategicWeakness[];
+  matchupConsiderations: MatchupConsideration[];
+  
+  // Optional legacy fields (no longer generated, but may exist in old data)
+  executiveSummary?: string;
+  armyArchetype?: {
     primary: 'horde' | 'elite' | 'balanced' | 'skew' | 'castle' | 'alpha_strike' | 'attrition' | 'objective_play';
     secondary: 'melee_focused' | 'ranged_focused' | 'hybrid' | 'psychic' | 'vehicle_heavy' | 'monster_mash' | 'character_hammer' | 'transport_rush';
     description: string;
   };
-  statisticalBreakdown: {
+  statisticalBreakdown?: {
     totalUnits: number;
     totalModels: number;
     totalWounds: number;
@@ -1702,10 +1708,7 @@ export interface BriefStrategicAnalysis {
       fastUnitsCount: number;
     };
   };
-  strategicStrengths: StrategicStrength[];
-  strategicWeaknesses: StrategicWeakness[];
-  matchupConsiderations: MatchupConsideration[];
-  secondaryRecommendations: {
+  secondaryRecommendations?: {
     strongSecondaries: Array<{
       name: string;
       reasoning: string;
@@ -1717,13 +1720,13 @@ export interface BriefStrategicAnalysis {
     }>;
     overallScoringPotential: 'poor' | 'below_average' | 'average' | 'above_average' | 'excellent';
   };
-  collectionRecommendations: Array<{
+  collectionRecommendations?: Array<{
     unitName: string;
     reason: string;
     priority: 'low' | 'medium' | 'high';
     alternativeOptions: string[];
   }>;
-  threatAssessment: {
+  threatAssessment?: {
     overallThreatLevel: 'low' | 'moderate' | 'high' | 'very_high' | 'extreme';
     peakThreatPhase: 'deployment' | 'early_game' | 'mid_game' | 'late_game';
     keyThreats: string[];
@@ -2163,18 +2166,6 @@ Before writing your analysis, identify:
 3. What does this list SACRIFICE compared to typical builds?
 4. If you played against this 10 times, what would you learn to fear most?
 
-Your executive summary MUST answer these questions with specific numbers and unit names.
-
-## Analysis Quality Examples
-
-### BAD Executive Summary (Generic):
-"This Space Wolves list uses the Stormlance Task Force to enable Advance and Charge. The Thunderwolf Cavalry provide fast melee pressure while Terminators hold objectives."
-WHY BAD: Describes faction rules, not list choices. Any Space Wolves player knows this.
-
-### GOOD Executive Summary (Specific):
-"This list commits 70% of points to invuln-save melee units, creating an 'AP tax' where your opponent's melta and plasma become statistically worse than volume fire. The gamble: only 5 Intercessors provide reliable OC, so if the Wulfen get screened, you lose on primary. Play aggressively or lose slowly."
-WHY GOOD: Names the specific investment choice (70% invuln melee), its tactical implication (AP tax), AND the risk (OC deficit).
-
 ## Output Requirements
 
 ### Strategic Analysis
@@ -2274,13 +2265,6 @@ WHY GOOD: Names win condition, timing, stat check awareness, specific unit count
 
 ### Role Assignments
 Assign roles based on actual battlefield purpose: hammer, anvil, scoring, screening, support, skirmisher, utility, specialist
-
-### Collection Recommendations (CRITICAL)
-When suggesting units for collectionRecommendations:
-- ONLY suggest units that appear in the "AVAILABLE FACTION UNITS" section of the prompt
-- Do NOT suggest units from your training data that might be Legends/discontinued
-- If a unit is not in the available units list, it does NOT exist for this army
-- Examples of Legends units to NEVER suggest: Wolf Lord on Thunderwolf, Iron Priest on Thunderwolf (if not in list)
 
 Provide analysis in the exact JSON schema format specified.`;
 }
@@ -2688,19 +2672,11 @@ ${gaps.length > 0 ? gaps.map(g => `- ${g}`).join('\n') : '- Army appears well-ro
 Use these exact names when referencing units in your analysis:
 ${context.units.map(u => `- ${u.displayName}`).join('\n')}
 
-${availableDatasheets && availableDatasheets.length > 0 ? `## AVAILABLE FACTION UNITS (for collection recommendations)
-These are ALL units currently available to this faction. When making collectionRecommendations, ONLY suggest units from this list.
-Do NOT suggest units that are not in this list - they may be Legends/discontinued.
-
-${formatAvailableUnitsForStrategicAnalysis(availableDatasheets)}
-` : ''}
 ---
 
 ## ANALYSIS REQUIREMENTS
 
 Provide your strategic analysis in JSON format. CRITICAL: Make every section specific to THIS list, not generic faction advice.
-
-**Executive Summary**: What makes THIS list different? Name the key investment choices, their tactical implications, AND the risks.
 
 **Army Quirks (4 required)**: Discover the 4 most interesting/unusual aspects of THIS specific list composition. Each quirk must explain TACTICAL IMPACT, not just state a statistic. Cover different aspects: durability, damage output, mobility, board control.
 
