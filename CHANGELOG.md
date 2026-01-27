@@ -4,6 +4,47 @@ This file contains the **last 30 versions**. For older entries, see [CHANGELOG_A
 
 ---
 
+## [4.90.8] - 2026-01-27 - Brief Generation Optimization (Remove Unused Output)
+
+### Changed
+
+- **Removed 6 Unused Output Sections from Brief Generation:**
+  - UI analysis revealed these sections were generated but never displayed
+  - Removed from schema: `executiveSummary`, `armyArchetype`, `statisticalBreakdown`, `secondaryRecommendations`, `collectionRecommendations`, `threatAssessment`
+  - **Impact:** ~1,650 fewer output tokens per brief generation
+
+- **Reduced Token Limits:**
+  - Main analysis: `maxOutputTokens` 32,000 → 12,000 (actual output is ~5K tokens)
+  - Suggestions: `maxOutputTokens` 20,000 → 8,000
+
+- **Streamlined System Prompt:**
+  - Removed instructions for removed sections (executive summary examples, collection recommendations)
+  - Removed "Available Faction Units" section from user prompt (was for collection recommendations)
+  - **Impact:** ~800 fewer input tokens
+
+- **Updated Type Definitions:**
+  - Made removed fields optional (`?`) in `BriefStrategicAnalysis` interface
+  - Preserves backward compatibility with existing data in database
+
+- **HTML Export Backward Compatibility:**
+  - Strategic Assessment section now conditional (only renders if `executiveSummary` exists)
+  - Old briefs with these fields still export correctly
+
+### Technical
+
+- **Files Modified:**
+  - `lib/briefGenerator.ts` - Schema changes, token limits, fallback field checks
+  - `lib/briefAnalysis.ts` - System prompt trimming, type definitions, user prompt optimization
+  - `lib/briefExport.ts` - Conditional rendering for removed sections
+
+### Performance
+
+- **Before:** ~7,000-8,000 output tokens, 32K token limit
+- **After:** ~5,000-5,500 output tokens, 12K token limit
+- **Estimated improvement:** 25-35% faster brief generation from reduced output
+
+---
+
 ## [4.90.7] - 2026-01-26 - Security Workflow Fix & Dependency Audit
 
 ### Fixed

@@ -1,7 +1,7 @@
 # Grimlog Documentation
 
-**Version:** 4.90.6
-**Last Updated:** 2026-01-26
+**Version:** 4.90.8
+**Last Updated:** 2026-01-27
 **Status:** Production Ready
 
 ## 📚 Complete Documentation Index

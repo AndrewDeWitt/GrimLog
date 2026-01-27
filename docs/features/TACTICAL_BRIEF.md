@@ -1,11 +1,13 @@
 # Tactical Dossier (War Room)
 
-**Last Updated:** 2026-01-19 (v4.90.4)
+**Last Updated:** 2026-01-27 (v4.90.8)
 **Status:** Complete
 
 ## Overview
 
 The Tactical Dossier is a standalone army analysis tool that generates comprehensive tactical reports for Warhammer 40K army lists. Select your faction, paste your army list text, submit, and receive a detailed tactical analysis with AI-powered recommendations. Generation runs in the background - you'll be notified when it's ready.
+
+**New in v4.90.8:** Output Optimization - Removed 6 unused output sections from AI generation (executiveSummary, armyArchetype, statisticalBreakdown, secondaryRecommendations, collectionRecommendations, threatAssessment). These were generated but never displayed in the UI. Reduces output tokens by ~1,650 per brief (~25-35% faster generation). Token limits reduced: main 32K→12K, suggestions 20K→8K.
 
 **New in v4.90.4:** Faction Selector - Required faction dropdown before submitting army lists. Improves parsing accuracy by filtering datasheets to the selected faction. Subfactions automatically include parent faction datasheets (e.g., Space Wolves includes Space Marines units).
 
