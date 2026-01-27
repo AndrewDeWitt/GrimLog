@@ -76,5 +76,9 @@
     "*.{js,jsx,ts,tsx}": [
       "eslint --fix"
     ]
+  },
+  "resolutions": {
+    "tar": ">=7.5.4",
+    "undici": ">=6.23.0"
   }
 }

@@ -32,14 +32,13 @@ jobs:
 
       - name: Check for critical vulnerabilities
         run: |
-          # yarn audit exits with non-zero for any vulnerabilities, so we parse the output
-          AUDIT_OUTPUT=$(yarn audit --json 2>/dev/null || true)
-          CRITICAL=$(echo "$AUDIT_OUTPUT" | grep -c '"severity":"critical"' || echo "0")
-          HIGH=$(echo "$AUDIT_OUTPUT" | grep -c '"severity":"high"' || echo "0")
-          if [ "$CRITICAL" -gt 0 ] || [ "$HIGH" -gt 0 ]; then
-            echo "::error::Found $CRITICAL critical and $HIGH high severity vulnerabilities"
+          # yarn audit --level high fails only for high/critical vulnerabilities
+          if ! yarn audit --level high > /dev/null 2>&1; then
+            echo "::error::Found high or critical severity vulnerabilities"
+            yarn audit --level high
             exit 1
           fi
+          echo "No high or critical vulnerabilities found"
 
   secret-scanning:
     name: Secret Detection
