@@ -626,14 +626,6 @@ export async function generateBrief(options: GenerateBriefOptions): Promise<Gene
 
     console.log(`✅ AI analysis complete: ${strategicAnalysis.strategicStrengths?.length || 0} strengths`);
 
-    // DEBUG: Add delay to test cache propagation
-    // Gemini implicit caching may need time to propagate before subsequent calls can hit it
-    // Testing with 2 minutes to see if cache becomes available
-    const CACHE_PROPAGATION_DELAY_MS = 120000; // 2 minutes
-    console.log(`⏳ [Analysis→Suggestions] Waiting ${CACHE_PROPAGATION_DELAY_MS / 1000}s for cache propagation...`);
-    await new Promise(resolve => setTimeout(resolve, CACHE_PROPAGATION_DELAY_MS));
-    console.log(`✅ [Analysis→Suggestions] Cache propagation delay complete`);
-
     // Generate suggestions (using shared prefix for cache optimization)
     const suggestionSpan = trace.span({
       name: "generate-list-suggestions",

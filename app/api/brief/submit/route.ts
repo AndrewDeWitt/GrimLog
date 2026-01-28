@@ -207,14 +207,6 @@ export async function POST(request: NextRequest) {
         });
         console.log(`✅ Army parsed: ${parsedArmy.units?.length || 0} units`);
 
-        // DEBUG: Add delay to test cache propagation
-        // Gemini implicit caching may need time to propagate before subsequent calls can hit it
-        // Testing with 2 minutes to see if cache becomes available
-        const CACHE_PROPAGATION_DELAY_MS = 120000; // 2 minutes
-        console.log(`⏳ Waiting ${CACHE_PROPAGATION_DELAY_MS / 1000}s for cache propagation...`);
-        await new Promise(resolve => setTimeout(resolve, CACHE_PROPAGATION_DELAY_MS));
-        console.log(`✅ Cache propagation delay complete`);
-
         // Step 2: Run local analysis
         const localAnalysisSpan = trace.span({
           name: "run-local-analysis",
