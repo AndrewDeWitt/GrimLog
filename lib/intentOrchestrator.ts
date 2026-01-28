@@ -1,13 +1,13 @@
 // Intent Orchestrator
 // Classifies speech intent and determines required context tier
 //
-// Uses AI SDK for Gemini/Vertex AI calls with proper WIF authentication.
+// Uses direct @google/genai SDK for Gemini calls to ensure proper
+// system instruction handling and implicit caching support.
 
 import OpenAI from 'openai';
-import { generateObject, jsonSchema } from 'ai';
 import type { ContextTier } from './contextBuilder';
 import { getAnalyzeProvider, validateProviderConfig, getAnalyzeModel, isGeminiProvider, type IntentClassification as IIntentClassification } from './aiProvider';
-import { getGeminiProvider } from './vertexAI';
+import { generateContent, formatCacheLog } from './geminiDirect';
 
 // Use plain OpenAI client (observeOpenAI adds massive overhead - 10-15s per call!)
 // Gemini provider is fetched dynamically based on provider setting (AI Studio or Vertex AI)
@@ -477,56 +477,39 @@ First determine if this is game-related (isGameRelated). If FALSE, set intent to
 If TRUE, map the speech to the appropriate tool category and determine the context tier based on what data the tool needs.`;
 
   try {
+    // Check if already aborted before starting
+    if (abortSignal?.aborted) {
+      console.log('🛑 Gemini intent classification aborted before start');
+      throw new Error('AbortError');
+    }
+
     console.log(`🔄 Starting ${modelName} call for gatekeeper + intent (${provider})...`);
     console.time(`  └─ ${modelName} API call`);
 
-    // Get the appropriate Gemini provider (AI Studio or Vertex AI with WIF)
-    const gemini = getGeminiProvider(provider);
-
-    // Use AI SDK generateObject for structured output
-    let classification: any;
-    let usage: any;
-    let finishReason: string | undefined;
+    // Use direct @google/genai SDK for structured output
+    const result = await generateContent({
+      model: modelName,
+      systemInstruction: systemPrompt,
+      contents: `Analyze this game speech:\n\n"${transcription}"`,
+      responseSchema: INTENT_CLASSIFICATION_SCHEMA,
+      thinkingBudget: 0, // Disable thinking for fast intent classification
+    });
     
-    try {
-      const result = await generateObject({
-        model: gemini(modelName),
-        schema: jsonSchema(INTENT_CLASSIFICATION_SCHEMA as any),
-        system: systemPrompt,
-        prompt: `Analyze this game speech:\n\n"${transcription}"`,
-        abortSignal,
-      });
-      
-      classification = result.object;
-      usage = result.usage;
-      finishReason = result.finishReason;
-    } catch (parseError: any) {
-      // Check if this is a JSON parsing error (control characters in response)
-      if (parseError.name === 'AI_NoObjectGeneratedError' && parseError.text) {
-        console.warn('⚠️ generateObject failed due to JSON parse error, attempting to sanitize and parse manually...');
-        try {
-          const sanitized = sanitizeJsonString(parseError.text);
-          classification = JSON.parse(sanitized);
-          console.log('✅ Successfully parsed sanitized JSON');
-        } catch (sanitizeError) {
-          console.error('❌ Failed to parse even after sanitization:', sanitizeError);
-          throw parseError; // Re-throw original error
-        }
-      } else {
-        throw parseError; // Re-throw non-parsing errors
-      }
-    }
+    const classification = result.object;
+    const usage = result.usage;
+    const finishReason = result.finishReason;
 
     console.timeEnd(`  └─ ${modelName} API call`);
     console.time('  └─ Parsing response');
 
     // Extract token usage for Langfuse cost tracking
     const usageData = {
-      input: usage?.inputTokens || 0,
-      output: usage?.outputTokens || 0,
-      total: (usage?.inputTokens || 0) + (usage?.outputTokens || 0)
+      input: usage.inputTokens,
+      output: usage.outputTokens,
+      total: usage.totalTokens
     };
     console.log(`📊 Gemini intent token usage: ${usageData.input} input, ${usageData.output} output, ${usageData.total} total`);
+    console.log(formatCacheLog(usage));
 
     console.timeEnd('  └─ Parsing response');
 

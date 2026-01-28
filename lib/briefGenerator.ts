@@ -4,10 +4,10 @@
  * Extracts the core brief generation functionality from the API route
  * so it can be called directly for background processing.
  *
- * Uses AI SDK for Gemini/Vertex AI calls with proper WIF authentication.
+ * Uses direct @google/genai SDK for Gemini calls to ensure proper
+ * system instruction handling and implicit caching support.
  */
 
-import { streamObject, jsonSchema } from 'ai';
 import { langfuse } from '@/lib/langfuse';
 import { prisma } from '@/lib/prisma';
 import { checkAndDeductCredit } from '@/lib/briefCredits';
@@ -30,11 +30,11 @@ import {
   SUGGESTION_RESPONSE_SCHEMA,
   SuggestionResponse,
 } from '@/lib/briefSuggestions';
-import { buildSharedSystemPrefix, getSharedPrefixStats } from '@/lib/briefSharedContext';
+import { buildSharedSystemPrefix, buildBaseSharedPrefix, extendSharedPrefix, getSharedPrefixStats } from '@/lib/briefSharedContext';
 import { loadKnownDetachments } from '@/lib/armyListParser';
 import { generateSpiritIconInternal } from '@/lib/spiritIconGenerator';
 import { getProvider, isGeminiProvider } from '@/lib/aiProvider';
-import { getGeminiProvider } from '@/lib/vertexAI';
+import { streamContent, formatCacheLog, type GeminiTokenUsage } from '@/lib/geminiDirect';
 
 // Use Flash for speed - Pro is too slow and causes timeouts
 const BRIEF_MODEL = 'gemini-3-flash-preview';
@@ -125,16 +125,27 @@ const BRIEF_RESPONSE_SCHEMA = {
       },
       required: ["tagline", "spiritDescription", "funStat1Name", "funStat1Emoji", "funStat1Value", "funStat1Desc", "funStat1IconPrompt", "funStat2Name", "funStat2Emoji", "funStat2Value", "funStat2Desc", "funStat2IconPrompt", "funStat3Name", "funStat3Emoji", "funStat3Value", "funStat3Desc", "funStat3IconPrompt", "funStat4Name", "funStat4Emoji", "funStat4Value", "funStat4Desc", "funStat4IconPrompt", "armySpiritIconPrompt"]
     },
-    unitTacticalSummaries: { type: "object", additionalProperties: { type: "string" } },
-    unitRoleAssignments: {
-      type: "object",
-      additionalProperties: {
+    unitTacticalSummaries: {
+      type: "array",
+      items: {
         type: "object",
         properties: {
+          unitName: { type: "string" },
+          summary: { type: "string" }
+        },
+        required: ["unitName", "summary"]
+      }
+    },
+    unitRoleAssignments: {
+      type: "array",
+      items: {
+        type: "object",
+        properties: {
+          unitName: { type: "string" },
           role: { type: "string", enum: ["hammer", "anvil", "scoring", "screening", "support", "skirmisher", "utility", "specialist"] },
           reasoning: { type: "string" }
         },
-        required: ["role", "reasoning"]
+        required: ["unitName", "role", "reasoning"]
       }
     }
   },
@@ -291,6 +302,7 @@ export interface GenerateBriefOptions {
   userId: string;
   briefId: string; // Required for background processing
   trace?: any; // Optional Langfuse trace (if provided, will be used instead of creating a new one)
+  baseSharedPrefix?: string; // Pre-built base prefix (datasheets + known detachments) for cache optimization
 }
 
 export interface GenerateBriefResult {
@@ -308,7 +320,7 @@ export interface GenerateBriefResult {
  * Updates the brief record in the database with the results.
  */
 export async function generateBrief(options: GenerateBriefOptions): Promise<GenerateBriefResult> {
-  const { parsedArmy, localAnalysis, userId, briefId, trace: externalTrace } = options;
+  const { parsedArmy, localAnalysis, userId, briefId, trace: externalTrace, baseSharedPrefix } = options;
 
   // Use external trace if provided, otherwise will create one below
   let trace: any = externalTrace || null;
@@ -433,29 +445,45 @@ export async function generateBrief(options: GenerateBriefOptions): Promise<Gene
     console.log(`📋 Fetched ${allFactionDatasheets.length} faction datasheets`);
 
     // ========== BUILD SHARED SYSTEM PREFIX FOR CACHE OPTIMIZATION ==========
-    // This prefix is IDENTICAL across analysis and suggestions calls to enable Gemini implicit caching
+    // This prefix is IDENTICAL across parser, analysis, and suggestions calls to enable Gemini implicit caching
     const sharedPrefixSpan = trace.span({
       name: "build-shared-system-prefix",
-      metadata: { faction, detachment }
+      metadata: { faction, detachment, usingBasePrefix: !!baseSharedPrefix }
     });
     
-    const knownDetachments = await loadKnownDetachments();
-    const sharedSystemPrefix = buildSharedSystemPrefix(
-      allFactionDatasheets,
-      knownDetachments,
-      detachmentContext.factionRules,
-      detachmentContext
-    );
+    let sharedSystemPrefix: string;
+    
+    if (baseSharedPrefix) {
+      // Extend the pre-built base prefix (from parser) with faction rules and detachment context
+      // This ensures the datasheets section is IDENTICAL for cache hits
+      sharedSystemPrefix = extendSharedPrefix(
+        baseSharedPrefix,
+        detachmentContext.factionRules,
+        detachmentContext
+      );
+      console.log(`📋 Extended base shared prefix with detachment context`);
+    } else {
+      // Fallback: Build full prefix from scratch (backwards compatibility)
+      const knownDetachments = await loadKnownDetachments();
+      sharedSystemPrefix = buildSharedSystemPrefix(
+        allFactionDatasheets,
+        knownDetachments,
+        detachmentContext.factionRules,
+        detachmentContext
+      );
+      console.log(`📋 Built shared system prefix from scratch (no base prefix provided)`);
+    }
     
     const prefixStats = getSharedPrefixStats(sharedSystemPrefix);
     sharedPrefixSpan.end({
       metadata: {
         prefixCharCount: prefixStats.charCount,
         estimatedTokens: prefixStats.estimatedTokens,
-        datasheetCount: allFactionDatasheets.length
+        datasheetCount: allFactionDatasheets.length,
+        usedBasePrefix: !!baseSharedPrefix
       }
     });
-    console.log(`📋 Built shared system prefix: ${prefixStats.charCount} chars (~${prefixStats.estimatedTokens} tokens), ${allFactionDatasheets.length} datasheets`);
+    console.log(`📋 Shared system prefix: ${prefixStats.charCount} chars (~${prefixStats.estimatedTokens} tokens), ${allFactionDatasheets.length} datasheets`);
 
     // Build prompts with shared prefix for cache optimization
     // The shared prefix contains: datasheets, known detachments, faction rules, detachment context
@@ -466,10 +494,9 @@ export async function generateBrief(options: GenerateBriefOptions): Promise<Gene
     // Call Gemini for strategic analysis
     console.log(`🤖 Starting AI analysis for brief: ${briefId}`);
 
-    // Get the Gemini provider (AI Studio or Vertex AI with WIF)
+    // Get provider for logging
     const provider = getProvider();
     const geminiProvider = isGeminiProvider(provider) ? (provider as 'google' | 'vertex') : 'google';
-    const gemini = getGeminiProvider(geminiProvider);
 
     const analysisGeneration = trace.generation({
       name: "gemini-brief-analysis",
@@ -480,7 +507,7 @@ export async function generateBrief(options: GenerateBriefOptions): Promise<Gene
       ],
       metadata: {
         provider: geminiProvider,
-        thinkingLevel: 'high',
+        thinkingBudget: 1024,
         promptLength: userPrompt.length,
         systemPromptLength: systemPrompt.length,
         sharedPrefixChars: prefixStats.charCount,
@@ -492,132 +519,60 @@ export async function generateBrief(options: GenerateBriefOptions): Promise<Gene
     // Reduced from 32000 - removed 6 unused sections, actual output is ~4-6K tokens
     const maxOutputTokens = 12000;
 
-    // Use AI SDK streamObject for streaming structured output
-    console.log(`🔄 [Brief] Starting streamObject call to ${BRIEF_MODEL}...`);
+    // Use direct @google/genai SDK for streaming structured output
+    console.log(`🔄 [Brief] Starting streamContent call to ${BRIEF_MODEL}...`);
     const streamStartTime = Date.now();
-    
-    const streamResult = streamObject({
-      model: gemini(BRIEF_MODEL),
-      schema: jsonSchema(BRIEF_RESPONSE_SCHEMA as any),
-      system: systemPrompt,
-      prompt: userPrompt,
-      maxOutputTokens: maxOutputTokens,
-      providerOptions: {
-        google: {
-          thinkingConfig: { thinkingLevel: 'high' },
-        },
-      },
-    });
-
-    // Log streaming progress by consuming partialObjectStream
-    // Wrapped in try-catch to detect silent errors
     let chunkCount = 0;
     let lastLogTime = Date.now();
-    let lastPartialObject: any = null;
     
-    try {
-      for await (const partialObject of streamResult.partialObjectStream) {
-        chunkCount++;
-        lastPartialObject = partialObject;
+    const analysisResult = await streamContent({
+      model: BRIEF_MODEL,
+      systemInstruction: systemPrompt,
+      contents: userPrompt,
+      responseSchema: BRIEF_RESPONSE_SCHEMA,
+      maxOutputTokens: maxOutputTokens,
+      thinkingBudget: 1024, // Low thinking for speed
+      onProgress: (count, elapsedMs) => {
+        chunkCount = count;
         const now = Date.now();
-        // Log every 10 seconds to show progress
         if (now - lastLogTime > 10000) {
-          const elapsed = Math.round((now - streamStartTime) / 1000);
-          console.log(`📡 [Brief] Stream progress: ${chunkCount} chunks, ${elapsed}s elapsed, keys: ${Object.keys(partialObject || {}).join(', ')}`);
+          console.log(`📡 [Brief] Stream progress: ${count} chunks, ${Math.round(elapsedMs / 1000)}s elapsed`);
           lastLogTime = now;
         }
-      }
-    } catch (streamError: any) {
-      console.error(`❌ [Brief] Stream iteration error after ${chunkCount} chunks:`, streamError.message || streamError);
-      console.error(`❌ [Brief] Last partial object keys:`, Object.keys(lastPartialObject || {}));
-      throw streamError;
-    }
+      },
+    });
     
     const streamEndTime = Date.now();
     console.log(`✅ [Brief] Stream complete: ${chunkCount} chunks in ${Math.round((streamEndTime - streamStartTime) / 1000)}s`);
 
-    // Get the final object and metadata
-    let rawAnalysis: any;
-    let usage: any;
-    let finishReason: string | undefined;
-    
-    try {
-      console.log(`🔄 [Brief] Awaiting final object...`);
-      rawAnalysis = await streamResult.object;
-      console.log(`✅ [Brief] Got final object`);
-    } catch (objectError: any) {
-      console.error(`❌ [Brief] Error getting final object:`, objectError.message || objectError);
-      
-      // Try to use the last partial object if it has enough data
-      // This happens when JSON parsing fails due to control characters
-      if (lastPartialObject && Object.keys(lastPartialObject).length > 0) {
-        console.log(`⚠️ [Brief] Attempting to use last partial object with keys: ${Object.keys(lastPartialObject).join(', ')}`);
-        
-        // Check if we have the critical fields (updated after removing unused sections)
-        const hasMinimumFields = lastPartialObject.strategicStrengths && 
-                                  lastPartialObject.viralInsights && 
-                                  lastPartialObject.matchupConsiderations;
-        
-        if (hasMinimumFields) {
-          console.log(`✅ [Brief] Using last partial object as fallback (has minimum required fields)`);
-          rawAnalysis = lastPartialObject;
-        } else {
-          // Try to extract raw text from error and sanitize
-          if (objectError.text) {
-            console.log(`⚠️ [Brief] Attempting to sanitize raw response text...`);
-            try {
-              const sanitized = sanitizeJsonString(objectError.text);
-              rawAnalysis = JSON.parse(sanitized);
-              console.log(`✅ [Brief] Successfully parsed sanitized JSON`);
-            } catch (parseError) {
-              console.error(`❌ [Brief] Failed to parse sanitized JSON:`, parseError);
-              throw objectError;
-            }
-          } else {
-            throw objectError;
-          }
-        }
-      } else {
-        throw objectError;
-      }
-    }
-    
-    try {
-      usage = await streamResult.usage;
-      console.log(`✅ [Brief] Got usage`);
-      finishReason = await streamResult.finishReason;
-      console.log(`✅ [Brief] Got finishReason: ${finishReason}`);
-    } catch (metaError: any) {
-      console.warn(`⚠️ [Brief] Could not get usage/finishReason:`, metaError.message);
-      // Non-fatal - we can continue without these
-    }
+    const rawAnalysis = analysisResult.object;
+    const analysisUsage = analysisResult.usage;
+    const finishReason = analysisResult.finishReason;
 
-    // Extract token usage for Langfuse cost tracking
-    // Check for cache hit information (Gemini returns cachedTokens when prefix caching works)
-    let mainAnalysisUsage = { input: 0, output: 0, total: 0, cached: 0 };
-    if (usage) {
-      const cachedTokens = (usage as any).cachedTokens || (usage as any).cached_content_token_count || 0;
-      mainAnalysisUsage = {
-        input: usage.inputTokens || 0,
-        output: usage.outputTokens || 0,
-        total: (usage.inputTokens || 0) + (usage.outputTokens || 0),
-        cached: cachedTokens
-      };
-      console.log(`📊 Main analysis token usage: ${mainAnalysisUsage.input} input, ${mainAnalysisUsage.output} output, ${mainAnalysisUsage.total} total`);
-      if (cachedTokens > 0) {
-        const cacheHitRate = Math.round((cachedTokens / mainAnalysisUsage.input) * 100);
-        console.log(`💾 Cache hit: ${cachedTokens} tokens cached (${cacheHitRate}% of input)`);
-      }
-    }
+    // Log token usage with cache info
+    console.log(`📊 Main analysis token usage: ${analysisUsage.inputTokens} input, ${analysisUsage.outputTokens} output, ${analysisUsage.totalTokens} total`);
+    console.log(formatCacheLog(analysisUsage));
+
+    // Track for summary (keeping backwards compatible structure + full usage for cache stats)
+    const mainAnalysisUsage = {
+      input: analysisUsage.inputTokens,
+      output: analysisUsage.outputTokens,
+      total: analysisUsage.totalTokens,
+      cached: analysisUsage.cacheReadInputTokens
+    };
+    const mainCacheStats = {
+      cacheReadTokens: analysisUsage.cacheReadInputTokens,
+      cacheWriteTokens: analysisUsage.cacheCreationInputTokens,
+      cacheHitRate: analysisUsage.cacheHitRate
+    };
 
     analysisGeneration.update({
       output: JSON.stringify(rawAnalysis),
       metadata: {
         finishReason,
-        cachedTokens: mainAnalysisUsage.cached,
-        cacheHitRate: mainAnalysisUsage.input > 0
-          ? Math.round((mainAnalysisUsage.cached / mainAnalysisUsage.input) * 100)
-          : 0
+        cachedTokens: analysisUsage.cacheReadInputTokens,
+        cacheWriteTokens: analysisUsage.cacheCreationInputTokens,
+        cacheHitRate: analysisUsage.cacheHitRate
       }
     });
     // End generation with token usage for Langfuse cost calculation
@@ -644,6 +599,29 @@ export async function generateBrief(options: GenerateBriefOptions): Promise<Gene
     if (processedAnalysis.viralInsights) {
       processedAnalysis.viralInsights = parseViralInsights(processedAnalysis.viralInsights as ViralInsightsRaw);
     }
+
+    // Transform unitTacticalSummaries from array to Record (Gemini doesn't support additionalProperties)
+    if (Array.isArray(processedAnalysis.unitTacticalSummaries)) {
+      const summariesRecord: Record<string, string> = {};
+      for (const item of processedAnalysis.unitTacticalSummaries) {
+        if (item.unitName && item.summary) {
+          summariesRecord[item.unitName] = item.summary;
+        }
+      }
+      processedAnalysis.unitTacticalSummaries = summariesRecord;
+    }
+
+    // Transform unitRoleAssignments from array to Record (Gemini doesn't support additionalProperties)
+    if (Array.isArray(processedAnalysis.unitRoleAssignments)) {
+      const rolesRecord: Record<string, { role: string; reasoning: string }> = {};
+      for (const item of processedAnalysis.unitRoleAssignments) {
+        if (item.unitName && item.role) {
+          rolesRecord[item.unitName] = { role: item.role, reasoning: item.reasoning || '' };
+        }
+      }
+      processedAnalysis.unitRoleAssignments = rolesRecord;
+    }
+
     const strategicAnalysis: BriefStrategicAnalysis = processedAnalysis;
     parseSpan.end({
       metadata: {
@@ -655,6 +633,13 @@ export async function generateBrief(options: GenerateBriefOptions): Promise<Gene
 
     console.log(`✅ AI analysis complete: ${strategicAnalysis.strategicStrengths?.length || 0} strengths`);
 
+    // DEBUG: Add delay to test cache propagation
+    // Gemini implicit caching may need time to propagate before subsequent calls can hit it
+    const CACHE_PROPAGATION_DELAY_MS = 30000; // 30 seconds
+    console.log(`⏳ [Analysis→Suggestions] Waiting ${CACHE_PROPAGATION_DELAY_MS / 1000}s for cache propagation...`);
+    await new Promise(resolve => setTimeout(resolve, CACHE_PROPAGATION_DELAY_MS));
+    console.log(`✅ [Analysis→Suggestions] Cache propagation delay complete`);
+
     // Generate suggestions (using shared prefix for cache optimization)
     const suggestionSpan = trace.span({
       name: "generate-list-suggestions",
@@ -662,9 +647,16 @@ export async function generateBrief(options: GenerateBriefOptions): Promise<Gene
     });
     let listSuggestions: ListSuggestion[] = [];
     let suggestionsUsage = { input: 0, output: 0, total: 0, cached: 0 };
+    let suggestionsCacheStats = { cacheReadTokens: 0, cacheWriteTokens: 0, cacheHitRate: 0 };
     try {
       // Build suggestion prompts with shared prefix for cache optimization
       const suggestionSystemPrompt = buildSuggestionSystemPrompt(sharedSystemPrefix);
+      
+      // Debug: verify suggestion prompt starts with same prefix as analysis
+      const prefixMatch = suggestionSystemPrompt.startsWith(sharedSystemPrefix);
+      console.log(`📋 [Suggestions] Prefix match with analysis: ${prefixMatch}`);
+      console.log(`📋 [Suggestions] System prompt length: ${suggestionSystemPrompt.length}, shared prefix length: ${sharedSystemPrefix.length}`);
+      
       const suggestionPrompt = buildSuggestionPrompt(
         context,
         strategicAnalysis,
@@ -683,77 +675,67 @@ export async function generateBrief(options: GenerateBriefOptions): Promise<Gene
         ],
         metadata: {
           provider: geminiProvider,
-          thinkingLevel: 'high',
+          thinkingBudget: 1024,
           promptLength: suggestionPrompt.length,
           systemPromptLength: suggestionSystemPrompt.length,
           usingSharedPrefix: true
         }
       });
 
-      // Use AI SDK streamObject for streaming structured output
-      console.log(`🔄 [Suggestions] Starting streamObject call to ${BRIEF_MODEL}...`);
+      // Use direct @google/genai SDK for streaming structured output
+      console.log(`🔄 [Suggestions] Starting streamContent call to ${BRIEF_MODEL}...`);
       const suggestionsStartTime = Date.now();
-      
-      const suggestionsStreamResult = streamObject({
-        model: gemini(BRIEF_MODEL),
-        schema: jsonSchema(SUGGESTION_RESPONSE_SCHEMA as any),
-        system: suggestionSystemPrompt,
-        prompt: suggestionPrompt,
-        maxOutputTokens: 8000, // Reduced from 20000 - suggestions are simpler output
-        providerOptions: {
-          google: {
-            thinkingConfig: { thinkingLevel: 'high' },
-          },
-        },
-      });
-
-      // Log streaming progress by consuming partialObjectStream
       let suggestionsChunkCount = 0;
       let suggestionsLastLogTime = Date.now();
-      for await (const partialObject of suggestionsStreamResult.partialObjectStream) {
-        suggestionsChunkCount++;
-        const now = Date.now();
-        // Log every 10 seconds to show progress
-        if (now - suggestionsLastLogTime > 10000) {
-          const elapsed = Math.round((now - suggestionsStartTime) / 1000);
-          console.log(`📡 [Suggestions] Stream progress: ${suggestionsChunkCount} chunks, ${elapsed}s elapsed`);
-          suggestionsLastLogTime = now;
-        }
-      }
+      
+      const suggestionsResult = await streamContent({
+        model: BRIEF_MODEL,
+        systemInstruction: suggestionSystemPrompt,
+        contents: suggestionPrompt,
+        responseSchema: SUGGESTION_RESPONSE_SCHEMA,
+        maxOutputTokens: 12000,
+        thinkingBudget: 1024, // Low thinking for speed
+        onProgress: (count, elapsedMs) => {
+          suggestionsChunkCount = count;
+          const now = Date.now();
+          if (now - suggestionsLastLogTime > 10000) {
+            console.log(`📡 [Suggestions] Stream progress: ${count} chunks, ${Math.round(elapsedMs / 1000)}s elapsed`);
+            suggestionsLastLogTime = now;
+          }
+        },
+      });
       
       const suggestionsEndTime = Date.now();
       console.log(`✅ [Suggestions] Stream complete: ${suggestionsChunkCount} chunks in ${Math.round((suggestionsEndTime - suggestionsStartTime) / 1000)}s`);
 
-      // Get the final object and metadata
-      const suggestionsData = await suggestionsStreamResult.object;
-      const suggestionsUsageData = await suggestionsStreamResult.usage;
-      const suggestionsFinishReason = await suggestionsStreamResult.finishReason;
+      const suggestionsData = suggestionsResult.object as SuggestionResponse;
+      const suggestionsUsageData = suggestionsResult.usage;
+      const suggestionsFinishReason = suggestionsResult.finishReason;
 
-      // Extract token usage for Langfuse cost tracking
-      // Check for cache hit information (Gemini returns cachedTokens when prefix caching works)
-      if (suggestionsUsageData) {
-        const cachedTokens = (suggestionsUsageData as any).cachedTokens || (suggestionsUsageData as any).cached_content_token_count || 0;
-        suggestionsUsage = {
-          input: suggestionsUsageData.inputTokens || 0,
-          output: suggestionsUsageData.outputTokens || 0,
-          total: (suggestionsUsageData.inputTokens || 0) + (suggestionsUsageData.outputTokens || 0),
-          cached: cachedTokens
-        };
-        console.log(`📊 Suggestions token usage: ${suggestionsUsage.input} input, ${suggestionsUsage.output} output, ${suggestionsUsage.total} total`);
-        if (cachedTokens > 0) {
-          const cacheHitRate = Math.round((cachedTokens / suggestionsUsage.input) * 100);
-          console.log(`💾 Cache hit: ${cachedTokens} tokens cached (${cacheHitRate}% of input)`);
-        }
-      }
+      // Log token usage with cache info
+      console.log(`📊 Suggestions token usage: ${suggestionsUsageData.inputTokens} input, ${suggestionsUsageData.outputTokens} output, ${suggestionsUsageData.totalTokens} total`);
+      console.log(formatCacheLog(suggestionsUsageData));
 
+      suggestionsUsage = {
+        input: suggestionsUsageData.inputTokens,
+        output: suggestionsUsageData.outputTokens,
+        total: suggestionsUsageData.totalTokens,
+        cached: suggestionsUsageData.cacheReadInputTokens
+      };
+      suggestionsCacheStats = {
+        cacheReadTokens: suggestionsUsageData.cacheReadInputTokens,
+        cacheWriteTokens: suggestionsUsageData.cacheCreationInputTokens,
+        cacheHitRate: suggestionsUsageData.cacheHitRate
+      };
+      
       suggestionGeneration.update({
         output: JSON.stringify(suggestionsData),
         metadata: {
           finishReason: suggestionsFinishReason,
-          cachedTokens: suggestionsUsage.cached,
-          cacheHitRate: suggestionsUsage.input > 0
-            ? Math.round((suggestionsUsage.cached / suggestionsUsage.input) * 100)
-            : 0
+          cachedTokens: suggestionsUsageData.cacheReadInputTokens,
+          cacheWriteTokens: suggestionsUsageData.cacheCreationInputTokens,
+          cacheHitRate: suggestionsUsageData.cacheHitRate,
+          chunksReceived: suggestionsChunkCount
         }
       });
       // End generation with token usage for Langfuse cost calculation
@@ -765,9 +747,13 @@ export async function generateBrief(options: GenerateBriefOptions): Promise<Gene
         } : undefined
       });
 
-      if (suggestionsData) {
-        listSuggestions = (suggestionsData as SuggestionResponse).suggestions || [];
+      // Extract suggestions from data
+      if (suggestionsData && Array.isArray(suggestionsData.suggestions)) {
+        // Filter out any malformed suggestions (must have at minimum a title and reasoning)
+        listSuggestions = suggestionsData.suggestions.filter(s => s && s.title && s.reasoning);
         console.log(`✅ Generated ${listSuggestions.length} suggestions`);
+      } else {
+        console.warn(`⚠️ [Suggestions] Data received but suggestions array is invalid`);
       }
       suggestionSpan.end({ metadata: { suggestionsCount: listSuggestions.length } });
     } catch (suggestionError: any) {
@@ -858,12 +844,21 @@ export async function generateBrief(options: GenerateBriefOptions): Promise<Gene
           matchupsCount: strategicAnalysis.matchupConsiderations?.length || 0,
           suggestionsCount: listSuggestions.length,
           hasSpiritIcon: !!spiritIconUrl,
-          // Cache optimization stats
+          // Cache optimization stats (enhanced with detailed breakdown)
           cacheStats: {
             sharedPrefixChars: prefixStats.charCount,
             sharedPrefixEstimatedTokens: prefixStats.estimatedTokens,
+            // Main analysis cache stats
             analysisCachedTokens: mainAnalysisUsage.cached,
+            analysisCacheReadTokens: mainCacheStats.cacheReadTokens,
+            analysisCacheWriteTokens: mainCacheStats.cacheWriteTokens,
+            analysisCacheHitRate: mainCacheStats.cacheHitRate,
+            // Suggestions cache stats
             suggestionsCachedTokens: suggestionsUsage.cached,
+            suggestionsCacheReadTokens: suggestionsCacheStats.cacheReadTokens,
+            suggestionsCacheWriteTokens: suggestionsCacheStats.cacheWriteTokens,
+            suggestionsCacheHitRate: suggestionsCacheStats.cacheHitRate,
+            // Overall totals
             totalCachedTokens,
             totalInputTokens,
             overallCacheHitRate: overallCacheRate

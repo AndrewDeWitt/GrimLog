@@ -4,19 +4,18 @@
  * Extracts the core parsing functionality from the API route
  * so it can be called directly for background processing.
  *
- * Uses AI SDK for Gemini/Vertex AI calls with proper WIF authentication.
+ * Uses direct @google/genai SDK for Gemini calls to ensure proper
+ * system instruction handling and implicit caching support.
  */
 
 import OpenAI from 'openai';
-import { generateObject, generateText } from 'ai';
-import { jsonSchema } from 'ai';
 import { prisma } from '@/lib/prisma';
 import { ParsedArmyList } from '@/lib/types';
 import { langfuse } from '@/lib/langfuse';
 import { observeOpenAI } from 'langfuse';
 import { getArmyParseProvider, getArmyParseModel, validateProviderConfig, isGeminiProvider } from '@/lib/aiProvider';
 import { normalizeFactionName } from '@/lib/factionNormalization';
-import { getGeminiProvider } from '@/lib/vertexAI';
+import { generateContent, formatCacheLog, type GeminiTokenUsage } from '@/lib/geminiDirect';
 import * as fs from 'fs-extra';
 import * as path from 'path';
 
@@ -64,131 +63,224 @@ export async function loadKnownDetachments(): Promise<string> {
   return context;
 }
 
-// JSON Schema for Structured Outputs
+// JSON Schema for Structured Outputs - FLAT structure to avoid nesting depth limits
+// Stats are looked up from database after matching, not returned by AI
+// Composition uses string format: "role:count:modelType:weapon1,weapon2" to avoid nested objects
 const ARMY_LIST_SCHEMA = {
   type: "object",
   properties: {
-    detectedFaction: {
-      type: ["string", "null"],
-      description: "The detected faction from the army list. For subfactions like Space Wolves, Blood Angels, Dark Angels, Black Templars, or Deathwatch, return JUST the subfaction name (e.g., 'Space Wolves' not 'Space Marines (Space Wolves)'). For parent factions, return the faction name (e.g., 'Space Marines', 'Tyranids')."
-    },
-    detectedDetachment: {
-      type: ["string", "null"],
-      description: "The detected detachment (e.g., 'Gladius Task Force', 'Invasion Fleet'). Look for 'Detachment:', 'Detachment Rule:', or headers."
-    },
-    detectedPointsLimit: {
-      type: ["number", "null"],
-      description: "The detected points limit from the army list"
-    },
+    detectedFaction: { type: ["string", "null"], description: "Detected faction. For subfactions, return JUST the subfaction name." },
+    detectedDetachment: { type: ["string", "null"], description: "Detected detachment name." },
+    detectedPointsLimit: { type: ["number", "null"], description: "Detected points limit." },
+    parsingConfidence: { type: "number", description: "Overall parsing confidence (0-1)." },
     units: {
       type: "array",
-      description: "Array of parsed units from the army list",
       items: {
         type: "object",
         properties: {
-          name: { type: "string", description: "The unit name as it appears in the list" },
-          datasheet: { type: "string", description: "The datasheet name this unit should use" },
-          parsedDatasheet: {
-            type: "object",
-            description: "Matched datasheet information",
-            properties: {
-              datasheetId: { type: ["string", "null"], description: "ID of the matched datasheet from the database, or null if no match" },
-              name: { type: "string", description: "Name of the matched datasheet" },
-              factionId: { type: ["string", "null"], description: "ID of the faction" },
-              faction: { type: ["string", "null"], description: "Faction of the datasheet" },
-              subfaction: { type: ["string", "null"], description: "Subfaction of the datasheet" },
-              role: { type: ["string", "null"], description: "Role (e.g., Battleline, HQ, Elites)" },
-              keywords: { type: "array", items: { type: "string" }, description: "Array of keyword strings" },
-              movement: { type: ["string", "null"], description: "Movement characteristic" },
-              toughness: { type: ["number", "null"], description: "Toughness characteristic" },
-              save: { type: ["string", "null"], description: "Save characteristic" },
-              invulnerableSave: { type: ["string", "null"], description: "Invulnerable save characteristic" },
-              wounds: { type: ["number", "null"], description: "Wounds characteristic" },
-              leadership: { type: ["number", "null"], description: "Leadership characteristic" },
-              objectiveControl: { type: ["number", "null"], description: "Objective Control characteristic" },
-              pointsCost: { type: ["number", "null"], description: "Base points cost" },
-              leaderRules: { type: ["string", "null"], description: "Which units this character can attach to" },
-              leaderAbilities: { type: ["string", "null"], description: "Abilities granted when this character is leading a unit" },
-              matchConfidence: { type: "number", description: "Confidence in the match (0-1)" },
-              needsReview: { type: "boolean", description: "Whether this match needs manual review" }
-            },
-            required: ["datasheetId", "name", "factionId", "faction", "subfaction", "role", "keywords", "movement", "toughness", "save", "invulnerableSave", "wounds", "leadership", "objectiveControl", "pointsCost", "leaderRules", "leaderAbilities", "matchConfidence", "needsReview"],
-            additionalProperties: false
-          },
-          weapons: {
-            type: "array",
-            description: "Array of weapons this unit has",
-            items: {
-              type: "object",
-              properties: {
-                weaponId: { type: ["string", "null"], description: "ID of the matched weapon from database" },
-                name: { type: "string", description: "Weapon name" },
-                range: { type: ["string", "null"], description: "Weapon range" },
-                type: { type: ["string", "null"], description: "Weapon type (e.g., Assault 2, Heavy D6)" },
-                attacks: { type: ["string", "null"], description: "Number of attacks" },
-                ballisticSkill: { type: ["string", "null"], description: "Ballistic Skill for ranged weapons" },
-                weaponSkill: { type: ["string", "null"], description: "Weapon Skill for melee weapons" },
-                strength: { type: ["string", "null"], description: "Strength characteristic" },
-                armorPenetration: { type: ["string", "null"], description: "AP characteristic" },
-                damage: { type: ["string", "null"], description: "Damage characteristic" },
-                abilities: { type: "array", items: { type: "string" }, description: "Weapon abilities" },
-                matchConfidence: { type: "number", description: "Confidence in weapon match (0-1)" },
-                needsReview: { type: "boolean", description: "Whether this weapon needs review" }
-              },
-              required: ["weaponId", "name", "range", "type", "attacks", "ballisticSkill", "weaponSkill", "strength", "armorPenetration", "damage", "abilities", "matchConfidence", "needsReview"],
-              additionalProperties: false
-            }
-          },
-          abilities: {
-            type: "array",
-            description: "Array of unit abilities",
-            items: {
-              type: "object",
-              properties: {
-                abilityId: { type: ["string", "null"], description: "ID of the matched ability from database" },
-                name: { type: "string", description: "Ability name" },
-                type: { type: ["string", "null"], description: "Ability type (core, faction, unit, leader, wargear)" },
-                description: { type: ["string", "null"], description: "Ability description" },
-                phase: { type: ["string", "null"], description: "Phase when ability is used" },
-                matchConfidence: { type: "number", description: "Confidence in ability match (0-1)" },
-                needsReview: { type: "boolean", description: "Whether this ability needs review" }
-              },
-              required: ["abilityId", "name", "type", "description", "phase", "matchConfidence", "needsReview"],
-              additionalProperties: false
-            }
-          },
-          keywords: { type: "array", items: { type: "string" }, description: "Unit keywords" },
-          pointsCost: { type: "number", description: "Points cost for this unit" },
-          modelCount: { type: "number", description: "Number of models in the unit" },
-          composition: {
-            type: "array",
-            description: "Per-model composition breakdown",
-            items: {
-              type: "object",
-              properties: {
-                modelType: { type: "string", description: "Model type name from the datasheet" },
-                role: { type: "string", enum: ["sergeant", "leader", "heavy_weapon", "special_weapon", "regular"], description: "Model role within the unit" },
-                count: { type: "number", description: "Number of models with this model type", minimum: 1 },
-                weapons: { type: "array", items: { type: "string" }, description: "Weapons carried by models of this type" },
-                woundsPerModel: { type: "number", description: "Wounds characteristic per model", minimum: 1 }
-              },
-              required: ["modelType", "role", "count", "weapons", "woundsPerModel"],
-              additionalProperties: false
-            }
-          },
-          wargear: { type: "array", items: { type: "string" }, description: "List of wargear/equipment" },
-          enhancements: { type: "array", items: { type: "string" }, description: "List of enhancements/upgrades" },
-          needsReview: { type: "boolean", description: "Whether this unit needs manual review overall" }
+          name: { type: "string", description: "Unit name as it appears in the list." },
+          datasheetId: { type: ["string", "null"], description: "ID of matched datasheet, or null if no match." },
+          datasheetName: { type: "string", description: "Name of the matched datasheet." },
+          datasheetConfidence: { type: "number", description: "Confidence in datasheet match (0-1)." },
+          pointsCost: { type: "number", description: "Points cost for this unit." },
+          modelCount: { type: "number", description: "Total models in the unit." },
+          weapons: { type: "array", items: { type: "string" }, description: "All weapon names." },
+          wargear: { type: "array", items: { type: "string" }, description: "Wargear/equipment names." },
+          abilities: { type: "array", items: { type: "string" }, description: "Non-core ability names." },
+          enhancements: { type: "array", items: { type: "string" }, description: "Enhancement names." },
+          composition: { type: "array", items: { type: "string" }, description: "Model breakdown as strings: 'role:count:modelType:weapon1,weapon2'. Roles: sergeant, leader, heavy_weapon, special_weapon, regular." },
+          needsReview: { type: "boolean", description: "True if uncertain about matching." }
         },
-        required: ["name", "datasheet", "parsedDatasheet", "weapons", "abilities", "keywords", "pointsCost", "modelCount", "composition", "wargear", "enhancements", "needsReview"],
-        additionalProperties: false
+        required: ["name", "datasheetId", "datasheetName", "datasheetConfidence", "pointsCost", "modelCount", "weapons", "wargear", "abilities", "enhancements", "composition", "needsReview"]
       }
-    },
-    parsingConfidence: { type: "number", description: "Overall confidence in the parsing (0-1)" }
+    }
   },
-  required: ["detectedFaction", "detectedDetachment", "detectedPointsLimit", "units", "parsingConfidence"],
-  additionalProperties: false
+  required: ["detectedFaction", "detectedDetachment", "detectedPointsLimit", "parsingConfidence", "units"]
 };
+
+// Helper to parse keywords that might be JSON string or array
+function parseKeywords(keywords: any): string[] {
+  if (!keywords) return [];
+  if (Array.isArray(keywords)) return keywords;
+  if (typeof keywords === 'string') {
+    try {
+      const parsed = JSON.parse(keywords);
+      return Array.isArray(parsed) ? parsed : [];
+    } catch {
+      // If it's a comma-separated string
+      return keywords.split(',').map((k: string) => k.trim()).filter(Boolean);
+    }
+  }
+  return [];
+}
+
+// Enrich simplified AI output with full database details
+// Converts the simplified schema (names only) to full ParsedArmyList format
+function enrichParsedListFromDatabase(simplifiedOutput: any, availableDatasheets: any[]): ParsedArmyList {
+  // Build lookup maps
+  const datasheetById = new Map<string, any>();
+  const datasheetByName = new Map<string, any>();
+  for (const ds of availableDatasheets) {
+    datasheetById.set(ds.id, ds);
+    datasheetByName.set(ds.name.toLowerCase(), ds);
+  }
+
+  const enrichedUnits = (simplifiedOutput.units || []).map((unit: any) => {
+    // Find the datasheet
+    const datasheet = unit.datasheetId 
+      ? datasheetById.get(unit.datasheetId)
+      : datasheetByName.get(unit.datasheetName?.toLowerCase());
+
+    // Build full parsedDatasheet object
+    const parsedDatasheet = datasheet ? {
+      datasheetId: datasheet.id,
+      name: datasheet.name,
+      factionId: datasheet.factionId,
+      faction: datasheet.faction?.name || null,
+      subfaction: datasheet.subfaction || null,
+      role: datasheet.role || null,
+      keywords: parseKeywords(datasheet.keywords),
+      movement: datasheet.movement || null,
+      toughness: datasheet.toughness || null,
+      save: datasheet.save || null,
+      invulnerableSave: datasheet.invulnerableSave || null,
+      wounds: datasheet.wounds || null,
+      leadership: datasheet.leadership || null,
+      objectiveControl: datasheet.objectiveControl || null,
+      pointsCost: datasheet.pointsCost || null,
+      leaderRules: datasheet.canLead || null,
+      leaderAbilities: datasheet.leaderAbility || null,
+      matchConfidence: unit.datasheetConfidence || 0.5,
+      needsReview: !unit.datasheetId || unit.datasheetConfidence < 0.8
+    } : {
+      datasheetId: null,
+      name: unit.datasheetName || unit.name,
+      factionId: null,
+      faction: null,
+      subfaction: null,
+      role: null,
+      keywords: [],
+      movement: null,
+      toughness: null,
+      save: null,
+      invulnerableSave: null,
+      wounds: null,
+      leadership: null,
+      objectiveControl: null,
+      pointsCost: null,
+      leaderRules: null,
+      leaderAbilities: null,
+      matchConfidence: 0,
+      needsReview: true
+    };
+
+    // Build weapons array with database lookup
+    const weapons = (unit.weapons || []).map((weaponName: string) => {
+      // Try to find weapon in datasheet
+      let matchedWeapon = null;
+      if (datasheet?.weapons) {
+        matchedWeapon = datasheet.weapons.find((dw: any) => 
+          dw.weapon?.name?.toLowerCase() === weaponName.toLowerCase() ||
+          dw.weapon?.name?.toLowerCase().includes(weaponName.toLowerCase()) ||
+          weaponName.toLowerCase().includes(dw.weapon?.name?.toLowerCase() || '')
+        )?.weapon;
+      }
+
+      return {
+        weaponId: matchedWeapon?.id || null,
+        name: weaponName,
+        range: matchedWeapon?.range || null,
+        type: matchedWeapon?.type || null,
+        attacks: matchedWeapon?.attacks || null,
+        ballisticSkill: matchedWeapon?.ballisticSkill || null,
+        weaponSkill: matchedWeapon?.weaponSkill || null,
+        strength: matchedWeapon?.strength || null,
+        armorPenetration: matchedWeapon?.armorPenetration || null,
+        damage: matchedWeapon?.damage || null,
+        abilities: matchedWeapon?.abilities ? (typeof matchedWeapon.abilities === 'string' ? JSON.parse(matchedWeapon.abilities) : matchedWeapon.abilities) : [],
+        matchConfidence: matchedWeapon ? 0.9 : 0.3,
+        needsReview: !matchedWeapon
+      };
+    });
+
+    // Build abilities array with database lookup
+    const abilities = (unit.abilities || []).map((abilityName: string) => {
+      let matchedAbility = null;
+      if (datasheet?.abilities) {
+        matchedAbility = datasheet.abilities.find((da: any) => 
+          da.ability?.name?.toLowerCase() === abilityName.toLowerCase() ||
+          da.ability?.name?.toLowerCase().includes(abilityName.toLowerCase())
+        )?.ability;
+      }
+
+      return {
+        abilityId: matchedAbility?.id || null,
+        name: abilityName,
+        type: matchedAbility?.type || null,
+        description: matchedAbility?.description || null,
+        phase: matchedAbility?.phase || null,
+        matchConfidence: matchedAbility ? 0.9 : 0.3,
+        needsReview: !matchedAbility
+      };
+    });
+
+    // Build composition with wounds from datasheet
+    // Parse string format: "role:count:modelType:weapon1,weapon2"
+    const baseWounds = parsedDatasheet.wounds || 1;
+    const composition = (unit.composition || []).map((compStr: string) => {
+      // Handle both string format (new) and object format (legacy)
+      if (typeof compStr === 'object') {
+        const comp = compStr as any;
+        return {
+          modelType: comp.modelType || 'Model',
+          role: comp.role || 'regular',
+          count: comp.count || 1,
+          weapons: comp.weapons || [],
+          woundsPerModel: comp.woundsPerModel || baseWounds
+        };
+      }
+      
+      // Parse string format: "role:count:modelType:weapon1,weapon2"
+      const parts = compStr.split(':');
+      const role = parts[0] || 'regular';
+      const count = parseInt(parts[1], 10) || 1;
+      const modelType = parts[2] || 'Model';
+      const weaponsPart = parts[3] || '';
+      const weapons = weaponsPart ? weaponsPart.split(',').map(w => w.trim()) : [];
+      
+      return {
+        modelType,
+        role,
+        count,
+        weapons,
+        woundsPerModel: baseWounds
+      };
+    });
+
+    return {
+      name: unit.name,
+      datasheet: unit.datasheetName || unit.name,
+      parsedDatasheet,
+      weapons,
+      abilities,
+      keywords: parseKeywords(datasheet?.keywords),
+      pointsCost: unit.pointsCost || 0,
+      modelCount: unit.modelCount || 1,
+      composition,
+      wargear: unit.wargear || [],
+      enhancements: unit.enhancements || [],
+      needsReview: unit.needsReview || parsedDatasheet.needsReview
+    };
+  });
+
+  return {
+    detectedFaction: simplifiedOutput.detectedFaction,
+    detectedDetachment: simplifiedOutput.detectedDetachment,
+    detectedPointsLimit: simplifiedOutput.detectedPointsLimit,
+    units: enrichedUnits,
+    parsingConfidence: simplifiedOutput.parsingConfidence || 0.5
+  } as ParsedArmyList;
+}
 
 // Post-process weapon matches
 function postProcessWeaponMatches(parsedList: ParsedArmyList, availableDatasheets: any[]): ParsedArmyList {
@@ -662,34 +754,15 @@ async function executeParseWithAI(
   let parsed: any;
 
   if (isGeminiProvider(provider)) {
-    // Get the Gemini provider (AI Studio or Vertex AI with WIF)
-    const gemini = getGeminiProvider(provider as 'google' | 'vertex');
-
     // Build the user prompt based on content type
     let userPrompt: string;
-    let messages: Array<{ role: 'user'; content: any }>;
 
     if (contentType === 'image') {
-      const base64Match = content.match(/^data:([^;]+);base64,(.+)$/);
-      if (!base64Match) {
-        throw new Error('Invalid image data URL format');
-      }
-      const mimeType = base64Match[1];
-      const base64Data = base64Match[2];
-
-      userPrompt = 'Parse this Warhammer 40K army list image and extract all units with their datasheets, weapons, and abilities.';
-      messages = [
-        {
-          role: 'user',
-          content: [
-            { type: 'text', text: userPrompt },
-            { type: 'image', image: `data:${mimeType};base64,${base64Data}` },
-          ],
-        },
-      ];
+      // TODO: Image support with direct SDK requires different handling
+      // For now, throw an error - images are not commonly used for army parsing
+      throw new Error('Image parsing is not yet supported with direct Gemini SDK. Please use text input.');
     } else {
       userPrompt = `Parse this Warhammer 40K army list and extract all units with their datasheets, weapons, and abilities:\n\n${content}`;
-      messages = [{ role: 'user', content: userPrompt }];
     }
 
     // Create Langfuse generation for LLM cost tracking if trace provided
@@ -711,77 +784,45 @@ async function executeParseWithAI(
       }
     });
 
-    // Use AI SDK generateObject for structured output
-    // Wrap in try-catch to handle JSON parse errors from control characters in model output
-    let parsedObject: any;
-    let usage: any;
-    let finishReason: string | undefined;
+    // Use direct @google/genai SDK for structured output
+    // This ensures proper system instruction placement for implicit caching
+    const result = await generateContent({
+      model: modelName,
+      systemInstruction: systemPrompt,
+      contents: userPrompt,
+      responseSchema: ARMY_LIST_SCHEMA,
+      maxOutputTokens: 32768,
+      thinkingBudget: 1024, // Low thinking budget for parsing
+    });
 
-    try {
-      const result = await generateObject({
-        model: gemini(modelName),
-        schema: jsonSchema(ARMY_LIST_SCHEMA as any),
-        system: systemPrompt,
-        messages,
-        maxOutputTokens: 32768,
-        providerOptions: {
-          google: {
-            thinkingConfig: { thinkingLevel: 'low' },
-          },
-        },
-      });
-      parsedObject = result.object;
-      usage = result.usage;
-      finishReason = result.finishReason;
-    } catch (genObjError: any) {
-      // Check if this is a JSON parse error with valid text that just has control characters
-      if (genObjError.name === 'AI_NoObjectGeneratedError' && genObjError.text) {
-        console.warn('⚠️ generateObject failed due to JSON parse error, attempting to sanitize and parse manually...');
-        
-        // Sanitize the text to remove control characters
-        const sanitizedText = sanitizeJsonString(genObjError.text);
-        
-        try {
-          parsedObject = JSON.parse(sanitizedText);
-          console.log('✅ Successfully parsed sanitized JSON');
-          
-          // Extract usage from the error if available
-          usage = genObjError.usage || { inputTokens: 0, outputTokens: 0 };
-          finishReason = genObjError.finishReason || 'stop';
-        } catch (parseError) {
-          console.error('❌ Failed to parse even after sanitization:', parseError);
-          throw genObjError; // Re-throw original error
-        }
-      } else {
-        throw genObjError;
-      }
-    }
+    const parsedObject = result.object;
+    const usage = result.usage;
+    const finishReason = result.finishReason;
 
-    // Log token usage
-    const geminiUsage = {
-      input: usage?.inputTokens || 0,
-      output: usage?.outputTokens || 0,
-      total: (usage?.inputTokens || 0) + (usage?.outputTokens || 0)
-    };
-    console.log(`📊 Army parse token usage: ${geminiUsage.input} input, ${geminiUsage.output} output, ${geminiUsage.total} total`);
+    // Log token usage with cache info
+    console.log(`📊 Army parse token usage: ${usage.inputTokens} input, ${usage.outputTokens} output, ${usage.totalTokens} total`);
+    console.log(formatCacheLog(usage));
 
-    if (finishReason && finishReason !== 'stop') {
+    if (finishReason && finishReason !== 'STOP' && finishReason !== 'stop') {
       console.warn(`⚠️ Gemini response may be truncated. finishReason: ${finishReason}`);
     }
 
-    // Update Langfuse generation
+    // Update Langfuse generation with cache stats
     if (generation) {
       generation.update({
         output: JSON.stringify(parsedObject),
         metadata: {
           finishReason,
+          cachedTokens: usage.cacheReadInputTokens,
+          cacheWriteTokens: usage.cacheCreationInputTokens,
+          cacheHitRate: usage.cacheHitRate
         }
       });
       generation.end({
-        usage: geminiUsage.total > 0 ? {
-          input: geminiUsage.input,
-          output: geminiUsage.output,
-          total: geminiUsage.total
+        usage: usage.totalTokens > 0 ? {
+          input: usage.inputTokens,
+          output: usage.outputTokens,
+          total: usage.totalTokens
         } : undefined
       });
     }
@@ -823,7 +864,11 @@ async function executeParseWithAI(
 
   console.log('AI Parse Response units:', parsed.units?.length || 0);
 
-  return parsed as ParsedArmyList;
+  // Enrich simplified AI output with full database details
+  const enrichedList = enrichParsedListFromDatabase(parsed, availableDatasheets);
+  console.log('Enriched units with database details');
+
+  return enrichedList;
 }
 
 export interface ParseArmyListOptions {

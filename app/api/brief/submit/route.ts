@@ -17,9 +17,11 @@ import { requireAuth } from '@/lib/auth/apiAuth';
 import { checkRateLimit, getRateLimitIdentifier, getClientIp, RATE_LIMITS } from '@/lib/rateLimit';
 import { checkCreditsAvailable } from '@/lib/briefCredits';
 import { analyzeBrief } from '@/lib/briefAnalysis';
-import { parseArmyListFromText } from '@/lib/armyListParser';
+import { parseArmyListFromText, loadKnownDetachments } from '@/lib/armyListParser';
 import { generateBrief } from '@/lib/briefGenerator';
 import { langfuse } from '@/lib/langfuse';
+import { fetchFactionDatasheets } from '@/lib/briefSuggestions';
+import { buildBaseSharedPrefix, getSharedPrefixStats } from '@/lib/briefSharedContext';
 
 // Route segment config
 export const dynamic = 'force-dynamic';
@@ -134,6 +136,37 @@ export async function POST(request: NextRequest) {
           data: { status: 'processing' },
         });
 
+        // Step 0: Build base shared prefix for cache optimization
+        // This prefix (datasheets + known detachments) is shared by ALL 3 LLM calls
+        const prefixSpan = trace.span({
+          name: "build-base-shared-prefix",
+          metadata: { factionId }
+        });
+        console.log(`📋 Building shared prefix for brief: ${brief.id}`);
+        
+        // Look up faction name from ID for fetchFactionDatasheets
+        const factionRecord = await prisma.faction.findUnique({
+          where: { id: factionId }
+        });
+        const factionName = factionRecord?.name || 'Unknown';
+        
+        const [factionDatasheets, knownDetachments] = await Promise.all([
+          fetchFactionDatasheets(factionName, null),
+          loadKnownDetachments()
+        ]);
+        
+        const baseSharedPrefix = buildBaseSharedPrefix(factionDatasheets, knownDetachments);
+        const prefixStats = getSharedPrefixStats(baseSharedPrefix);
+        
+        prefixSpan.end({
+          metadata: {
+            prefixCharCount: prefixStats.charCount,
+            estimatedTokens: prefixStats.estimatedTokens,
+            datasheetCount: factionDatasheets.length
+          }
+        });
+        console.log(`📋 Built base shared prefix: ${prefixStats.charCount} chars (~${prefixStats.estimatedTokens} tokens), ${factionDatasheets.length} datasheets`);
+
         // Step 1: Parse the army list (direct function call)
         const parseSpan = trace.span({
           name: "parse-army-list",
@@ -144,6 +177,7 @@ export async function POST(request: NextRequest) {
           text: text.trim(),
           factionId, // Filter datasheets by selected faction
           trace, // Pass trace for LLM cost tracking
+          sharedSystemPrefix: baseSharedPrefix, // Use shared prefix for cache optimization
         });
 
         if (!parseResult.success || !parseResult.parsedArmy) {
@@ -160,6 +194,13 @@ export async function POST(request: NextRequest) {
           }
         });
         console.log(`✅ Army parsed: ${parsedArmy.units?.length || 0} units`);
+
+        // DEBUG: Add delay to test cache propagation
+        // Gemini implicit caching may need time to propagate before subsequent calls can hit it
+        const CACHE_PROPAGATION_DELAY_MS = 30000; // 30 seconds
+        console.log(`⏳ Waiting ${CACHE_PROPAGATION_DELAY_MS / 1000}s for cache propagation...`);
+        await new Promise(resolve => setTimeout(resolve, CACHE_PROPAGATION_DELAY_MS));
+        console.log(`✅ Cache propagation delay complete`);
 
         // Step 2: Run local analysis
         const localAnalysisSpan = trace.span({
@@ -184,6 +225,7 @@ export async function POST(request: NextRequest) {
           userId: user.id,
           briefId: brief.id,
           trace, // Pass trace for LLM cost tracking
+          baseSharedPrefix, // Pass the pre-built prefix for cache optimization
         });
 
         if (generateResult.success) {

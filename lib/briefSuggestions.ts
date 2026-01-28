@@ -710,9 +710,9 @@ export const SUGGESTION_RESPONSE_SCHEMA = {
   properties: {
     suggestions: {
       type: "array",
-      description: "Exactly 4 complete, independent list modification options",
-      minItems: 4,
-      maxItems: 4,
+      description: "2-4 complete, independent list modification options. Aim for 4 but fewer is acceptable if points are tight.",
+      minItems: 1,
+      maxItems: 6, // Allow flexibility - model can generate more if needed
       items: {
         type: "object",
         properties: {

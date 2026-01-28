@@ -5,7 +5,7 @@
  * from YouTube transcripts about Warhammer 40K units and factions.
  */
 
-import { langfuse } from '@/lib/langfuse';
+import { langfuse, extractCacheTokenStats, formatCacheStats } from '@/lib/langfuse';
 import { getProvider, isGeminiProvider } from '@/lib/aiProvider';
 import { getGeminiClient } from '@/lib/vertexAI';
 
@@ -509,12 +509,23 @@ export async function parseCompetitiveContext(
 
     // Extract token usage from response for Langfuse cost tracking
     const geminiResponse = response as any;
+    const usageMetadata = geminiResponse.usageMetadata;
+    
+    // Extract cache stats from raw Gemini SDK response
+    // Gemini SDK returns cachedContentTokenCount in usageMetadata
+    const cacheStats = extractCacheTokenStats({
+      inputTokens: usageMetadata?.promptTokenCount || 0,
+      cachedContentTokenCount: usageMetadata?.cachedContentTokenCount || 0
+    });
+    
     const usage = {
-      input: geminiResponse.usageMetadata?.promptTokenCount || 0,
-      output: geminiResponse.usageMetadata?.candidatesTokenCount || 0,
-      total: geminiResponse.usageMetadata?.totalTokenCount || 0
+      input: usageMetadata?.promptTokenCount || 0,
+      output: usageMetadata?.candidatesTokenCount || 0,
+      total: usageMetadata?.totalTokenCount || 0,
+      cached: cacheStats.cachedTokens
     };
     console.log(`📊 Competitive context parser token usage: ${usage.input} input, ${usage.output} output, ${usage.total} total`);
+    console.log(formatCacheStats(cacheStats, usage.input));
 
     const responseText = response.text || '';
 
@@ -538,10 +549,14 @@ export async function parseCompetitiveContext(
       };
     }
 
-    // Update generation with output
+    // Update generation with output and cache stats
     generation.update({
       output: responseText,
-      metadata: { responseLength: responseText.length }
+      metadata: { 
+        responseLength: responseText.length,
+        cachedTokens: cacheStats.cachedTokens,
+        cacheHitRate: cacheStats.cacheHitRate
+      }
     });
     // End generation with token usage for Langfuse cost calculation
     generation.end({

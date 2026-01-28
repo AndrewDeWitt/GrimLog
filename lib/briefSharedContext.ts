@@ -1,24 +1,25 @@
 /**
  * Brief Shared Context Builder
  *
- * Builds the shared system prompt prefix used by all 3 brief LLM calls:
- * 1. Army Parse
- * 2. Brief Analysis
- * 3. List Suggestions
+ * Builds shared system prompt prefixes for Gemini implicit caching optimization.
+ * 
+ * TWO PREFIX LEVELS:
+ * 1. BASE PREFIX (datasheets + known detachments) - used by parser
+ * 2. FULL PREFIX (base + faction rules + detachment context) - used by analysis/suggestions
  *
  * By placing identical content at the START of the system prompt,
  * Gemini's implicit caching can reuse the prefix across sequential calls,
  * reducing costs by ~60-70% per brief.
  *
  * CRITICAL: The content order and formatting MUST be identical across all calls
- * for cache hits to work. Do not add call-specific content to this prefix.
+ * for cache hits to work. Task-specific instructions come AFTER the shared prefix.
  */
 
 import { DatasheetWithWeaponsAndAbilities } from './briefSuggestions';
 import { DetachmentContext } from './fetchDetachmentContext';
 
-// Type for faction rules from DetachmentContext
-interface FactionRule {
+// Type for faction rules from DetachmentContext (exported for use by briefGenerator)
+export interface FactionRule {
   name: string;
   type: string;
   description: string;
@@ -49,16 +50,14 @@ export function buildSharedSystemPrefix(
   const sections: string[] = [];
 
   // Section 1: Faction datasheets (largest section, ~80-100K tokens)
-  sections.push('## REFERENCE DATA: FACTION DATASHEETS');
-  sections.push('Use these datasheets for matching, analysis, and suggestions.');
-  sections.push('Each datasheet includes: stats, weapons with IDs, abilities with IDs, keywords, competitive context.');
+  // NO description text - task-specific instructions come later in each prompt
+  sections.push('## FACTION DATASHEETS');
   sections.push('');
   sections.push(formatDatasheetsForSharedPrefix(datasheets));
 
   // Section 2: Known detachments (for validation)
   sections.push('');
   sections.push('## KNOWN DETACHMENTS');
-  sections.push('Valid detachments by faction. Use this to validate detected detachment names.');
   sections.push('');
   sections.push(knownDetachments);
 
@@ -68,6 +67,74 @@ export function buildSharedSystemPrefix(
     sections.push(`## FACTION RULES (${factionRules.length})`);
     sections.push('These rules apply to all units in the army:');
     sections.push('');
+    for (const rule of factionRules) {
+      sections.push(`**${rule.name}** (${rule.type})`);
+      sections.push(rule.description);
+      sections.push('');
+    }
+  }
+
+  // Section 4: Detachment context (ability, stratagems, enhancements)
+  if (detachmentContext.detachment) {
+    sections.push('');
+    sections.push(formatDetachmentContextForSharedPrefix(detachmentContext));
+  }
+
+  return sections.join('\n');
+}
+
+/**
+ * Builds the BASE shared prefix (datasheets + known detachments only).
+ * Used by the parser BEFORE we know which detachment was selected.
+ * 
+ * This is the cacheable core that ALL 3 LLM calls share.
+ * Analysis and suggestions extend this with faction rules + detachment context.
+ *
+ * @param datasheets - All datasheets available to the faction
+ * @param knownDetachments - Formatted string of known detachments by faction
+ * @returns Base prefix string (datasheets + known detachments)
+ */
+export function buildBaseSharedPrefix(
+  datasheets: DatasheetWithWeaponsAndAbilities[],
+  knownDetachments: string
+): string {
+  const sections: string[] = [];
+
+  // Section 1: Faction datasheets (largest section, ~80-100K tokens)
+  // NO description text - task-specific instructions come later in each prompt
+  sections.push('## FACTION DATASHEETS');
+  sections.push('');
+  sections.push(formatDatasheetsForSharedPrefix(datasheets));
+
+  // Section 2: Known detachments (for validation)
+  sections.push('');
+  sections.push('## KNOWN DETACHMENTS');
+  sections.push('');
+  sections.push(knownDetachments);
+
+  return sections.join('\n');
+}
+
+/**
+ * Extends a base shared prefix with faction rules and detachment context.
+ * Used to build the full prefix for analysis and suggestions AFTER parsing.
+ *
+ * @param basePrefix - The base prefix (from buildBaseSharedPrefix)
+ * @param factionRules - Faction-specific rules (Oath of Moment, etc.)
+ * @param detachmentContext - Selected detachment's ability, stratagems, enhancements
+ * @returns Extended prefix with faction rules and detachment context
+ */
+export function extendSharedPrefix(
+  basePrefix: string,
+  factionRules: FactionRule[],
+  detachmentContext: DetachmentContext
+): string {
+  const sections: string[] = [basePrefix];
+
+  // Section 3: Faction rules (Oath of Moment, etc.)
+  if (factionRules && factionRules.length > 0) {
+    sections.push('');
+    sections.push(`## FACTION RULES (${factionRules.length})`);
     for (const rule of factionRules) {
       sections.push(`**${rule.name}** (${rule.type})`);
       sections.push(rule.description);
