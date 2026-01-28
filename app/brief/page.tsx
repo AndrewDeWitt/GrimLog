@@ -6,7 +6,12 @@ import Link from 'next/link';
 import GrimlogFrame from '@/components/MechanicusFrame';
 import { useAuth } from '@/lib/auth/AuthContext';
 import AuthModal from '@/components/AuthModal';
+import TokenPurchaseModal from '@/components/TokenPurchaseModal';
+import InsufficientTokensModal from '@/components/InsufficientTokensModal';
 import { useBriefNotifications } from '@/lib/brief/BriefNotificationContext';
+
+// Brief generation feature key - matches FeatureCost table
+const BRIEF_FEATURE_KEY = 'generate_brief';
 
 export default function BriefPage() {
   const router = useRouter();
@@ -15,10 +20,13 @@ export default function BriefPage() {
   // Auth state
   const { user, loading: authLoading } = useAuth();
   const [showAuthModal, setShowAuthModal] = useState(false);
+  const [showPurchaseModal, setShowPurchaseModal] = useState(false);
+  const [showInsufficientModal, setShowInsufficientModal] = useState(false);
 
-  // Credits state
-  const [credits, setCredits] = useState<number | 'unlimited' | null>(null);
-  const [creditsLoading, setCreditsLoading] = useState(false);
+  // Tokens state
+  const [tokens, setTokens] = useState<number | 'unlimited' | null>(null);
+  const [tokensLoading, setTokensLoading] = useState(false);
+  const [briefCost, setBriefCost] = useState<number>(3); // Default, will be fetched
 
   // Form state
   const [textInput, setTextInput] = useState('');
@@ -41,30 +49,52 @@ export default function BriefPage() {
     }
   }, [authLoading, user, router]);
 
-  // Fetch credits when user is authenticated
+  // Fetch tokens and feature costs when user is authenticated
   useEffect(() => {
-    const fetchCredits = async () => {
+    const fetchTokenData = async () => {
       if (!user) {
-        setCredits(null);
+        setTokens(null);
         return;
       }
 
-      setCreditsLoading(true);
+      setTokensLoading(true);
       try {
-        const response = await fetch('/api/users/credits');
+        const response = await fetch('/api/tokens/balance');
         if (response.ok) {
           const data = await response.json();
-          setCredits(data.credits);
+          setTokens(data.isAdmin ? 'unlimited' : data.balance);
+          
+          // Get the brief cost from feature costs
+          const briefFeature = data.featureCosts?.find(
+            (f: { featureKey: string; tokenCost: number }) => f.featureKey === BRIEF_FEATURE_KEY
+          );
+          if (briefFeature) {
+            setBriefCost(briefFeature.tokenCost);
+          }
         }
       } catch (err) {
-        console.error('Failed to fetch credits:', err);
+        console.error('Failed to fetch tokens:', err);
       } finally {
-        setCreditsLoading(false);
+        setTokensLoading(false);
       }
     };
 
-    fetchCredits();
+    fetchTokenData();
   }, [user]);
+
+  // Refresh tokens after purchase modal closes
+  const refreshTokens = async () => {
+    if (!user) return;
+    try {
+      const response = await fetch('/api/tokens/balance');
+      if (response.ok) {
+        const data = await response.json();
+        setTokens(data.isAdmin ? 'unlimited' : data.balance);
+      }
+    } catch (err) {
+      console.error('Failed to refresh tokens:', err);
+    }
+  };
 
   // Fetch factions on mount
   useEffect(() => {
@@ -85,9 +115,10 @@ export default function BriefPage() {
     fetchFactions();
   }, []);
 
-  // Check if user can generate (has credits or is admin)
-  const canGenerate = credits === 'unlimited' || (typeof credits === 'number' && credits > 0);
-  const hasNoCredits = typeof credits === 'number' && credits === 0;
+  // Check if user can generate (has enough tokens or is admin)
+  const hasEnoughTokens = tokens === 'unlimited' || (typeof tokens === 'number' && tokens >= briefCost);
+  const hasNoTokens = typeof tokens === 'number' && tokens === 0;
+  const hasInsufficientTokens = typeof tokens === 'number' && tokens > 0 && tokens < briefCost;
 
   // Handle submission
   const handleSubmit = async () => {
@@ -96,8 +127,9 @@ export default function BriefPage() {
       return;
     }
 
-    if (!canGenerate) {
-      setError('No credits remaining.');
+    // Show insufficient tokens modal if not enough
+    if (!hasEnoughTokens) {
+      setShowInsufficientModal(true);
       return;
     }
 
@@ -124,12 +156,15 @@ export default function BriefPage() {
       if (!response.ok) {
         const errorData = await response.json();
         if (response.status === 402) {
-          const creditsRes = await fetch('/api/users/credits');
-          if (creditsRes.ok) {
-            const data = await creditsRes.json();
-            setCredits(data.credits);
+          // Refresh token balance and show insufficient modal
+          const tokensRes = await fetch('/api/tokens/balance');
+          if (tokensRes.ok) {
+            const data = await tokensRes.json();
+            setTokens(data.isAdmin ? 'unlimited' : data.balance);
           }
-          throw new Error(errorData.message || 'No credits remaining');
+          setSubmitting(false);
+          setShowInsufficientModal(true);
+          return;
         }
         if (response.status === 401) {
           router.push('/');
@@ -168,6 +203,22 @@ export default function BriefPage() {
     <>
       <GrimlogFrame />
       <AuthModal isOpen={showAuthModal} onClose={() => setShowAuthModal(false)} />
+      <TokenPurchaseModal 
+        isOpen={showPurchaseModal} 
+        onClose={() => {
+          setShowPurchaseModal(false);
+          refreshTokens(); // Refresh balance after closing
+        }}
+        currentBalance={typeof tokens === 'number' ? tokens : 0}
+      />
+      <InsufficientTokensModal
+        isOpen={showInsufficientModal}
+        onClose={() => setShowInsufficientModal(false)}
+        onGetTokens={() => setShowPurchaseModal(true)}
+        requiredTokens={briefCost}
+        currentBalance={typeof tokens === 'number' ? tokens : 0}
+        featureName="Tactical Brief"
+      />
 
       {/* Fixed fullscreen container - accounts for nav */}
       <main className="fixed inset-0 top-12 flex flex-col bg-grimlog-black overflow-hidden">
@@ -262,35 +313,54 @@ Thunderwolf Cavalry x3 (100 pts)`}
                   <p className="text-grimlog-red text-xs">⚠ {error}</p>
                 </div>
               )}
-              {hasNoCredits && !error && (
-                <div className="mt-2 p-2 bg-grimlog-amber/10 border border-grimlog-amber/50 rounded flex-shrink-0">
-                  <p className="text-grimlog-amber text-xs">⚡ No credits remaining.</p>
+              {(hasNoTokens || hasInsufficientTokens) && !error && (
+                <div className="mt-2 p-2 bg-grimlog-amber/10 border border-grimlog-amber/50 rounded flex-shrink-0 cursor-pointer hover:bg-grimlog-amber/20 transition-colors"
+                     onClick={() => setShowInsufficientModal(true)}>
+                  <p className="text-grimlog-amber text-xs">
+                    ⬢ {hasNoTokens ? 'No tokens remaining' : `Need ${briefCost} tokens (have ${tokens})`}. 
+                    <span className="underline ml-1">Get more →</span>
+                  </p>
                 </div>
               )}
 
-              {/* Button area with credits */}
+              {/* Button area with tokens */}
               <div className="mt-3 flex-shrink-0">
-                {/* Credits row */}
+                {/* Tokens row */}
                 <div className="flex items-center justify-center gap-2 mb-2">
-                  <span className="text-grimlog-light-steel text-xs font-mono">Credits:</span>
-                  {creditsLoading ? (
+                  <span className="text-grimlog-amber text-xs">⬢</span>
+                  <span className="text-grimlog-light-steel text-xs font-mono">Tokens:</span>
+                  {tokensLoading ? (
                     <span className="text-grimlog-steel text-xs">...</span>
-                  ) : credits === 'unlimited' ? (
+                  ) : tokens === 'unlimited' ? (
                     <span className="text-grimlog-green text-xs font-bold">∞ Unlimited</span>
                   ) : (
-                    <span className={`text-xs font-bold ${hasNoCredits ? 'text-grimlog-red' : 'text-grimlog-amber'}`}>
-                      {credits ?? 0} remaining
-                    </span>
+                    <>
+                      <span className={`text-xs font-bold ${!hasEnoughTokens ? 'text-grimlog-red' : 'text-grimlog-amber'}`}>
+                        {tokens ?? 0}
+                      </span>
+                      <span className="text-grimlog-steel text-xs">
+                        (costs {briefCost})
+                      </span>
+                    </>
+                  )}
+                  {/* Get More button inline */}
+                  {typeof tokens === 'number' && (
+                    <button
+                      onClick={() => setShowPurchaseModal(true)}
+                      className="text-grimlog-amber text-xs hover:underline ml-1"
+                    >
+                      Get More
+                    </button>
                   )}
                 </div>
 
                 <div className="relative">
-                  <div className={`absolute -inset-1 bg-grimlog-orange/20 rounded blur-md transition-opacity duration-300 ${!submitting && textInput.trim() && !hasNoCredits && selectedFactionId ? 'opacity-50' : 'opacity-0'}`} />
+                  <div className={`absolute -inset-1 bg-grimlog-orange/20 rounded blur-md transition-opacity duration-300 ${!submitting && textInput.trim() && hasEnoughTokens && selectedFactionId ? 'opacity-50' : 'opacity-0'}`} />
                   <button
                     onClick={handleSubmit}
-                    disabled={submitting || !textInput.trim() || hasNoCredits || !selectedFactionId}
+                    disabled={submitting || !textInput.trim() || !selectedFactionId}
                     className={`relative w-full py-3.5 font-bold text-sm uppercase tracking-wider rounded transition-all min-h-[52px] flex items-center justify-center gap-2 border-2 ${
-                      submitting || !textInput.trim() || hasNoCredits || !selectedFactionId
+                      submitting || !textInput.trim() || !hasEnoughTokens || !selectedFactionId
                         ? 'bg-grimlog-darkGray border-grimlog-steel/50 text-grimlog-steel cursor-not-allowed'
                         : 'bg-gradient-to-r from-grimlog-orange to-grimlog-amber border-grimlog-orange text-grimlog-black hover:from-grimlog-amber hover:to-grimlog-orange active:scale-[0.98]'
                     }`}
@@ -300,8 +370,8 @@ Thunderwolf Cavalry x3 (100 pts)`}
                         <div className="w-5 h-5 border-2 border-grimlog-black/30 rounded-full animate-spin border-t-grimlog-black" />
                         <span>Analyzing...</span>
                       </>
-                    ) : hasNoCredits ? (
-                      <span>No Credits Available</span>
+                    ) : !hasEnoughTokens ? (
+                      <span>⬢ Get Tokens to Continue</span>
                     ) : !selectedFactionId ? (
                       <span>Select a Faction</span>
                     ) : !textInput.trim() ? (
@@ -309,7 +379,7 @@ Thunderwolf Cavalry x3 (100 pts)`}
                     ) : (
                       <>
                         <span>⚔</span>
-                        <span>Analyze Army</span>
+                        <span>Analyze Army ({briefCost} ⬢)</span>
                       </>
                     )}
                   </button>

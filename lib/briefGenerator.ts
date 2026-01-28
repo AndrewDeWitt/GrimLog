@@ -10,7 +10,6 @@
 
 import { langfuse } from '@/lib/langfuse';
 import { prisma } from '@/lib/prisma';
-import { checkAndDeductCredit } from '@/lib/briefCredits';
 import {
   BriefAnalysis,
   BriefStrategicAnalysis,
@@ -327,15 +326,9 @@ export async function generateBrief(options: GenerateBriefOptions): Promise<Gene
   const ownsTrace = !externalTrace; // Track if we created the trace (so we know to flush it)
 
   try {
-    // Deduct credit
-    const creditCheck = await checkAndDeductCredit(userId);
-    if (!creditCheck.allowed) {
-      await prisma.briefGeneration.update({
-        where: { id: briefId },
-        data: { status: 'failed', completedAt: new Date(), errorMessage: 'No credits remaining' },
-      });
-      return { success: false, error: 'No credits remaining' };
-    }
+    // Note: Token deduction is now handled by the API route (checkAndDeductTokens)
+    // before calling this function. This ensures atomic deduction with proper
+    // refund on failure.
 
     // Update status to processing
     await prisma.briefGeneration.update({
@@ -635,7 +628,8 @@ export async function generateBrief(options: GenerateBriefOptions): Promise<Gene
 
     // DEBUG: Add delay to test cache propagation
     // Gemini implicit caching may need time to propagate before subsequent calls can hit it
-    const CACHE_PROPAGATION_DELAY_MS = 30000; // 30 seconds
+    // Testing with 2 minutes to see if cache becomes available
+    const CACHE_PROPAGATION_DELAY_MS = 120000; // 2 minutes
     console.log(`⏳ [Analysis→Suggestions] Waiting ${CACHE_PROPAGATION_DELAY_MS / 1000}s for cache propagation...`);
     await new Promise(resolve => setTimeout(resolve, CACHE_PROPAGATION_DELAY_MS));
     console.log(`✅ [Analysis→Suggestions] Cache propagation delay complete`);

@@ -75,11 +75,11 @@ export default function AuthModal({ isOpen, onClose }: AuthModalProps) {
             </div>
           )}
 
-          {/* Free Credits Banner */}
+          {/* Free Tokens Banner */}
           <div className="mb-6 p-4 bg-grimlog-green/10 border border-grimlog-green/30 rounded-lg text-center">
-            <div className="text-grimlog-green font-bold text-lg mb-1">🎁 2 Free Generations</div>
+            <div className="text-grimlog-green font-bold text-lg mb-1">🎁 3 Free Tokens</div>
             <p className="text-grimlog-steel text-sm">
-              Sign in with Google to get 2 free tactical brief generations!
+              Sign in with Google to get 3 free tokens for tactical briefs!
             </p>
           </div>
 

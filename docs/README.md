@@ -1,6 +1,6 @@
 # Grimlog Documentation
 
-**Version:** 4.90.8
+**Version:** 4.91.0
 **Last Updated:** 2026-01-27
 **Status:** Production Ready
 
@@ -319,14 +319,26 @@ This is the central hub for all Grimlog documentation. Everything you need to kn
   - Mission object structure
   - Request/response formats
 
-- **[User Credits Endpoint](api/USER_CREDITS_ENDPOINT.md)** ⭐ NEW v4.58.0 - `GET /api/users/credits`
-  - Fetch current user's dossier credit balance
-  - Returns admin status for UI display logic
+- **[Token Balance Endpoint](api/TOKEN_BALANCE_ENDPOINT.md)** ⭐ NEW v4.91.0 - `GET /api/tokens/balance`
+  - Fetch token balance, access status, admin status
+  - Recent transactions and feature costs
   - Authentication required
 
-- **[Admin Users Endpoint](api/ADMIN_USERS_ENDPOINT.md)** ⭐ NEW v4.58.0 - `/api/admin/users`
-  - List all users with credits (GET)
-  - Adjust user credits (PATCH `/api/admin/users/[id]/credits`)
+- **[Admin Feature Costs Endpoint](api/ADMIN_FEATURE_COSTS_ENDPOINT.md)** ⭐ NEW v4.91.0 - `/api/admin/feature-costs`
+  - Full CRUD for dynamic feature pricing
+  - Enable/disable features in real-time
+  - Admin authorization required
+
+- **[Admin Users Tokens Endpoint](api/ADMIN_USERS_TOKENS_ENDPOINT.md)** ⭐ NEW v4.91.0 - `/api/admin/users/[id]/tokens`
+  - Grant tokens to users
+  - Set absolute or relative token adjustments
+  - View user transaction history
+
+- **[User Credits Endpoint](api/USER_CREDITS_ENDPOINT.md)** ⚠️ DEPRECATED v4.91.0 - Replaced by Token Balance
+  - See [Token Balance Endpoint](api/TOKEN_BALANCE_ENDPOINT.md)
+
+- **[Admin Users Endpoint](api/ADMIN_USERS_ENDPOINT.md)** ⭐ UPDATED v4.91.0 - `/api/admin/users`
+  - List all users with token balances (GET)
   - Admin authorization required
 
 - **[Admin API](api/ADMIN_API.md)** ⭐ NEW v4.20.0 - Admin CRUD for Factions, Detachments, Stratagems
@@ -374,12 +386,15 @@ This is the central hub for all Grimlog documentation. Everything you need to kn
   - Extracted from Wahapedia data without API costs
   - Replaces inaccurate proportional scaling
 
-- **[Dossier Credits System](features/DOSSIER_CREDITS_SYSTEM.md)** ⭐ NEW v4.58.0 - Usage-based access control
-  - 2 free generations for new Google sign-ups
-  - Credit tracking per user in database
-  - Admin bypass with unlimited generations
-  - Admin panel for credit management
-  - UI enforcement with helpful messaging
+- **[Token Economy System](features/TOKEN_ECONOMY_SYSTEM.md)** ⭐ NEW v4.91.0 - Comprehensive token-based currency
+  - Dynamic pricing with admin-controlled feature costs
+  - Transaction ledger for complete audit trail
+  - Race-condition-safe atomic token deduction
+  - Token purchase UI (payment integration pending)
+  - Admin pricing dashboard at `/admin/pricing`
+
+- **[Dossier Credits System](features/DOSSIER_CREDITS_SYSTEM.md)** ⚠️ DEPRECATED v4.91.0 - Replaced by Token Economy
+  - See [Token Economy System](features/TOKEN_ECONOMY_SYSTEM.md) for new implementation
 
 - **[Dossier Gallery](features/DOSSIER_GALLERY.md)** ⭐ NEW v4.73.0 - Public dossier showcase
   - CRT terminal header with green glow and scanlines
@@ -1084,7 +1099,18 @@ docs/
 
 ## 📈 Recent Updates
 
-### Version 4.63.0 (January 8, 2026) ⭐ LATEST
+### Version 4.91.0 (January 27, 2026) ⭐ LATEST
+**Token Economy System:**
+- ✅ **Token Currency** - New ⬢ token system replaces simple credits
+- ✅ **Dynamic Pricing** - Admin-controlled feature costs via `/admin/pricing`
+- ✅ **Transaction Ledger** - Complete audit trail for all token operations
+- ✅ **Race Condition Fix** - Atomic conditional updates prevent double-spending
+- ✅ **Purchase UI** - Token bundles display (payment integration pending)
+- ✅ **Insufficient Tokens Modal** - CTA when users lack tokens for features
+- ✅ **Security Hardening** - Input validation before deduction, LLM usage tracking
+- ✅ See [Token Economy System](features/TOKEN_ECONOMY_SYSTEM.md) for details
+
+### Version 4.63.0 (January 8, 2026)
 **Marketing Homepage & Route Separation:**
 - ✅ **Marketing Homepage** - Public-facing landing page (`/`) with grimdark terminal green "2 Free Analyses" banner
 - ✅ **Route Separation** - `/` (marketing) vs `/dossier` (functional tool) vs `/dossier/gallery` (logged-in landing)

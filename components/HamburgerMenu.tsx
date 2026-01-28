@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/lib/auth/AuthContext';
 
@@ -24,6 +24,7 @@ interface HamburgerMenuProps {
   onOpenStratagemLogger?: () => void;
   onOpenDamageCalculator?: () => void;
   onOpenDamageResults?: () => void;
+  onOpenTokenPurchase?: () => void;
   
   // UI state
   timelineEventsCount?: number;
@@ -49,6 +50,7 @@ export default function HamburgerMenu({
   onOpenStratagemLogger,
   onOpenDamageCalculator,
   onOpenDamageResults,
+  onOpenTokenPurchase,
   timelineEventsCount = 0,
   damageResultsCount = 0,
   showReturnToBattle = false
@@ -57,24 +59,45 @@ export default function HamburgerMenu({
   const menuRef = useRef<HTMLDivElement>(null);
   const { user, signOut } = useAuth();
   const [isAdmin, setIsAdmin] = useState(false);
+  const [tokenBalance, setTokenBalance] = useState<number | null>(null);
+  const [isLoadingTokens, setIsLoadingTokens] = useState(false);
 
-  // Check if user is admin
-  useEffect(() => {
-    if (user) {
-      fetch('/api/users')
-        .then(res => res.ok ? res.json() : null)
-        .then(data => {
-          if (data?.isAdmin) {
-            setIsAdmin(true);
-          } else {
-            setIsAdmin(false);
-          }
-        })
-        .catch(() => setIsAdmin(false));
-    } else {
-      setIsAdmin(false);
+  // Fetch token balance
+  const fetchTokenBalance = useCallback(async () => {
+    if (!user) {
+      setTokenBalance(null);
+      return;
+    }
+    
+    setIsLoadingTokens(true);
+    try {
+      const res = await fetch('/api/tokens/balance');
+      if (res.ok) {
+        const data = await res.json();
+        setTokenBalance(data.balance);
+        // Also update admin status from this response
+        if (data.isAdmin !== undefined) {
+          setIsAdmin(data.isAdmin);
+        }
+      }
+    } catch (error) {
+      console.error('Error fetching token balance:', error);
+    } finally {
+      setIsLoadingTokens(false);
     }
   }, [user]);
+
+  // Fetch token balance (and admin status) when menu opens or user changes
+  // Note: /api/tokens/balance returns isAdmin, so no separate admin check needed
+  useEffect(() => {
+    if (user && isOpen) {
+      fetchTokenBalance();
+    }
+    if (!user) {
+      setIsAdmin(false);
+      setTokenBalance(null);
+    }
+  }, [user, isOpen, fetchTokenBalance]);
   
   const handleSignOut = async () => {
     try {
@@ -241,6 +264,43 @@ export default function HamburgerMenu({
                       </div>
                     </div>
                   </div>
+                  
+                  {/* Token Balance Display */}
+                  <div className="mb-3 p-2 bg-grimlog-black/60 border border-grimlog-amber/30 rounded">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <span className="text-grimlog-amber text-sm">⬢</span>
+                        <span className="text-grimlog-amber text-xs font-bold uppercase tracking-wider">
+                          Tokens
+                        </span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        {isLoadingTokens ? (
+                          <span className="text-grimlog-steel text-xs animate-pulse">...</span>
+                        ) : isAdmin ? (
+                          <span className="text-grimlog-green text-sm font-bold font-mono">∞</span>
+                        ) : (
+                          <span className="text-grimlog-amber text-sm font-bold font-mono">
+                            {tokenBalance ?? 0}
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                    {!isAdmin && (
+                      <button
+                        onClick={() => {
+                          if (onOpenTokenPurchase) {
+                            onOpenTokenPurchase();
+                            onClose();
+                          }
+                        }}
+                        className="w-full mt-2 py-1.5 bg-grimlog-amber/10 hover:bg-grimlog-amber/20 text-grimlog-amber border border-grimlog-amber/30 transition-all uppercase text-[10px] tracking-wider font-bold flex items-center justify-center gap-2"
+                      >
+                        <span>+</span> GET MORE TOKENS
+                      </button>
+                    )}
+                  </div>
+                  
                   <button
                     onClick={handleSignOut}
                     className="w-full py-1.5 bg-grimlog-steel/20 hover:bg-grimlog-red/20 text-grimlog-red hover:text-red-400 border border-grimlog-red/30 transition-all uppercase text-[10px] tracking-wider font-bold flex items-center justify-center gap-2"
@@ -451,7 +511,14 @@ export default function HamburgerMenu({
                       onClick={() => handleNavigation('/admin/users')}
                       className="w-full p-3.5 bg-grimlog-red/10 hover:bg-grimlog-red/20 text-grimlog-red border border-grimlog-red/50 hover:border-grimlog-red transition-all uppercase text-sm font-bold text-left flex items-center gap-3 px-3"
                     >
-                      <span className="text-grimlog-red">👤</span> USER CREDITS
+                      <span className="text-grimlog-red">👤</span> USER TOKENS
+                    </button>
+                    
+                    <button
+                      onClick={() => handleNavigation('/admin/pricing')}
+                      className="w-full p-3.5 bg-grimlog-red/10 hover:bg-grimlog-red/20 text-grimlog-red border border-grimlog-red/50 hover:border-grimlog-red transition-all uppercase text-sm font-bold text-left flex items-center gap-3 px-3"
+                    >
+                      <span className="text-grimlog-red">⬢</span> TOKEN PRICING
                     </button>
                   </>
                 )}

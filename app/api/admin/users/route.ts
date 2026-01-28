@@ -1,7 +1,7 @@
 /**
  * Admin Users API Endpoint
  * 
- * GET /api/admin/users - List all users with credits
+ * GET /api/admin/users - List all users with token balances
  */
 
 import { NextRequest, NextResponse } from 'next/server';
@@ -18,7 +18,8 @@ export async function GET(request: NextRequest) {
           name: true,
           avatar: true,
           isAdmin: true,
-          briefCredits: true,
+          tokenBalance: true,
+          accessStatus: true,
           createdAt: true,
           updatedAt: true,
         },

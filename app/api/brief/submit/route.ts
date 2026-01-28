@@ -15,7 +15,7 @@ import { after } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { requireAuth } from '@/lib/auth/apiAuth';
 import { checkRateLimit, getRateLimitIdentifier, getClientIp, RATE_LIMITS } from '@/lib/rateLimit';
-import { checkCreditsAvailable } from '@/lib/briefCredits';
+import { checkAndDeductTokens, refundTokens } from '@/lib/tokenService';
 import { analyzeBrief } from '@/lib/briefAnalysis';
 import { parseArmyListFromText, loadKnownDetachments } from '@/lib/armyListParser';
 import { generateBrief } from '@/lib/briefGenerator';
@@ -63,20 +63,8 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // 3. Check credits (without deducting - will deduct when processing starts)
-    const creditCheck = await checkCreditsAvailable(user.id);
-    if (!creditCheck.allowed) {
-      return NextResponse.json(
-        {
-          error: 'No credits remaining',
-          remainingCredits: 0,
-          message: 'You have used all your free brief generations. Contact an administrator for more credits.'
-        },
-        { status: 402 }
-      );
-    }
-
-    // 4. Parse and validate request body
+    // 3. Parse and validate request body BEFORE deducting tokens
+    // This prevents users losing tokens on invalid input
     const body: SubmitRequest = await request.json();
     const { text, factionId } = body;
 
@@ -102,6 +90,22 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // 4. Check and deduct tokens atomically (AFTER validation passes)
+    const tokenResult = await checkAndDeductTokens(user.id, 'generate_brief');
+    if (!tokenResult.success) {
+      return NextResponse.json(
+        {
+          error: 'Insufficient tokens',
+          remainingTokens: tokenResult.remainingBalance,
+          requiredTokens: tokenResult.tokensDeducted || 3, // Default cost if lookup failed
+          message: tokenResult.error || 'You do not have enough tokens. Purchase more to continue.'
+        },
+        { status: 402 }
+      );
+    }
+
+    // Note: tokenResult.ledgerEntryId available for debugging if needed
+
     // 5. Create pending brief record
     const brief = await prisma.briefGeneration.create({
       data: {
@@ -126,6 +130,10 @@ export async function POST(request: NextRequest) {
         },
         tags: ['brief-analysis', 'background-processing']
       });
+
+      // Track whether we've made an LLM call - once we have, the token is consumed
+      // No refunds after LLM is called (we incurred the API cost)
+      let llmCallMade = false;
 
       try {
         console.log(`🔄 Starting background processing for brief: ${brief.id}`);
@@ -167,12 +175,16 @@ export async function POST(request: NextRequest) {
         });
         console.log(`📋 Built base shared prefix: ${prefixStats.charCount} chars (~${prefixStats.estimatedTokens} tokens), ${factionDatasheets.length} datasheets`);
 
-        // Step 1: Parse the army list (direct function call)
+        // Step 1: Parse the army list (FIRST LLM CALL - token is consumed after this)
         const parseSpan = trace.span({
           name: "parse-army-list",
           metadata: { textLength: text.length }
         });
         console.log(`📝 Parsing army list for brief: ${brief.id}`);
+        
+        // Mark that we're about to make an LLM call - no refunds after this point
+        llmCallMade = true;
+        
         const parseResult = await parseArmyListFromText({
           text: text.trim(),
           factionId, // Filter datasheets by selected faction
@@ -197,7 +209,8 @@ export async function POST(request: NextRequest) {
 
         // DEBUG: Add delay to test cache propagation
         // Gemini implicit caching may need time to propagate before subsequent calls can hit it
-        const CACHE_PROPAGATION_DELAY_MS = 30000; // 30 seconds
+        // Testing with 2 minutes to see if cache becomes available
+        const CACHE_PROPAGATION_DELAY_MS = 120000; // 2 minutes
         console.log(`⏳ Waiting ${CACHE_PROPAGATION_DELAY_MS / 1000}s for cache propagation...`);
         await new Promise(resolve => setTimeout(resolve, CACHE_PROPAGATION_DELAY_MS));
         console.log(`✅ Cache propagation delay complete`);
@@ -234,6 +247,8 @@ export async function POST(request: NextRequest) {
         } else {
           console.error(`❌ AI analysis failed for brief ${brief.id}:`, generateResult.error);
           trace.update({ metadata: { error: generateResult.error, status: 'error' } });
+          // No refund - LLM was already called and token is consumed
+          console.log(`💸 Token consumed (LLM was called) - no refund for failed brief ${brief.id}`);
           // generateBrief already marks the brief as failed in the database
         }
 
@@ -243,6 +258,24 @@ export async function POST(request: NextRequest) {
         trace.update({
           metadata: { error: error instanceof Error ? error.message : 'Unknown error', status: 'error' }
         });
+
+        // Only refund if we haven't made an LLM call yet
+        // Once LLM is called, the token is consumed (we incurred the API cost)
+        if (!llmCallMade) {
+          const refundResult = await refundTokens(
+            user.id,
+            'generate_brief',
+            `Brief generation failed before LLM call: ${error instanceof Error ? error.message : 'Unknown error'}`
+          );
+          
+          if (refundResult.success) {
+            console.log(`💰 Refunded ${refundResult.tokensGranted} tokens to user ${user.id} (failed before LLM) for brief ${brief.id}`);
+          } else {
+            console.error(`❌ Failed to refund tokens for brief ${brief.id}:`, refundResult.error);
+          }
+        } else {
+          console.log(`💸 Token consumed (LLM was called) - no refund for failed brief ${brief.id}`);
+        }
 
         // Update status to failed
         await prisma.briefGeneration.update({

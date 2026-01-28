@@ -4,6 +4,122 @@ This file contains the **last 30 versions**. For older entries, see [CHANGELOG_A
 
 ---
 
+## [4.91.0] - 2026-01-27 - Token Economy System
+
+### Added
+
+- **Token Economy System** - Replaced simple credit system with comprehensive token-based economy:
+  - New currency: **Tokens** (⬢ symbol) with dynamic pricing
+  - `FeatureCost` table for admin-controlled feature pricing
+  - `TokenLedger` table for complete transaction audit trail
+  - Transaction types: `GRANT`, `PURCHASE`, `USAGE`, `REFUND`
+
+- **Token Service Layer** (`lib/tokenService.ts`):
+  - `checkAndDeductTokens()` - Atomic deduction with race condition protection
+  - `refundTokens()` - Restore tokens on feature failure (before LLM usage)
+  - `grantTokens()` - Admin-initiated token grants
+  - `getTokenHistory()` - User transaction history
+  - `getAllFeatureCosts()` - Retrieve active feature pricing
+
+- **Token Balance API** (`/api/tokens/balance`):
+  - Returns token balance, access status, admin status
+  - Recent transactions (last 10)
+  - Active feature costs for UI display
+
+- **Token Purchase API** (`/api/tokens/purchase`):
+  - GET: Returns available token bundles
+  - POST: Purchase stub (returns "Coming Soon" - payment integration deferred)
+
+- **Admin Feature Costs API** (`/api/admin/feature-costs`):
+  - Full CRUD for dynamic feature pricing
+  - Soft delete when ledger entries exist
+  - `isActive` toggle for feature availability
+
+- **Admin User Tokens API** (`/api/admin/users/[id]/tokens`):
+  - Grant tokens to users
+  - Set absolute or relative token adjustments
+  - View user token history
+
+- **UI Components**:
+  - `TokenPurchaseModal` - Bundle selection and purchase flow
+  - `InsufficientTokensModal` - CTA when user lacks tokens for a feature
+  - Token balance display in HamburgerMenu (⬢ symbol)
+  - Admin Pricing page (`/admin/pricing`) for live feature cost management
+
+- **Admin Panel Enhancement**:
+  - New "PRICING" menu item for feature cost management
+  - Real-time cost editing with active/inactive toggles
+
+### Changed
+
+- **Database Migration**:
+  - Renamed `briefCredits` → `tokenBalance` in User model
+  - Added `accessStatus` enum (`WAITLISTED`, `ACTIVE`) to User model
+  - Existing credit balances migrated to token balances with `GRANT` ledger entries
+
+- **Brief Generation Integration**:
+  - Now uses `checkAndDeductTokens('generate_brief')` for token deduction
+  - Input validation moved before token deduction (security fix)
+  - Tokens consumed if LLM call is made, even on subsequent failure
+  - Tokens refunded only if error occurs before any LLM interaction
+
+### Removed
+
+- **Legacy Credit APIs** (not live, no deprecation needed):
+  - Removed `/api/users/credits` endpoint
+  - Removed `/api/admin/users/[id]/credits` endpoint
+  - Removed `lib/briefCredits.ts`
+
+### Security
+
+- **Race Condition Fix**: Changed token deduction from check-then-update pattern to atomic conditional `updateMany` within `$transaction` block. Prevents double-spend when concurrent requests pass the same balance check.
+
+- **Input Validation Order**: Moved all input validation before token deduction in `/api/brief/submit` to prevent token loss on invalid requests.
+
+- **Information Disclosure Prevention**: Removed `userId` from `/api/tokens/purchase` response to avoid unnecessary data exposure.
+
+- **Admin Authorization**: All admin token endpoints use `withAdminAuth` middleware with proper 401/403 responses.
+
+### Technical
+
+- **Files Added:**
+  - `lib/tokenService.ts` - Token economy business logic
+  - `app/api/tokens/balance/route.ts` - User token balance endpoint
+  - `app/api/tokens/purchase/route.ts` - Token purchase endpoint
+  - `app/api/admin/feature-costs/route.ts` - Feature cost CRUD
+  - `app/api/admin/feature-costs/[featureKey]/route.ts` - Individual feature cost management
+  - `app/api/admin/users/[id]/tokens/route.ts` - Admin user token management
+  - `app/admin/pricing/page.tsx` - Admin pricing dashboard
+  - `components/TokenPurchaseModal.tsx` - Purchase flow UI
+  - `components/InsufficientTokensModal.tsx` - Insufficient tokens CTA
+  - `prisma/seed-feature-costs.ts` - Feature cost seeding script
+  - `prisma/migrations/20250127_add_token_system/migration.sql` - Schema migration
+
+- **Files Modified:**
+  - `prisma/schema.prisma` - User model changes, new FeatureCost and TokenLedger models
+  - `app/api/brief/submit/route.ts` - Token integration
+  - `app/brief/page.tsx` - Token display and modals
+  - `components/HamburgerMenu.tsx` - Token balance display
+  - `components/GlobalHeader.tsx` - Token purchase modal integration
+  - `app/api/admin/users/route.ts` - Updated to use tokenBalance
+
+- **Files Deleted:**
+  - `lib/briefCredits.ts` - Replaced by tokenService
+  - `app/api/users/credits/route.ts` - Replaced by /api/tokens/balance
+  - `app/api/admin/users/[id]/credits/route.ts` - Replaced by /api/admin/users/[id]/tokens
+
+### Default Feature Costs
+
+| Feature Key | Token Cost | Description |
+|-------------|------------|-------------|
+| `generate_brief` | 3 | Deep tactical brief analysis |
+| `generate_dossier` | 3 | Full dossier generation |
+| `quick_check` | 1 | Quick list review |
+| `matchup_simulator` | 5 | Matchup simulation (future) |
+| `image_generation` | 2 | Army badge/icon generation |
+
+---
+
 ## [4.90.8] - 2026-01-27 - Brief Generation Optimization (Remove Unused Output)
 
 ### Changed

@@ -225,7 +225,7 @@ export default function LiveSessionPage() {
       }
       
       try {
-        const response = await fetch('/api/users/credits');
+        const response = await fetch('/api/tokens/balance');
         if (response.ok) {
           const data = await response.json();
           setIsAdmin(data.isAdmin);

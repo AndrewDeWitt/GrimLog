@@ -12,7 +12,8 @@ interface UserData {
   name: string | null;
   avatar: string | null;
   isAdmin: boolean;
-  briefCredits: number;
+  tokenBalance: number;
+  accessStatus: string;
   createdAt: string;
   updatedAt: string;
 }
@@ -25,7 +26,7 @@ export default function AdminUsersPage() {
   const [error, setError] = useState<string | null>(null);
   const [isAdmin, setIsAdmin] = useState(false);
   const [editingUserId, setEditingUserId] = useState<string | null>(null);
-  const [creditInput, setCreditInput] = useState<string>('');
+  const [tokenInput, setTokenInput] = useState<string>('');
   const [actionLoading, setActionLoading] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
 
@@ -38,7 +39,7 @@ export default function AdminUsersPage() {
       }
       
       try {
-        const response = await fetch('/api/users/credits');
+        const response = await fetch('/api/tokens/balance');
         if (response.ok) {
           const data = await response.json();
           if (!data.isAdmin) {
@@ -80,64 +81,64 @@ export default function AdminUsersPage() {
     fetchUsers();
   }, [isAdmin]);
 
-  // Adjust credits
-  const handleAdjustCredits = async (userId: string, adjustment: number) => {
+  // Adjust tokens
+  const handleAdjustTokens = async (userId: string, adjustment: number) => {
     setActionLoading(userId);
     try {
-      const response = await fetch(`/api/admin/users/${userId}/credits`, {
+      const response = await fetch(`/api/admin/users/${userId}/tokens`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ adjustment }),
+        body: JSON.stringify({ adjustment, reason: `Quick adjustment ${adjustment > 0 ? '+' : ''}${adjustment}` }),
       });
 
       if (!response.ok) {
-        throw new Error('Failed to adjust credits');
+        throw new Error('Failed to adjust tokens');
       }
 
       const result = await response.json();
       
       // Update local state
       setUsers(prev => prev.map(u => 
-        u.id === userId ? { ...u, briefCredits: result.newCredits } : u
+        u.id === userId ? { ...u, tokenBalance: result.newBalance } : u
       ));
       
-      setSuccessMessage(`Credits updated to ${result.newCredits}`);
+      setSuccessMessage(`Tokens updated to ${result.newBalance}`);
       setTimeout(() => setSuccessMessage(null), 3000);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to adjust credits');
+      setError(err instanceof Error ? err.message : 'Failed to adjust tokens');
       setTimeout(() => setError(null), 3000);
     } finally {
       setActionLoading(null);
     }
   };
 
-  // Set exact credits
-  const handleSetCredits = async (userId: string, credits: number) => {
+  // Set exact tokens
+  const handleSetTokens = async (userId: string, balance: number) => {
     setActionLoading(userId);
     try {
-      const response = await fetch(`/api/admin/users/${userId}/credits`, {
+      const response = await fetch(`/api/admin/users/${userId}/tokens`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ credits }),
+        body: JSON.stringify({ balance, reason: `Set to ${balance}` }),
       });
 
       if (!response.ok) {
-        throw new Error('Failed to set credits');
+        throw new Error('Failed to set tokens');
       }
 
       const result = await response.json();
       
       // Update local state
       setUsers(prev => prev.map(u => 
-        u.id === userId ? { ...u, briefCredits: result.newCredits } : u
+        u.id === userId ? { ...u, tokenBalance: result.newBalance } : u
       ));
       
       setEditingUserId(null);
-      setCreditInput('');
-      setSuccessMessage(`Credits set to ${result.newCredits}`);
+      setTokenInput('');
+      setSuccessMessage(`Tokens set to ${result.newBalance}`);
       setTimeout(() => setSuccessMessage(null), 3000);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to set credits');
+      setError(err instanceof Error ? err.message : 'Failed to set tokens');
       setTimeout(() => setError(null), 3000);
     } finally {
       setActionLoading(null);
@@ -169,10 +170,10 @@ export default function AdminUsersPage() {
             <div className="flex items-center justify-between">
               <div>
                 <h1 className="text-3xl font-bold text-grimlog-orange glow-orange tracking-widest uppercase">
-                  👤 USER CREDITS
+                  ⬢ USER TOKENS
                 </h1>
                 <p className="text-grimlog-green text-sm font-mono mt-2">
-                  Manage brief generation credits for users
+                  Manage token balances for users
                 </p>
               </div>
               <Link
@@ -210,7 +211,7 @@ export default function AdminUsersPage() {
                 <thead>
                   <tr className="border-b-2 border-grimlog-steel bg-grimlog-darkGray">
                     <th className="px-4 py-3 text-left text-grimlog-orange font-bold uppercase tracking-wider text-sm">User</th>
-                    <th className="px-4 py-3 text-center text-grimlog-orange font-bold uppercase tracking-wider text-sm">Credits</th>
+                    <th className="px-4 py-3 text-center text-grimlog-orange font-bold uppercase tracking-wider text-sm">Tokens</th>
                     <th className="px-4 py-3 text-center text-grimlog-orange font-bold uppercase tracking-wider text-sm">Status</th>
                     <th className="px-4 py-3 text-center text-grimlog-orange font-bold uppercase tracking-wider text-sm">Joined</th>
                     <th className="px-4 py-3 text-right text-grimlog-orange font-bold uppercase tracking-wider text-sm">Actions</th>
@@ -236,27 +237,27 @@ export default function AdminUsersPage() {
                         </div>
                       </td>
                       
-                      {/* Credits */}
+                      {/* Tokens */}
                       <td className="px-4 py-4 text-center">
                         {editingUserId === u.id ? (
                           <div className="flex items-center justify-center gap-2">
                             <input
                               type="number"
-                              value={creditInput}
-                              onChange={(e) => setCreditInput(e.target.value)}
+                              value={tokenInput}
+                              onChange={(e) => setTokenInput(e.target.value)}
                               className="w-20 bg-grimlog-darkGray border border-grimlog-steel text-grimlog-green p-1 text-center font-mono text-sm"
                               min="0"
                               autoFocus
                             />
                             <button
-                              onClick={() => handleSetCredits(u.id, parseInt(creditInput) || 0)}
+                              onClick={() => handleSetTokens(u.id, parseInt(tokenInput) || 0)}
                               disabled={actionLoading === u.id}
                               className="px-2 py-1 bg-grimlog-green text-grimlog-black text-xs font-bold uppercase"
                             >
                               Set
                             </button>
                             <button
-                              onClick={() => { setEditingUserId(null); setCreditInput(''); }}
+                              onClick={() => { setEditingUserId(null); setTokenInput(''); }}
                               className="px-2 py-1 bg-grimlog-steel text-grimlog-black text-xs font-bold uppercase"
                             >
                               ✕
@@ -265,16 +266,16 @@ export default function AdminUsersPage() {
                         ) : (
                           <span 
                             className={`font-mono font-bold text-lg cursor-pointer hover:underline ${
-                              u.briefCredits === 0 ? 'text-grimlog-red' : 
-                              u.briefCredits > 5 ? 'text-grimlog-green' : 'text-grimlog-amber'
+                              u.tokenBalance === 0 ? 'text-grimlog-red' : 
+                              u.tokenBalance > 5 ? 'text-grimlog-green' : 'text-grimlog-amber'
                             }`}
                             onClick={() => {
                               setEditingUserId(u.id);
-                              setCreditInput(u.briefCredits.toString());
+                              setTokenInput(u.tokenBalance.toString());
                             }}
                             title="Click to edit"
                           >
-                            {u.isAdmin ? '∞' : u.briefCredits}
+                            {u.isAdmin ? '∞' : u.tokenBalance}
                           </span>
                         )}
                       </td>
@@ -286,8 +287,12 @@ export default function AdminUsersPage() {
                             ADMIN
                           </span>
                         ) : (
-                          <span className="px-2 py-1 bg-grimlog-steel/20 text-grimlog-steel text-xs font-bold uppercase border border-grimlog-steel/50">
-                            USER
+                          <span className={`px-2 py-1 text-xs font-bold uppercase border ${
+                            u.accessStatus === 'ACTIVE' 
+                              ? 'bg-grimlog-green/20 text-grimlog-green border-grimlog-green/50'
+                              : 'bg-grimlog-amber/20 text-grimlog-amber border-grimlog-amber/50'
+                          }`}>
+                            {u.accessStatus}
                           </span>
                         )}
                       </td>
@@ -301,26 +306,26 @@ export default function AdminUsersPage() {
                       <td className="px-4 py-4 text-right">
                         <div className="flex items-center justify-end gap-2">
                           <button
-                            onClick={() => handleAdjustCredits(u.id, -1)}
-                            disabled={actionLoading === u.id || u.isAdmin || u.briefCredits === 0}
+                            onClick={() => handleAdjustTokens(u.id, -1)}
+                            disabled={actionLoading === u.id || u.isAdmin || u.tokenBalance === 0}
                             className="w-8 h-8 bg-grimlog-red/20 hover:bg-grimlog-red/40 text-grimlog-red border border-grimlog-red/50 font-bold transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-                            title="Remove 1 credit"
+                            title="Remove 1 token"
                           >
                             −
                           </button>
                           <button
-                            onClick={() => handleAdjustCredits(u.id, 1)}
+                            onClick={() => handleAdjustTokens(u.id, 1)}
                             disabled={actionLoading === u.id || u.isAdmin}
                             className="w-8 h-8 bg-grimlog-green/20 hover:bg-grimlog-green/40 text-grimlog-green border border-grimlog-green/50 font-bold transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-                            title="Add 1 credit"
+                            title="Add 1 token"
                           >
                             +
                           </button>
                           <button
-                            onClick={() => handleAdjustCredits(u.id, 5)}
+                            onClick={() => handleAdjustTokens(u.id, 5)}
                             disabled={actionLoading === u.id || u.isAdmin}
                             className="px-3 h-8 bg-grimlog-amber/20 hover:bg-grimlog-amber/40 text-grimlog-amber border border-grimlog-amber/50 text-xs font-bold transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-                            title="Add 5 credits"
+                            title="Add 5 tokens"
                           >
                             +5
                           </button>
@@ -348,15 +353,15 @@ export default function AdminUsersPage() {
               </div>
               <div className="bg-grimlog-black border border-grimlog-steel p-4 text-center">
                 <div className="text-3xl font-bold text-grimlog-green">
-                  {users.filter(u => u.briefCredits > 0 || u.isAdmin).length}
+                  {users.filter(u => u.tokenBalance > 0 || u.isAdmin).length}
                 </div>
-                <div className="text-grimlog-steel text-xs uppercase tracking-wider">With Credits</div>
+                <div className="text-grimlog-steel text-xs uppercase tracking-wider">With Tokens</div>
               </div>
               <div className="bg-grimlog-black border border-grimlog-steel p-4 text-center">
                 <div className="text-3xl font-bold text-grimlog-red">
-                  {users.filter(u => !u.isAdmin && u.briefCredits === 0).length}
+                  {users.filter(u => !u.isAdmin && u.tokenBalance === 0).length}
                 </div>
-                <div className="text-grimlog-steel text-xs uppercase tracking-wider">No Credits</div>
+                <div className="text-grimlog-steel text-xs uppercase tracking-wider">No Tokens</div>
               </div>
             </div>
           )}
@@ -365,4 +370,3 @@ export default function AdminUsersPage() {
     </>
   );
 }
-
